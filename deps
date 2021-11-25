@@ -1,0 +1,30 @@
+- | Extended | -
+
+com.google.gson.Gson -> json serializer
+
+retrofit2 -> webapi library (for youtube) - Auth0 / API Key
+
+   gson = new GsonBuilder().create();
+   retrofit = new Retrofit.Builder().baseUrl(YOUTUBE_API_URL).addConverterFactory(GsonConverterFactory.create(gson)).addCallAdapterFactory(???.create()).build();
+   youtubeApi = retrofit.create(YoutubeApi.class);
+
+   public Response<__JSON_Response__> getVideoInfo(String videoId)
+   {
+             return youtubeApi.getVideoInfo(videoId).execute();
+   }
+   
+   public interface IYoutube 
+   {
+          // YOUTUBE_API_URL set by retrofit
+          @GET("_endpoint_")
+          Call<ResponseBody> getVideoInfo(@Query("video_id") String videoId);
+   }
+
+   // get video stream
+   // playback audio channels
+   ...
+
+- | Basic | -
+
+jooq -> sql database library
+

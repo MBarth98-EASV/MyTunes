@@ -23,6 +23,13 @@
     -fx-opacity: 1;
 }
 
+.label-small {
+    -fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
@@ -380,6 +387,107 @@
 
 }
 
-.labeButton:default:hover {
+.labelButton:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
 }
+
+/*______________________________________________________________________*/
+
+.roundButton {
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+}
+
+.roundButton:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-background-radius: 30;
+
+}
+
+.roundButton:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+    fx-border-radius: 30;
+
+}
+
+.roundButton:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 30;
+
+}
+
+.roundButton:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.roundButton:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.roundButton:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.transparrentButton {
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #1d1d1d;
+    -fx-background-opacity: 0;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+}
+
+.transparrentButton:hover {
+    -fx-background-color: #3a3a3a;
+    -fx-background-radius: 30;
+
+}
+
+.transparrentButton:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+    fx-border-radius: 30;
+
+}
+
+.transparrentButton:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 30;
+
+}
+
+.transparrentButton:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.transparrentButton:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.transparrentButton:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+

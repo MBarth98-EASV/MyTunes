@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("gui/View/MyTunesView.fxml"));
         primaryStage.setTitle("MyTunes");
-        primaryStage.setScene(new Scene(root, 1050, 600));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 

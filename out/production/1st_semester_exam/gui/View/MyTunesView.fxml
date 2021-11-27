@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
@@ -21,124 +22,172 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #2b2929;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #2b2929;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.Controller">
    <children>
-      <AnchorPane layoutY="652.0" prefHeight="89.0" prefWidth="1282.0" style="-fx-background-color: #1a1a1a;" />
-      <Separator layoutX="332.0" layoutY="50.0" orientation="VERTICAL" prefHeight="583.0" prefWidth="8.0" />
-      <HBox layoutX="233.0" layoutY="667.0" prefHeight="46.0" prefWidth="800.0">
+      <AnchorPane layoutY="605.0" prefHeight="39.0" prefWidth="1282.0" style="-fx-background-color: #404040;" />
+      <AnchorPane layoutY="61.0" prefHeight="38.0" prefWidth="1282.0" style="-fx-background-color: #404040;" />
+      <HBox layoutX="-1.0" layoutY="59.0" prefHeight="597.0" prefWidth="1282.0">
          <children>
-            <VBox prefHeight="46.0" prefWidth="791.0">
+            <VBox prefHeight="385.0" prefWidth="355.0">
                <children>
-                  <HBox prefHeight="23.0" prefWidth="546.0">
-                     <children>
-                        <Label prefHeight="23.0" prefWidth="75.0" />
-                        <Label alignment="CENTER" prefHeight="23.0" prefWidth="643.0" text="Song">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets></Label>
-                        <HBox prefHeight="23.0" prefWidth="75.0">
-                           <children>
-                              <Label prefHeight="44.0" prefWidth="32.0" styleClass="label-small" text="00:00" />
-                              <Label prefHeight="39.0" prefWidth="7.0" styleClass="label-bright" text="l " />
-                              <Label prefHeight="46.0" prefWidth="29.0" styleClass="label-small" text="00:00" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="12.0" prefWidth="791.0">
-                     <children>
-                        <Slider prefHeight="15.0" prefWidth="792.0" />
-                     </children>
-                  </HBox>
+                  <TableView prefHeight="547.0" prefWidth="354.0">
+                     <columns>
+                        <TableColumn editable="false" prefWidth="182.0" text="Playlists" />
+                        <TableColumn editable="false" prefWidth="90.0" text="Songs" />
+                        <TableColumn editable="false" prefWidth="77.0" text="Time" />
+                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <ButtonBar prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #404040;">
+                     <buttons>
+                        <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
+                        <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
+                        <MenuButton mnemonicParsing="false" prefHeight="23.0" styleClass="menu-item" text="Options">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="New" />
+                              <MenuItem mnemonicParsing="false" text="Edit" />
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                           </items>
+                        </MenuButton>
+                     </buttons>
+                  </ButtonBar>
+               </children>
+            </VBox>
+            <Separator minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="394.0" prefWidth="3.0" />
+            <VBox prefHeight="596.0" prefWidth="927.0">
+               <children>
+                  <TableView prefHeight="547.0" prefWidth="926.0">
+                    <columns>
+                      <TableColumn editable="false" prefWidth="292.0" text="Title" />
+                      <TableColumn editable="false" prefWidth="221.0" text="Artist" />
+                        <TableColumn editable="false" prefWidth="256.0" text="Album" />
+                        <TableColumn editable="false" prefWidth="95.0" text="Genre" />
+                        <TableColumn editable="false" prefWidth="69.0" text="Time" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <ButtonBar prefHeight="40.0" prefWidth="926.0" style="-fx-background-color: #404040;">
+                     <buttons>
+                        <Button minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
+                        <Button minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
+                        <MenuButton mnemonicParsing="false" prefHeight="31.0" styleClass="menu-item" text="Options">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="New" />
+                            <MenuItem mnemonicParsing="false" text="Edit" />
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                          </items>
+                        </MenuButton>
+                     </buttons>
+                  </ButtonBar>
                </children>
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="1091.0" layoutY="687.0" prefHeight="28.0" prefWidth="155.0">
+      <AnchorPane prefHeight="65.0" prefWidth="1280.0" style="-fx-background-color: #262626;">
          <children>
-            <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/voldown.png" />
-               </image></ImageView>
-            <Slider prefHeight="20.0" prefWidth="103.0" />
-            <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/volup.png" />
-               </image></ImageView>
+            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" styleClass="transparrentButton" text="Settings" />
+            <TextField layoutX="458.0" layoutY="18.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="364.0" promptText="Search" style="-fx-border-radius: 30; -fx-background-color: #2b2929; -fx-border-color: WHITE; -fx-border-image-width: 3;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+            <HBox layoutX="960.0" layoutY="22.0" prefHeight="0.0" prefWidth="286.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="48.0" styleClass="label-small" text="Source:">
+                     <font>
+                        <Font name="Century Gothic" size="7.0" />
+                     </font>
+                  </Label>
+                  <RadioButton mnemonicParsing="false" prefHeight="22.0" prefWidth="71.0" text="Local" textFill="#dadada">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="22.0" prefWidth="76.0" text="Server" textFill="#dadada" />
+                  <RadioButton mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Youtube" textFill="#dadada" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <ToolBar layoutX="24.0" layoutY="668.0" prefHeight="59.0" prefWidth="191.0" style="-fx-background-color: transparent;">
-         <items>
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-radius: 40;" styleClass="roundButton" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="57.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-background-radius: 40;" styleClass="roundButton" text="Button" />
-         </items>
-      </ToolBar>
-      <TextField layoutX="458.0" layoutY="8.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="364.0" promptText="Search" style="-fx-background-color: #2b2929; -fx-border-color: WHITE; -fx-border-image-width: 3;" styleClass="text-field">
-         <font>
-            <Font size="10.0" />
-         </font></TextField>
-      <VBox layoutX="-1.0" layoutY="50.0" prefHeight="582.0" prefWidth="333.0">
+      </AnchorPane>
+      <AnchorPane layoutY="645.0" prefHeight="81.0" prefWidth="1280.0" style="-fx-background-color: #262626;">
          <children>
-            <TableView prefHeight="551.0" prefWidth="338.0">
-               <columns>
-                  <TableColumn editable="false" prefWidth="136.0" text="Playlists" />
-                  <TableColumn editable="false" prefWidth="100.0" text="Songs" />
-                  <TableColumn editable="false" prefWidth="78.0" text="Time" />
-               </columns>
-               <contextMenu>
-                  <ContextMenu>
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                     </items>
-                  </ContextMenu>
-               </contextMenu>
-            </TableView>
-            <ButtonBar prefHeight="30.0" prefWidth="338.0">
-               <buttons>
-                  <MenuButton mnemonicParsing="false" prefHeight="23.0" prefWidth="103.0" styleClass="menu-item" text="Options">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Edit" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                     </items>
-                  </MenuButton>
-               </buttons>
-            </ButtonBar>
+            <HBox layoutX="241.0" layoutY="14.0" prefHeight="46.0" prefWidth="800.0">
+               <children>
+                  <VBox prefHeight="46.0" prefWidth="791.0">
+                     <children>
+                        <HBox prefHeight="23.0" prefWidth="546.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="23.0" prefWidth="643.0" text="Song">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="75.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <HBox prefHeight="23.0" prefWidth="75.0">
+                                 <children>
+                                    <Label prefHeight="44.0" prefWidth="32.0" styleClass="label-small" text="00:00" />
+                                    <Label prefHeight="39.0" prefWidth="7.0" styleClass="label-bright" text="l " />
+                                    <Label prefHeight="46.0" prefWidth="29.0" styleClass="label-small" text="00:00" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="12.0" prefWidth="791.0">
+                           <children>
+                              <Slider prefHeight="15.0" prefWidth="792.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="1103.0" layoutY="34.0" prefHeight="14.0" prefWidth="155.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/voldown.png" />
+                     </image>
+                  </ImageView>
+                  <Slider prefHeight="20.0" prefWidth="103.0" />
+                  <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/volup.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+            <ToolBar layoutX="28.0" layoutY="9.0" prefHeight="65.0" prefWidth="191.0" style="-fx-background-color: transparent;">
+               <items>
+                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" text="⏮" />
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="57.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" text="▶" />
+                  <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" text="⏭" />
+               </items>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
+            </ToolBar>
+            <ToggleButton layoutX="1047.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" styleClass="transparrentButton" text=" 🔀" />
          </children>
-      </VBox>
-      <VBox layoutX="336.0" layoutY="50.0" prefHeight="591.0" prefWidth="943.0">
-         <children>
-            <TableView prefHeight="553.0" prefWidth="943.0">
-              <columns>
-                <TableColumn editable="false" prefWidth="292.0" text="Title" />
-                <TableColumn editable="false" prefWidth="206.0" text="Artist" />
-                  <TableColumn editable="false" prefWidth="178.0" text="Album" />
-                  <TableColumn editable="false" prefWidth="84.0" text="Genre" />
-                  <TableColumn editable="false" prefWidth="71.0" text="Time" />
-              </columns>
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </TableView>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <MenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" styleClass="menu-item" text="Options">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="New" />
-                      <MenuItem mnemonicParsing="false" text="Edit" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                  </MenuButton>
-                  <Button minWidth="35.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="75.0" text="Button" />
-               </buttons>
-            </ButtonBar>
-         </children>
-      </VBox>
-      <ToggleButton layoutX="1039.0" layoutY="683.0" mnemonicParsing="false" prefHeight="6.0" prefWidth="24.0" styleClass="transparrentButton" text="ToggleButton" />
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -446,8 +446,7 @@
     -fx-border-width: 2;
     -fx-border-radius: 30;
     -fx-background-radius: 30;
-    -fx-background-color: #1d1d1d;
-    -fx-background-opacity: 0;
+    -fx-background-color: #262626;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
@@ -493,9 +492,6 @@
 
 /* ____________________________________________________________________ TABLE VIEW */
 
-.root{
-    -fx-background-color: #262626;
-}
 
 .table-view{
     -fx-background-color: transparent;

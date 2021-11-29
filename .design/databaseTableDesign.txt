@@ -1,0 +1,25 @@
+
+// song
+
+	id: primary key
+	name: varchar[256]
+	artists: varchar[256] (CSV)
+	duration: Int (seconds)
+	type: enum (Local / Youtube)
+	location : varchar(256) (localpath / Youtube id)
+
+// playlist-entry
+	entry-id primary key
+	id: int (playlist id)
+	song-id: int
+
+// playlist
+	id: int ( playlist-entry.id)
+	name: varchar[256]
+
+// user
+	id: int
+	username: varchar[50]
+	playlists: varchar[256] (playlist.id -> string, CSV)
+
+	password-hash: varchar(50) ?????????

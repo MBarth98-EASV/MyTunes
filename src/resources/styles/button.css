@@ -5,6 +5,7 @@
     -fx-content-display: CENTER;
     -fx-border-radius: 5;
     -fx-border-width: 2;
+    -fx-border-color: #e2e2e2;
     -fx-background-radius: 5;
     -fx-background-color: #4678c5;
 }

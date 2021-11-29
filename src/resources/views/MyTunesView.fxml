@@ -26,14 +26,14 @@
       <AnchorPane layoutY="61.0" prefHeight="38.0" prefWidth="1282.0" style="-fx-background-color: #404040;" />
       <HBox layoutX="-1.0" layoutY="59.0" prefHeight="597.0" prefWidth="1282.0">
          <children>
-            <VBox prefHeight="597.0" prefWidth="494.0">
+            <VBox prefHeight="597.0" prefWidth="479.0">
                <children>
                   <TreeTableView fx:id="treeTblViewPlaylists" prefHeight="548.0" prefWidth="425.0" styleClass="table-view">
                     <columns>
                       <TreeTableColumn fx:id="treeTblClmnPlaylist" prefWidth="110.00000095367432" text="Playlist" />
                         <TreeTableColumn fx:id="treeTblClmnPlaylistArtist" prefWidth="95.77780151367188" text="Artist" />
                       <TreeTableColumn fx:id="treeTblClmnPlaylistSongs" prefWidth="145.1111297607422" text="Songs" />
-                        <TreeTableColumn fx:id="treeTblClmnPlaylistTime" prefWidth="62.44439697265625" text="Time" />
+                        <TreeTableColumn fx:id="treeTblClmnPlaylistTime" prefWidth="67.33329264322919" text="Time" />
                     </columns>
                   </TreeTableView>
                   <ButtonBar prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #404040;">
@@ -47,7 +47,7 @@
             <Separator minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="597.0" prefWidth="0.0" styleClass="blackSeparator" stylesheets="@../styles/dark.css" />
             <VBox prefHeight="596.0" prefWidth="927.0">
                <children>
-                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="715.0">
+                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="744.0">
                     <columns>
                       <TableColumn fx:id="tblClmnSongTitle" editable="false" prefWidth="272.4444069862366" text="Title" />
                       <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="165.55560302734375" text="Artist" />

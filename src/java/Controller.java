@@ -2,6 +2,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.beans.EventHandler;
 import java.net.URL;
@@ -78,32 +80,32 @@ public class Controller implements Initializable
         System.out.println("play/pause current song");
     }
 
-    public void onNextTrack(ActionEvent actionEvent)
+    @FXML public void onNextTrack(ActionEvent actionEvent)
     {
         System.out.println("next song");
     }
 
-    public void onPreviousTrack(ActionEvent actionEvent)
+    @FXML public void onPreviousTrack(ActionEvent actionEvent)
     {
         System.out.println("previous/reset song");
     }
 
-    public void onRandomTrack(ActionEvent actionEvent)
+    @FXML public void onRandomTrack(ActionEvent actionEvent)
     {
         System.out.println("get a random song");
     }
 
-    public void onSettings(ActionEvent actionEvent)
+    @FXML public void onSettings(ActionEvent actionEvent)
     {
         System.out.println("open settings");
     }
 
-    public void onMoveTrackUp(ActionEvent actionEvent)
+    @FXML public void onMoveTrackUp(ActionEvent actionEvent)
     {
         System.out.println("track is moved upwards");
     }
 
-    public void onMoveTrackDown(ActionEvent actionEvent)
+    @FXML public void onMoveTrackDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
     }

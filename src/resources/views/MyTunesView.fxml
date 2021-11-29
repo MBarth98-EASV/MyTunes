@@ -4,9 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,6 +11,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,53 +26,40 @@
       <AnchorPane layoutY="61.0" prefHeight="38.0" prefWidth="1282.0" style="-fx-background-color: #404040;" />
       <HBox layoutX="-1.0" layoutY="59.0" prefHeight="597.0" prefWidth="1282.0">
          <children>
-            <VBox prefHeight="385.0" prefWidth="355.0">
+            <VBox prefHeight="597.0" prefWidth="479.0">
                <children>
-                  <TableView fx:id="tblViewPlaylist" prefHeight="547.0" prefWidth="354.0">
-                     <columns>
-                        <TableColumn fx:id="tblClmnPlaylists" editable="false" prefWidth="182.0" text="Playlists" />
-                        <TableColumn fx:id="tblClmnPlaylistSongs" editable="false" prefWidth="90.0" text="Songs" />
-                        <TableColumn fx:id="tblClmnPlaylistTime" editable="false" prefWidth="77.0" text="Time" />
-                     </columns>
-                  </TableView>
+                  <TreeTableView fx:id="treeTblViewPlaylists" prefHeight="548.0" prefWidth="425.0" styleClass="table-view">
+                    <columns>
+                      <TreeTableColumn fx:id="treeTblClmnPlaylist" prefWidth="110.00000095367432" text="Playlist" />
+                        <TreeTableColumn fx:id="treeTblClmnPlaylistArtist" prefWidth="95.77780151367188" text="Artist" />
+                      <TreeTableColumn fx:id="treeTblClmnPlaylistSongs" prefWidth="145.1111297607422" text="Songs" />
+                        <TreeTableColumn fx:id="treeTblClmnPlaylistTime" prefWidth="67.33329264322919" text="Time" />
+                    </columns>
+                  </TreeTableView>
                   <ButtonBar prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #404040;">
                      <buttons>
                         <Button fx:id="btnPlaylistUp" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
-                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
-                        <MenuButton fx:id="mnuBtnPlaylistOptions" mnemonicParsing="false" prefHeight="23.0" styleClass="menu-item" text="Options">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="New" />
-                              <MenuItem mnemonicParsing="false" text="Edit" />
-                              <MenuItem mnemonicParsing="false" text="Delete" />
-                           </items>
-                        </MenuButton>
+                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" translateX="-4.0" />
                      </buttons>
                   </ButtonBar>
                </children>
             </VBox>
-            <Separator minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="394.0" prefWidth="3.0" styleClass="blackSeparator" stylesheets="@../styles/dark.css" />
+            <Separator minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="597.0" prefWidth="0.0" styleClass="blackSeparator" stylesheets="@../styles/dark.css" />
             <VBox prefHeight="596.0" prefWidth="927.0">
                <children>
-                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="926.0">
+                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="744.0">
                     <columns>
-                      <TableColumn fx:id="tblClmnSongTitle" editable="false" prefWidth="292.0" text="Title" />
-                      <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="221.0" text="Artist" />
-                        <TableColumn fx:id="tblClmnSongAlbum" editable="false" prefWidth="256.0" text="Album" />
-                        <TableColumn fx:id="tblClmnSongGenre" editable="false" prefWidth="95.0" text="Genre" />
-                        <TableColumn fx:id="tblClmnSongTime" editable="false" prefWidth="69.0" text="Time" />
+                      <TableColumn fx:id="tblClmnSongTitle" editable="false" prefWidth="272.4444069862366" text="Title" />
+                      <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="165.55560302734375" text="Artist" />
+                        <TableColumn fx:id="tblClmnSongAlbum" editable="false" prefWidth="175.11099243164062" text="Album" />
+                        <TableColumn fx:id="tblClmnSongGenre" editable="false" prefWidth="167.111083984375" text="Genre" />
+                        <TableColumn fx:id="tblClmnSongTime" editable="false" prefWidth="155.5556640625" text="Time" />
                     </columns>
                   </TableView>
-                  <ButtonBar prefHeight="40.0" prefWidth="926.0" style="-fx-background-color: #404040;">
+                  <ButtonBar prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #404040;">
                      <buttons>
-                        <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
-                        <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
-                        <MenuButton fx:id="mnuBtnSongOptions" mnemonicParsing="false" prefHeight="31.0" styleClass="menu-item" text="Options">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="New" />
-                            <MenuItem mnemonicParsing="false" text="Edit" />
-                              <MenuItem mnemonicParsing="false" text="Delete" />
-                          </items>
-                        </MenuButton>
+                        <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" translateX="-1.0" />
+                        <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" translateX="-5.0" />
                      </buttons>
                   </ButtonBar>
                </children>
@@ -88,22 +74,6 @@
                   <Font size="10.0" />
                </font>
             </TextField>
-            <HBox layoutX="960.0" layoutY="22.0" prefHeight="0.0" prefWidth="286.0">
-               <children>
-                  <Label prefHeight="21.0" prefWidth="48.0" styleClass="label-small" text="Source:">
-                     <font>
-                        <Font name="Century Gothic" size="7.0" />
-                     </font>
-                  </Label>
-                  <RadioButton fx:id="radioBtnLocal" mnemonicParsing="false" prefHeight="22.0" prefWidth="71.0" text="Local" textFill="#dadada">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </RadioButton>
-                  <RadioButton fx:id="radioBtnServer" mnemonicParsing="false" prefHeight="22.0" prefWidth="76.0" text="Server" textFill="#dadada" />
-                  <RadioButton fx:id="radioBtnYoutube" mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Youtube" textFill="#dadada" />
-               </children>
-            </HBox>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="645.0" prefHeight="81.0" prefWidth="1280.0" style="-fx-background-color: #262626;">

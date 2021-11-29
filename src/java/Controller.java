@@ -12,10 +12,11 @@ public class Controller implements Initializable
     public TextField txtFieldSearch;
     public Button btnSettings;
 
-    public TableView tblViewPlaylist;
-    public TableColumn tblClmnPlaylists;
-    public TableColumn tblClmnPlaylistSongs;
-    public TableColumn tblClmnPlaylistTime;
+    public TreeTableView treeTblViewPlaylists;
+    public TreeTableColumn treeTblClmnPlaylist;
+    public TreeTableColumn treeTblClmnPlaylistArtist;
+    public TreeTableColumn treeTblClmnPlaylistSongs;
+    public TreeTableColumn treeTblClmnPlaylistTime;
     public Button btnPlaylistUp;
     public Button btnPlaylistDown;
     public MenuButton mnuBtnPlaylistOptions;

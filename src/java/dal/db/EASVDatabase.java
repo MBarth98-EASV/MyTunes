@@ -6,11 +6,11 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class MyDatabaseConnector
+public class EASVDatabase
 {
     private SQLServerDataSource dataSource;
 
-    public MyDatabaseConnector()
+    public EASVDatabase()
     {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
@@ -25,9 +25,14 @@ public class MyDatabaseConnector
         return dataSource.getConnection();
     }
 
+    public void test()
+    {
+
+    }
+
     public static void main(String[] args) throws SQLException
     {
-        MyDatabaseConnector databaseConnector = new MyDatabaseConnector();
+        EASVDatabase databaseConnector = new EASVDatabase();
 
         try (Connection connection = databaseConnector.getConnection())
         {

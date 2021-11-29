@@ -5,7 +5,7 @@
 	name: varchar[256]
 	artists: varchar[256] (CSV)
 	duration: Int (seconds)
-	type: enum (MP3 / WAV / Youtube)
+	type: enum (Local / Youtube)
 	location : varchar(256) (localpath / Youtube id)
 
 // playlist-entry

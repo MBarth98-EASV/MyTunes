@@ -45,7 +45,7 @@ jobs:
         languages: ${{ matrix.language }}
 
 
-      name: Build Java
+     - name: Build Java
         run: |
           make bootstrap
           make release

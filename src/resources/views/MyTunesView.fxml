@@ -40,7 +40,7 @@
                      <buttons>
                         <Button fx:id="btnPlaylistUp" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
                         <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
-                        <MenuButton mnemonicParsing="false" prefHeight="23.0" styleClass="menu-item" text="Options">
+                        <MenuButton fx:id="mnuBtnPlaylistOptions" mnemonicParsing="false" prefHeight="23.0" styleClass="menu-item" text="Options">
                            <items>
                               <MenuItem mnemonicParsing="false" text="New" />
                               <MenuItem mnemonicParsing="false" text="Edit" />
@@ -58,7 +58,7 @@
                     <columns>
                       <TableColumn fx:id="tblClmnSongTitle" editable="false" prefWidth="292.0" text="Title" />
                       <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="221.0" text="Artist" />
-                        <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="256.0" text="Album" />
+                        <TableColumn fx:id="tblClmnSongAlbum" editable="false" prefWidth="256.0" text="Album" />
                         <TableColumn fx:id="tblClmnSongGenre" editable="false" prefWidth="95.0" text="Genre" />
                         <TableColumn fx:id="tblClmnSongTime" editable="false" prefWidth="69.0" text="Time" />
                     </columns>
@@ -67,7 +67,7 @@
                      <buttons>
                         <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
                         <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" />
-                        <MenuButton mnemonicParsing="false" prefHeight="31.0" styleClass="menu-item" text="Options">
+                        <MenuButton fx:id="mnuBtnSongOptions" mnemonicParsing="false" prefHeight="31.0" styleClass="menu-item" text="Options">
                           <items>
                             <MenuItem mnemonicParsing="false" text="New" />
                             <MenuItem mnemonicParsing="false" text="Edit" />
@@ -101,7 +101,7 @@
                      </padding>
                   </RadioButton>
                   <RadioButton fx:id="radioBtnServer" mnemonicParsing="false" prefHeight="22.0" prefWidth="76.0" text="Server" textFill="#dadada" />
-                  <RadioButton fx:id="RadioBtnYoutube" mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Youtube" textFill="#dadada" />
+                  <RadioButton fx:id="radioBtnYoutube" mnemonicParsing="false" prefHeight="22.0" prefWidth="77.0" text="Youtube" textFill="#dadada" />
                </children>
             </HBox>
          </children>

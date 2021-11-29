@@ -77,7 +77,7 @@ public class Controller implements Initializable
 
     @FXML public void onPlayTrack(ActionEvent actionEvent)
     {
-        System.out.println("play/pause current song");
+        System.out.println("Play/Resume song");
     }
 
     @FXML public void onNextTrack(ActionEvent actionEvent)

@@ -4,9 +4,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+import javax.sound.sampled.Clip;
 import java.util.Objects;
 
 public class Main extends Application {
+
+    static Clip clip;
 
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -16,10 +20,5 @@ public class Main extends Application {
         primaryStage.setTitle("MyTunes");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

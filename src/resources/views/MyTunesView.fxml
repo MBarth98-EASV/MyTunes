@@ -30,34 +30,54 @@
                <children>
                   <TreeTableView fx:id="treeTblViewPlaylists" prefHeight="548.0" prefWidth="425.0" styleClass="table-view">
                     <columns>
-                      <TreeTableColumn fx:id="treeTblClmnPlaylist" prefWidth="110.00000095367432" text="Playlist" />
-                        <TreeTableColumn fx:id="treeTblClmnPlaylistArtist" prefWidth="95.77780151367188" text="Artist" />
-                      <TreeTableColumn fx:id="treeTblClmnPlaylistSongs" prefWidth="145.1111297607422" text="Songs" />
-                        <TreeTableColumn fx:id="treeTblClmnPlaylistTime" prefWidth="67.33329264322919" text="Time" />
+                      <TreeTableColumn fx:id="treeTblClmnPlaylist" prefWidth="118.0" text="Playlist" />
+                        <TreeTableColumn fx:id="treeTblClmnPlaylistArtist" prefWidth="101.0" text="Artist" />
+                      <TreeTableColumn fx:id="treeTblClmnPlaylistSongs" prefWidth="156.0" text="Songs" />
+                        <TreeTableColumn fx:id="treeTblClmnPlaylistTime" prefWidth="78.0" text="Time" />
                     </columns>
                   </TreeTableView>
                   <ButtonBar prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #404040;">
                      <buttons>
-                        <Button fx:id="btnPlaylistUp" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
-                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" translateX="-4.0" />
+                        <HBox minWidth="54.0" prefHeight="40.0" prefWidth="357.0">
+                           <children>
+                              <Button fx:id="btnPlaylistUp111" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 75;" styleClass="transparrentButton" text="New" />
+                              <Button fx:id="btnPlaylistUp11" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 71;" styleClass="transparrentButton" text="Edit" />
+                              <Button fx:id="btnPlaylistUp1" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 96;" styleClass="transparrentButton" text="Remove" />
+                           </children>
+                           <padding>
+                              <Insets top="4.0" />
+                           </padding>
+                        </HBox>
+                        <Button fx:id="btnPlaylistUp" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 60; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" />
+                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 60; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" translateX="-4.0" />
                      </buttons>
                   </ButtonBar>
                </children>
             </VBox>
             <Separator minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="597.0" prefWidth="0.0" styleClass="blackSeparator" stylesheets="@../styles/dark.css" />
-            <VBox prefHeight="596.0" prefWidth="927.0">
+            <VBox prefHeight="597.0" prefWidth="846.0">
                <children>
-                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="744.0">
+                  <TableView fx:id="tblViewSongs" prefHeight="547.0" prefWidth="872.0">
                     <columns>
                       <TableColumn fx:id="tblClmnSongTitle" editable="false" prefWidth="272.4444069862366" text="Title" />
                       <TableColumn fx:id="tblClmnSongArtist" editable="false" prefWidth="165.55560302734375" text="Artist" />
-                        <TableColumn fx:id="tblClmnSongAlbum" editable="false" prefWidth="175.11099243164062" text="Album" />
-                        <TableColumn fx:id="tblClmnSongGenre" editable="false" prefWidth="167.111083984375" text="Genre" />
-                        <TableColumn fx:id="tblClmnSongTime" editable="false" prefWidth="155.5556640625" text="Time" />
+                        <TableColumn fx:id="tblClmnSongAlbum" editable="false" prefWidth="185.0" text="Album" />
+                        <TableColumn fx:id="tblClmnSongGenre" editable="false" prefWidth="119.0" text="Genre" />
+                        <TableColumn fx:id="tblClmnSongTime" editable="false" prefWidth="196.0" text="Time" />
                     </columns>
                   </TableView>
                   <ButtonBar prefHeight="40.0" prefWidth="966.0" style="-fx-background-color: #404040;">
                      <buttons>
+                        <HBox minWidth="54.0" prefHeight="40.0" prefWidth="661.0">
+                           <children>
+                              <Button fx:id="btnPlaylistUp1111" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 75;" styleClass="transparrentButton" text="New" />
+                              <Button fx:id="btnPlaylistUp111" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 71;" styleClass="transparrentButton" text="Edit" />
+                              <Button fx:id="btnPlaylistUp11" maxWidth="101.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="104.0" style="-fx-min-width: 10; -fx-max-width: 96;" styleClass="transparrentButton" text="Remove" />
+                           </children>
+                           <padding>
+                              <Insets top="4.0" />
+                           </padding>
+                        </HBox>
                         <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▲" translateX="-1.0" />
                         <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60;" styleClass="transparrentButton" text="▼" translateX="-5.0" />
                      </buttons>
@@ -69,9 +89,9 @@
       <AnchorPane prefHeight="65.0" prefWidth="1280.0" style="-fx-background-color: #262626;">
          <children>
             <Button fx:id="btnSettings" layoutX="22.0" layoutY="16.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="96.0" styleClass="transparrentButton" text="Settings" />
-            <TextField fx:id="txtFieldSearch" layoutX="458.0" layoutY="18.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="364.0" promptText="Search" style="-fx-border-radius: 30; -fx-background-color: #2b2929; -fx-border-color: WHITE; -fx-border-image-width: 3;">
+            <TextField fx:id="txtFieldSearch" layoutX="458.0" layoutY="18.0" minHeight="-Infinity" prefHeight="30.0" prefWidth="364.0" promptText="Search" style="-fx-border-radius: 30; -fx-background-color: #2b2929; -fx-border-color: e2e2e2;; -fx-border-width: 2;" styleClass="text-field">
                <font>
-                  <Font size="10.0" />
+                  <Font name="Segoe UI Light" size="10.0" />
                </font>
             </TextField>
          </children>
@@ -115,17 +135,18 @@
             </HBox>
             <HBox layoutX="1103.0" layoutY="34.0" prefHeight="14.0" prefWidth="155.0">
                <children>
-                  <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/voldown.png" />
-                     </image>
-                  </ImageView>
-                  <Slider fx:id="sliderVolume" prefHeight="20.0" prefWidth="103.0" />
-                  <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/volup.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </HBox.margin>
                   </ImageView>
+                  <Slider fx:id="sliderVolume" prefHeight="20.0" prefWidth="103.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Slider>
                </children>
                <padding>
                   <Insets bottom="5.0" />
@@ -133,18 +154,18 @@
             </HBox>
             <ToolBar layoutX="28.0" layoutY="9.0" prefHeight="65.0" prefWidth="191.0" style="-fx-background-color: transparent;">
                <items>
-                  <Button fx:id="btnPrevSong" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" />
-                  <Button fx:id="btnPlayPause" mnemonicParsing="false" prefHeight="45.0" prefWidth="57.0" style="-fx-background-radius: 40; -fx-background-image: url /images/play.png;" styleClass="transparrentButton">
+                  <Button fx:id="btnPrevSong" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-radius: 40;" styleClass="prevButton" stylesheets="@../styles/MediaButtons.css" />
+                  <Button fx:id="btnPlayPause" mnemonicParsing="false" prefHeight="48.0" prefWidth="64.0" style="-fx-background-radius: 40;" styleClass="playButton" stylesheets="@../styles/MediaButtons.css">
                      <font>
                         <Font size="1.0" />
                      </font></Button>
-                  <Button fx:id="btnNextSong" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" style="-fx-background-radius: 40;" styleClass="transparrentButton" />
+                  <Button fx:id="btnNextSong" mnemonicParsing="false" prefHeight="34.0" prefWidth="30.0" style="-fx-background-radius: 40;" styleClass="nextButton" stylesheets="@../styles/MediaButtons.css" />
                </items>
                <padding>
                   <Insets top="2.0" />
                </padding>
             </ToolBar>
-            <ToggleButton fx:id="tglBtnShuffle" layoutX="1047.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" styleClass="transparrentButton" />
+            <ToggleButton fx:id="tglBtnShuffle" layoutX="1047.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="39.0" styleClass="shuffleButton" stylesheets="@../styles/MediaButtons.css" />
          </children>
       </AnchorPane>
    </children>

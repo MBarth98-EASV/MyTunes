@@ -23,7 +23,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <GridPane cache="true" cacheHint="QUALITY" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
@@ -41,6 +40,8 @@
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="310.0" />
+            <ColumnConstraints />
+            <ColumnConstraints />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -200,69 +201,47 @@
                   </ToolBar>
                </children>
             </GridPane>
-            <GridPane prefHeight="54.0" prefWidth="600.0" GridPane.columnIndex="1">
+            <GridPane prefHeight="54.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="38.33331298828125" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="51.666666666666664" minHeight="10.0" prefHeight="33.99997965494792" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="41.33335367838541" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox prefHeight="5.0" prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                  <Slider fx:id="sliderSong" blockIncrement="1.0" maxHeight="14.0" maxWidth="1.7976931348623157E308" minHeight="14.0" prefHeight="14.0" prefWidth="600.0" stylesheets="@../styles/Timeline.css" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <cursor>
+                        <Cursor fx:constant="H_RESIZE" />
+                     </cursor>
+                  </Slider>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="70.0" minWidth="57.0" prefHeight="34.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                      <children>
-                        <VBox prefHeight="15.0" prefWidth="600.0" translateY="-21.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <GridPane>
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="491.33335367838544" minWidth="10.0" prefWidth="491.33335367838544" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.33334732055664" minWidth="10.0" prefWidth="41.66664632161462" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.3333129882813" minWidth="10.0" prefWidth="67.33335367838538" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <HBox prefHeight="19.0" prefWidth="499.0">
-                                       <children>
-                                          <Label fx:id="lblSongName1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="19.0" style="-fx-text-fill: #e2e2e2;" text="|">
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </Label>
-                                          <Label fx:id="lblSongName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13;" stylesheets="@../styles/dark.css" text="Song">
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="21.0" prefWidth="276.0" translateY="1.0" GridPane.columnIndex="2">
-                                       <children>
-                                          <Label fx:id="lblSongCurrentTime" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="28.0" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00" />
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="5.0" styleClass="label-bright" stylesheets="@../styles/dark.css" text=":" translateY="-1.0">
-                                             <padding>
-                                                <Insets left="2.0" right="2.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label fx:id="lblSongTotalTime" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </GridPane>
-                              <Slider fx:id="sliderSong" blockIncrement="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="83.0" prefWidth="536.0" stylesheets="@../styles/Timeline.css">
-                                 <cursor>
-                                    <Cursor fx:constant="H_RESIZE" />
-                                 </cursor>
-                              </Slider>
-                           </children>
-                        </VBox>
+                        <Label fx:id="lblSongCurrentTime" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="28.0" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="5.0" styleClass="label-bright" stylesheets="@../styles/dark.css" text=":">
+                           <padding>
+                              <Insets left="2.0" right="2.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="lblSongTotalTime" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
                   </HBox>
+                  <Label fx:id="lblSongName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13;" stylesheets="@../styles/dark.css" text="Song" GridPane.halignment="LEFT">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="2">

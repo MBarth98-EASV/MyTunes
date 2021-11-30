@@ -82,45 +82,45 @@ public class Controller implements Initializable
 
     }
 
-    @FXML public void onPlayTrack(ActionEvent actionEvent)
+    @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
         isPlaying = !isPlaying;
 
         switchPlayPause();
     }
 
-    @FXML public void onNextTrack(ActionEvent actionEvent)
+    @FXML private void onNextTrack(ActionEvent actionEvent)
     {
         System.out.println("next song");
     }
 
-    @FXML public void onPreviousTrack(ActionEvent actionEvent)
+    @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
         System.out.println("previous/reset song");
     }
 
-    @FXML public void onRandomTrack(ActionEvent actionEvent)
+    @FXML private void onShuffleToggled(ActionEvent actionEvent)
     {
         System.out.println("get a random song");
     }
 
-    @FXML public void onSettings(ActionEvent actionEvent)
+    @FXML private void onSettings(ActionEvent actionEvent)
     {
         System.out.println("open settings");
     }
 
-    @FXML public void onMoveTrackUp(ActionEvent actionEvent)
+    @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
         System.out.println("track is moved upwards");
     }
 
-    @FXML private void onMoveTrackDown(ActionEvent actionEvent)
+    @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
     }
 
     @FXML
-    public void switchPlayPause(){
+    private void switchPlayPause(){
         if (isPlaying == true){
             btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
                     + "-fx-background-position: 8");
@@ -129,5 +129,26 @@ public class Controller implements Initializable
             btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
                     + "-fx-background-position: 9");
         }
+    }
+
+
+    @FXML
+    private void setVolume(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistUp(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistDown(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onSearch(ActionEvent event){
+
     }
 }

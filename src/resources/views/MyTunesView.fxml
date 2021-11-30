@@ -52,7 +52,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <TextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" prefHeight="32.0" prefWidth="737.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%);" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+            <TextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" onAction="#onSearch" prefHeight="32.0" prefWidth="737.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%);" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                <promptText>Search
                </promptText>
                <opaqueInsets>
@@ -91,11 +91,11 @@
                   </TreeTableView>
                   <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #404040;" GridPane.rowIndex="1">
                      <buttons>
-                        <Button fx:id="btnPlaylistUp" maxWidth="65.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲">
+                        <Button fx:id="btnPlaylistUp" maxWidth="65.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlaylistUp" prefHeight="34.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" translateX="-4.0">
+                        <Button fx:id="btnPlaylistDown" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlaylistDown" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" translateX="-4.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -126,11 +126,11 @@
                   </TableView>
                   <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="810.0" style="-fx-background-color: #404040;" GridPane.rowIndex="1">
                      <buttons>
-                        <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" onAction="#onMoveTrackUp" prefHeight="32.0" style="-fx-max-width: 60; -fx-min-width: 10; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" translateX="-1.0">
+                        <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" onAction="#onMoveSongUp" prefHeight="32.0" style="-fx-max-width: 60; -fx-min-width: 10; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" translateX="-1.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" onAction="#onMoveTrackDown" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" translateX="-5.0">
+                        <Button fx:id="btnSongDown" minWidth="50.0" mnemonicParsing="false" onAction="#onMoveSongDown" prefHeight="32.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" translateX="-5.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -180,7 +180,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ToggleButton fx:id="tglBtnShuffle" maxHeight="34.0" maxWidth="60.0" onAction="#onRandomTrack" prefHeight="34.0" prefWidth="36.0" styleClass="Button" stylesheets="@../styles/shuffleButton.css" translateX="50.0">
+                        <ToggleButton fx:id="tglBtnShuffle" maxHeight="34.0" maxWidth="60.0" onAction="#onShuffleToggled" prefHeight="34.0" prefWidth="36.0" styleClass="Button" stylesheets="@../styles/shuffleButton.css" translateX="50.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -248,7 +248,7 @@
                   <RowConstraints maxHeight="33.33331298828125" minHeight="7.33331298828125" prefHeight="12.666666666666671" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="140.0" stylesheets="@../styles/dark.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#setVolume" prefHeight="41.0" prefWidth="140.0" stylesheets="@../styles/dark.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="H_RESIZE" />
                      </cursor>

@@ -26,4 +26,41 @@
     -fx-background-color: #11223f;
     -fx-text-fill: #d5d4d4;
 }
+.Button2 {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d5d4d4;
+    -fx-background-color: transparent;
+    -fx-content-display: CENTER;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-border-color: #e2e2e2;
+    -fx-background-radius: 5;
+}
+
+
+
+
+
+
+.Button2:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: #5786cb;
+    -fx-text-fill: #5786cb;
+}
+
+.Button2:pressed {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #5786cb;
+    -fx-border-color: #5786cb;
+    -fx-border-radius: 5;
+}
+
+.Button2:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #11223f;
+    -fx-text-fill: #d5d4d4;
+}
+
+
 

@@ -67,7 +67,7 @@
             </TextField>
          </children>
       </GridPane>
-      <SplitPane dividerPositions="0.33666666666666667" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #262626;" stylesheets="@../styles/dark.css" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #262626;" stylesheets="@../styles/dark.css" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <items>
             <GridPane layoutX="10.0" layoutY="10.0" prefHeight="498.0" prefWidth="42.0">
                <columnConstraints>
@@ -124,7 +124,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #404040;" GridPane.rowIndex="1">
+                  <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="810.0" style="-fx-background-color: #404040;" GridPane.rowIndex="1">
                      <buttons>
                         <Button fx:id="btnSongUp" minWidth="50.0" mnemonicParsing="false" onAction="#onMoveTrackUp" prefHeight="32.0" style="-fx-max-width: 60; -fx-min-width: 10;" styleClass="button2" stylesheets="@../styles/button.css" text="▲" translateX="-1.0">
                            <cursor>
@@ -160,37 +160,25 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="25.0" prefHeight="33.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" translateY="4.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                  <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" translateY="3.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                      <items>
-                        <Button fx:id="btnPrevSong" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" onAction="#onPreviousTrack" prefHeight="35.0" prefWidth="35.0" rotate="180.0" styleClass="Button" translateX="-8.0">
+                        <Button fx:id="btnPrevSong" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" onAction="#onPreviousTrack" prefHeight="35.0" prefWidth="35.0" rotate="180.0" styleClass="Button" stylesheets="@../styles/PreviousButton.css" translateX="-8.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                           <stylesheets>
-                              <URL value="@../styles/button.css" />
-                              <URL value="@../styles/PreviousButton.css" />
-                           </stylesheets>
                         </Button>
-                        <Button fx:id="btnPlayPause" maxHeight="35.0" maxWidth="35.0" minHeight="15.0" minWidth="35.0" onAction="#onPlayTrack" prefHeight="21.0" prefWidth="38.0" scaleX="1.5" scaleY="1.5" style="-fx-border-color: #e2e2e2;" styleClass="Button" translateY="-2.0">
+                        <Button fx:id="btnPlayPause" maxHeight="35.0" maxWidth="35.0" minHeight="15.0" minWidth="35.0" onAction="#onPlayTrack" prefHeight="21.0" prefWidth="38.0" scaleX="1.5" scaleY="1.5" styleClass="Button" stylesheets="@../styles/PlayButton.css" translateY="-2.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <stylesheets>
-                              <URL value="@../styles/button.css" />
-                              <URL value="@../styles/PlayButton.css" />
-                           </stylesheets>
                         </Button>
-                        <Button fx:id="btnNextSong" alignment="CENTER_RIGHT" maxHeight="35.0" maxWidth="35.0" minHeight="21.0" minWidth="35.0" onAction="#onNextTrack" prefHeight="35.0" prefWidth="41.0" styleClass="Button" translateX="8.0">
+                        <Button fx:id="btnNextSong" alignment="CENTER_RIGHT" maxHeight="35.0" maxWidth="35.0" minHeight="21.0" minWidth="35.0" onAction="#onNextTrack" prefHeight="35.0" prefWidth="41.0" styleClass="Button" stylesheets="@../styles/NextButton.css" translateX="8.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                           <stylesheets>
-                              <URL value="@../styles/button.css" />
-                              <URL value="@../styles/NextButton.css" />
-                           </stylesheets>
                         </Button>
                         <ToggleButton fx:id="tglBtnShuffle" maxHeight="30.0" maxWidth="60.0" onAction="#onRandomTrack" style="-fx-border-radius: 0; -fx-border-color: #e2e2e2;" translateX="50.0">
                            <cursor>
@@ -217,35 +205,47 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="36.66668701171875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="38.33331298828125" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <HBox prefHeight="5.0" prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                      <children>
                         <VBox prefHeight="15.0" prefWidth="600.0" translateY="-21.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="21.0" prefWidth="695.0">
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="491.33335367838544" minWidth="10.0" prefWidth="491.33335367838544" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.33334732055664" minWidth="10.0" prefWidth="41.66664632161462" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.3333129882813" minWidth="10.0" prefWidth="67.33335367838538" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <Label fx:id="lblSongName1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="7.0" style="-fx-text-fill: #e2e2e2;" text="|" translateX="15.0">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <Label fx:id="lblSongName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13;" stylesheets="@../styles/dark.css" text="Song" translateX="20.0">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </Label>
-                                    <HBox translateX="490.0" translateY="2.0">
+                                    <HBox prefHeight="19.0" prefWidth="499.0">
                                        <children>
-                                          <Label fx:id="lblSongCurrentTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00" />
+                                          <Label fx:id="lblSongName1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="19.0" style="-fx-text-fill: #e2e2e2;" text="|">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                          <Label fx:id="lblSongName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 13;" stylesheets="@../styles/dark.css" text="Song">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="21.0" prefWidth="276.0" translateY="1.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label fx:id="lblSongCurrentTime" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="28.0" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00" />
                                           <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="5.0" styleClass="label-bright" stylesheets="@../styles/dark.css" text=":" translateY="-1.0">
                                              <padding>
                                                 <Insets left="2.0" right="2.0" />
                                              </padding>
                                           </Label>
-                                          <Label fx:id="lblSongTotalTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00">
+                                          <Label fx:id="lblSongTotalTime" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="label-small" stylesheets="@../styles/dark.css" text="00:00">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -253,7 +253,7 @@
                                        </children>
                                     </HBox>
                                  </children>
-                              </HBox>
+                              </GridPane>
                               <Slider fx:id="sliderSong" blockIncrement="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="83.0" prefWidth="536.0" stylesheets="@../styles/Timeline.css">
                                  <cursor>
                                     <Cursor fx:constant="H_RESIZE" />
@@ -273,10 +273,12 @@
                   <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="68.66668701171875" minHeight="4.000020345052084" prefHeight="21.333333333333332" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="68.66668701171875" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="33.33331298828125" minHeight="7.33331298828125" prefHeight="12.666666666666671" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="140.0" stylesheets="@../styles/dark.css" translateY="5.0" GridPane.columnIndex="2">
+                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="57.0" prefWidth="140.0" stylesheets="@../styles/dark.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="H_RESIZE" />
                      </cursor>
@@ -284,7 +286,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Slider>
-                  <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" translateY="4.0" GridPane.columnIndex="1">
+                  <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" translateX="-4.0" translateY="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../images/volup.png" />
                      </image>

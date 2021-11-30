@@ -29,6 +29,12 @@ public class Controller implements Initializable
 
     @FXML public Button btnPlaylistDown;
 
+    @FXML public Button btnPlaylistNew;
+
+    @FXML public Button btnPlaylistEdit;
+
+    @FXML public Button btnPlaylistDelete;
+
     @FXML public TableView tblViewSongs;
 
     @FXML public TableColumn tblClmnSongTitle;
@@ -44,6 +50,12 @@ public class Controller implements Initializable
     @FXML public Button btnSongUp;
 
     @FXML public Button btnSongDown;
+
+    @FXML public Button btnSongNew;
+
+    @FXML public Button btnSongEdit;
+
+    @FXML public Button btnSongDelete;
 
     @FXML public Button btnPlayPause;
 
@@ -120,6 +132,22 @@ public class Controller implements Initializable
     }
 
     @FXML
+    private void onSongNew(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onSongEdit(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onSongDelete(ActionEvent event){
+
+    }
+
+
+    @FXML
     private void switchPlayPause(){
         if (isPlaying == true){
             btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
@@ -151,4 +179,21 @@ public class Controller implements Initializable
     private void onSearch(ActionEvent event){
 
     }
+
+    @FXML
+    private void onPlaylistNew(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistEdit(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistDelete(ActionEvent event){
+
+    }
+
+
 }

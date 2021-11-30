@@ -63,10 +63,15 @@ public class Controller implements Initializable
 
     @FXML public Slider sliderVolume;
 
+    static musicPlayer player = musicPlayer.getInstance();
+    static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
+    static long clipTimePosition;
+
+    static boolean isPlaying = true;
 
     public Controller()
     {
-
+        musicPlayer.loadMusic(filepath);
     }
 
     @Override
@@ -77,7 +82,9 @@ public class Controller implements Initializable
 
     @FXML public void onPlayTrack(ActionEvent actionEvent)
     {
-        System.out.println("Play/Resume song");
+        player.clip.setMicrosecondPosition(0);
+        clipTimePosition = 0;
+        player.clip.start();
     }
 
     @FXML public void onNextTrack(ActionEvent actionEvent)

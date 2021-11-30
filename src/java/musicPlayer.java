@@ -39,6 +39,7 @@ public class musicPlayer {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
+
             }
         }
         catch (Exception e)

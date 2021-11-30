@@ -63,15 +63,17 @@ public class Controller implements Initializable
 
     @FXML public Slider sliderVolume;
 
+
+/*
     static musicPlayer player = musicPlayer.getInstance();
     static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
     static long clipTimePosition;
-
-    static boolean isPlaying = true;
+*/
+    private static boolean isPlaying = true;
 
     public Controller()
     {
-        musicPlayer.loadMusic(filepath);
+        //musicPlayer.loadMusic(filepath);
     }
 
     @Override
@@ -82,9 +84,9 @@ public class Controller implements Initializable
 
     @FXML public void onPlayTrack(ActionEvent actionEvent)
     {
-        player.clip.setMicrosecondPosition(0);
-        clipTimePosition = 0;
-        player.clip.start();
+        isPlaying = !isPlaying;
+
+        switchPlayPause();
     }
 
     @FXML public void onNextTrack(ActionEvent actionEvent)
@@ -112,8 +114,20 @@ public class Controller implements Initializable
         System.out.println("track is moved upwards");
     }
 
-    @FXML public void onMoveTrackDown(ActionEvent actionEvent)
+    @FXML private void onMoveTrackDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
+    }
+
+    @FXML
+    public void switchPlayPause(){
+        if (isPlaying == true){
+            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
+                    + "-fx-background-position: 8");
+        }
+        else if (isPlaying == false){
+            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
+                    + "-fx-background-position: 9");
+        }
     }
 }

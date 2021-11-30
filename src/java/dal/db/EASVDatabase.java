@@ -14,7 +14,7 @@ public class EASVDatabase
     {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
-        dataSource.setDatabaseName("CSe21A_29_MRS");
+        dataSource.setDatabaseName("CSe21A_29_MyTunes_3");
         dataSource.setUser("CSe21A_29");
         dataSource.setPassword("itsikkerhed");
         dataSource.setPortNumber(1433);

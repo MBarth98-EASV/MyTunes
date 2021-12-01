@@ -154,7 +154,16 @@ public class Controller implements Initializable
 
     @FXML
     private void onSongNew(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("New Song");
+            stage.setScene(new Scene(root, 320, 190));
+            stage.show();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

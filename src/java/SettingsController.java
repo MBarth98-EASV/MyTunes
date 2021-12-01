@@ -40,11 +40,13 @@ public class SettingsController implements Initializable {
         DirectoryChooser dc = new DirectoryChooser();
 
         File selectedDirectory = dc.showDialog(new Stage());
+
+        if (selectedDirectory == null)
+            return;
+
         txtFieldDirectory.setText(selectedDirectory.getAbsolutePath());
 
-
         Path path = Path.of(txtFieldDirectory.getText());
-
     }
 
 }

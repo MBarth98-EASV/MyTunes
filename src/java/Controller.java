@@ -82,9 +82,10 @@ public class Controller implements Initializable
 
     @FXML public Slider sliderVolume;
 
+
     MusicPlayer songPlayer = new MusicPlayer();
 
-    boolean isPlaying;
+    boolean isPlaying = false;
 
     public Controller()
     {
@@ -99,6 +100,7 @@ public class Controller implements Initializable
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
+
         if(isPlaying)
         {
             songPlayer.pauseTrack();
@@ -111,7 +113,6 @@ public class Controller implements Initializable
             isPlaying = true;
             switchPlayPause();
         }
-
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)

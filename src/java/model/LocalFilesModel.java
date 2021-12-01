@@ -12,9 +12,7 @@ public class LocalFilesModel {
 
     public LocalFilesModel() {
         localFilesManager = new LocalFilesManager();
-
     }
-
 
     public Path getCurrentPath(){
         return localFilesManager.getCurrentPath();
@@ -24,9 +22,19 @@ public class LocalFilesModel {
         return localFilesManager.readAllFromDir(path);
     }
 
-    public File addSong(Path path){
+    public Path addSong(Path path){
 
+        return localFilesManager.addSong(path);
     }
+
+    public void removeSong(Path path){
+        localFilesManager.removeSong(path);
+    }
+
+    public void editSong(Path path){
+        localFilesManager.editSong(path);
+    }
+
 
 
 }

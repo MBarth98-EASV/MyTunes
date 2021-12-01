@@ -1,10 +1,12 @@
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import model.LocalFilesModel;
 
 
 import java.io.File;
@@ -17,11 +19,13 @@ public class SettingsController implements Initializable {
     @FXML public TextField txtFieldDirectory;
 
     @FXML public Button btnSelectDirectory;
+    @FXML public Button btnApply;
 
+    LocalFilesModel localFilesModel;
 
     public SettingsController()
     {
-
+        localFilesModel = new LocalFilesModel();
     }
 
     @Override
@@ -45,6 +49,17 @@ public class SettingsController implements Initializable {
 
         Path path = Path.of(txtFieldDirectory.getText());
 
+    }
+
+    @FXML
+    public void onApplySettings(ActionEvent event){
+        if(!txtFieldDirectory.getText().isEmpty() &&
+                !txtFieldDirectory.getText().equals(null))
+        {
+            localFilesModel.getAllLocalSongs(Path.of(txtFieldDirectory.getText()));
+        }
+
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
 }

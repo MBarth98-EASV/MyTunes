@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.LocalFilesModel;
 
 
 import java.io.File;
@@ -16,14 +17,16 @@ import java.util.ResourceBundle;
 
 public class SongController implements Initializable {
 
-    @FXML public TextField txtFieldSongPath;
+    @FXML public TextField txtFieldAddSongPath;
 
     @FXML public Button btnSelectFile;
 
     String songPath = null;
+    LocalFilesModel localFilesModel;
 
     public SongController()
     {
+        localFilesModel = new LocalFilesModel();
 
     }
 
@@ -36,14 +39,29 @@ public class SongController implements Initializable {
         FileChooser fc = new FileChooser();
 
         File selectedFile =  fc.showOpenDialog(new Stage());
-        txtFieldSongPath.setText(selectedFile.getAbsolutePath());
+        txtFieldAddSongPath.setText(selectedFile.getAbsolutePath());
 
 
-        songPath = txtFieldSongPath.getText();
+        songPath = txtFieldAddSongPath.getText();
 
     }
 
     public void onAddSong(ActionEvent event) {
+        if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){
+            localFilesModel.addSong(Path.of(songPath));
+        }
+
+
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void onRemoveSong(ActionEvent event) {
+
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void onEditSong(ActionEvent event) {
+
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 

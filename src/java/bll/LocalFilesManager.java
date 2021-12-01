@@ -66,10 +66,16 @@ public class LocalFilesManager {
         return currentPath;
     }
 
-    public File addSong(Path path){
-        
+    public Path addSong(Path path){
 
         return null;
+    }
+
+    public void removeSong(Path path){
+    }
+
+    public Path editSong(Path path){
+        return path;
     }
 
 }

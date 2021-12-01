@@ -23,6 +23,9 @@ public class LocalFilesDAO {
     Path currentPath = null;
 
     public List<File> readAllFromDir(Path path){
+        currentPath = path;
+        ArrayList<File> returnList = new ArrayList<>();
+
         File filePath = path.toFile();
         File[] listOfFiles = filePath.listFiles();
 
@@ -30,43 +33,25 @@ public class LocalFilesDAO {
         allLocalFilePaths.addAll(List.of(listOfFiles));
 
         for (File f : allLocalFilePaths){
-            if (f.isDirectory()){
-                readAllFromDir(Path.of(f.getPath()));
-            }
-        }
-/*
-        for (File f : allLocalFilePaths){
 
-            System.out.println(f.getName());
-        }
-*/
-        ArrayList<File> returnList = new ArrayList<>();
-        for (File f : allLocalFilePaths){
-            if(checkForMp3OrWav(f.getName())){
+
+            if(checkForMp3OrWav(f.getName())) {
                 returnList.add(f);
             }
-        }
-
-
-        return returnList;
-    }
-
-    public List<File> allLocalMusic(Path path) {
-        ArrayList<File> filterList = new ArrayList<>(readAllFromDir(path));
-
-        ArrayList<File> returnList = new ArrayList<>();
-        for (File f : filterList){
-            if(checkForMp3OrWav(f.getName())){
-                System.out.println(f);
+            else if (f.isDirectory()){
+                readAllFromDir(Path.of(f.getPath()));
             }
+
         }
 
         for (File f : returnList){
-            System.out.println(f);
+
+            System.out.println(f.getName());
         }
 
         return returnList;
     }
+
 
 
     public Boolean checkForMp3OrWav(String fileName){
@@ -82,14 +67,5 @@ public class LocalFilesDAO {
         else return false;
     }
 
-    public static void main(String[] args) {
-        LocalFilesDAO l = new LocalFilesDAO();
-        String filepath = "D:\\Music\\Rap";
-        //l.readAllFromDir(Path.of(filepath));
-        ArrayList<File> p = new ArrayList<>(l.readAllFromDir(Path.of(filepath)));
-        for (File f : p){
-            System.out.println(f.getName());
-        }
-        //l.allLocalMusic(Path.of(filepath));
-    }
+    
 }

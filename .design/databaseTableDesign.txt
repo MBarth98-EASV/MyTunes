@@ -10,11 +10,11 @@
 
 // playlist-entry
 	entry-id primary key
-	id: int (playlist id)
+	playlistID: int (playlist id)
 	song-id: int
 
 // playlist
-	id: int ( playlist-entry.id)
+	id
 	name: varchar[256]
 
 // user

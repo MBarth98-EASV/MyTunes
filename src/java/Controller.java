@@ -1,12 +1,19 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.beans.EventHandler;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -29,6 +36,12 @@ public class Controller implements Initializable
 
     @FXML public Button btnPlaylistDown;
 
+    @FXML public Button btnPlaylistNew;
+
+    @FXML public Button btnPlaylistEdit;
+
+    @FXML public Button btnPlaylistDelete;
+
     @FXML public TableView tblViewSongs;
 
     @FXML public TableColumn tblClmnSongTitle;
@@ -44,6 +57,12 @@ public class Controller implements Initializable
     @FXML public Button btnSongUp;
 
     @FXML public Button btnSongDown;
+
+    @FXML public Button btnSongNew;
+
+    @FXML public Button btnSongEdit;
+
+    @FXML public Button btnSongDelete;
 
     @FXML public Button btnPlayPause;
 
@@ -63,15 +82,18 @@ public class Controller implements Initializable
 
     @FXML public Slider sliderVolume;
 
+
+/*
     static musicPlayer player = musicPlayer.getInstance();
     static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
     static long clipTimePosition;
+*/
 
-    static boolean isPlaying = true;
+    private static boolean isPlaying = true;
 
     public Controller()
     {
-        musicPlayer.loadMusic(filepath);
+        //musicPlayer.loadMusic(filepath);
     }
 
     @Override
@@ -80,40 +102,124 @@ public class Controller implements Initializable
 
     }
 
-    @FXML public void onPlayTrack(ActionEvent actionEvent)
+    @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
-        player.clip.setMicrosecondPosition(0);
-        clipTimePosition = 0;
-        player.clip.start();
+        isPlaying = !isPlaying;
+
+        switchPlayPause();
     }
 
-    @FXML public void onNextTrack(ActionEvent actionEvent)
+    @FXML private void onNextTrack(ActionEvent actionEvent)
     {
         System.out.println("next song");
     }
 
-    @FXML public void onPreviousTrack(ActionEvent actionEvent)
+    @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
         System.out.println("previous/reset song");
     }
 
-    @FXML public void onRandomTrack(ActionEvent actionEvent)
+    @FXML private void onShuffleToggled(ActionEvent actionEvent)
     {
         System.out.println("get a random song");
     }
 
-    @FXML public void onSettings(ActionEvent actionEvent)
-    {
-        System.out.println("open settings");
+    @FXML
+    private void onSettings(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Settings");
+            stage.setScene(new Scene(root, 320, 157));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML public void onMoveTrackUp(ActionEvent actionEvent)
+    @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
         System.out.println("track is moved upwards");
     }
 
-    @FXML public void onMoveTrackDown(ActionEvent actionEvent)
+    @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
     }
+
+    @FXML
+    private void onSongNew(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("New Song");
+            stage.setScene(new Scene(root, 320, 190));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSongEdit(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onSongDelete(ActionEvent event){
+
+    }
+
+
+    @FXML
+    private void switchPlayPause(){
+        if (isPlaying == true){
+            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
+                    + "-fx-background-position: 8");
+        }
+        else if (isPlaying == false){
+            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
+                    + "-fx-background-position: 9");
+        }
+    }
+
+
+    @FXML
+    private void setVolume(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistUp(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistDown(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onSearch(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistNew(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistEdit(ActionEvent event){
+
+    }
+
+    @FXML
+    private void onPlaylistDelete(ActionEvent event){
+
+    }
+
+
 }

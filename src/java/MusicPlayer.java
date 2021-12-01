@@ -1,18 +1,53 @@
+import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.io.File;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MusicPlayer {
+public class MusicPlayer implements Initializable {
 
-        private File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG.mp3").getFile());
+        private File filepath = new File(Controller.class.getResource("music/honor-and-sword-main-11222.mp3").getFile());
         private Timer timer;
         private TimerTask timertask;
 
+        private File directory;
+        private File[] files;
+
+        private int songNumber;
+
+        private ArrayList<File> songs;
+
         private boolean isRunning;
+
+
+        /** Loads all local files from a folder into a list.
+         *
+         * @param location
+         * @param resources
+         */
+        @Override
+        public void initialize(URL location, ResourceBundle resources)
+        {
+            songs = new ArrayList<File>();
+
+            File directoryPath = new File("music");
+
+            File filesList[] = directoryPath.listFiles();
+
+            if(files != null)
+            {
+                for(File file : filesList)
+                {
+                    songs.add(file);
+                }
+            }
+        }
 
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);
@@ -38,12 +73,12 @@ public class MusicPlayer {
         */
         public void resetTrack()
         {
-           musicPlayer.seek(Duration.seconds(0));
+           musicPlayer.seek(Duration.ZERO);
         }
 
         public void stopTrack()
         {
-          
+            musicPlayer.stop();
         }
 
         public void nextTrack()
@@ -53,7 +88,7 @@ public class MusicPlayer {
 
         public void previousTrack()
         {
-
+                resetTrack();
         }
 
         /**
@@ -101,11 +136,19 @@ public class MusicPlayer {
 
         /**
          * Returns the name of the current track.
-         * @return
          */
 
-        public String trackName()
+        public void trackName()
         {
-            return
+
+        }
+
+        /**
+         * Sets the volume of the music player.
+         * @param volume
+         */
+        public void setVolume(Double volume)
+        {
+            musicPlayer.setVolume(volume);
         }
 }

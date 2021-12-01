@@ -1,12 +1,19 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.beans.EventHandler;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -81,6 +88,7 @@ public class Controller implements Initializable
     static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
     static long clipTimePosition;
 */
+
     private static boolean isPlaying = true;
 
     public Controller()
@@ -116,9 +124,18 @@ public class Controller implements Initializable
         System.out.println("get a random song");
     }
 
-    @FXML private void onSettings(ActionEvent actionEvent)
-    {
-        System.out.println("open settings");
+    @FXML
+    private void onSettings(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Settings");
+            stage.setScene(new Scene(root, 320, 157));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML private void onMoveSongUp(ActionEvent actionEvent)

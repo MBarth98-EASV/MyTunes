@@ -85,4 +85,23 @@ public class MusicPlayer {
             isRunning = false;
             timer.cancel();
         }
+
+        /**
+         * Returns the total length of the current track.
+         * @return
+         */
+        public double trackDuration()
+        {
+            return musicPlayer.getTotalDuration().toSeconds();
+        }
+
+        /**
+         * Returns the name of the current track.
+         * @return
+         */
+
+        public String trackName()
+        {
+            return
+        }
 }

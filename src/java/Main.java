@@ -16,7 +16,7 @@ public class Main extends Application {
     {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/MyTunesView.fxml")));
         primaryStage.setTitle("MyTunes");
-        primaryStage.setScene(new Scene(root, 1000, 500));
+        primaryStage.setScene(new Scene(root, 1200, 600));
         primaryStage.show();
     }
 }

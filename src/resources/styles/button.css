@@ -26,6 +26,9 @@
     -fx-background-color: #11223f;
     -fx-text-fill: #d5d4d4;
 }
+
+
+
 .Button2 {
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
@@ -37,8 +40,6 @@
     -fx-border-color: #e2e2e2;
     -fx-background-radius: 5;
 }
-
-
 
 
 

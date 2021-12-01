@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="157.0" prefWidth="320.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SettingsController">
+   <children>
+      <GridPane prefHeight="114.0" prefWidth="320.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="226.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="0.0" prefWidth="84.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="318.0" minHeight="0.0" prefHeight="12.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="389.0" style="-fx-font-size: 16;" text="Settings" textAlignment="CENTER" GridPane.columnSpan="2147483647" />
+            <Label prefHeight="17.0" prefWidth="334.0" text="Select Music Directory:" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtFieldDirectory" prefHeight="33.0" prefWidth="226.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="btnSelectDirectory" mnemonicParsing="false" onAction="#onSelectDirectory" prefHeight="16.0" prefWidth="84.0" style="-fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Select" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </GridPane>
+   </children>
+</AnchorPane>

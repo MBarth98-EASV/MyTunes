@@ -4,7 +4,7 @@ import java.io.File;
 
 public class MusicPlayer {
 
-        File filepath = new File("D:\\Music\\Avantasia - Ghostlights (2016)\\01. Mystery Of A Blood Red Rose.mp3");
+        File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG.mp3").getFile());
 
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);

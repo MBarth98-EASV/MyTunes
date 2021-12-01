@@ -7,10 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.beans.EventHandler;
 import java.io.File;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -89,7 +94,7 @@ public class Controller implements Initializable
     static long clipTimePosition;
 */
 
-    private static boolean isPlaying = true;
+    private static boolean isPlaying = false;
 
     public Controller()
     {
@@ -99,6 +104,7 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this::systemAudioControl);
 
     }
 
@@ -185,6 +191,25 @@ public class Controller implements Initializable
         }
     }
 
+    private boolean systemAudioControl(KeyEvent event)
+    {
+        try
+        {
+            int key = event.getKeyCode();
+
+            if (key == KeyEvent.VK_PAUSE || key == KeyEvent.VK_SPACE)
+            {
+                onPlayTrack(null);
+            }
+
+            event.consume();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
 
     @FXML
     private void setVolume(ActionEvent event){

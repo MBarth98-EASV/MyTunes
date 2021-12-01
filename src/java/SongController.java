@@ -1,6 +1,3 @@
-package gui.controller;
-
-import gui.model.LocalFilesModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -25,11 +22,9 @@ public class SongController implements Initializable {
 
     String songPath = null;
 
-    LocalFilesModel localFilesModel;
-
     public SongController()
     {
-        localFilesModel = new LocalFilesModel();
+
     }
 
     @Override
@@ -42,9 +37,10 @@ public class SongController implements Initializable {
 
         File selectedFile =  fc.showOpenDialog(new Stage());
         txtFieldSongPath.setText(selectedFile.getAbsolutePath());
+
+
         songPath = txtFieldSongPath.getText();
 
-        localFilesModel.addSong(songPath);
     }
 
     public void onAddSong(ActionEvent event) {

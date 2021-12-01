@@ -8,12 +8,11 @@ import java.util.TimerTask;
 
 public class MusicPlayer {
 
+        private File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG.mp3").getFile());
         private Timer timer;
         private TimerTask timertask;
 
         private boolean isRunning;
-
-        File filepath = new File("D:\\Music\\Avantasia - Ghostlights (2016)\\01. Mystery Of A Blood Red Rose.mp3");
 
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);
@@ -21,7 +20,7 @@ public class MusicPlayer {
         /**
         * Plays the currently selected track.
         */
-         public void playTrack()
+        public void playTrack()
         {
             musicPlayer.play();
         }
@@ -40,6 +39,11 @@ public class MusicPlayer {
         public void resetTrack()
         {
            musicPlayer.seek(Duration.seconds(0));
+        }
+
+        public void stopTrack()
+        {
+          
         }
 
         public void nextTrack()

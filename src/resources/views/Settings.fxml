@@ -30,7 +30,7 @@
                </padding>
             </Label>
             <TextField fx:id="txtFieldDirectory" prefHeight="33.0" prefWidth="226.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Button fx:id="btnSelectDirectory" mnemonicParsing="false" onAction="#onSelectDirectory" prefHeight="16.0" prefWidth="84.0" styleClass="Button2" stylesheets="@../styles/button.css" text="Select" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="btnSelectDirectory" mnemonicParsing="false" onAction="#onSelectDirectory" prefHeight="16.0" prefWidth="84.0" style="-fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Select" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
          <padding>
             <Insets left="5.0" right="5.0" />

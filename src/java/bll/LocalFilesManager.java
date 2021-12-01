@@ -49,7 +49,7 @@ public class LocalFilesManager {
 
 
 
-    public Boolean checkForMp3OrWav(String fileName){
+    private Boolean checkForMp3OrWav(String fileName){
         String extension = "";
 
         int i = fileName.lastIndexOf('.');
@@ -64,6 +64,12 @@ public class LocalFilesManager {
 
     public Path getCurrentPath(){
         return currentPath;
+    }
+
+    public File addSong(Path path){
+        
+
+        return null;
     }
 
 }

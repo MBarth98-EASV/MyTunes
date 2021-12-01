@@ -27,7 +27,7 @@ public class MusicPlayer implements Initializable {
 
 
         /** Loads all local files from a folder into a list.
-         *
+         *  Or it should, if it wasn't because it keeps returning null, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
          * @param location
          * @param resources
          */
@@ -58,6 +58,7 @@ public class MusicPlayer implements Initializable {
         public void playTrack()
         {
             musicPlayer.play();
+
         }
 
         /**

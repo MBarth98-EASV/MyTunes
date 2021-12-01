@@ -1,3 +1,6 @@
+package gui.controller;
+
+import gui.model.LocalFilesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,17 +86,21 @@ public class Controller implements Initializable
     @FXML public Slider sliderVolume;
 
 
+
+
 /*
     static musicPlayer player = musicPlayer.getInstance();
     static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
     static long clipTimePosition;
 */
 
+
     private static boolean isPlaying = true;
 
     public Controller()
     {
         //musicPlayer.loadMusic(filepath);
+
     }
 
     @Override

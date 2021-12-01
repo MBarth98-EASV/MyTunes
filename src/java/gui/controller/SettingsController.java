@@ -1,3 +1,6 @@
+package gui.controller;
+
+import gui.model.LocalFilesModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,10 +21,11 @@ public class SettingsController implements Initializable {
 
     @FXML public Button btnSelectDirectory;
 
+    LocalFilesModel localFilesModel;
 
     public SettingsController()
     {
-
+        localFilesModel = new LocalFilesModel();
     }
 
     @Override
@@ -42,8 +46,9 @@ public class SettingsController implements Initializable {
         File selectedDirectory = dc.showDialog(new Stage());
         txtFieldDirectory.setText(selectedDirectory.getAbsolutePath());
 
-
         Path path = Path.of(txtFieldDirectory.getText());
+
+        localFilesModel.getAllSongsFromDir(path);
 
     }
 

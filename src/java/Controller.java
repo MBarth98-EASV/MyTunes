@@ -103,11 +103,13 @@ public class Controller implements Initializable
         {
             songPlayer.pauseTrack();
             isPlaying = false;
+            switchPlayPause();
         }
         else
         {
             songPlayer.playTrack();
             isPlaying = true;
+            switchPlayPause();
         }
 
     }

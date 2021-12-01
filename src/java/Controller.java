@@ -83,17 +83,13 @@ public class Controller implements Initializable
     @FXML public Slider sliderVolume;
 
 
-/*
-    static musicPlayer player = musicPlayer.getInstance();
-    static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
-    static long clipTimePosition;
-*/
+    MusicPlayer songPlayer = new MusicPlayer();
 
-    private static boolean isPlaying = true;
+    boolean isPlaying = false;
 
     public Controller()
     {
-        //musicPlayer.loadMusic(filepath);
+
     }
 
     @Override
@@ -104,19 +100,27 @@ public class Controller implements Initializable
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
-        isPlaying = !isPlaying;
 
-        switchPlayPause();
+        if(isPlaying)
+        {
+            songPlayer.pauseTrack();
+            isPlaying = false;
+            switchPlayPause();
+        }
+        else
+        {
+            songPlayer.playTrack();
+            isPlaying = true;
+            switchPlayPause();
+        }
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        System.out.println("next song");
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        System.out.println("previous/reset song");
     }
 
     @FXML private void onShuffleToggled(ActionEvent actionEvent)

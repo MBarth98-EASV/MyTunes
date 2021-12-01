@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
@@ -43,7 +44,7 @@ public class SongController implements Initializable {
     }
 
     public void onAddSong(ActionEvent event) {
-        
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
 

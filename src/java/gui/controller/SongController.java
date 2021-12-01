@@ -27,7 +27,6 @@ public class SongController implements Initializable {
     public SongController()
     {
         localFilesModel = new LocalFilesModel();
-
     }
 
     @Override
@@ -58,6 +57,7 @@ public class SongController implements Initializable {
 
         songPath = txtFieldAddSongPath.getText();
 
+        localFilesModel.addSong(songPath);
     }
 
      */

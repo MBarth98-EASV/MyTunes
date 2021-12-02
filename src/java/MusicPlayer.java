@@ -61,6 +61,7 @@ public class MusicPlayer implements Initializable {
         */
         public void playTrack()
         {
+            beginTimer();
             musicPlayer.play();
 
         }
@@ -70,6 +71,7 @@ public class MusicPlayer implements Initializable {
         */
         public void pauseTrack()
         {
+           cancelTimer();
            musicPlayer.pause();
         }
 
@@ -95,7 +97,20 @@ public class MusicPlayer implements Initializable {
          */
         public void nextTrack()
         {
+            resetTrack();
 
+            if(isRunning)
+            {
+                cancelTimer();
+            }
+
+            //Path is temp, just for testing.
+            File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG").getFile());
+
+            Media media = new Media(filepath.toURI().toString());
+            musicPlayer = new MediaPlayer(media);
+
+            playTrack();
         }
 
         /**
@@ -103,7 +118,20 @@ public class MusicPlayer implements Initializable {
          */
         public void previousTrack()
         {
-                resetTrack();
+            resetTrack();
+
+            if(isRunning)
+            {
+                cancelTimer();
+            }
+
+            //Path is also temp, just for testing.
+            File filepath = new File(Controller.class.getResource("music/the-introvert-michael-kobrin-10959.mp3").getFile());
+
+            Media media = new Media(filepath.toURI().toString());
+            musicPlayer = new MediaPlayer(media);
+
+            playTrack();
         }
 
         /**

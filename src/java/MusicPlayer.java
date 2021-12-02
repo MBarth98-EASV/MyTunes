@@ -66,6 +66,16 @@ public class MusicPlayer implements Initializable {
 
         }
 
+        /**
+         * Stops the current track.
+         */
+        public void stopTrack()
+        {
+            cancelTimer();
+            resetTrack();
+            musicPlayer.stop();
+        }
+
         public void playSelectedTrack(String song)
         {
             resetTrack();
@@ -82,7 +92,6 @@ public class MusicPlayer implements Initializable {
         */
         public void pauseTrack()
         {
-           cancelTimer();
            musicPlayer.pause();
         }
 
@@ -91,17 +100,10 @@ public class MusicPlayer implements Initializable {
         */
         public void resetTrack()
         {
+           cancelTimer();
            musicPlayer.seek(Duration.ZERO);
         }
 
-
-        /**
-         * Stops the current track.
-         */
-        public void stopTrack()
-        {
-            musicPlayer.stop();
-        }
 
         /**
          * Plays the next track in the list.
@@ -122,6 +124,7 @@ public class MusicPlayer implements Initializable {
             musicPlayer = new MediaPlayer(media);
 
             playTrack();
+            beginTimer();
         }
 
         /**
@@ -129,10 +132,9 @@ public class MusicPlayer implements Initializable {
          */
         public void previousTrack()
         {
-            resetTrack();
-
             if(isRunning)
             {
+                resetTrack();
                 cancelTimer();
             }
 
@@ -143,6 +145,7 @@ public class MusicPlayer implements Initializable {
             musicPlayer = new MediaPlayer(media);
 
             playTrack();
+            beginTimer();
         }
 
         /**
@@ -183,7 +186,7 @@ public class MusicPlayer implements Initializable {
          * Returns the total length of the current track.
          * @return
          */
-        public double trackDuration()
+        public double getTrackDuration()
         {
             return musicPlayer.getTotalDuration().toSeconds();
         }
@@ -192,7 +195,7 @@ public class MusicPlayer implements Initializable {
          * Returns the name of the current track.
          */
 
-        public void trackName()
+        public void getTrackName()
         {
 
         }

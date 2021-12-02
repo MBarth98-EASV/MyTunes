@@ -15,7 +15,7 @@ public class LocalFilesManager {
      * @return Every file in the path's directory and subdirectories.
      */
 
-    private Path currentPath = null;
+    Path currentPath = null;
 
     public List<File> readAllFromDir(Path path){
         currentPath = path;

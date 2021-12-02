@@ -66,6 +66,17 @@ public class MusicPlayer implements Initializable {
 
         }
 
+        public void playSelectedTrack(String song)
+        {
+            resetTrack();
+            beginTimer();
+
+            Media media = new Media(song);
+            musicPlayer = new MediaPlayer(media);
+
+            musicPlayer.play();
+        }
+
         /**
         * Pauses the current track.
         */

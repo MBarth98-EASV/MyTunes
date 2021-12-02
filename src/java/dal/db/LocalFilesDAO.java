@@ -10,6 +10,16 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.parser.mp3.Mp3Parser;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+
 public class LocalFilesDAO {
 
     private Path currentPath = null;
@@ -42,9 +52,7 @@ public class LocalFilesDAO {
             else if (f.isDirectory()){
                 readAllFromNewDir(Path.of(f.getPath()));
             }
-
         }
-
         return returnList;
     }
 
@@ -70,17 +78,27 @@ public class LocalFilesDAO {
         try (BufferedWriter bw = Files.newBufferedWriter(songPath, StandardOpenOption.SYNC,
                 StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
 
-            bw.newLine();
-            bw.write(String.valueOf(path));
-
+            if (checkForMp3OrWav(String.valueOf(path))){
+                bw.newLine();
+                bw.write(String.valueOf(path));
+            }
+            else throw new Exception("The file you added is not currently supported");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return path;
+    }
+
+    public List<Path> loadAllExternalSongs(){
+        ArrayList<Path> returnList = new ArrayList<>();
+
+        
     }
 
 
@@ -96,5 +114,7 @@ public class LocalFilesDAO {
         }
         else return false;
     }
+
+
 
 }

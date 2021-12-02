@@ -58,7 +58,7 @@ public class SettingsController implements Initializable {
         if(!txtFieldDirectory.getText().isEmpty() &&
                 !txtFieldDirectory.getText().equals(null))
         {
-            localFilesModel.getAllLocalSongs(Path.of(txtFieldDirectory.getText()));
+            localFilesModel.readAllFromNewDir(Path.of(txtFieldDirectory.getText()));
         }
 
         ((Node)(event.getSource())).getScene().getWindow().hide();

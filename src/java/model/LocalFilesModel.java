@@ -19,8 +19,6 @@ public class LocalFilesModel {
     public LocalFilesModel() {
         localFilesManager = new LocalFilesManager();
         musicFilePaths = FXCollections.observableArrayList();
-        ArrayList<File> popList = new ArrayList<>(localFilesManager.readAllFromDir(localDirPath));
-        musicFilePaths.addAll( popList);
 
     }
 

@@ -1,30 +1,26 @@
 package model;
 
 import bll.LocalFilesManager;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LocalFilesModel {
 
-    ObservableList<Path> musicFilePaths;
     LocalFilesManager localFilesManager;
-    Path localDirPath = null;
+    ObservableList musicFilePaths;
 
     public LocalFilesModel() {
         localFilesManager = new LocalFilesManager();
-        musicFilePaths = FXCollections.observableArrayList();
+        
+
 
     }
 
-
-    public void setLocalDirPathInModel(Path path){
-        localDirPath = path;
+    public Path getCurrentPath(){
+        return localFilesManager.getCurrentPath();
     }
 
     public List<File> getAllLocalSongs(Path path){

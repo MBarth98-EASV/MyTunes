@@ -12,6 +12,10 @@ import java.util.TimerTask;
 
 public class MusicPlayer implements Initializable {
 
+
+        /**
+         * Variables, woo.
+         */
         private File filepath = new File(Controller.class.getResource("music/honor-and-sword-main-11222.mp3").getFile());
         private Timer timer;
         private TimerTask timertask;
@@ -77,16 +81,26 @@ public class MusicPlayer implements Initializable {
            musicPlayer.seek(Duration.ZERO);
         }
 
+
+        /**
+         * Stops the current track.
+         */
         public void stopTrack()
         {
             musicPlayer.stop();
         }
 
+        /**
+         * Plays the next track in the list.
+         */
         public void nextTrack()
         {
 
         }
 
+        /**
+         * Plays the previous track in the list.
+         */
         public void previousTrack()
         {
                 resetTrack();

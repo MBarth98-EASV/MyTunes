@@ -8,15 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.SongModel;
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.Parser;
-import org.apache.tika.parser.audio.AudioParser;
-import org.apache.tika.parser.mp3.Mp3Parser;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+
+
+import com.mpatric.mp3agic.*;
 
 
 public class LocalFilesDAO {
@@ -176,58 +170,23 @@ public class LocalFilesDAO {
         loadList.addAll(loadAllExternalSongs());
 
         ArrayList<SongModel> returnList = new ArrayList<>();
+        for (Path p : loadList) {
+            try {
+                Mp3File mp3File = new Mp3File("p");
+                mp3File.getId3v2Tag();
 
-        try {
-            for (Path p : loadList) {
-                //String fileLocation = String.valueOf(p.toAbsolutePath());
-                InputStream inputfile = new FileInputStream(p.toFile());
-                DefaultHandler handler = new DefaultHandler();
-                Metadata metadata = new Metadata();
-                Parser parser = new AudioParser();
-                ParseContext parseCtx = new ParseContext();
-                parser.parse(inputfile, handler, metadata, parseCtx);
 
-                /*InputStream input = new FileInputStream(p.toFile());
-                ContentHandler handler = new DefaultHandler();
-                Metadata metadata = new Metadata();
-                Parser parser = new AudioParser();
-                //Parser parser = new Mp3Parser();
-                ParseContext parseCtx = new ParseContext();
-                parser.parse(input, handler, metadata, parseCtx);
-                input.close();
-*/
-                System.out.println(metadata.get("title"));
-                //returnList.add(new SongModel(null, metadata.get("title"), metadata.get("xmpDM:artist"), null, null, p));
 
-                // List all metadata
-                String[] metadataNames = metadata.names();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-               /* for (String name : metadataNames) {
-                    System.out.println(name + ": " + metadata.get(name));
-                    System.out.println("----------------------------------------------");
-                    System.out.println("Title: " + metadata.get("title"));
-                    System.out.println("Artists: " + metadata.get("xmpDM:artist"));
-                    System.out.println("Composer : " + metadata.get("xmpDM:composer"));
-                    System.out.println("Genre : " + metadata.get("xmpDM:genre"));
-                    System.out.println("Album : " + metadata.get("xmpDM:album"));
-                }*/
-
-        }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (TikaException e) {
-        }
-
+            }
 
         return returnList;
-    }
+        }
 
-
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         LocalFilesDAO localFilesDAO = new LocalFilesDAO();
         localFilesDAO.loadAllLocalSongs();
     }

@@ -76,6 +76,7 @@ public class MusicPlayer implements Initializable {
             musicPlayer.stop();
         }
 
+
         public void playSelectedTrack(String song)
         {
             resetTrack();
@@ -194,7 +195,6 @@ public class MusicPlayer implements Initializable {
         /**
          * Returns the name of the current track.
          */
-
         public void getTrackName()
         {
 

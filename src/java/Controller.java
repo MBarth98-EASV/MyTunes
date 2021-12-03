@@ -1,3 +1,4 @@
+import dal.db.EASVDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -93,8 +95,10 @@ public class Controller implements Initializable
 
     }
 
-    @FXML private void onPlayTrack(ActionEvent actionEvent)
-    {
+    @FXML private void onPlayTrack(ActionEvent actionEvent) throws SQLException {
+        EASVDatabase dbtest = new EASVDatabase();
+
+        dbtest.getSong();
 
         if(isPlaying)
         {

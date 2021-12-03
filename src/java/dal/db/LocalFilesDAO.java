@@ -12,6 +12,7 @@ import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
+import org.apache.tika.parser.audio.AudioParser;
 import org.apache.tika.parser.mp3.Mp3Parser;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
@@ -20,10 +21,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class LocalFilesDAO {
 
-    private Path currentPath = null;
+    private Path currentPath = Path.of("D:\\Music\\Rap");
 
     private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
-    private static final Path dirPath = Path.of("data/directory.txt");
+    private static final Path dirPath = Path.of("src/resources/data/directory.txt");
 
 
     /**
@@ -52,7 +53,7 @@ public class LocalFilesDAO {
         return returnList;
     }
 
-    public List<Path> readAllFromCurDirectory() {
+    public List<Path> readAllFromCurDirectory(Path currentPath) {
         ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = currentPath.toFile();
@@ -88,6 +89,25 @@ public class LocalFilesDAO {
             e.printStackTrace();
         }
     }
+
+    public Path loadDirectory(){
+        Path returnPath = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(dirPath)))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                returnPath = Path.of(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return returnPath;
+    }
+
 
     public Path addSong(Path path) {
 
@@ -133,7 +153,11 @@ public class LocalFilesDAO {
 
     }
 
-
+    /**
+     *
+     * @param fileName String value of a Path object.
+     * @return true if the file has a .mp3 or .wav file ex
+     */
     private Boolean checkForMp3OrWav(String fileName) {
         String extension = "";
 
@@ -148,7 +172,7 @@ public class LocalFilesDAO {
 
     private List<SongModel> loadAllLocalSongs() {
         ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromCurDirectory());
+        loadList.addAll(readAllFromCurDirectory(loadDirectory()));
         loadList.addAll(loadAllExternalSongs());
 
         ArrayList<SongModel> returnList = new ArrayList<>();
@@ -156,34 +180,39 @@ public class LocalFilesDAO {
         try {
             for (Path p : loadList) {
                 //String fileLocation = String.valueOf(p.toAbsolutePath());
+                InputStream inputfile = new FileInputStream(p.toFile());
+                DefaultHandler handler = new DefaultHandler();
+                Metadata metadata = new Metadata();
+                Parser parser = new AudioParser();
+                ParseContext parseCtx = new ParseContext();
+                parser.parse(inputfile, handler, metadata, parseCtx);
 
-
-                InputStream input = new FileInputStream(p.toFile());
+                /*InputStream input = new FileInputStream(p.toFile());
                 ContentHandler handler = new DefaultHandler();
                 Metadata metadata = new Metadata();
-                Parser parser = new Mp3Parser();
+                Parser parser = new AudioParser();
+                //Parser parser = new Mp3Parser();
                 ParseContext parseCtx = new ParseContext();
                 parser.parse(input, handler, metadata, parseCtx);
                 input.close();
-
+*/
+                System.out.println(metadata.get("title"));
                 //returnList.add(new SongModel(null, metadata.get("title"), metadata.get("xmpDM:artist"), null, null, p));
 
                 // List all metadata
                 String[] metadataNames = metadata.names();
 
-                for (String name : metadataNames) {
+               /* for (String name : metadataNames) {
                     System.out.println(name + ": " + metadata.get(name));
-                }
-            }
-            // Retrieve the necessary info from metadata
-  /*              // Names - title, xmpDM:artist etc. - mentioned below may differ based
-                System.out.println("----------------------------------------------");
-                System.out.println("Title: " + metadata.get("title"));
-                System.out.println("Artists: " + metadata.get("xmpDM:artist"));
-                System.out.println("Composer : " + metadata.get("xmpDM:composer"));
-                System.out.println("Genre : " + metadata.get("xmpDM:genre"));
-                System.out.println("Album : " + metadata.get("xmpDM:album"));
-*/
+                    System.out.println("----------------------------------------------");
+                    System.out.println("Title: " + metadata.get("title"));
+                    System.out.println("Artists: " + metadata.get("xmpDM:artist"));
+                    System.out.println("Composer : " + metadata.get("xmpDM:composer"));
+                    System.out.println("Genre : " + metadata.get("xmpDM:genre"));
+                    System.out.println("Album : " + metadata.get("xmpDM:album"));
+                }*/
+
+        }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -195,6 +224,12 @@ public class LocalFilesDAO {
 
 
         return returnList;
+    }
+
+
+    public static void main(String[] args) {
+        LocalFilesDAO localFilesDAO = new LocalFilesDAO();
+        localFilesDAO.loadAllLocalSongs();
     }
 }
 

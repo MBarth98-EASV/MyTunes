@@ -27,7 +27,7 @@ public class EASVDatabase
         return dataSource.getConnection();
     }
 
-    public void test()
+    public void sqlInject(String command)
     {
 
     }
@@ -42,23 +42,73 @@ public class EASVDatabase
         }
     }
 
-    public void getSong() throws SQLException {
-        String sql = "SELECT * FROM Songs";
+    public void getSong() {
+        try {
+            String sql = "SELECT * FROM Songs";
 
-        Statement statement = dataSource.getConnection().createStatement();
-        ResultSet result = statement.executeQuery(sql);
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
 
-        while(result.next())
+            while (result.next()) {
+                int id = result.getInt("id");
+                String name = result.getString("title");
+                String artist = result.getString("artists");
+
+
+                System.out.println(id);
+                System.out.println(name);
+                System.out.println(artist);
+            }
+        } catch (SQLException e)
         {
-            int id = result.getInt("id");
-            String name = result.getString("title");
-            String artist = result.getString("artists");
-
-
-            System.out.println(id);
-            System.out.println(name);
-            System.out.println(artist);
+            e.printStackTrace();
+            System.out.println("Connection to database failed");
         }
     }
+
+    public int getSongIDFromName(String songName) {
+        try
+        {
+            int songID;
+
+            String sql = "SELECT * FROM Songs WHERE title LIKE '%" + songName + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            songID = result.getInt("id");
+
+            return songID;
+        }
+        catch (SQLException e)
+        {
+            return 0;
+        }
+    }
+
+    public String getSongNameFromID(int songID)
+    {
+        try
+        {
+            String songName;
+
+            String sql = "SELECT * FROM Songs WHERE id LIKE '%" + songID + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            songName = result.getString("title");
+
+            return songName;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return "ID not found";
+        }
+    }
+
 
 }

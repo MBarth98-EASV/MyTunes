@@ -37,6 +37,10 @@ public class EASVDatabase
         }
     }
 
+
+    /**
+     * Getters from the SQL database.
+     */
     public int getSongIDFromName(String songName) {
         try
         {
@@ -74,10 +78,10 @@ public class EASVDatabase
 
             return songName;
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             e.printStackTrace();
-            return "ID not found";
+            return null;
         }
     }
 
@@ -95,10 +99,10 @@ public class EASVDatabase
 
              return artists;
          }
-         catch (SQLException e)
+         catch (Exception e)
          {
              e.printStackTrace();
-             return "";
+             return null;
          }
      }
 
@@ -116,13 +120,12 @@ public class EASVDatabase
 
              return artists;
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
-
 
     public String getFilePath(String songName)
     {
@@ -136,9 +139,10 @@ public class EASVDatabase
             String filepath = result.getString("filepath");
 
             return filepath;
-        } catch (SQLException e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
@@ -154,10 +158,14 @@ public class EASVDatabase
             String filepath = result.getString("filepath");
 
             return filepath;
-        } catch (SQLException e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
+    /**
+     * Setters for the SQL database.
+     */
 }

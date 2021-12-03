@@ -27,11 +27,6 @@ public class EASVDatabase
         return dataSource.getConnection();
     }
 
-    public void sqlInject(String command)
-    {
-
-    }
-
     public static void main(String[] args) throws SQLException
     {
         EASVDatabase databaseConnector = new EASVDatabase();
@@ -39,30 +34,6 @@ public class EASVDatabase
         try (Connection connection = databaseConnector.getConnection())
         {
             System.out.println("Is it open? " + !connection.isClosed());
-        }
-    }
-
-    public void getSong() {
-        try {
-            String sql = "SELECT * FROM Songs";
-
-            Statement statement = dataSource.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
-
-            while (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("title");
-                String artist = result.getString("artists");
-
-
-                System.out.println(id);
-                System.out.println(name);
-                System.out.println(artist);
-            }
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("Connection to database failed");
         }
     }
 
@@ -110,5 +81,83 @@ public class EASVDatabase
         }
     }
 
+     public String getArtists(int songID)
+     {
+         try
+         {
+             String sql = "SELECT * FROM Songs WHERE id LIKE '%" + songID + "%'";
+
+             Statement statement = dataSource.getConnection().createStatement();
+             ResultSet result = statement.executeQuery(sql);
+
+             result.next();
+             String artists = result.getString("artists");
+
+             return artists;
+         }
+         catch (SQLException e)
+         {
+             e.printStackTrace();
+             return "";
+         }
+     }
+
+    public String getArtists(String songName)
+    {
+        try
+        {
+            String sql = "SELECT * FROM Songs WHERE title LIKE '%" + songName + "%'";
+
+             Statement statement = dataSource.getConnection().createStatement();
+             ResultSet result = statement.executeQuery(sql);
+
+             result.next();
+             String artists = result.getString("artists");
+
+             return artists;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
+    public String getFilePath(String songName)
+    {
+        try {
+            String sql = "SELECT * FROM Songs WHERE title LIKE '%" + songName + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            String filepath = result.getString("filepath");
+
+            return filepath;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getFilePath(int songID)
+    {
+        try {
+            String sql = "SELECT * FROM Songs WHERE title LIKE '%" + songID + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            String filepath = result.getString("filepath");
+
+            return filepath;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
 }

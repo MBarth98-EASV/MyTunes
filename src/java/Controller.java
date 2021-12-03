@@ -98,11 +98,17 @@ public class Controller implements Initializable
     @FXML private void onPlayTrack(ActionEvent actionEvent) throws SQLException {
         EASVDatabase dbtest = new EASVDatabase();
 
-       String testname = dbtest.getSongNameFromID(1);
-       int testid = dbtest.getSongIDFromName("test");
+        String testname = dbtest.getSongNameFromID(1);
+        int testid = dbtest.getSongIDFromName("test");
+
+        String artisttest = dbtest.getArtists(1);
+        String anotherartiststest = dbtest.getArtists("test");
 
         System.out.println(testid);
         System.out.println(testname);
+
+        System.out.println(artisttest);
+        System.out.println(anotherartiststest);
 
         if(isPlaying)
         {

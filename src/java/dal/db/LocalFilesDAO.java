@@ -15,20 +15,21 @@ import com.mpatric.mp3agic.*;
 
 public class LocalFilesDAO {
 
-    private Path currentPath = Path.of("D:\\Music\\Rap");
 
     private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
     private static final Path dirPath = Path.of("src/resources/data/directory.txt");
 
 
     /**
+     * Lists all files in the given path, and checks whether it's a directory
+     * or a supported filetype (.wav or .mp3). If its a directory, the method is run again in the subdirectory.
+     * If a supported filetype is found, it is added to the returnList and returned by the method.
      * @param path The given Path to read files from.
      * @return Every file in the path's directory and subdirectories.
      */
 
-    public List<File> readAllFromNewDir(Path path) {
-        saveDirectory(path);
-        ArrayList<File> returnList = new ArrayList<>();
+    public List<Path> readAllFromSubDir(Path path) {
+        ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = path.toFile();
         File[] listOfFiles = filePath.listFiles();
@@ -39,18 +40,26 @@ public class LocalFilesDAO {
         for (File f : allLocalFilePaths) {
 
             if (checkForMp3OrWav(f.getName())) {
-                returnList.add(f);
+                returnList.add(f.toPath());
             } else if (f.isDirectory()) {
-                readAllFromNewDir(Path.of(f.getPath()));
+                readAllFromSubDir(Path.of(f.getPath()));
             }
         }
         return returnList;
     }
 
-    public List<Path> readAllFromCurDirectory(Path currentPath) {
+
+    /**
+     * Read all files in the current directory and directories.
+     * If the file is of a supported filetype (.wav or .mp3), it is added to
+     * the returnList. If it is a directory, readAllFromSubDir.
+     *
+     * @return every mp3 and wav file in a directory.
+     */
+    public List<Path> readAllFromCurDirectory() {
         ArrayList<Path> returnList = new ArrayList<>();
 
-        File filePath = currentPath.toFile();
+        File filePath = loadDirectory().toFile();
         File[] listOfFiles = filePath.listFiles();
 
         ArrayList<File> allLocalFilePaths = new ArrayList<>();
@@ -61,13 +70,16 @@ public class LocalFilesDAO {
             if (checkForMp3OrWav(f.getName())) {
                 returnList.add(f.toPath());
             } else if (f.isDirectory()) {
-                readAllFromNewDir(Path.of(f.getPath()));
+                returnList.addAll(readAllFromSubDir(Path.of(f.getPath())));
             }
         }
         return returnList;
     }
 
-
+    /**
+     * Saves the given directory in directory.txt
+     * @param path The directory to be saved.
+     */
     private void saveDirectory(Path path) {
         try (BufferedWriter bw = Files.newBufferedWriter(dirPath, StandardOpenOption.SYNC,
                 StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
@@ -84,6 +96,10 @@ public class LocalFilesDAO {
         }
     }
 
+    /**
+     * Reads directory.txt as a string.
+     * @return the currently stored directory as a Path object.
+     */
     public Path loadDirectory(){
         Path returnPath = null;
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(dirPath)))) {
@@ -102,7 +118,12 @@ public class LocalFilesDAO {
         return returnPath;
     }
 
-
+    /**
+     * Writes the given path to externalsongs.txt. Also checks whether or not the given
+     * path is of a supported filetype (.mp3 or .wav). An exception is thrown if it is not.
+     * @param path The path to the song added manually by the user.
+     * @return The input path.
+     */
     public Path addSong(Path path) {
 
         try (BufferedWriter bw = Files.newBufferedWriter(songPath, StandardOpenOption.SYNC,
@@ -124,6 +145,11 @@ public class LocalFilesDAO {
         return path;
     }
 
+    /**
+     * Reads the entirety of externalsongs.txt and adds the indvidual lines to the returnList
+     * as Path objects.
+     * @return returnList of all manually added songs.
+     */
     public List<Path> loadAllExternalSongs() {
         ArrayList<Path> returnList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(songPath)))) {
@@ -148,9 +174,9 @@ public class LocalFilesDAO {
     }
 
     /**
-     *
+     * Checks the characters of a filename after the "." indicating it's filetype.
      * @param fileName String value of a Path object.
-     * @return true if the file has a .mp3 or .wav file ex
+     * @return true if the file has a .mp3 or .wav file extension.
      */
     private Boolean checkForMp3OrWav(String fileName) {
         String extension = "";
@@ -166,25 +192,53 @@ public class LocalFilesDAO {
 
     private List<SongModel> loadAllLocalSongs() {
         ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromCurDirectory(loadDirectory()));
+        loadList.addAll(readAllFromCurDirectory());
         loadList.addAll(loadAllExternalSongs());
+
+        String artist = null;
+        String title = null;
+        String album = null;
+        String genre = null;
+        int duration = 0;
+
 
         ArrayList<SongModel> returnList = new ArrayList<>();
         for (Path p : loadList) {
             try {
-                Mp3File mp3File = new Mp3File("p");
-                mp3File.getId3v2Tag();
+                Mp3File mp3file = new Mp3File(p);
+                if (mp3file.hasId3v2Tag()) {
+                    ID3v2 id3v2Tag = mp3file.getId3v2Tag();
+                    artist = id3v2Tag.getArtist();
+                    title = id3v2Tag.getTitle();
+                    album = id3v2Tag.getAlbum();
+                    genre = id3v2Tag.getGenreDescription();
+                    duration = id3v2Tag.getDataLength();
 
+                } else if (mp3file.hasId3v1Tag()){
+                    ID3v1 id3v1Tag = mp3file.getId3v1Tag();
+                    artist = id3v1Tag.getArtist();
+                    title = id3v1Tag.getTitle();
+                    album = id3v1Tag.getAlbum();
+                    genre = id3v1Tag.getGenreDescription();
+                    duration = 0;
+                }
 
+                System.out.println(artist + title +album+genre + duration);
 
-            } catch (Exception e) {
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             }
 
         return returnList;
         }
+
 
         public static void main(String[] args) {
         LocalFilesDAO localFilesDAO = new LocalFilesDAO();

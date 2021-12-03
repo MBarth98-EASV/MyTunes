@@ -21,7 +21,7 @@ public class LocalFilesModel {
 
 
 
-    public List<File> readAllFromNewDir(Path path){
+    public List<Path> readAllFromNewDir(Path path){
         return localFilesManager.readAllFromNewDir(path);
     }
 

@@ -39,14 +39,14 @@ public class SongModel
         return id.get();
     }
 
-    public IntegerProperty idProperty()
-    {
-        return id;
-    }
-
     public void setId(int id)
     {
         this.id.set(id);
+    }
+
+    public IntegerProperty idProperty()
+    {
+        return id;
     }
 
     public String getName()
@@ -54,14 +54,14 @@ public class SongModel
         return name.get();
     }
 
-    public StringProperty nameProperty()
-    {
-        return name;
-    }
-
     public void setName(String name)
     {
         this.name.set(name);
+    }
+
+    public StringProperty nameProperty()
+    {
+        return name;
     }
 
     public ObservableList<String> getArtists()
@@ -69,14 +69,14 @@ public class SongModel
         return artists.get();
     }
 
-    public ListProperty<String> artistsProperty()
-    {
-        return artists;
-    }
-
     public void setArtists(ObservableList<String> artists)
     {
         this.artists.set(artists);
+    }
+
+    public ListProperty<String> artistsProperty()
+    {
+        return artists;
     }
 
     public int getDuration()
@@ -84,14 +84,14 @@ public class SongModel
         return duration.get();
     }
 
-    public IntegerProperty durationProperty()
-    {
-        return duration;
-    }
-
     public void setDuration(int duration)
     {
         this.duration.set(duration);
+    }
+
+    public IntegerProperty durationProperty()
+    {
+        return duration;
     }
 
     public String getTag()
@@ -99,14 +99,14 @@ public class SongModel
         return tag.get();
     }
 
-    public StringProperty tagProperty()
-    {
-        return tag;
-    }
-
     public void setTag(String tag)
     {
         this.tag.set(tag);
+    }
+
+    public StringProperty tagProperty()
+    {
+        return tag;
     }
 
     public String getLocation()
@@ -114,13 +114,13 @@ public class SongModel
         return location.get();
     }
 
-    public StringProperty locationProperty()
-    {
-        return location;
-    }
-
     public void setLocation(String location)
     {
         this.location.set(location);
+    }
+
+    public StringProperty locationProperty()
+    {
+        return location;
     }
 }

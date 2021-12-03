@@ -95,18 +95,19 @@ public class Controller implements Initializable
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
+
         if(isPlaying)
         {
             songPlayer.pauseTrack();
             isPlaying = false;
+            switchPlayPause();
         }
         else
         {
             songPlayer.playTrack();
             isPlaying = true;
+            switchPlayPause();
         }
-
-        switchPlayPause();
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
@@ -117,11 +118,6 @@ public class Controller implements Initializable
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
         songPlayer.previousTrack();
-    }
-
-    @FXML private void onShuffleToggled(ActionEvent actionEvent)
-    {
-        System.out.println("get a random song");
     }
 
     @FXML

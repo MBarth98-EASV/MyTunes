@@ -12,6 +12,11 @@ import be.SongModel;
 
 import com.mpatric.mp3agic.*;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 public class LocalFilesDAO {
 
@@ -223,6 +228,33 @@ public class LocalFilesDAO {
                     duration = 0;
                 }
 
+                File file = p.toFile();
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+                AudioFormat format = audioInputStream.getFormat();
+                long frames = audioInputStream.getFrameLength();
+                double durationInSeconds = (frames+0.0) / format.getFrameRate();
+
+
+                if (artist == null){
+                    artist = "Unkown Artist";
+                }
+
+                if (title == null){
+                    title = String.valueOf(p);
+                }
+
+                if (album == null){
+                    album = "N/A";
+                }
+
+                if (genre == null){
+                    genre = "N/A";
+                }
+
+                if (duration == 0){
+                    duration = (int) durationInSeconds;
+                }
+
                 System.out.println(artist + title +album+genre + duration);
 
             } catch (InvalidDataException e) {
@@ -231,10 +263,11 @@ public class LocalFilesDAO {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
             }
 
-
-            }
+        }
 
         return returnList;
         }

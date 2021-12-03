@@ -111,10 +111,12 @@ public class Controller implements Initializable
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
+        songPlayer.nextTrack();
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
+        songPlayer.previousTrack();
     }
 
     @FXML private void onShuffleToggled(ActionEvent actionEvent)

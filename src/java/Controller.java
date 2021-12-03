@@ -223,4 +223,8 @@ public class Controller implements Initializable
     private void onPlaylistDelete(ActionEvent event){
 
     }
+
+    public void onShuffleToggled(ActionEvent actionEvent)
+    {
+    }
 }

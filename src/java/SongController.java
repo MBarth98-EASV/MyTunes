@@ -11,6 +11,7 @@ import model.LocalFilesModel;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class SongController implements Initializable {
@@ -40,13 +41,16 @@ public class SongController implements Initializable {
         FileChooser fc = new FileChooser();
 
         File selectedFile = fc.showOpenDialog(new Stage());
-        txtFieldSongPath.setText(selectedFile.getAbsolutePath());
+        txtFieldAddSongPath.setText(selectedFile.getAbsolutePath());
 
-        songPath = txtFieldSongPath.getText();
+        songPath = txtFieldAddSongPath.getText();
     }
 
+    /**
     public void onAddSong(ActionEvent event)
     {
+        FileChooser fc = new FileChooser();
+
         ((Node) (event.getSource())).getScene().getWindow().hide();
         File selectedFile =  fc.showOpenDialog(new Stage());
         txtFieldAddSongPath.setText(selectedFile.getAbsolutePath());
@@ -55,6 +59,9 @@ public class SongController implements Initializable {
         songPath = txtFieldAddSongPath.getText();
 
     }
+
+     */
+
 
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){

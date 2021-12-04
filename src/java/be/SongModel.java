@@ -1,7 +1,6 @@
 package be;
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 
 public class SongModel
 {
@@ -10,19 +9,19 @@ public class SongModel
     private StringProperty name = null;
     private StringProperty location = null;
     private IntegerProperty duration = null;
-    private ListProperty<String> artists = null;
+    private SimpleStringProperty artists = null;
 
     public SongModel()
     {
         tag = new SimpleStringProperty();
         id = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
-        artists = new SimpleListProperty<>();
+        artists = new SimpleStringProperty();
         location = new SimpleStringProperty();
         duration = new SimpleIntegerProperty();
     }
 
-    public SongModel(int id, String name, ObservableList<String> artists, int duration, String tag, String location)
+    public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
         this();
 
@@ -64,17 +63,17 @@ public class SongModel
         this.name.set(name);
     }
 
-    public ObservableList<String> getArtists()
+    public String getArtists()
     {
         return artists.get();
     }
 
-    public ListProperty<String> artistsProperty()
+    public SimpleStringProperty artistsProperty()
     {
         return artists;
     }
 
-    public void setArtists(ObservableList<String> artists)
+    public void setArtists(String artists)
     {
         this.artists.set(artists);
     }
@@ -122,5 +121,10 @@ public class SongModel
     public void setLocation(String location)
     {
         this.location.set(location);
+    }
+
+    @Override
+    public String toString(){
+        return "("+id+") " + artists + " - " + name + " - " + duration;
     }
 }

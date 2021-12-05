@@ -56,10 +56,7 @@ public class EASVDatabase {
 
     /**
      * Remove Songs from SQL database.
-     *
-     * @param table
-     * @param id
-     */
+      */
     public void removeSong(String table, int id)
     {
         try {
@@ -230,11 +227,42 @@ public class EASVDatabase {
     public void updateSong(String table, String column, String condition)
     {
         try {
-            String sql = "SELECT * FROM " + table + " SET " + column + " WHERE " + condition;
+            String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSong(String table, String column, int condition)
+    {
+        try {
+            String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Database sorter
+     */
+
+    public void sortList(String table, String column, String order)
+    {
+        try
+        {
+        String sql = "SELECT * FROM " + table + " ORDER BY " + column + order;
+
+        Statement statement = dataSource.getConnection().createStatement();
+        statement.executeQuery(sql);
+
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

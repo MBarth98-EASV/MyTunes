@@ -39,6 +39,64 @@ public class EASVDatabase
 
 
     /**
+     * Add song to SQL database table.
+     * @param table
+     * @param songName
+     * @param art
+     * @param dura
+     * @param sauce
+     * @param fpath
+     */
+    public void addSong (String table, String songName, String art, int dura, String sauce, String fpath)
+    {
+
+        String sql = "INSERT INTO Songs (title, artists, duration, source, filepath) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "')";
+
+        try
+        {
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Remove Songs from SQL database.
+     * @param table
+     * @param id
+     */
+    public void removeSong (String table, int id)
+    {
+        try
+        {
+            String sql = "DELETE FROM " + table +" WHERE id LIKE '%" + id + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeSong (String table, String songName)
+    {
+        try
+        {
+            String sql = "DELETE FROM " + table + " WHERE title LIKE '%" + songName + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Getters from the SQL database.
      */
     public int getSongIDFromName(String songName, String table) {
@@ -46,7 +104,7 @@ public class EASVDatabase
         {
             int songID;
 
-            String sql = "SELECT * FROM" + table + "WHERE title LIKE '%" + songName + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -68,7 +126,7 @@ public class EASVDatabase
         {
             String songName;
 
-            String sql = "SELECT * FROM" + table + "WHERE id LIKE '%" + songID + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE id LIKE '%" + songID + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -89,7 +147,7 @@ public class EASVDatabase
      {
          try
          {
-             String sql = "SELECT * FROM" + table + "WHERE id LIKE '%" + songID + "%'";
+             String sql = "SELECT * FROM " + table + " WHERE id LIKE '%" + songID + "%'";
 
              Statement statement = dataSource.getConnection().createStatement();
              ResultSet result = statement.executeQuery(sql);
@@ -110,7 +168,7 @@ public class EASVDatabase
     {
         try
         {
-            String sql = "SELECT * FROM" + table + "WHERE id LIKE '%" + songName + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
              Statement statement = dataSource.getConnection().createStatement();
              ResultSet result = statement.executeQuery(sql);
@@ -130,7 +188,7 @@ public class EASVDatabase
     public String getFilePath(String songName, String table)
     {
         try {
-            String sql = "SELECT * FROM" + table + "WHERE title LIKE '%" + songName + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -149,7 +207,7 @@ public class EASVDatabase
     public String getFilePath(int songID, String table)
     {
         try {
-            String sql = "SELECT * FROM" + table + "WHERE title LIKE '%" + songID + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songID + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -166,6 +224,10 @@ public class EASVDatabase
     }
 
     /**
-     * Setters for the SQL database.
+     * Updater for the SQL database.
      */
+
+
+
+
 }

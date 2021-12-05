@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +41,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -78,7 +79,8 @@
       <workItem from="1638526818228" duration="572000" />
       <workItem from="1638538470033" duration="10438000" />
       <workItem from="1638550074224" duration="1002000" />
-      <workItem from="1638655132754" duration="5606000" />
+      <workItem from="1638655132754" duration="6557000" />
+      <workItem from="1638667921727" duration="1676000" />
     </task>
     <servers />
   </component>

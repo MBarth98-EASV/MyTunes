@@ -1,3 +1,4 @@
+import dal.db.EASVDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,6 +63,7 @@ public class SongController implements Initializable {
 
      */
 
+    EASVDatabase dbtest = new EASVDatabase();
 
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){

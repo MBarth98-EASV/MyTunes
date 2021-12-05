@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class EASVDatabase {
     private SQLServerDataSource dataSource;
@@ -65,7 +66,7 @@ public class EASVDatabase {
             String sql = "DELETE FROM " + table + " WHERE id LIKE '%" + id + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,7 +78,7 @@ public class EASVDatabase {
             String sql = "DELETE FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -197,6 +198,31 @@ public class EASVDatabase {
         }
     }
 
+    public ArrayList getSongList(String table)
+    {
+        try
+        {
+            ArrayList<String> songsList = new ArrayList<>();
+
+            String sql = "SELECT * FROM " + table;
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+                songsList.add(String.valueOf(result));
+            }
+
+            return songsList;
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * Updater for the SQL database.
      */
@@ -207,7 +233,7 @@ public class EASVDatabase {
             String sql = "SELECT * FROM " + table + " SET " + column + " WHERE " + condition;
 
             Statement statement = dataSource.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement.executeQuery(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }

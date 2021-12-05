@@ -115,7 +115,7 @@ public class Controller implements Initializable
             songPlayer.pauseTrack();
             isPlaying = false;
             switchPlayPause();
-            dbtest.removeSong("Songs" ,"The Great Cheese");
+            dbtest.addSong("Songs", "The Great Cheese", "The Cheese-Makers", 10, "Bleptube", "Cheez/McCheeseness.Chez");
         }
         else
         {

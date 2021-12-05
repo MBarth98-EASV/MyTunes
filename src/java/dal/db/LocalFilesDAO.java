@@ -14,22 +14,11 @@ import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
-
-import be.SongModel;
-
+import org.jaudiotagger.tag.TagException;
 
 import com.mpatric.mp3agic.*;
-/*import entagged.audioformats.AudioFile;
-import entagged.audioformats.AudioFileIO;
-import entagged.audioformats.Tag;
 
-import entagged.audioformats.exceptions.CannotReadException;
- */
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.jaudiotagger.audio.AudioHeader;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.TagException;
+import be.SongModel;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;

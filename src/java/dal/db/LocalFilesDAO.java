@@ -13,6 +13,9 @@ import be.SongModel;
 
 
 import com.mpatric.mp3agic.*;
+import entagged.audioformats.AudioFile;
+import entagged.audioformats.AudioFileIO;
+import entagged.audioformats.exceptions.CannotReadException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -338,6 +341,16 @@ public class LocalFilesDAO {
         ArrayList<SongModel> returnList = new ArrayList<>();
 
         for (Path p : list) {
+
+            try {
+                AudioFile audioFile = AudioFileIO.read(p.toFile());
+
+
+
+            } catch (CannotReadException e) {
+                e.printStackTrace();
+            }
+            
 
             artist = "Unkown Artist";
             title = String.valueOf(p);

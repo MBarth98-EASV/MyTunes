@@ -38,18 +38,11 @@ public class EASVDatabase {
 
     /**
      * Add song to SQL database table.
-     *
-     * @param table
-     * @param songName
-     * @param art
-     * @param dura
-     * @param sauce
-     * @param fpath
-     */
+      */
     public void addSong(String table, String songName, String art, int dura, String sauce, String fpath)
     {
 
-        String sql = "INSERT INTO Songs (title, artists, duration, source, filepath) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "')";
+        String sql = "INSERT INTO " + table + " (title, artists, duration, source, filepath) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "')";
 
         try {
             Statement statement = dataSource.getConnection().createStatement();

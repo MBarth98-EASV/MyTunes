@@ -31,7 +31,6 @@
     <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
-    <orderEntry type="library" name="entagged-audioformats-0.15" level="project" />
     <orderEntry type="library" name="jaudiotagger-2.2.5" level="project" />
   </component>
 </module>

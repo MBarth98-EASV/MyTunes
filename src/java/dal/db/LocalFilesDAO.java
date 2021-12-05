@@ -279,7 +279,7 @@ public class LocalFilesDAO {
 
 
             for (Path p : list) {
-                String artist = "Unkown Artist";
+                String artist = "Unknown Artist";
                 String title = String.valueOf(p);
                 String album = "N/A";
                 String genre = "N/A";
@@ -308,7 +308,7 @@ public class LocalFilesDAO {
 
 
                     if (artist == null || artist.isEmpty() || artist.equals("null")){
-                        artist = "Unkown Artist";
+                        artist = "Unknown Artist";
                     }
 
                     if (title == null || title.isEmpty() || title.equals("null")){
@@ -345,7 +345,7 @@ public class LocalFilesDAO {
         ArrayList<SongModel> returnList = new ArrayList<>();
 
         for (Path p : list) {
-            String artist = "Unkown Artist";
+            String artist = "Unknown Artist";
             String title = String.valueOf(p);
             String album = "N/A";
             String genre = "N/A";
@@ -363,7 +363,7 @@ public class LocalFilesDAO {
                 duration = header.getTrackLength();
 
                 if (artist == null || artist.isEmpty() || artist.equals("null")){
-                    artist = "Unkown Artist";
+                    artist = "Unknown Artist";
                 }
 
                 if (title == null || title.isEmpty() || title.equals("null")){
@@ -411,62 +411,6 @@ public class LocalFilesDAO {
 
         return returnList;
     }
-/*
-    private List<SongModel> BACKUPloadAllWavAsSong(List<Path> list, String artist, String title, String album, String genre, int duration) {
-        ArrayList<SongModel> returnList = new ArrayList<>();
-
-        for (Path p : list) {
-            artist = "Unkown Artist";
-            title = String.valueOf(p);
-            album = "N/A";
-            genre = "N/A";
-            duration = 0;
-
-            try {
-                AudioFile audioFile = AudioFileIO.read(p.toFile());
-                artist = audioFile.getTag().getFirstArtist();
-                title = audioFile.getTag().getFirstTitle();
-                album = audioFile.getTag().getFirstAlbum();
-                genre = audioFile.getTag().getFirstGenre();
-                duration = audioFile.getLength();
-
-
-
-            } catch (CannotReadException e) {
-                e.printStackTrace();
-            }
-
-
-            System.out.println(artist+title+album+genre+duration);
-
-
-            try {
-                File file = p.toFile();
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-                AudioFormat format = audioInputStream.getFormat();
-                long frames = audioInputStream.getFrameLength();
-                double durationInSeconds = (frames+0.0) / format.getFrameRate();
-
-                //duration = (int) durationInSeconds;
-
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            int id = (int) (Math.random() * 100);
-            returnList.add(new SongModel(id, title, artist, duration, genre, p.toString()));
-        }
-
-        return returnList;
-    }
-
-
-
- */
-
 
     public static void main(String[] args) {
         LocalFilesDAO localFilesDAO = new LocalFilesDAO();
@@ -475,66 +419,7 @@ public class LocalFilesDAO {
             System.out.println(s);
         }
     }
-
-
-
-
-    /*
-    private List<SongModel> BACKUPloadAllWavAsSong(List<Path> list, String artist, String title, String album, String genre, int duration) {
-        ArrayList<SongModel> returnList = new ArrayList<>();
-
-        for (Path p : list) {
-            artist = "Unkown Artist";
-            title = String.valueOf(p);
-            album = "N/A";
-            genre = "N/A";
-            duration = 0;
-
-            try {
-                AudioFile audioFile = AudioFileIO.read(p.toFile());
-                artist = audioFile.getTag().getFirstArtist();
-                title = audioFile.getTag().getFirstTitle();
-                album = audioFile.getTag().getFirstAlbum();
-                genre = audioFile.getTag().getFirstGenre();
-                duration = audioFile.getLength();
-
-
-
-            } catch (CannotReadException e) {
-                e.printStackTrace();
-            }
-
-
-            System.out.println(artist+title+album+genre+duration);
-
-
-            try {
-                File file = p.toFile();
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-                AudioFormat format = audioInputStream.getFormat();
-                long frames = audioInputStream.getFrameLength();
-                double durationInSeconds = (frames+0.0) / format.getFrameRate();
-
-                //duration = (int) durationInSeconds;
-
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            int id = (int) (Math.random() * 100);
-            returnList.add(new SongModel(id, title, artist, duration, genre, p.toString()));
-        }
-
-        return returnList;
-    }
-
-
-
- */
-
+    
 
 }
 

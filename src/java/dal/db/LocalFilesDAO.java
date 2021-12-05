@@ -4,10 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import be.SongModel;
 
@@ -304,7 +301,7 @@ public class LocalFilesDAO {
 
 
                     if (artist == null) {
-                        artist = "Unknown Artist";
+                        artist = "Unkown Artist";
                     }
 
                     if (title == null) {
@@ -341,22 +338,28 @@ public class LocalFilesDAO {
         ArrayList<SongModel> returnList = new ArrayList<>();
 
         for (Path p : list) {
+            artist = "Unkown Artist";
+            title = String.valueOf(p);
+            album = "N/A";
+            genre = "N/A";
+            duration = 0;
 
             try {
                 AudioFile audioFile = AudioFileIO.read(p.toFile());
+                artist = audioFile.getTag().getFirstArtist();
+                title = audioFile.getTag().getFirstTitle();
+                album = audioFile.getTag().getFirstAlbum();
+                genre = audioFile.getTag().getFirstGenre();
+                duration = audioFile.getLength();
 
 
 
             } catch (CannotReadException e) {
                 e.printStackTrace();
             }
-            
 
-            artist = "Unkown Artist";
-            title = String.valueOf(p);
-            album = "N/A";
-            genre = "N/A";
-            duration = 0;
+
+            System.out.println(artist+title+album+genre+duration);
 
 
             try {
@@ -366,7 +369,7 @@ public class LocalFilesDAO {
                 long frames = audioInputStream.getFrameLength();
                 double durationInSeconds = (frames+0.0) / format.getFrameRate();
 
-                duration = (int) durationInSeconds;
+                //duration = (int) durationInSeconds;
 
             } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();

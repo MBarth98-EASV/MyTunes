@@ -1,4 +1,6 @@
-package be;
+package bll;
+
+import be.SongModel;
 
 public interface IAudio
 {

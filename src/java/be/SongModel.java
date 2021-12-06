@@ -71,13 +71,13 @@ public class SongModel
 
     public SimpleStringProperty artistsProperty()
     {
-        this.artists.set(artists);
+        return artists;
     }
 
 
     public void setArtists(String artists)
     {
-        return artists;
+        this.artists.set(artists);
     }
 
     public int getDuration()

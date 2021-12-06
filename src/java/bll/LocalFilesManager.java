@@ -18,9 +18,10 @@ public class LocalFilesManager {
 
 
 
-    public List<File> readAllFromNewDir(Path path){
+    public List<Path> readAllFromNewDir(Path path){
 
-        return localFilesDAO.readAllFromNewDir(path);
+        return null;
+                //localFilesDAO.readAllFromDir(path);
     }
 
 

@@ -1,7 +1,7 @@
 package bll;
 
 import be.SongModel;
-import dal.db.LocalFilesDAO;
+import dal.LocalFilesDAO;
 
 import java.io.File;
 import java.nio.file.Path;

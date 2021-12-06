@@ -1,4 +1,4 @@
-package dal.db;
+package dal;
 
 import java.io.*;
 import java.nio.file.Files;

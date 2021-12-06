@@ -1,9 +1,9 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.LocalFilesModel;
@@ -29,10 +29,10 @@ public class SettingsController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
 
     }
-
 
     /**
      * Opens a DirectoryChooser, and sets the accompanying TextField's text as the directory.
@@ -40,7 +40,8 @@ public class SettingsController implements Initializable {
      * as a path, which is then used by other classes.
      */
     @FXML
-    public void onSelectDirectory(ActionEvent event){
+    public void onSelectDirectory(ActionEvent event)
+    {
         DirectoryChooser dc = new DirectoryChooser();
 
         File selectedDirectory = dc.showDialog(new Stage());
@@ -63,5 +64,4 @@ public class SettingsController implements Initializable {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
 }

@@ -5,12 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import java.beans.EventHandler;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -83,17 +78,13 @@ public class Controller implements Initializable
     @FXML public Slider sliderVolume;
 
 
-/*
-    static musicPlayer player = musicPlayer.getInstance();
-    static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
-    static long clipTimePosition;
-*/
+    MusicPlayer songPlayer = new MusicPlayer();
 
-    private static boolean isPlaying = true;
+    boolean isPlaying = false;
 
     public Controller()
     {
-        //musicPlayer.loadMusic(filepath);
+
     }
 
     @Override
@@ -104,36 +95,44 @@ public class Controller implements Initializable
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
-        isPlaying = !isPlaying;
 
-        switchPlayPause();
+        if(isPlaying)
+        {
+            songPlayer.pauseTrack();
+            isPlaying = false;
+            switchPlayPause();
+        }
+        else
+        {
+            songPlayer.playTrack();
+            isPlaying = true;
+            switchPlayPause();
+        }
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        System.out.println("next song");
+        songPlayer.nextTrack();
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        System.out.println("previous/reset song");
-    }
-
-    @FXML private void onShuffleToggled(ActionEvent actionEvent)
-    {
-        System.out.println("get a random song");
+        songPlayer.previousTrack();
     }
 
     @FXML
-    private void onSettings(ActionEvent actionEvent) {
-        try {
+    private void onSettings(ActionEvent actionEvent)
+    {
+        try
+        {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
             Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 320, 157));
             stage.show();
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -149,15 +148,18 @@ public class Controller implements Initializable
     }
 
     @FXML
-    private void onSongNew(ActionEvent event){
-        try {
+    private void onSongNew(ActionEvent event)
+    {
+        try
+        {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
             stage.setScene(new Scene(root, 320, 190));
             stage.show();
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -174,14 +176,15 @@ public class Controller implements Initializable
 
 
     @FXML
-    private void switchPlayPause(){
-        if (isPlaying == true){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
-                    + "-fx-background-position: 8");
+    private void switchPlayPause()
+    {
+        if (isPlaying)
+        {
+            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);-fx-background-position: 8");
         }
-        else if (isPlaying == false){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
-                    + "-fx-background-position: 9");
+        else
+        {
+            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);-fx-background-position: 9");
         }
     }
 
@@ -221,5 +224,7 @@ public class Controller implements Initializable
 
     }
 
-
+    public void onShuffleToggled(ActionEvent actionEvent)
+    {
+    }
 }

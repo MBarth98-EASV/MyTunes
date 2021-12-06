@@ -1,5 +1,6 @@
 package bll;
 
+
 import dal.db.LocalFilesDAO;
 
 import java.io.File;
@@ -11,27 +12,31 @@ public class LocalFilesManager {
 
     LocalFilesDAO localFilesDAO;
 
-    public LocalFilesManager() 
-    {
+    public LocalFilesManager() {
         localFilesDAO = new LocalFilesDAO();
     }
 
-    public List<Path> readAllFromNewDir(Path path)
-    {
-        return null;
-        //localFilesDAO.readAllFromDir(path);
+
+
+
+    public List<File> readAllFromNewDir(Path path){
+
+        return localFilesDAO.readAllFromNewDir(path);
     }
 
-    public Path addSong(Path path)
-    {
+
+
+
+    public Path addSong(Path path){
+
         return localFilesDAO.addSong(path);
+
     }
 
     public void removeSong(Path path){
     }
 
-    public Path editSong(Path path)
-    {
+    public Path editSong(Path path){
         return path;
     }
 

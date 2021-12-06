@@ -4,19 +4,23 @@ import javafx.beans.property.*;
 
 public class SongModel
 {
-    private StringProperty tag = null;
     private IntegerProperty id = null;
-    private StringProperty name = null;
-    private StringProperty location = null;
+    private StringProperty title = null;
+    private StringProperty artists = null;
+    private StringProperty genre = null;
+    private StringProperty tag = null;
+    private StringProperty album = null;
     private IntegerProperty duration = null;
-    private SimpleStringProperty artists = null;
+    private StringProperty location = null;
 
     public SongModel()
     {
         tag = new SimpleStringProperty();
         id = new SimpleIntegerProperty();
-        name = new SimpleStringProperty();
+        title = new SimpleStringProperty();
         artists = new SimpleStringProperty();
+        genre = new SimpleStringProperty();
+        album = new SimpleStringProperty();
         location = new SimpleStringProperty();
         duration = new SimpleIntegerProperty();
     }
@@ -27,10 +31,18 @@ public class SongModel
 
         this.setId(id);
         this.setTag(tag);
-        this.setName(name);
+        this.setTitle(name);
         this.setArtists(artists);
         this.setDuration(duration);
         this.setLocation(location);
+    }
+
+    public SongModel(int id, String name, String artists, String genre, String album, int duration, String tag, String location)
+    {
+        this(id, name, artists, duration, tag, location);
+
+        this.setGenre(genre);
+        this.setAlbum(album);
     }
 
     public int getId()
@@ -43,36 +55,19 @@ public class SongModel
         this.id.set(id);
     }
 
-    public IntegerProperty idProperty()
+    public String getTitle()
     {
-        return id;
+        return title.get();
     }
 
-    public String getName()
+    public void setTitle(String title)
     {
-        return name.get();
+        this.title.set(title);
     }
-
-    public void setName(String name)
-    {
-        this.name.set(name);
-    }
-
-    public StringProperty nameProperty()
-    {
-        return name;
-    }
-
 
     public String getArtists()
     {
         return artists.get();
-    }
-
-
-    public SimpleStringProperty artistsProperty()
-    {
-        return artists;
     }
 
     public void setArtists(String artists)
@@ -90,11 +85,6 @@ public class SongModel
         this.duration.set(duration);
     }
 
-    public IntegerProperty durationProperty()
-    {
-        return duration;
-    }
-
     public String getTag()
     {
         return tag.get();
@@ -103,11 +93,6 @@ public class SongModel
     public void setTag(String tag)
     {
         this.tag.set(tag);
-    }
-
-    public StringProperty tagProperty()
-    {
-        return tag;
     }
 
     public String getLocation()
@@ -120,13 +105,23 @@ public class SongModel
         this.location.set(location);
     }
 
-    public StringProperty locationProperty()
+    public String getGenre()
     {
-        return location;
+        return genre.get();
     }
 
-    @Override
-    public String toString(){
-        return "("+id+") " + artists + " - " + name + " - " + duration;
+    public void setGenre(String genre)
+    {
+        this.genre.set(genre);
+    }
+
+    public String getAlbum()
+    {
+        return album.get();
+    }
+
+    public void setAlbum(String album)
+    {
+        this.album.set(album);
     }
 }

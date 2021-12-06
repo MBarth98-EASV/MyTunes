@@ -63,6 +63,7 @@ public class SongModel
         return name;
     }
 
+
     public String getArtists()
     {
         return artists.get();
@@ -71,9 +72,8 @@ public class SongModel
 
     public SimpleStringProperty artistsProperty()
     {
-        this.artists.set(artists);
+        this.artists;
     }
-
 
     public void setArtists(String artists)
     {

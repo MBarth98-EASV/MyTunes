@@ -11,32 +11,27 @@ public class LocalFilesManager {
 
     LocalFilesDAO localFilesDAO;
 
-    public LocalFilesManager() {
+    public LocalFilesManager() 
+    {
         localFilesDAO = new LocalFilesDAO();
     }
 
-
-
-
-    public List<Path> readAllFromNewDir(Path path){
-
+    public List<Path> readAllFromNewDir(Path path)
+    {
         return null;
-                //localFilesDAO.readAllFromDir(path);
+        //localFilesDAO.readAllFromDir(path);
     }
 
-
-
-
-    public Path addSong(Path path){
-
+    public Path addSong(Path path)
+    {
         return localFilesDAO.addSong(path);
-
     }
 
     public void removeSong(Path path){
     }
 
-    public Path editSong(Path path){
+    public Path editSong(Path path)
+    {
         return path;
     }
 

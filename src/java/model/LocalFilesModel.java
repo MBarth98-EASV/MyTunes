@@ -16,19 +16,14 @@ public class LocalFilesModel {
 
     public LocalFilesModel() {
         localFilesManager = new LocalFilesManager();
-
-
-
     }
 
 
-
-    public List<Path> readAllFromNewDir(Path path){
+    public List<SongModel> readAllFromNewDir(Path path){
         return localFilesManager.readAllFromNewDir(path);
     }
 
     public Path addSong(Path path){
-
         return localFilesManager.addSong(path);
     }
 

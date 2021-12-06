@@ -94,7 +94,7 @@ public class LocalFilesDAO {
      * Saves the given directory in directory.txt
      * @param path The directory to be saved.
      */
-    private void saveDirectory(Path path) {
+    public void saveDirectory(Path path) {
         try (BufferedWriter bw = Files.newBufferedWriter(dirPath, StandardOpenOption.SYNC,
                 StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
 
@@ -114,7 +114,7 @@ public class LocalFilesDAO {
      * Reads directory.txt as a string.
      * @return the currently stored directory as a Path object.
      */
-    public Path loadDirectory(){
+    private Path loadDirectory(){
         Path returnPath = null;
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(dirPath)))) {
             String line;
@@ -162,7 +162,7 @@ public class LocalFilesDAO {
      * as Path objects.
      * @return returnList of all manually added songs.
      */
-    public List<Path> loadAllExternalSongs() {
+    private List<Path> loadAllExternalSongs() {
         ArrayList<Path> returnList = new ArrayList<>();
 
 
@@ -209,7 +209,7 @@ public class LocalFilesDAO {
      * Throws "Could not invoke DirectBuffer method - illegal access".
      * Library fault - To do.
      */
-    private List<SongModel> loadAllLocalSongs() {
+    public List<SongModel> loadAllLocalSongs() {
         ArrayList<SongModel> returnList = new ArrayList<>();
         ArrayList<Path> loadList = new ArrayList<>();
         loadList.addAll(readAllFromCurDirectory());
@@ -282,14 +282,7 @@ public class LocalFilesDAO {
 
         return returnList;
     }
-
-    public static void main(String[] args) {
-        LocalFilesDAO localFilesDAO = new LocalFilesDAO();
-        ArrayList<SongModel> l = new ArrayList<>(localFilesDAO.loadAllLocalSongs());
-        for (SongModel s : l){
-            System.out.println(s);
-        }
-    }
+    
     
 
 }

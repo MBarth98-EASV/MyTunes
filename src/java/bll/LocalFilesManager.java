@@ -17,28 +17,23 @@ public class LocalFilesManager {
     }
 
 
-
-
-    public List<Path> readAllFromNewDir(Path path){
-
-        return null;
-                //localFilesDAO.readAllFromDir(path);
+    public List<SongModel> readAllFromNewDir(Path path){
+        localFilesDAO.saveDirectory(path);
+        return localFilesDAO.loadAllLocalSongs();
     }
 
 
 
 
     public Path addSong(Path path){
-
         return localFilesDAO.addSong(path);
-
     }
 
     public void removeSong(Path path){
     }
 
-    public SongModel editSong(SongModel songModel){
-        return songModel;
+    public void editSong(SongModel songModel){
+
     }
 
 }

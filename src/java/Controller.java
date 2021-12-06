@@ -1,3 +1,9 @@
+import be.SongModel;
+import dal.db.EASVDatabase;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -5,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -13,6 +20,8 @@ import java.beans.EventHandler;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -42,17 +51,17 @@ public class Controller implements Initializable
 
     @FXML public Button btnPlaylistDelete;
 
-    @FXML public TableView tblViewSongs;
+    @FXML public TableView<SongModel> tblViewSongs = new TableView<SongModel>();
 
-    @FXML public TableColumn tblClmnSongTitle;
+    @FXML public TableColumn<SongModel, String> tblClmnSongTitle = new TableColumn<SongModel, String>();
 
-    @FXML public TableColumn tblClmnSongArtist;
+    @FXML public TableColumn<SongModel, String> tblClmnSongArtist = new TableColumn<SongModel, String>();
 
-    @FXML public TableColumn tblClmnSongAlbum;
+    @FXML public TableColumn<SongModel, String> tblClmnSongAlbum = new TableColumn<SongModel, String>();
 
-    @FXML public TableColumn tblClmnSongGenre;
+    @FXML public TableColumn<SongModel, String> tblClmnSongGenre = new TableColumn<SongModel, String>();
 
-    @FXML public TableColumn tblClmnSongTime;
+    @FXML public TableColumn<SongModel, String> tblClmnSongTime = new TableColumn<SongModel, String>();
 
     @FXML public Button btnSongUp;
 
@@ -83,23 +92,35 @@ public class Controller implements Initializable
     @FXML public Slider sliderVolume;
 
 
-/*
-    static musicPlayer player = musicPlayer.getInstance();
-    static String filepath = "C:\\Users\\Kish\\Documents\\GitHub\\1st_semester_exam\\testMusic\\TestMusicFile.wav";
-    static long clipTimePosition;
-*/
-
     private static boolean isPlaying = true;
+
+    final ObservableList<SongModel> data = FXCollections.observableArrayList();
 
     public Controller()
     {
-        //musicPlayer.loadMusic(filepath);
+        tblViewSongs.getColumns().add(this.tblClmnSongTitle);
+        tblViewSongs.getColumns().add(this.tblClmnSongArtist);
+        tblViewSongs.getColumns().add(this.tblClmnSongGenre);
+        tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
+        tblViewSongs.getColumns().add(this.tblClmnSongTime);
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        data.add(new SongModel(1, "1st song", "Phillip", "soft pop", "rainbow and unicorns", 190, "local", "Magic location 2"));
+        data.add(new SongModel(2, "2st song", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(3, "3st song", "Mads", null, null, 345, "local", "Magic location"));
 
+        this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
+        this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
+        this.tblClmnSongGenre.setCellValueFactory(new PropertyValueFactory<SongModel, String>("genre"));
+        this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
+        this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
+
+        tblViewSongs.setItems(data);
     }
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)

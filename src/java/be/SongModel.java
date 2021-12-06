@@ -1,37 +1,48 @@
 package be;
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 
 public class SongModel
 {
-    private StringProperty tag = null;
     private IntegerProperty id = null;
-    private StringProperty name = null;
-    private StringProperty location = null;
+    private StringProperty title = null;
+    private StringProperty artists = null;
+    private StringProperty genre = null;
+    private StringProperty tag = null;
+    private StringProperty album = null;
     private IntegerProperty duration = null;
-    private ListProperty<String> artists = null;
+    private StringProperty location = null;
 
     public SongModel()
     {
         tag = new SimpleStringProperty();
         id = new SimpleIntegerProperty();
-        name = new SimpleStringProperty();
-        artists = new SimpleListProperty<>();
+        title = new SimpleStringProperty();
+        artists = new SimpleStringProperty();
+        genre = new SimpleStringProperty();
+        album = new SimpleStringProperty();
         location = new SimpleStringProperty();
         duration = new SimpleIntegerProperty();
     }
 
-    public SongModel(int id, String name, ObservableList<String> artists, int duration, String tag, String location)
+    public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
         this();
 
         this.setId(id);
         this.setTag(tag);
-        this.setName(name);
+        this.setTitle(name);
         this.setArtists(artists);
         this.setDuration(duration);
         this.setLocation(location);
+    }
+
+    public SongModel(int id, String name, String artists, String genre, String album, int duration, String tag, String location)
+    {
+        this(id, name, artists, duration, tag, location);
+
+        this.setGenre(genre);
+        this.setAlbum(album);
     }
 
     public int getId()
@@ -39,42 +50,27 @@ public class SongModel
         return id.get();
     }
 
-    public IntegerProperty idProperty()
-    {
-        return id;
-    }
-
     public void setId(int id)
     {
         this.id.set(id);
     }
 
-    public String getName()
+    public String getTitle()
     {
-        return name.get();
+        return title.get();
     }
 
-    public StringProperty nameProperty()
+    public void setTitle(String title)
     {
-        return name;
+        this.title.set(title);
     }
 
-    public void setName(String name)
-    {
-        this.name.set(name);
-    }
-
-    public ObservableList<String> getArtists()
+    public String getArtists()
     {
         return artists.get();
     }
 
-    public ListProperty<String> artistsProperty()
-    {
-        return artists;
-    }
-
-    public void setArtists(ObservableList<String> artists)
+    public void setArtists(String artists)
     {
         this.artists.set(artists);
     }
@@ -82,11 +78,6 @@ public class SongModel
     public int getDuration()
     {
         return duration.get();
-    }
-
-    public IntegerProperty durationProperty()
-    {
-        return duration;
     }
 
     public void setDuration(int duration)
@@ -99,11 +90,6 @@ public class SongModel
         return tag.get();
     }
 
-    public StringProperty tagProperty()
-    {
-        return tag;
-    }
-
     public void setTag(String tag)
     {
         this.tag.set(tag);
@@ -114,13 +100,28 @@ public class SongModel
         return location.get();
     }
 
-    public StringProperty locationProperty()
-    {
-        return location;
-    }
-
     public void setLocation(String location)
     {
         this.location.set(location);
+    }
+
+    public String getGenre()
+    {
+        return genre.get();
+    }
+
+    public void setGenre(String genre)
+    {
+        this.genre.set(genre);
+    }
+
+    public String getAlbum()
+    {
+        return album.get();
+    }
+
+    public void setAlbum(String album)
+    {
+        this.album.set(album);
     }
 }

@@ -24,3 +24,5 @@ hs_err_pid*
 
 # do not version control the compiled output
 /target/**
+.idea/workspace.xml
+.idea/uiDesigner.xml

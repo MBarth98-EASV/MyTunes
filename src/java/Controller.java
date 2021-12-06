@@ -121,6 +121,7 @@ public class Controller implements Initializable
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
         tblViewSongs.setItems(data);
+        data.addAll(new EASVDatabase().getAllSongs());
     }
 
     @FXML private void onPlayTrack(ActionEvent actionEvent)

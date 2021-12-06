@@ -1,5 +1,6 @@
 package bll;
 
+import be.SongModel;
 import dal.db.LocalFilesDAO;
 
 import java.io.File;
@@ -36,8 +37,8 @@ public class LocalFilesManager {
     public void removeSong(Path path){
     }
 
-    public Path editSong(Path path){
-        return path;
+    public SongModel editSong(SongModel songModel){
+        return songModel;
     }
 
 }

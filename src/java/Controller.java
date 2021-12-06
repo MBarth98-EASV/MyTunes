@@ -1,3 +1,4 @@
+import be.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.LocalFilesModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -82,6 +85,7 @@ public class Controller implements Initializable
 
     boolean isPlaying = false;
 
+
     public Controller()
     {
 
@@ -155,7 +159,11 @@ public class Controller implements Initializable
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
-            stage.setScene(new Scene(root, 320, 190));
+            stage.setMaxHeight(193);
+            stage.setMinHeight(193);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 193));
             stage.show();
         }
         catch (IOException e)
@@ -166,7 +174,22 @@ public class Controller implements Initializable
 
     @FXML
     private void onSongEdit(ActionEvent event){
-
+        LocalFilesModel.setCurrentlySelectedSong((SongModel) tblViewSongs.getSelectionModel().getSelectedItem());
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Song");
+            stage.setMaxHeight(305);
+            stage.setMinHeight(305);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 305));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML

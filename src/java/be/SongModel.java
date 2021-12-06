@@ -10,6 +10,7 @@ public class SongModel
     private StringProperty location = null;
     private IntegerProperty duration = null;
     private SimpleStringProperty artists = null;
+    private StringProperty album = null;
 
     public SongModel()
     {
@@ -19,9 +20,10 @@ public class SongModel
         artists = new SimpleStringProperty();
         location = new SimpleStringProperty();
         duration = new SimpleIntegerProperty();
+        album = new SimpleStringProperty();
     }
 
-    public SongModel(int id, String name, String artists, int duration, String tag, String location)
+    public SongModel(int id, String name, String artists, String album, int duration, String tag, String location)
     {
         this();
 
@@ -31,6 +33,7 @@ public class SongModel
         this.setArtists(artists);
         this.setDuration(duration);
         this.setLocation(location);
+
     }
 
     public int getId()
@@ -108,6 +111,21 @@ public class SongModel
     public StringProperty tagProperty()
     {
         return tag;
+    }
+
+    public String getAlbum()
+    {
+        return album.get();
+    }
+
+    public void setAlbum(String album)
+    {
+        this.tag.set(album);
+    }
+
+    public StringProperty albumProperty()
+    {
+        return album;
     }
 
     public String getLocation()

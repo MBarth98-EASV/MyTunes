@@ -16,8 +16,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import com.mpatric.mp3agic.*;
-
 import be.SongModel;
 
 import javax.sound.sampled.AudioFormat;
@@ -36,19 +34,15 @@ public class LocalFilesDAO {
     /**
      * Lists all files in the given path, and checks whether it's a directory
      * or a supported filetype (.wav or .mp3). The file's path is then stored as a Path object in
-     * the appropriate list. If its a directory, the method is run again in inside that directory.
+     * the returnlist. If it's a directory, the method is run again in inside that directory.
      * The method loops until there are no more subdirectories.
      * @param path The given Path to read files from.
-     * @return A HashMap containing a list of every file mp3 file, and one for every wav file
+     * @return A list containing a list of every file mp3 file and wav file
      * in the path's directory and subdirectories.
      */
 
-    public HashMap<String, ArrayList<Path>> readAllFromSubDir(Path path) {
-        ArrayList<Path> returnMp3List = new ArrayList<>();
-        ArrayList<Path> returnWavList = new ArrayList<>();
-        HashMap<String, ArrayList<Path>> returnMap = new HashMap<>();
-        returnMap.put("mp3", returnMp3List);
-        returnMap.put("wav", returnWavList);
+    public List<Path> readAllFromSubDir(Path path) {
+        ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = path.toFile();
         File[] listOfFiles = filePath.listFiles();
@@ -58,36 +52,25 @@ public class LocalFilesDAO {
 
         for (File f : allLocalFilePaths) {
 
-            if (checkForFileType(f.getName(), "mp3")) {
-                returnMp3List.add(f.toPath());
-            }
-            else if (checkForFileType(f.getName(), "wav")) {
-                returnWavList.add(f.toPath());
+            if (checkForMp3OrWav(f.getName())) {
+                returnList.add(f.toPath());
             }
             else if (f.isDirectory()) {
                 readAllFromSubDir(Path.of(f.getPath()));
             }
         }
-        returnMap.put("mp3", returnMp3List);
-        returnMap.put("wav", returnWavList);
-        return returnMap;
+        return returnList;
     }
 
 
     /**
      * Read all files in the current directory and directories.
      * If the file is of a supported filetype (.wav or .mp3), it is added to
-     * the appropriate List, stored inside a HashMap. If it is a directory, readAllFromSubDir
-     * is run.
+     * the returnList. If it is a directory, readAllFromSubDir is run.
      * @return A HashMap containing a list of every mp3 file and a list of every wav file in a directory.
      */
-    public HashMap<String, List<Path>> readAllFromCurDirectory() {
-        ArrayList<Path> returnMp3List = new ArrayList<>();
-        ArrayList<Path> returnWavList = new ArrayList<>();
-        HashMap<String, List<Path>> returnMap = new HashMap<>();
-        returnMap.put("mp3", returnMp3List);
-        returnMap.put("wav", returnWavList);
-
+    public List<Path> readAllFromCurDirectory() {
+        ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = loadDirectory().toFile();
         File[] listOfFiles = filePath.listFiles();
@@ -97,21 +80,14 @@ public class LocalFilesDAO {
 
         for (File f : allLocalFilePaths) {
 
-            if (checkForFileType(f.getName(), "mp3")) {
-                returnMp3List.add(f.toPath());
-            }
-            else if (checkForFileType(f.getName(), "wav")){
-                returnWavList.add(f.toPath());
+            if (checkForMp3OrWav(f.getName())) {
+                returnList.add(f.toPath());
             }
             else if (f.isDirectory()) {
-                Map<String, ArrayList<Path>> subDirMap = readAllFromSubDir(Path.of(f.getPath()));
-                returnMp3List.addAll(subDirMap.get("mp3"));
-                returnWavList.addAll(subDirMap.get("wav"));
+                returnList.addAll(readAllFromSubDir(Path.of(f.getPath())));
             }
         }
-        returnMap.put("mp3", returnMp3List);
-        returnMap.put("wav", returnWavList);
-        return returnMap;
+        return returnList;
     }
 
     /**
@@ -186,10 +162,8 @@ public class LocalFilesDAO {
      * as Path objects.
      * @return returnList of all manually added songs.
      */
-    public HashMap<String, ArrayList<Path>> loadAllExternalSongs() {
-        ArrayList<Path> returnMp3List = new ArrayList<>();
-        ArrayList<Path> returnWavList = new ArrayList<>();
-        HashMap<String, ArrayList<Path>> returnMap = new HashMap<>();
+    public List<Path> loadAllExternalSongs() {
+        ArrayList<Path> returnList = new ArrayList<>();
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(songPath)))) {
@@ -197,11 +171,8 @@ public class LocalFilesDAO {
             while ((line = br.readLine()) != null) {
 
                 String songPath = line;
-                if (checkForFileType(songPath, "mp3")) {
-                    returnMp3List.add(Path.of(songPath));
-                }
-                else if (checkForFileType(songPath, "wav")){
-                    returnWavList.add(Path.of(songPath));
+                if (checkForMp3OrWav(songPath)) {
+                    returnList.add(Path.of(songPath));
                 }
             }
 
@@ -210,14 +181,9 @@ public class LocalFilesDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        returnMap.put("mp3", returnMp3List);
-        returnMap.put("wav", returnWavList);
-        return returnMap;
+        return returnList;
     }
 
-    public void removeSong(SongModel song) {
-
-    }
 
     /**
      * Checks the characters of a filename after the "." indicating it's filetype.
@@ -237,114 +203,20 @@ public class LocalFilesDAO {
     }
 
     /**
-     * Checks whether or not a file is of the wanted filetype.
-     * @param fileName: The file to check.
-     * @param fileType: The filetype to check for.
-     * @return true if the file has the given fileType extension
+     *
+     * @return
+     * 
+     * Throws "Could not invoke DirectBuffer method - illegal access".
+     * Library fault - To do.
      */
-    private Boolean checkForFileType(String fileName, String fileType) {
-        String extension = "";
-
-        int i = fileName.lastIndexOf('.');
-        if (i > 0) {
-            extension = fileName.substring(i + 1);
-        }
-        if (extension.equals(fileType)){
-            return true;
-        } else return false;
-    }
-
-
     private List<SongModel> loadAllLocalSongs() {
-        ArrayList<Path> mp3List = new ArrayList<>();
-        ArrayList<Path> wavList = new ArrayList<>();
-        mp3List.addAll(readAllFromCurDirectory().get("mp3"));
-        mp3List.addAll(loadAllExternalSongs().get("mp3"));
-        wavList.addAll(readAllFromCurDirectory().get("wav"));
-        wavList.addAll(loadAllExternalSongs().get("wav"));
-
-
         ArrayList<SongModel> returnList = new ArrayList<>();
-
-        returnList.addAll(loadAllMp3AsSong(mp3List));
-
-        returnList.addAll(loadAllWavAsSong(wavList));
-
-        return returnList;
-        }
+        ArrayList<Path> loadList = new ArrayList<>();
+        loadList.addAll(readAllFromCurDirectory());
+        loadList.addAll(loadAllExternalSongs());
 
 
-        private List<SongModel> loadAllMp3AsSong(List<Path> list) {
-            ArrayList<SongModel> returnList = new ArrayList<>();
-
-
-            for (Path p : list) {
-                String artist = "Unknown Artist";
-                String title = String.valueOf(p);
-                String album = "N/A";
-                String genre = "N/A";
-                int duration = 0;
-
-                try {
-
-                    Mp3File mp3file = new Mp3File(p);
-                    if (mp3file.hasId3v2Tag()) {
-                        ID3v2 id3v2Tag = mp3file.getId3v2Tag();
-                        artist = id3v2Tag.getArtist();
-                        title = id3v2Tag.getTitle();
-                        album = id3v2Tag.getAlbum();
-                        genre = id3v2Tag.getGenreDescription();
-                        duration = id3v2Tag.getDataLength();
-
-
-                    } else if (mp3file.hasId3v1Tag()) {
-                        ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-                        artist = id3v1Tag.getArtist();
-                        title = id3v1Tag.getTitle();
-                        album = id3v1Tag.getAlbum();
-                        genre = id3v1Tag.getGenreDescription();
-                        duration = 0;
-                    }
-
-
-                    if (artist == null || artist.isEmpty() || artist.equals("null")){
-                        artist = "Unknown Artist";
-                    }
-
-                    if (title == null || title.isEmpty() || title.equals("null")){
-                        title = String.valueOf(p);
-                    }
-
-                    if (album == null || album.isEmpty() || album.equals("null")){
-                        album = "N/A";
-                    }
-
-                    if (genre == null || genre.isEmpty() || genre.equals("null")){
-                        genre = "---";
-                    }
-
-                    if (duration == 0) {
-                        duration = (int) mp3file.getLengthInSeconds();
-                    }
-
-                    int id = (int) (Math.random() * 100);
-                    returnList.add(new SongModel(id, title, artist, duration, genre, p.toString()));
-
-                } catch (InvalidDataException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedTagException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return returnList;
-        }
-
-    private List<SongModel> loadAllWavAsSong(List<Path> list) {
-        ArrayList<SongModel> returnList = new ArrayList<>();
-
-        for (Path p : list) {
+        for (Path p : loadList) {
             String artist = "Unknown Artist";
             String title = String.valueOf(p);
             String album = "N/A";
@@ -383,7 +255,7 @@ public class LocalFilesDAO {
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
                     AudioFormat format = audioInputStream.getFormat();
                     long frames = audioInputStream.getFrameLength();
-                    double durationInSeconds = (frames+0.0) / format.getFrameRate();
+                    double durationInSeconds = (double) frames / format.getFrameRate();
 
                     duration = (int) durationInSeconds;
                 }
@@ -403,7 +275,6 @@ public class LocalFilesDAO {
             } catch (UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
-
 
             int id = (int) (Math.random() * 100);
                 returnList.add(new SongModel(id, title, artist, duration, genre, p.toString()));

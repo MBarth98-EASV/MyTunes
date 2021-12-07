@@ -4,14 +4,15 @@ import javafx.beans.property.*;
 
 public class SongModel
 {
-    private IntegerProperty id = null;
     private StringProperty title = null;
     private StringProperty artists = null;
     private StringProperty genre = null;
     private StringProperty tag = null;
     private StringProperty album = null;
-    private IntegerProperty duration = null;
     private StringProperty location = null;
+
+    private IntegerProperty id = null;
+    private IntegerProperty duration = null;
 
     public SongModel()
     {

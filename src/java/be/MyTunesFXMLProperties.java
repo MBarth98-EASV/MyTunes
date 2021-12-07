@@ -5,9 +5,7 @@ import javafx.scene.control.*;
 
 public class MyTunesFXMLProperties
 {
-
-    @FXML
-    public TextField txtFieldSearch;
+    @FXML public TextField txtFieldSearch;
 
     @FXML public Button btnSettings;
 

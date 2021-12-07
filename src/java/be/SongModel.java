@@ -120,7 +120,6 @@ public class SongModel
         return artists.get();
     }
 
-
     public void setArtists(String artists)
     {
         this.artists.set(artists);
@@ -185,6 +184,6 @@ public class SongModel
     @Override
     public String toString()
     {
-        return "("+id+") " + artists + " - " + name + " - " + duration;
+        return "("+id+") " + artists + " - " + title + " - " + duration;
     }
 }

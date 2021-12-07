@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/src/java/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +30,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

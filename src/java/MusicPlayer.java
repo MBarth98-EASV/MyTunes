@@ -45,15 +45,6 @@ public class MusicPlayer {
             musicPlayer.play();
         }
 
-        /**
-         * Stops the current track.
-         */
-        public void stopTrack()
-        {
-            cancelTimer();
-            musicPlayer.stop();
-        }
-
 
         public void playSelectedTrack(String song)
         {

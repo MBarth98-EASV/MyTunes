@@ -12,6 +12,7 @@ public class SongModel
     private SimpleStringProperty artists = null;
     private StringProperty album = null;
 
+
     public SongModel()
     {
         tag = new SimpleStringProperty();
@@ -31,9 +32,9 @@ public class SongModel
         this.setTag(tag);
         this.setName(name);
         this.setArtists(artists);
+        this.setAlbum(album);
         this.setDuration(duration);
         this.setLocation(location);
-
     }
 
     public int getId()
@@ -65,6 +66,7 @@ public class SongModel
     {
         return name;
     }
+
 
     public String getArtists()
     {

@@ -1,4 +1,5 @@
 import be.SongModel;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldAddSongPath;
     @FXML public Button btnSelectFile;
 
+
     @FXML public TextField txtFieldEditTitle;
     @FXML public TextField txtFieldEditArtist;
     @FXML public TextField txtFieldEditAlbum;
@@ -40,6 +42,7 @@ public class SongController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
 
+
     }
 
     public void onSelectFile(ActionEvent event)
@@ -53,7 +56,15 @@ public class SongController implements Initializable {
     }
 
 
+    public void onSelectFile(ActionEvent event)
+    {
+        FileChooser fc = new FileChooser();
 
+        File selectedFile = fc.showOpenDialog(new Stage());
+        txtFieldAddSongPath.setText(selectedFile.getAbsolutePath());
+        songPath = txtFieldAddSongPath.getText();
+    }
+  
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){
             localFilesModel.addSong(Path.of(songPath));
@@ -61,7 +72,8 @@ public class SongController implements Initializable {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
+  
+  
     public void onRemoveSong(ActionEvent event) {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();

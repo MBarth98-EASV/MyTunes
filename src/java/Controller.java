@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.LocalFilesModel;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -82,7 +83,6 @@ public class Controller implements Initializable
 
 
     MusicPlayer songPlayer = new MusicPlayer();
-
     boolean isPlaying = false;
 
 

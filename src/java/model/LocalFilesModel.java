@@ -1,7 +1,9 @@
 package model;
 
+
 import be.SongModel;
 import bll.LocalFilesManager;
+
 import javafx.collections.ObservableList;
 
 import java.io.File;
@@ -12,6 +14,7 @@ public class LocalFilesModel {
 
     LocalFilesManager localFilesManager;
     ObservableList musicFilePaths;
+
     public static SongModel currentlySelectedSong;
 
     public LocalFilesModel() {
@@ -42,7 +45,6 @@ public class LocalFilesModel {
     public void editSong(SongModel songModel){
         localFilesManager.editSong(songModel);
     }
-
 
 
 }

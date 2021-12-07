@@ -1,3 +1,6 @@
+import be.SongModel;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -18,9 +21,19 @@ import java.util.ResourceBundle;
 public class SongController implements Initializable {
 
     @FXML public TextField txtFieldAddSongPath;
-
     @FXML public Button btnSelectFile;
 
+
+    @FXML public TextField txtFieldEditTitle;
+    @FXML public TextField txtFieldEditArtist;
+    @FXML public TextField txtFieldEditAlbum;
+    @FXML public TextField txtFieldEditGenre;
+
+    // todo: conflict - are both used.
+    @FXML public Button btnSelectFile;
+    @FXML public Button btnEditDone;
+    //
+  
     String songPath = null;
     LocalFilesModel localFilesModel;
 
@@ -31,11 +44,14 @@ public class SongController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
+
 
     }
 
-    public void onSelectFile(ActionEvent event) {
+    public void onSelectFile(ActionEvent event) 
+    {
         FileChooser fc = new FileChooser();
 
         File selectedFile =  fc.showOpenDialog(new Stage());
@@ -51,19 +67,34 @@ public class SongController implements Initializable {
             localFilesModel.addSong(Path.of(songPath));
         }
 
-
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
+  
+  
     public void onRemoveSong(ActionEvent event) {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public void onEditSong(ActionEvent event) {
+    public void onEditSongDone(ActionEvent event) {
+        String editTitle = txtFieldEditTitle.getText();
+        String editArtist = txtFieldEditArtist.getText();
+        String editAlbum = txtFieldEditAlbum.getText();
+        String editGenre = txtFieldEditGenre.getText();
+        SongModel currentlySelected = LocalFilesModel.getCurrentlySelectedSong();
+
+        if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
+        currentlySelected.setArtists(editArtist); }
+        if (editTitle != null || !editTitle.isEmpty() || !editTitle.equals("null")){
+        currentlySelected.setName(editTitle); }
+        if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
+        currentlySelected.setAlbum(editAlbum); }
+        if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){
+        currentlySelected.setTag(editGenre); }
+
+        localFilesModel.editSong(currentlySelected);
+
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
-
 }

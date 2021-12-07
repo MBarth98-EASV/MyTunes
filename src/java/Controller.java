@@ -1,5 +1,12 @@
+import be.MyTunesFXMLProperties;
 import be.SongModel;
 import dal.db.EASVDatabase;
+import model.LocalFilesModel;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,86 +17,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable
+public class Controller extends MyTunesFXMLProperties implements Initializable
 {
-    @FXML public TextField txtFieldSearch;
 
-    @FXML public Button btnSettings;
-
-    @FXML public TreeTableView treeView;
-
-    @FXML public TreeTableColumn tvColumnPlaylist;
-
-    @FXML public TreeTableColumn tvColumnArtist;
-
-    @FXML public TreeTableColumn tvColumnSongs;
-
-    @FXML public TreeTableColumn tvColumnTime;
-
-    @FXML public Button btnPlaylistUp;
-
-    @FXML public Button btnPlaylistDown;
-
-    @FXML public Button btnPlaylistNew;
-
-    @FXML public Button btnPlaylistEdit;
-
-    @FXML public Button btnPlaylistDelete;
-
-    @FXML public TableView<SongModel> tblViewSongs = new TableView<SongModel>();
-
-    @FXML public TableColumn<SongModel, String> tblClmnSongTitle = new TableColumn<SongModel, String>();
-
-    @FXML public TableColumn<SongModel, String> tblClmnSongArtist = new TableColumn<SongModel, String>();
-
-    @FXML public TableColumn<SongModel, String> tblClmnSongAlbum = new TableColumn<SongModel, String>();
-
-    @FXML public TableColumn<SongModel, String> tblClmnSongGenre = new TableColumn<SongModel, String>();
-
-    @FXML public TableColumn<SongModel, String> tblClmnSongTime = new TableColumn<SongModel, String>();
-
-    @FXML public Button btnSongUp;
-
-    @FXML public Button btnSongDown;
-
-    @FXML public Button btnSongNew;
-
-    @FXML public Button btnSongEdit;
-
-    @FXML public Button btnSongDelete;
-
-    @FXML public Button btnPlayPause;
-
-    @FXML public Button btnNextSong;
-
-    @FXML public Button btnPrevSong;
-
-    @FXML public Label lblSongName;
-
-    @FXML public Label lblSongCurrentTime;
-
-    @FXML public Label lblSongTotalTime;
-
-    @FXML public Slider sliderSong;
-
-    @FXML public ToggleButton tglBtnShuffle;
-
-    @FXML public Slider sliderVolume;
-
-
-    private static boolean isPlaying = true;
-
-    final ObservableList<SongModel> data = FXCollections.observableArrayList();
+    /**
+     *  isPlaying is now a property because we can attach an event handler when the value changes.
+     */
+    private final BooleanProperty isPlaying = new SimpleBooleanProperty();
+    
+    
+    private final ObservableList<SongModel> data = FXCollections.observableArrayList();
+    
+    private MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
     {
+        isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
+
         tblViewSongs.getColumns().add(this.tblClmnSongTitle);
         tblViewSongs.getColumns().add(this.tblClmnSongArtist);
         tblViewSongs.getColumns().add(this.tblClmnSongGenre);
@@ -97,7 +52,13 @@ public class Controller implements Initializable
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
     }
 
+    private void playPauseUpdateStyle(boolean state)
+    {
+        String playStyle = "-fx-background-image: url(/images/pause.png); -fx-background-position: 8;";
+        String pauseStyle = "-fx-background-image: url(/images/play.png); -fx-background-position: 9;";
 
+        btnPlayPause.setStyle(state ? playStyle : pauseStyle);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -116,11 +77,10 @@ public class Controller implements Initializable
         data.addAll(new EASVDatabase().getAllSongs());
     }
 
+
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
-        isPlaying = !isPlaying;
-
-        switchPlayPause();
+        isPlaying.setValue(!isPlaying.getValue());
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
@@ -155,11 +115,13 @@ public class Controller implements Initializable
     @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
         System.out.println("track is moved upwards");
+        throw new NotImplementedException();
     }
 
     @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
+        throw new NotImplementedException();
     }
 
     @FXML
@@ -168,7 +130,11 @@ public class Controller implements Initializable
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
-            stage.setScene(new Scene(root, 320, 190));
+            stage.setMaxHeight(193);
+            stage.setMinHeight(193);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 193));
             stage.show();
 
         } catch (IOException e) {
@@ -178,14 +144,31 @@ public class Controller implements Initializable
 
     @FXML
     private void onSongEdit(ActionEvent event){
-
+        LocalFilesModel.setCurrentlySelectedSong((SongModel) tblViewSongs.getSelectionModel().getSelectedItem());
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Song");
+            stage.setMaxHeight(305);
+            stage.setMinHeight(305);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 305));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void onSongDelete(ActionEvent event){
-
+    private void onSongDelete(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
+    /*
 
     @FXML
     private void switchPlayPause(){
@@ -198,42 +181,52 @@ public class Controller implements Initializable
                     + "-fx-background-position: 9");
         }
     }
-
+*/
 
     @FXML
-    private void setVolume(ActionEvent event){
-
+    private void setVolume(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistUp(ActionEvent event){
-
+    private void onPlaylistUp(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistDown(ActionEvent event){
-
+    private void onPlaylistDown(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onSearch(ActionEvent event){
-
+    private void onSearch(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistNew(ActionEvent event){
-
+    private void onPlaylistNew(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistEdit(ActionEvent event){
-
+    private void onPlaylistEdit(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistDelete(ActionEvent event){
-
+    private void onPlaylistDelete(ActionEvent event)
+    {
+        throw new NotImplementedException();
     }
 
-
+    public void onShuffleToggled(ActionEvent actionEvent)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -170,16 +170,18 @@ public class LocalFilesDAO {
         } else return false;
     }
 
-    private List<SongModel> loadAllLocalSongs() {
+    private List<SongModel> loadAllLocalSongs() 
+    {
         ArrayList<Path> loadList = new ArrayList<>();
         loadList.addAll(readAllFromCurDirectory(loadDirectory()));
         loadList.addAll(loadAllExternalSongs());
 
         ArrayList<SongModel> returnList = new ArrayList<>();
 
-        try {
-            for (Path p : loadList) {
-                //String fileLocation = String.valueOf(p.toAbsolutePath());
+        try 
+        {
+            for (Path p : loadList) 
+            {
                 InputStream inputfile = new FileInputStream(p.toFile());
                 DefaultHandler handler = new DefaultHandler();
                 Metadata metadata = new Metadata();
@@ -187,41 +189,30 @@ public class LocalFilesDAO {
                 ParseContext parseCtx = new ParseContext();
                 parser.parse(inputfile, handler, metadata, parseCtx);
 
-                /*InputStream input = new FileInputStream(p.toFile());
-                ContentHandler handler = new DefaultHandler();
-                Metadata metadata = new Metadata();
-                Parser parser = new AudioParser();
-                //Parser parser = new Mp3Parser();
-                ParseContext parseCtx = new ParseContext();
-                parser.parse(input, handler, metadata, parseCtx);
-                input.close();
-*/
                 System.out.println(metadata.get("title"));
-                //returnList.add(new SongModel(null, metadata.get("title"), metadata.get("xmpDM:artist"), null, null, p));
 
-                // List all metadata
                 String[] metadataNames = metadata.names();
 
-               /* for (String name : metadataNames) {
-                    System.out.println(name + ": " + metadata.get(name));
-                    System.out.println("----------------------------------------------");
-                    System.out.println("Title: " + metadata.get("title"));
-                    System.out.println("Artists: " + metadata.get("xmpDM:artist"));
-                    System.out.println("Composer : " + metadata.get("xmpDM:composer"));
-                    System.out.println("Genre : " + metadata.get("xmpDM:genre"));
-                    System.out.println("Album : " + metadata.get("xmpDM:album"));
-                }*/
-
+                int id = (int) (Math.random() * 100);
+                returnList.add(new SongModel(id, title, artist, album, duration, genre, p.toString()));
+            }
+        } 
+        catch (FileNotFoundException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (SAXException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (TikaException e) 
+        {
+          // todo: handle error
         }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (TikaException e) {
-        }
-
 
         return returnList;
     }

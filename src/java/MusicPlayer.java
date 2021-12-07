@@ -1,3 +1,4 @@
+import dal.db.EASVDatabase;
 import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -10,13 +11,12 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MusicPlayer implements Initializable {
+public class MusicPlayer {
 
 
         /**
          * Variables, woo.
          */
-        private File filepath = new File(Controller.class.getResource("music/honor-and-sword-main-11222.mp3").getFile());
         private Timer timer;
         private TimerTask timertask;
 
@@ -29,29 +29,14 @@ public class MusicPlayer implements Initializable {
 
         private boolean isRunning;
 
-
-        /** Loads all local files from a folder into a list.
-         *  Or it should, if it wasn't because it keeps returning null, aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-         * @param location
-         * @param resources
-         */
-        @Override
-        public void initialize(URL location, ResourceBundle resources)
+        public MusicPlayer()
         {
-            songs = new ArrayList<File>();
 
-            File directoryPath = new File("music");
-
-            File filesList[] = directoryPath.listFiles();
-
-            if(files != null)
-            {
-                for(File file : filesList)
-                {
-                    songs.add(file);
-                }
-            }
         }
+
+        EASVDatabase dbaccess = new EASVDatabase();
+
+        private File filepath = new File(Controller.class.getResource(dbaccess.getFilePath(6, "Songs")).getFile());
 
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);

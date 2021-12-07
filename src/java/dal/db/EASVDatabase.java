@@ -180,7 +180,7 @@ public class EASVDatabase {
     public String getFilePath(int songID, String table)
     {
         try {
-            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songID + "%'";
+            String sql = "SELECT * FROM " + table + " WHERE id LIKE '%" + songID + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);

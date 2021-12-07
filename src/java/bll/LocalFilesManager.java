@@ -1,6 +1,9 @@
 package bll;
 
-import dal.db.LocalFilesDAO;
+
+import be.SongModel;
+import dal.LocalFilesDAO;
+
 
 import java.io.File;
 import java.nio.file.Path;
@@ -11,32 +14,29 @@ public class LocalFilesManager {
 
     LocalFilesDAO localFilesDAO;
 
+
     public LocalFilesManager() {
         localFilesDAO = new LocalFilesDAO();
     }
 
 
-
-
-    public List<File> readAllFromNewDir(Path path){
-
-        return localFilesDAO.readAllFromNewDir(path);
+    public List<SongModel> readAllFromNewDir(Path path){
+        localFilesDAO.saveDirectory(path);
+        return localFilesDAO.loadAllLocalSongs();
     }
-
 
 
 
     public Path addSong(Path path){
 
         return localFilesDAO.addSong(path);
-
     }
 
     public void removeSong(Path path){
     }
 
-    public Path editSong(Path path){
-        return path;
+
+    public void editSong(SongModel songModel){
     }
 
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="305.0" maxWidth="320.0" minHeight="305.0" minWidth="320.0" prefHeight="297.0" prefWidth="320.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongController">
+    <children>
+        <GridPane prefHeight="308.0" prefWidth="320.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="226.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="0.0" prefWidth="84.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="318.0" minHeight="6.6666552225748745" prefHeight="26.666671752929688" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="31.999989827473954" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="318.0" minHeight="5.333323160807296" prefHeight="26.000010172526032" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="318.0" minHeight="0.0" prefHeight="30.666646321614593" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="322.0" minHeight="8.666666666666657" prefHeight="26.666656494140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="30.666656494140625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="23.333343505859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="9.0" prefHeight="41.999979654947936" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="42.000020345052064" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="389.0" style="-fx-font-size: 16;" text="Edit Song" textAlignment="CENTER" GridPane.columnSpan="2147483647" />
+                <Label prefHeight="53.0" prefWidth="226.0" text="Genre:" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+                    <padding>
+                        <Insets left="4.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="txtFieldEditGenre" prefHeight="0.0" prefWidth="226.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="TOP" />
+                <Button fx:id="btnEditDone" mnemonicParsing="false" onAction="#onEditSongDone" prefHeight="33.0" prefWidth="81.0" style="-fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Done" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="TOP" />
+            <TextField fx:id="txtFieldEditAlbum" prefHeight="15.0" prefWidth="310.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />
+            <Label prefHeight="28.0" prefWidth="226.0" text="Album:" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtFieldEditArtist" prefHeight="16.0" prefWidth="310.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
+            <Label prefHeight="53.0" prefWidth="334.0" text="Artist:" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtFieldEditTitle" prefHeight="11.0" prefWidth="310.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+            <Label prefHeight="15.0" prefWidth="226.0" text="Title:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
+    </children>
+</AnchorPane>

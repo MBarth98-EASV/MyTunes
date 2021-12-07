@@ -56,6 +56,7 @@ public class MusicPlayer implements Initializable {
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);
 
+
         /**
         * Plays the currently selected track.
         */

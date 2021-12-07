@@ -37,6 +37,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="21jSA9weObWTmPIyTtVgS1SKdPD" />
   <component name="ProjectViewState">
@@ -92,6 +96,7 @@
       <updated>1638452860363</updated>
       <workItem from="1638452862428" duration="2134000" />
       <workItem from="1638526818228" duration="572000" />
+      <workItem from="1638866332383" duration="834000" />
     </task>
     <servers />
   </component>

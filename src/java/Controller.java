@@ -1,6 +1,8 @@
 import be.MyTunesFXMLProperties;
 import be.SongModel;
 import dal.db.EASVDatabase;
+import model.LocalFilesModel;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -19,9 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.commons.lang.NotImplementedException;
-
-import java.beans.EventHandler;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +38,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     //private static boolean isPlaying = true;
 
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
+    
+    MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
     {
@@ -51,6 +52,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
     }
 
+
     private void playPauseUpdateStyle(boolean state)
     {
         String playStyle = "-fx-background-image: url(/images/pause.png); -fx-background-position: 8;";
@@ -58,6 +60,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         btnPlayPause.setStyle(state ? playStyle : pauseStyle);
     }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -76,6 +79,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         data.addAll(new EASVDatabase().getAllSongs());
     }
 
+
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
         isPlaying.setValue(!isPlaying.getValue());
@@ -83,32 +87,27 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        System.out.println("next song");
-        throw new NotImplementedException();
+        songPlayer.nextTrack();
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        System.out.println("previous/reset song");
-        throw new NotImplementedException();
-    }
-
-    @FXML private void onShuffleToggled(ActionEvent actionEvent)
-    {
-        System.out.println("get a random song");
-        throw new NotImplementedException();
+        songPlayer.previousTrack();
     }
 
     @FXML
-    private void onSettings(ActionEvent actionEvent) {
-        try {
+    private void onSettings(ActionEvent actionEvent)
+    {
+        try
+        {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
             Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 320, 157));
             stage.show();
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -126,23 +125,44 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     @FXML
-    private void onSongNew(ActionEvent event){
-        try {
+    private void onSongNew(ActionEvent event)
+    {
+        try
+        {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
-            stage.setScene(new Scene(root, 320, 190));
+            stage.setMaxHeight(193);
+            stage.setMinHeight(193);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 193));
             stage.show();
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void onSongEdit(ActionEvent event)
-    {
-        throw new NotImplementedException();
+    private void onSongEdit(ActionEvent event){
+        LocalFilesModel.setCurrentlySelectedSong((SongModel) tblViewSongs.getSelectionModel().getSelectedItem());
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Song");
+            stage.setMaxHeight(305);
+            stage.setMinHeight(305);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 305));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -154,17 +174,19 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     /*
 
     @FXML
-    private void switchPlayPause(){
-        if (isPlaying == true){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
-                    + "-fx-background-position: 8");
+    private void switchPlayPause()
+    {
+        if (isPlaying)
+        {
+            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);-fx-background-position: 8");
         }
-        else if (isPlaying == false){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
-                    + "-fx-background-position: 9");
+        else
+        {
+            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);-fx-background-position: 9");
         }
     }
 */
+
     @FXML
     private void setVolume(ActionEvent event)
     {
@@ -203,6 +225,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML
     private void onPlaylistDelete(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void onShuffleToggled(ActionEvent actionEvent)
     {
         throw new NotImplementedException();
     }

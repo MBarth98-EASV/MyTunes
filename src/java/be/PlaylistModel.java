@@ -4,6 +4,12 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
 import java.util.List;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 
 public class PlaylistModel
 {
@@ -60,7 +66,6 @@ public class PlaylistModel
         this.setName(name);
     }
 
-
     public int getOrderID()
     {
         return orderID.get();
@@ -81,7 +86,7 @@ public class PlaylistModel
     {
         this.songs.getValue().setAll(songs);
     }
-
+      
 
     public int getSelectedSongIndex()
     {
@@ -92,7 +97,7 @@ public class PlaylistModel
     {
         this.selectedSongIndex.set(selectedSongIndex);
     }
-
+      
 
     public boolean getIsActive()
     {
@@ -103,12 +108,13 @@ public class PlaylistModel
     {
         this.isActive.set(isActive);
     }
-
+      
 
     public String getName()
     {
         return name.get();
     }
+
 
     public void setName(String name)
     {

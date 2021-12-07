@@ -48,6 +48,7 @@ public class SongModel
      */
     private IntegerProperty duration = null;
 
+
     /**
      *  initialize the objects to valid references
      */
@@ -61,6 +62,7 @@ public class SongModel
         album = new SimpleStringProperty();
         location = new SimpleStringProperty();
         duration = new SimpleIntegerProperty();
+        album = new SimpleStringProperty();
     }
 
     /**
@@ -74,6 +76,7 @@ public class SongModel
         this.setTag(tag);
         this.setTitle(name);
         this.setArtists(artists);
+        this.setAlbum(album);
         this.setDuration(duration);
         this.setLocation(location);
     }
@@ -89,15 +92,14 @@ public class SongModel
         this.setAlbum(album);
     }
 
-
     public int getId()
     {
         return id.get();
     }
 
-    public void setId(int id)
+    public IntegerProperty idProperty()
     {
-        this.id.set(id);
+        return id;
     }
 
 
@@ -110,12 +112,14 @@ public class SongModel
     {
         this.title.set(title);
     }
+  
 
 
     public String getArtists()
     {
         return artists.get();
     }
+
 
     public void setArtists(String artists)
     {
@@ -130,7 +134,7 @@ public class SongModel
 
     public void setDuration(int duration)
     {
-        this.duration.set(duration);
+        return duration;
     }
 
 
@@ -175,5 +179,12 @@ public class SongModel
     public void setAlbum(String album)
     {
         this.album.set(album);
+    }
+
+      
+    @Override
+    public String toString()
+    {
+        return "("+id+") " + artists + " - " + name + " - " + duration;
     }
 }

@@ -41,7 +41,7 @@ public class LocalFilesDAO {
      * in the path's directory and subdirectories.
      */
 
-    public List<Path> readAllFromSubDir(Path path) {
+    private List<Path> readAllFromDirectory(Path path) {
         ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = path.toFile();
@@ -56,39 +56,12 @@ public class LocalFilesDAO {
                 returnList.add(f.toPath());
             }
             else if (f.isDirectory()) {
-                readAllFromSubDir(Path.of(f.getPath()));
+                readAllFromDirectory(Path.of(f.getPath()));
             }
         }
         return returnList;
     }
 
-
-    /**
-     * Read all files in the current directory and directories.
-     * If the file is of a supported filetype (.wav or .mp3), it is added to
-     * the returnList. If it is a directory, readAllFromSubDir is run.
-     * @return A HashMap containing a list of every mp3 file and a list of every wav file in a directory.
-     */
-    public List<Path> readAllFromCurDirectory() {
-        ArrayList<Path> returnList = new ArrayList<>();
-
-        File filePath = loadDirectory().toFile();
-        File[] listOfFiles = filePath.listFiles();
-
-        ArrayList<File> allLocalFilePaths = new ArrayList<>();
-        allLocalFilePaths.addAll(List.of(listOfFiles));
-
-        for (File f : allLocalFilePaths) {
-
-            if (checkForMp3OrWav(f.getName())) {
-                returnList.add(f.toPath());
-            }
-            else if (f.isDirectory()) {
-                returnList.addAll(readAllFromSubDir(Path.of(f.getPath())));
-            }
-        }
-        return returnList;
-    }
 
     /**
      * Saves the given directory in directory.txt
@@ -212,7 +185,7 @@ public class LocalFilesDAO {
     public List<SongModel> loadAllLocalSongs() {
         ArrayList<SongModel> returnList = new ArrayList<>();
         ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromCurDirectory());
+        loadList.addAll(readAllFromDirectory(loadDirectory()));
         loadList.addAll(loadAllExternalSongs());
 
 

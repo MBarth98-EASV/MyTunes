@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/bll/LocalFilesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/LocalFilesManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/LocalFilesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/LocalFilesModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="21jSA9weObWTmPIyTtVgS1SKdPD" />
   <component name="ProjectViewState">
@@ -46,19 +49,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="1st_semester_exam" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="1st_semester_exam" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -75,6 +65,7 @@
       <updated>1638452860363</updated>
       <workItem from="1638452862428" duration="2134000" />
       <workItem from="1638526818228" duration="572000" />
+      <workItem from="1638866332383" duration="834000" />
     </task>
     <servers />
   </component>
@@ -91,6 +82,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

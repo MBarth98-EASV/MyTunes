@@ -2,18 +2,55 @@ package be;
 
 import javafx.beans.property.*;
 
+/**
+ *   a model of a single song instance, described by the database and visualized by fxml data binding.
+ */
 public class SongModel
 {
+    /**
+     *  the title of the song
+     */
     private StringProperty title = null;
+
+    /**
+     *  the csv or single line description of the artist
+     */
     private StringProperty artists = null;
+
+    /**
+     *  the genre of the song
+     */
     private StringProperty genre = null;
+
+    /**
+     *  internal tag (unused?) to determine the method at which we fetch the audio
+     */
     private StringProperty tag = null;
+
+    /**
+     *  set if the song is a part of an album
+     */
     private StringProperty album = null;
+
+    /**
+     *  if the tag is set to local:     Standard file path
+     *  if the tag is set to youtube:   The entity id seen in the url of a youtube video.
+     */
     private StringProperty location = null;
 
+    /**
+     *  internal id for faster sql queries (is the primary key of the song table)
+     */
     private IntegerProperty id = null;
+
+    /**
+     *  the time in seconds the song takes to complete
+     */
     private IntegerProperty duration = null;
 
+    /**
+     *  initialize the objects to valid references
+     */
     public SongModel()
     {
         tag = new SimpleStringProperty();
@@ -26,6 +63,9 @@ public class SongModel
         duration = new SimpleIntegerProperty();
     }
 
+    /**
+     *  set all properties except the genre and album
+     */
     public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
         this();
@@ -38,6 +78,9 @@ public class SongModel
         this.setLocation(location);
     }
 
+    /**
+     *  set all properties at construction time
+     */
     public SongModel(int id, String name, String artists, String genre, String album, int duration, String tag, String location)
     {
         this(id, name, artists, duration, tag, location);
@@ -45,6 +88,7 @@ public class SongModel
         this.setGenre(genre);
         this.setAlbum(album);
     }
+
 
     public int getId()
     {
@@ -56,6 +100,7 @@ public class SongModel
         this.id.set(id);
     }
 
+
     public String getTitle()
     {
         return title.get();
@@ -65,6 +110,7 @@ public class SongModel
     {
         this.title.set(title);
     }
+
 
     public String getArtists()
     {
@@ -76,6 +122,7 @@ public class SongModel
         this.artists.set(artists);
     }
 
+
     public int getDuration()
     {
         return duration.get();
@@ -85,6 +132,7 @@ public class SongModel
     {
         this.duration.set(duration);
     }
+
 
     public String getTag()
     {
@@ -96,6 +144,7 @@ public class SongModel
         this.tag.set(tag);
     }
 
+
     public String getLocation()
     {
         return location.get();
@@ -106,6 +155,7 @@ public class SongModel
         this.location.set(location);
     }
 
+
     public String getGenre()
     {
         return genre.get();
@@ -115,6 +165,7 @@ public class SongModel
     {
         this.genre.set(genre);
     }
+
 
     public String getAlbum()
     {

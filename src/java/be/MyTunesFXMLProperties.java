@@ -9,15 +9,15 @@ public class MyTunesFXMLProperties
 
     @FXML public Button btnSettings;
 
-    @FXML public TreeTableView treeView;
+    @FXML public TreeTableView<PlaylistModel> treeView;
 
-    @FXML public TreeTableColumn tvColumnPlaylist;
+    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnPlaylist;
 
     @FXML public TreeTableColumn tvColumnArtist;
 
     @FXML public TreeTableColumn tvColumnSongs;
 
-    @FXML public TreeTableColumn tvColumnTime;
+    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnTime;
 
     @FXML public Button btnPlaylistUp;
 

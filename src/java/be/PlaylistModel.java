@@ -1,41 +1,58 @@
 package be;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class PlaylistModel
 {
     /**
      *  used to determine where the entity is displayed.
      */
-    private IntegerProperty orderID;
+    private final IntegerProperty orderID;
 
     /**
      *   songs assigned to this playlist.
      */
-    private ListProperty<SongModel> songs;
+    private final ListProperty<SongModel> songs;
 
     /**
      *  currently selected entry in the playlist songs.
      */
-    private IntegerProperty selectedSongIndex;
+    private final IntegerProperty selectedSongIndex;
 
     /**
      *  is this playlist the active one.
      */
-    private BooleanProperty isActive;
+    private final BooleanProperty isActive;
 
     /**
-     *  this human-readable identifier of this playlist.
+     *  human-readable identifier of this playlist.
      */
-    private StringProperty name;
+    private final StringProperty name;
 
 
-    public PlaylistModel(int id, ObservableList<SongModel> songs, int selectedSong, boolean isActive, String name)
+
+    /**
+     *  initialize the objects to valid references
+     */
+    public PlaylistModel()
     {
+        this.orderID = new SimpleIntegerProperty();
+        this.songs = new SimpleListProperty<>();
+        this.selectedSongIndex = new SimpleIntegerProperty();
+        this.isActive = new SimpleBooleanProperty();
+        this.name = new SimpleStringProperty();
+    }
+
+    /**
+     *  set all properties at construction time
+     */
+    public PlaylistModel(int id, List<SongModel> songs, int selectedSong, boolean isActive, String name)
+    {
+        this();
+
         this.setOrderID(id);
         this.setSongs(songs);
         this.setSelectedSongIndex(selectedSong);
@@ -43,14 +60,10 @@ public class PlaylistModel
         this.setName(name);
     }
 
+
     public int getOrderID()
     {
         return orderID.get();
-    }
-
-    public IntegerProperty orderIDProperty()
-    {
-        return orderID;
     }
 
     public void setOrderID(int orderID)
@@ -58,29 +71,21 @@ public class PlaylistModel
         this.orderID.set(orderID);
     }
 
+
     public ObservableList<SongModel> getSongs()
     {
         return songs.get();
     }
 
-    public ListProperty<SongModel> songsProperty()
+    public void setSongs(List<SongModel> songs)
     {
-        return songs;
+        this.songs.getValue().setAll(songs);
     }
 
-    public void setSongs(ObservableList<SongModel> songs)
-    {
-        this.songs.set(songs);
-    }
 
     public int getSelectedSongIndex()
     {
         return selectedSongIndex.get();
-    }
-
-    public IntegerProperty selectedSongIndexProperty()
-    {
-        return selectedSongIndex;
     }
 
     public void setSelectedSongIndex(int selectedSongIndex)
@@ -88,14 +93,10 @@ public class PlaylistModel
         this.selectedSongIndex.set(selectedSongIndex);
     }
 
-    public boolean isIsActive()
+
+    public boolean getIsActive()
     {
         return isActive.get();
-    }
-
-    public BooleanProperty isActiveProperty()
-    {
-        return isActive;
     }
 
     public void setIsActive(boolean isActive)
@@ -103,14 +104,10 @@ public class PlaylistModel
         this.isActive.set(isActive);
     }
 
+
     public String getName()
     {
         return name.get();
-    }
-
-    public StringProperty nameProperty()
-    {
-        return name;
     }
 
     public void setName(String name)

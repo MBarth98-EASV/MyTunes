@@ -1,4 +1,4 @@
-package dal.db;
+package dal;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -24,9 +24,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
+public class LocalFilesDAO {
 
-public class LocalFilesDAO 
-{
+
     private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
     private static final Path dirPath = Path.of("src/resources/data/directory.txt");
 
@@ -41,7 +41,7 @@ public class LocalFilesDAO
      * in the path's directory and subdirectories.
      */
 
-    public List<Path> readAllFromSubDir(Path path) {
+    private List<Path> readAllFromDirectory(Path path) {
         ArrayList<Path> returnList = new ArrayList<>();
 
         File filePath = path.toFile();
@@ -50,55 +50,24 @@ public class LocalFilesDAO
         ArrayList<File> allLocalFilePaths = new ArrayList<>();
         allLocalFilePaths.addAll(List.of(listOfFiles));
 
-        for (File f : allLocalFilePaths) 
-        {
-            if (checkForMp3OrWav(f.getName())) 
-            {
+        for (File f : allLocalFilePaths) {
+
+            if (checkForMp3OrWav(f.getName())) {
                 returnList.add(f.toPath());
             }
-            else if (f.isDirectory()) 
-            {
-                readAllFromSubDir(Path.of(f.getPath()));
+            else if (f.isDirectory()) {
+                readAllFromDirectory(Path.of(f.getPath()));
             }
         }
         return returnList;
     }
 
-
-    /**
-     * Read all files in the current directory and directories.
-     * If the file is of a supported filetype (.wav or .mp3), it is added to
-     * the returnList. If it is a directory, readAllFromSubDir is run.
-     * @return A HashMap containing a list of every mp3 file and a list of every wav file in a directory.
-     */
-    public List<Path> readAllFromCurDirectory() {
-        ArrayList<Path> returnList = new ArrayList<>();
-
-        File filePath = loadDirectory().toFile();
-        File[] listOfFiles = filePath.listFiles();
-
-        ArrayList<File> allLocalFilePaths = new ArrayList<>();
-        allLocalFilePaths.addAll(List.of(listOfFiles));
-
-        for (File f : allLocalFilePaths) 
-        {
-            if (checkForMp3OrWav(f.getName())) 
-            {
-                returnList.add(f.toPath());
-            }
-            else if (f.isDirectory()) 
-            {
-                returnList.addAll(readAllFromSubDir(Path.of(f.getPath())));
-            }
-        }
-        return returnList;
-    }
 
     /**
      * Saves the given directory in directory.txt
      * @param path The directory to be saved.
      */
-    private void saveDirectory(Path path) {
+    public void saveDirectory(Path path) {
         try (BufferedWriter bw = Files.newBufferedWriter(dirPath, StandardOpenOption.SYNC,
                 StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
 
@@ -118,7 +87,7 @@ public class LocalFilesDAO
      * Reads directory.txt as a string.
      * @return the currently stored directory as a Path object.
      */
-    public Path loadDirectory(){
+    private Path loadDirectory(){
         Path returnPath = null;
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(dirPath)))) {
             String line;
@@ -145,61 +114,46 @@ public class LocalFilesDAO
     public Path addSong(Path path) {
 
         try (BufferedWriter bw = Files.newBufferedWriter(songPath, StandardOpenOption.SYNC,
-                StandardOpenOption.APPEND, StandardOpenOption.WRITE)) 
-        {
+                StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
 
-            if (checkForMp3OrWav(String.valueOf(path))) 
-            {
+            if (checkForMp3OrWav(String.valueOf(path))) {
                 bw.newLine();
                 bw.write(String.valueOf(path));
             } else throw new Exception("The file you added is not currently supported");
 
-        } 
-        catch (FileNotFoundException e) 
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } 
-        catch (Exception e) 
-        {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-      
         return path;
     }
-
 
     /**
      * Reads the entirety of externalsongs.txt and adds the indvidual lines to the returnList
      * as Path objects.
      * @return returnList of all manually added songs.
      */
-    public List<Path> loadAllExternalSongs() 
-    {
+    private List<Path> loadAllExternalSongs() {
         ArrayList<Path> returnList = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(songPath)))) 
-        {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(songPath)))) {
             String line;
-            while ((line = br.readLine()) != null) 
-            {
+            while ((line = br.readLine()) != null) {
 
                 String songPath = line;
-                if (checkForMp3OrWav(songPath)) 
-                {
+                if (checkForMp3OrWav(songPath)) {
                     returnList.add(Path.of(songPath));
                 }
             }
 
-        } 
-        catch (FileNotFoundException e) 
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } 
-        catch (IOException e) 
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
         return returnList;
     }
 
@@ -209,22 +163,16 @@ public class LocalFilesDAO
      * @param fileName String value of a Path object.
      * @return true if the file has a .mp3 or .wav file extension.
      */
-    private Boolean checkForMp3OrWav(String fileName) 
-    {
+    private Boolean checkForMp3OrWav(String fileName) {
         String extension = "";
 
         int i = fileName.lastIndexOf('.');
-        
-        if (i > 0) 
-        {
+        if (i > 0) {
             extension = fileName.substring(i + 1);
         }
-      
-        if (extension.equals("mp3") || extension.equals("wav")) 
-        {
+        if (extension.equals("mp3") || extension.equals("wav")) {
             return true;
-        } 
-        else return false;
+        } else return false;
     }
 
     /**
@@ -234,11 +182,12 @@ public class LocalFilesDAO
      * Throws "Could not invoke DirectBuffer method - illegal access".
      * Library fault - To do.
      */
-    private List<SongModel> loadAllLocalSongs() {
+    public List<SongModel> loadAllLocalSongs() {
         ArrayList<SongModel> returnList = new ArrayList<>();
         ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromCurDirectory());
+        loadList.addAll(readAllFromDirectory(loadDirectory()));
         loadList.addAll(loadAllExternalSongs());
+
 
         for (Path p : loadList) {
             String artist = "Unknown Artist";
@@ -306,13 +255,8 @@ public class LocalFilesDAO
 
         return returnList;
     }
+    
+    
 
-    public static void main(String[] args) {
-        LocalFilesDAO localFilesDAO = new LocalFilesDAO();
-        ArrayList<SongModel> l = new ArrayList<>(localFilesDAO.loadAllLocalSongs());
-        for (SongModel s : l){
-            System.out.println(s);
-        }
-    }
 }
 

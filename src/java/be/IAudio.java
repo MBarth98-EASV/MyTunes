@@ -1,5 +1,7 @@
 package be;
 
+import be.SongModel;
+
 public interface IAudio
 {
     void play();

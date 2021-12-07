@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.SongModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -8,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List
 
-public class EASVDatabase {
+public class EASVDatabase 
+{
     private SQLServerDataSource dataSource;
 
     public EASVDatabase()
@@ -225,51 +228,48 @@ public class EASVDatabase {
             return null;
         }
     }
-
-    public ArrayList getSongList(String table)
+  
+    public List<SongModel> getAllSongs()
     {
+        String sql = "SELECT * FROM dbo.Songs";
+        List<SongModel> songs = new ArrayList<>();
+
+        String songTitle;
+        int songId;
+        String songArtist;
+        String songLocation;
+
         try
         {
-            ArrayList<String> songsList = new ArrayList<>();
-
-            String sql = "SELECT * FROM " + table;
+            System.out.println("trying to get all songs from the database");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next())
             {
-                songsList.add(String.valueOf(result));
+                songTitle = result.getString("title");
+                songId = result.getInt("id");
+                songArtist = result.getString("artists");
+                songLocation = result.getString("filepath");
+
+                songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
             }
 
-            return songsList;
-
+            return songs;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            e.printStackTrace();
-            return null;
+            System.out.println("database is not available");
+            // return empty array - garentee not null
+            return new ArrayList<>();
         }
     }
-
+  
     /**
      * Updater for the SQL database.
      */
-
     public void updateSong(String table, String column, String condition)
-    {
-        try {
-            String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
-
-            Statement statement = dataSource.getConnection().createStatement();
-            statement.executeQuery(sql);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateSong(String table, String column, int condition)
     {
         try {
             String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
@@ -285,7 +285,6 @@ public class EASVDatabase {
     /**
      * Database sorter
      */
-
     public void sortList(String table, String column, String order)
     {
         try

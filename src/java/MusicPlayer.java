@@ -32,6 +32,7 @@ public class MusicPlayer {
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);
 
+
         /**
         * Plays the current track.
         */

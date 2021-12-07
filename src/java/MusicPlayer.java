@@ -46,12 +46,12 @@ public class MusicPlayer {
         }
 
 
-        public void playSelectedTrack(String song)
+        public void playSelectedTrack(String song, String table)
         {
             musicPlayer.stop();
             cancelTimer();
 
-            File filepath = new File(Controller.class.getResource(dbaccess.getFilePath(song, "Songs")).getFile());
+            File filepath = new File(Controller.class.getResource(dbaccess.getFilePath(song, table)).getFile());
 
             Media media = new Media(filepath.toURI().toString());
             musicPlayer = new MediaPlayer(media);

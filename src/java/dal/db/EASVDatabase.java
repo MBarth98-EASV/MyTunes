@@ -179,6 +179,22 @@ public class EASVDatabase {
         }
     }
 
+    public String getNextSongPath(int id, String table)
+    {
+        try
+        {
+            String sql = "SELECT * FROM " + table + " WHERE id = (SELECT MIN(id) FROM Songs WHERE id > "+ id +")";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            String filepath = result.getString("filepath");
+        } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+
     public String getFilePath(int songID, String table)
     {
         try {

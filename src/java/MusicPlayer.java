@@ -20,12 +20,7 @@ public class MusicPlayer {
         private Timer timer;
         private TimerTask timertask;
 
-        private File directory;
-        private File[] files;
-
         private int songNumber;
-
-        private ArrayList<File> songs;
 
         private boolean isRunning;
 
@@ -42,13 +37,12 @@ public class MusicPlayer {
         MediaPlayer musicPlayer = new MediaPlayer(media);
 
         /**
-        * Plays the currently selected track.
+        * Plays the current track.
         */
         public void playTrack()
         {
             beginTimer();
             musicPlayer.play();
-
         }
 
         /**
@@ -57,19 +51,21 @@ public class MusicPlayer {
         public void stopTrack()
         {
             cancelTimer();
-            resetTrack();
             musicPlayer.stop();
         }
 
 
         public void playSelectedTrack(String song)
         {
-            resetTrack();
-            beginTimer();
+            musicPlayer.stop();
+            cancelTimer();
 
-            Media media = new Media(song);
+            File filepath = new File(Controller.class.getResource(dbaccess.getFilePath(song, "Songs")).getFile());
+
+            Media media = new Media(filepath.toURI().toString());
             musicPlayer = new MediaPlayer(media);
 
+            beginTimer();
             musicPlayer.play();
         }
 
@@ -96,15 +92,10 @@ public class MusicPlayer {
          */
         public void nextTrack()
         {
-            resetTrack();
+            cancelTimer();
+            musicPlayer.stop();
 
-            if(isRunning)
-            {
-                cancelTimer();
-            }
-
-            //Path is temp, just for testing.
-            File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG").getFile());
+            File filepath = new File(Controller.class.getResource("music/file_example_MP3_5MG.mp3").getFile());
 
             Media media = new Media(filepath.toURI().toString());
             musicPlayer = new MediaPlayer(media);
@@ -118,20 +109,23 @@ public class MusicPlayer {
          */
         public void previousTrack()
         {
-            if(isRunning)
+            if (musicPlayer.getCurrentTime().toSeconds() > 5)
             {
                 resetTrack();
-                cancelTimer();
             }
+            else
+            {
+                cancelTimer();
+                musicPlayer.stop();
 
-            //Path is also temp, just for testing.
-            File filepath = new File(Controller.class.getResource("music/the-introvert-michael-kobrin-10959.mp3").getFile());
+                File filepath = new File(Controller.class.getResource("music/the-introvert-michael-kobrin-10959.mp3").getFile());
 
-            Media media = new Media(filepath.toURI().toString());
-            musicPlayer = new MediaPlayer(media);
+                Media media = new Media(filepath.toURI().toString());
+                musicPlayer = new MediaPlayer(media);
 
-            playTrack();
-            beginTimer();
+                beginTimer();
+                musicPlayer.play();
+            }
         }
 
         /**

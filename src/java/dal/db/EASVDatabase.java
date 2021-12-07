@@ -84,9 +84,11 @@ public class EASVDatabase {
     /**
      * Getters from the SQL database.
      */
+
     public int getSongIDFromName(String songName, String table)
     {
-        try {
+        try
+        {
             int songID;
 
             String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";

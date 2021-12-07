@@ -48,7 +48,8 @@ public class EASVDatabase {
         try {
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -64,7 +65,8 @@ public class EASVDatabase {
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -76,7 +78,8 @@ public class EASVDatabase {
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -100,7 +103,8 @@ public class EASVDatabase {
             songID = result.getInt("id");
 
             return songID;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             return 0;
         }
     }
@@ -119,7 +123,8 @@ public class EASVDatabase {
             songName = result.getString("title");
 
             return songName;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -137,7 +142,8 @@ public class EASVDatabase {
             String artists = result.getString("artists");
 
             return artists;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -155,7 +161,8 @@ public class EASVDatabase {
             String artists = result.getString("artists");
 
             return artists;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -173,7 +180,8 @@ public class EASVDatabase {
             String filepath = result.getString("filepath");
 
             return filepath;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -181,18 +189,22 @@ public class EASVDatabase {
 
     public String getNextSongPath(int id, String table)
     {
-        try
-        {
-            String sql = "SELECT * FROM " + table + " WHERE id = (SELECT MIN(id) FROM Songs WHERE id > "+ id +")";
+        try {
+            String sql = "SELECT * FROM " + table + " WHERE id = (SELECT MIN(id) FROM Songs WHERE id > " + id + ")";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             result.next();
             String filepath = result.getString("filepath");
-        } catch (Exception e) {
-        e.printStackTrace();
-        return null;
+
+            return filepath;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getFilePath(int songID, String table)
@@ -207,7 +219,8 @@ public class EASVDatabase {
             String filepath = result.getString("filepath");
 
             return filepath;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -231,7 +244,8 @@ public class EASVDatabase {
 
             return songsList;
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             return null;
@@ -249,7 +263,8 @@ public class EASVDatabase {
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -261,7 +276,8 @@ public class EASVDatabase {
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -279,7 +295,8 @@ public class EASVDatabase {
         Statement statement = dataSource.getConnection().createStatement();
         statement.executeQuery(sql);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

@@ -55,15 +55,7 @@ public class SongController implements Initializable {
         songPath = txtFieldAddSongPath.getText();
     }
 
-
-    public void onSelectFile(ActionEvent event)
-    {
-        FileChooser fc = new FileChooser();
-
-        File selectedFile = fc.showOpenDialog(new Stage());
-        txtFieldAddSongPath.setText(selectedFile.getAbsolutePath());
-        songPath = txtFieldAddSongPath.getText();
-    }
+    
   
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){

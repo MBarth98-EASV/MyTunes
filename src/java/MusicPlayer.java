@@ -1,13 +1,9 @@
 import dal.db.EASVDatabase;
-import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.io.File;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 

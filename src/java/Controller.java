@@ -23,6 +23,21 @@ import java.util.*;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
+/**Assuming that the newly added item has an index of N,
+ Selecting it:
+
+ listView.getSelectionModel().select(N);
+ Focusing on it:
+
+ listView.getFocusModel().focus(N);
+ Scrolling to it:
+
+ listView.scrollTo(N);
+ *
+ * To Do: Get the selected item from search and do that. Use StringToMap.
+ */
+
+
 
     /**
      *  isPlaying is now a property because we can attach an event handler when the value changes.
@@ -245,7 +260,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void initializeSearchEntries(List<MusicModel> inputList){
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
-            
+
         }
     }
 }

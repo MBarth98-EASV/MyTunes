@@ -76,9 +76,12 @@ public class SongModel
         this.setTag(tag);
         this.setTitle(name);
         this.setArtists(artists);
-        this.setAlbum(album);
         this.setDuration(duration);
         this.setLocation(location);
+    }
+
+    private void setId(int id) {
+        this.id.set(id);
     }
 
     /**
@@ -133,7 +136,7 @@ public class SongModel
 
     public void setDuration(int duration)
     {
-        return duration;
+        this.duration.set(duration);
     }
 
 

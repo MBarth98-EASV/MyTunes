@@ -1,12 +1,10 @@
+import CustomComponent.AutoCompleteTextField;
 import be.MyTunesFXMLProperties;
 import be.SongModel;
-import dal.db.EASVDatabase;
 import model.LocalFilesModel;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,18 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
@@ -44,6 +36,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     public Controller()
     {
         isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
+        txtFieldSearch = new AutoCompleteTextField();
 
         tblViewSongs.getColumns().add(this.tblClmnSongTitle);
         tblViewSongs.getColumns().add(this.tblClmnSongArtist);
@@ -76,7 +69,13 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
         tblViewSongs.setItems(data);
-        data.addAll(new EASVDatabase().getAllSongs());
+        //data.addAll(new EASVDatabase().getAllSongs());
+        txtFieldSearch.getEntries().add("a");
+        txtFieldSearch.getEntries().add("b");
+        txtFieldSearch.getEntries().add("c");
+        txtFieldSearch.getEntries().add("aaaaa");
+        txtFieldSearch.getEntries().add("bbbbba");
+        txtFieldSearch.getEntries().add("ca");
     }
 
 
@@ -208,7 +207,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSearch(ActionEvent event)
     {
-        throw new NotImplementedException();
+
     }
 
     @FXML

@@ -250,7 +250,7 @@ public class LocalFilesDAO {
             }
 
             int id = (int) (Math.random() * 100);
-                returnList.add(new SongModel(id, title, artist, album, duration, genre, p.toString()));
+                returnList.add(new SongModel(id, title, artist, genre, album, duration, "local", p.toString()));
         }
 
         return returnList;

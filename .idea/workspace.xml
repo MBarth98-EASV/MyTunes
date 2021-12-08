@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/CustomComponent/AutoCompleteTextField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,6 +74,7 @@
       <workItem from="1638452862428" duration="2134000" />
       <workItem from="1638526818228" duration="572000" />
       <workItem from="1638866332383" duration="834000" />
+      <workItem from="1638960673715" duration="4885000" />
     </task>
     <servers />
   </component>

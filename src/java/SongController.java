@@ -81,7 +81,7 @@ public class SongController implements Initializable {
         if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
         currentlySelected.setArtists(editArtist); }
         if (editTitle != null || !editTitle.isEmpty() || !editTitle.equals("null")){
-        currentlySelected.setName(editTitle); }
+        currentlySelected.setTitle(editTitle); }
         if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
         currentlySelected.setAlbum(editAlbum); }
         if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){

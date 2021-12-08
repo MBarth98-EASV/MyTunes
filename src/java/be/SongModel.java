@@ -2,6 +2,9 @@ package be;
 
 import javafx.beans.property.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.
  */
@@ -192,5 +195,11 @@ public class SongModel extends MusicModel
     {
         return artists.get() + " - " + title.get() + "  |  " + duration.get()
                 + "         " + TYPE;
+    }
+
+    public Map<String, SongModel> StringToObject(){
+        HashMap<String, SongModel> thisMap = new HashMap<>();
+        thisMap.put(toString(),this);
+        return thisMap;
     }
 }

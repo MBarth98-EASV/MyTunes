@@ -1,7 +1,6 @@
 import CustomComponent.AutoCompleteTextField;
 import be.MusicModel;
 import be.MyTunesFXMLProperties;
-import be.PlaylistModel;
 import be.SongModel;
 import model.LocalFilesModel;
 
@@ -84,12 +83,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewSongs.setItems(data);
         //data.addAll(new EASVDatabase().getAllSongs());
         dataArray.addAll(data.stream().toList());
-        txtFieldSearch.getEntries().add("a");
-        txtFieldSearch.getEntries().add("b");
-        txtFieldSearch.getEntries().add("c");
-        txtFieldSearch.getEntries().add("aaaaa");
-        txtFieldSearch.getEntries().add("bbbbba");
-        txtFieldSearch.getEntries().add("ca");
 
         initializeSearchEntries(dataArray);
     }
@@ -252,6 +245,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void initializeSearchEntries(List<MusicModel> inputList){
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
+            
         }
     }
 }

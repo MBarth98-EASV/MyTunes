@@ -5,8 +5,11 @@ import javafx.beans.property.*;
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.
  */
-public class SongModel
+public class SongModel extends MusicModel
 {
+    private static final String TYPE = "[SONG]";
+
+
     /**
      *  the title of the song
      */
@@ -187,6 +190,7 @@ public class SongModel
     @Override
     public String toString()
     {
-        return "("+id+") " + artists + " - " + title + " - " + duration;
+        return artists.get() + " - " + title.get() + "  |  " + duration.get()
+                + "         " + TYPE;
     }
 }

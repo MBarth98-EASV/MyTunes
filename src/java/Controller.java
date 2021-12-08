@@ -1,5 +1,7 @@
 import CustomComponent.AutoCompleteTextField;
+import be.MusicModel;
 import be.MyTunesFXMLProperties;
+import be.PlaylistModel;
 import be.SongModel;
 import model.LocalFilesModel;
 
@@ -29,8 +31,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private final BooleanProperty isPlaying = new SimpleBooleanProperty();
     //private static boolean isPlaying = true;
 
+    final ArrayList<MusicModel> dataArray = new ArrayList();
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
-    
+
     MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
@@ -61,6 +64,15 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         data.add(new SongModel(1, "1st song", "Phillip", "soft pop", "rainbow and unicorns", 190, "local", "Magic location 2"));
         data.add(new SongModel(2, "2st song", "Rasmus", 50, "local", "Magic location 2"));
         data.add(new SongModel(3, "3st song", "Mads", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(4, "1st", "Youtube", "Garbage", "Google", 190, "local", "The Cloud"));
+        data.add(new SongModel(5, "Some song", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(6, "Yeezy what's good?", "Kanye", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(7, "I Love Kanye", "Kanye West", "Hip-Hop", "The Life of Pablo", 60, "local", "Magic location 2"));
+        data.add(new SongModel(8, "Kill Ed Sheeran", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(9, "Java is shit", "Mads", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(10, "DNA.", "Kendrick", "Hip-Hop", "DAMN.", 190, "local", "Magic location 2"));
+        data.add(new SongModel(11, "Superman", "Soulja Boy", 50, "local", "Magic location 2"));
+        data.add(new SongModel(12, "Another Song", "Mads", null, null, 345, "local", "Magic location"));
 
         this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
         this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
@@ -68,14 +80,18 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
+        data.addAll();
         tblViewSongs.setItems(data);
         //data.addAll(new EASVDatabase().getAllSongs());
+        dataArray.addAll(data.stream().toList());
         txtFieldSearch.getEntries().add("a");
         txtFieldSearch.getEntries().add("b");
         txtFieldSearch.getEntries().add("c");
         txtFieldSearch.getEntries().add("aaaaa");
         txtFieldSearch.getEntries().add("bbbbba");
         txtFieldSearch.getEntries().add("ca");
+
+        initializeSearchEntries(dataArray);
     }
 
 
@@ -231,5 +247,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     public void onShuffleToggled(ActionEvent actionEvent)
     {
         throw new NotImplementedException();
+    }
+
+    private void initializeSearchEntries(List<MusicModel> inputList){
+        for (int i = 0; i < inputList.size(); i++){
+            txtFieldSearch.getEntries().add((inputList.get(i)).toString());
+        }
     }
 }

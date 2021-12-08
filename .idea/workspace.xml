@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/java/CustomComponent/AutoCompleteTextField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/be/MusicModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/LocalFilesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +26,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
@@ -74,7 +78,7 @@
       <workItem from="1638452862428" duration="2134000" />
       <workItem from="1638526818228" duration="572000" />
       <workItem from="1638866332383" duration="834000" />
-      <workItem from="1638960673715" duration="4885000" />
+      <workItem from="1638960673715" duration="10494000" />
     </task>
     <servers />
   </component>

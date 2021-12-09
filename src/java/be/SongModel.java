@@ -51,18 +51,24 @@ public class SongModel
 
     /**
      *  initialize the objects to valid references
+     * @param id
+     * @param title
+     * @param artist
+     * @param album
+     * @param duration
+     * @param genre
+     * @param s
      */
-    public SongModel()
+    public SongModel(int id, String title, String artist, String album, int duration, String genre, String s)
     {
         tag = new SimpleStringProperty();
-        id = new SimpleIntegerProperty();
-        title = new SimpleStringProperty();
+        this.id = new SimpleIntegerProperty();
+        this.title = new SimpleStringProperty();
         artists = new SimpleStringProperty();
-        genre = new SimpleStringProperty();
-        album = new SimpleStringProperty();
+        this.genre = new SimpleStringProperty();
+        this.album = new SimpleStringProperty();
         location = new SimpleStringProperty();
-        duration = new SimpleIntegerProperty();
-        album = new SimpleStringProperty();
+        this.duration = new SimpleIntegerProperty();
     }
 
     /**
@@ -70,13 +76,10 @@ public class SongModel
      */
     public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
-        this();
-
         this.setId(id);
         this.setTag(tag);
         this.setTitle(name);
         this.setArtists(artists);
-        this.setAlbum(album);
         this.setDuration(duration);
         this.setLocation(location);
     }
@@ -98,11 +101,12 @@ public class SongModel
         return id.get();
     }
 
-    public void setId(int id)
+
+    private void setId(int id)
     {
         this.id.set(id);
     }
-  
+
 
     public String getTitle()
     {
@@ -131,7 +135,7 @@ public class SongModel
         return duration.get();
     }
 
-    public void setDuration(int duration)
+    public int setDuration(int duration)
     {
         this.duration.set(duration);
     }

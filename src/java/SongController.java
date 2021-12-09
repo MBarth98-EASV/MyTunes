@@ -1,4 +1,6 @@
+import dal.db.EASVDatabase;
 import be.SongModel;
+import model.LocalFilesModel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,9 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.LocalFilesModel;
-
-
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -62,6 +61,7 @@ public class SongController implements Initializable {
 
     }
 
+
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){
             localFilesModel.addSong(Path.of(songPath));
@@ -86,7 +86,7 @@ public class SongController implements Initializable {
         if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
         currentlySelected.setArtists(editArtist); }
         if (editTitle != null || !editTitle.isEmpty() || !editTitle.equals("null")){
-        currentlySelected.setName(editTitle); }
+        currentlySelected.setTitle(editTitle); }
         if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
         currentlySelected.setAlbum(editAlbum); }
         if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){

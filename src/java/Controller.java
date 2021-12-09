@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -167,21 +168,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     {
         throw new NotImplementedException();
     }
-
-    /*
-
-    @FXML
-    private void switchPlayPause(){
-        if (isPlaying == true){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);"
-                    + "-fx-background-position: 8");
-        }
-        else if (isPlaying == false){
-            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);"
-                    + "-fx-background-position: 9");
-        }
-    }
-*/
 
     @FXML
     private void setVolume(ActionEvent event)

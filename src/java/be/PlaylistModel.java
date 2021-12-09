@@ -11,11 +11,14 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 
-public class PlaylistModel
+public class PlaylistModel extends MusicModel
 {
+    private static final String TYPE = "[PLAYLIST]";
+
     /**
      *  used to determine where the entity is displayed.
      */
+
     private final IntegerProperty orderID;
 
     /**
@@ -119,5 +122,10 @@ public class PlaylistModel
     public void setName(String name)
     {
         this.name.set(name);
+    }
+
+    @Override
+    public String toString(){
+        return name.get() + "         " + TYPE;
     }
 }

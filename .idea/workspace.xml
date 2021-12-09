@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/CustomComponent/AutoCompleteTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CustomComponent/AutoCompleteTextField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
@@ -17,6 +20,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -91,6 +95,8 @@
       <updated>1638452860363</updated>
       <workItem from="1638452862428" duration="2134000" />
       <workItem from="1638526818228" duration="572000" />
+      <workItem from="1638866332383" duration="834000" />
+      <workItem from="1638960673715" duration="12463000" />
       <workItem from="1638538470033" duration="10438000" />
       <workItem from="1638550074224" duration="1002000" />
       <workItem from="1638655132754" duration="6557000" />

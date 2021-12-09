@@ -57,18 +57,24 @@ public class SongModel extends MusicModel
 
     /**
      *  initialize the objects to valid references
+     * @param id
+     * @param title
+     * @param artist
+     * @param album
+     * @param duration
+     * @param genre
+     * @param s
      */
-    public SongModel()
+    public SongModel(int id, String title, String artist, String album, int duration, String genre, String s)
     {
         tag = new SimpleStringProperty();
-        id = new SimpleIntegerProperty();
-        title = new SimpleStringProperty();
+        this.id = new SimpleIntegerProperty();
+        this.title = new SimpleStringProperty();
         artists = new SimpleStringProperty();
-        genre = new SimpleStringProperty();
-        album = new SimpleStringProperty();
+        this.genre = new SimpleStringProperty();
+        this.album = new SimpleStringProperty();
         location = new SimpleStringProperty();
-        duration = new SimpleIntegerProperty();
-        album = new SimpleStringProperty();
+        this.duration = new SimpleIntegerProperty();
     }
 
     /**
@@ -76,8 +82,6 @@ public class SongModel extends MusicModel
      */
     public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
-        this();
-
         this.setId(id);
         this.setTag(tag);
         this.setTitle(name);
@@ -100,15 +104,17 @@ public class SongModel extends MusicModel
         this.setGenre(genre);
         this.setAlbum(album);
     }
+  
 
     public int getId()
     {
         return id.get();
     }
 
-    public IntegerProperty idProperty()
+
+    private void setId(int id)
     {
-        return id;
+        this.id.set(id);
     }
 
 
@@ -122,7 +128,6 @@ public class SongModel extends MusicModel
         this.title.set(title);
     }
   
-
 
     public String getArtists()
     {
@@ -140,12 +145,12 @@ public class SongModel extends MusicModel
         return duration.get();
     }
 
-    public void setDuration(int duration)
+    public int setDuration(int duration)
     {
         this.duration.set(duration);
     }
-
-
+  
+  
     public String getTag()
     {
         return tag.get();
@@ -174,10 +179,11 @@ public class SongModel extends MusicModel
     }
 
     public void setGenre(String genre)
+
     {
         this.genre.set(genre);
     }
-
+  
 
     public String getAlbum()
     {
@@ -188,14 +194,14 @@ public class SongModel extends MusicModel
     {
         this.album.set(album);
     }
-
+  
       
     @Override
     public String toString()
     {
-        return artists.get() + " - " + title.get() + "  |  " + duration.get()
-                + "         " + TYPE;
+        return "("+id+") " + artists + " - " + title + " - " + duration;
     }
+    
 
     public Map<String, SongModel> StringToObject(){
         HashMap<String, SongModel> thisMap = new HashMap<>();

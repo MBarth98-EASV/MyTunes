@@ -255,15 +255,30 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML
     private void onPlaylistNew(ActionEvent event)
-    {
-        throw new NotImplementedException();
+    { try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewPlaylist.fxml")));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 236, 193));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void onPlaylistEdit(ActionEvent event)
-    {
-        throw new NotImplementedException();
+    { try {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, 236, 193));
+        stage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+
+}
 
     @FXML
     private void onPlaylistDelete(ActionEvent event)

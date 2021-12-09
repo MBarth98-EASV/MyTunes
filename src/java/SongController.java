@@ -22,7 +22,6 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldAddSongPath;
     @FXML public Button btnSelectFile;
 
-
     @FXML public TextField txtFieldEditTitle;
     @FXML public TextField txtFieldEditArtist;
     @FXML public TextField txtFieldEditAlbum;
@@ -30,6 +29,11 @@ public class SongController implements Initializable {
 
     @FXML public Button btnEditDone;
 
+    @FXML public TextField txtFieldPlaylistName;
+    @FXML public Button btnAddPlaylist;
+
+    @FXML public TextField txtFieldPLEditName;
+    @FXML public Button btnEditPLName;
   
     String songPath = null;
     LocalFilesModel localFilesModel;
@@ -92,6 +96,16 @@ public class SongController implements Initializable {
 
         localFilesModel.editSong(currentlySelected);
 
+
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void onEditPlaylist(ActionEvent event) {
+
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void onAddPlaylist(ActionEvent event) {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }

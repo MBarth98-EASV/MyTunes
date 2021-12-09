@@ -29,7 +29,7 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldEditGenre;
 
     @FXML public Button btnEditDone;
-    //
+
   
     String songPath = null;
     LocalFilesModel localFilesModel;

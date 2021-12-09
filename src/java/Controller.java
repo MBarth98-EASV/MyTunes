@@ -316,6 +316,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
     }
 
+    /**
+     * While filterbutton active:  txtFieldSearch.setPromptText("Enter filter")
+     * While filterbutton inactive: txtFieldSearch.setPromptText("Press enter to search")
+     * @param event
+     */
     public void onFilterToggled(ActionEvent event) {
     }
 }

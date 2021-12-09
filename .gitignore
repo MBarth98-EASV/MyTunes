@@ -27,3 +27,6 @@ hs_err_pid*
 .idea/workspace.xml
 .idea/uiDesigner.xml
 
+lib/vorbis-java-tika-0.6.jar
+lib/tika-core-1.12.jar
+lib/tika-parsers-1.12.jar

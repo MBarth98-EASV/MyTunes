@@ -122,10 +122,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         System.out.println("previous/reset song");
     }
 
-    @FXML private void onShuffleToggled(ActionEvent actionEvent)
-    {
-        System.out.println("get a random song");
-    }
 
     @FXML
     private void onSettings(ActionEvent actionEvent) {
@@ -224,9 +220,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                 if (ke.getCode().equals(KeyCode.ENTER)) {
                     SearchModel s = new SearchModel();
                     MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
-                    if (m){
+                    //if (m){
 
-                    }
+                    //}
                 }
             }
         });

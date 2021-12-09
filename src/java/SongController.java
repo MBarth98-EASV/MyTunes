@@ -28,8 +28,6 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldEditAlbum;
     @FXML public TextField txtFieldEditGenre;
 
-    // todo: conflict - are both used.
-    @FXML public Button btnSelectFile;
     @FXML public Button btnEditDone;
     //
   

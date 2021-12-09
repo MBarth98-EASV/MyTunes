@@ -2,7 +2,7 @@ import CustomComponent.AutoCompleteTextField;
 import be.MusicModel;
 import be.MyTunesFXMLProperties;
 import be.SongModel;
-import com.google.gson.Gson;
+import bll.MusicManager;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,9 +23,9 @@ import javafx.stage.Stage;
 import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
-import java.sql.SQLException;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
@@ -53,7 +53,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     final ArrayList<MusicModel> dataArray = new ArrayList();
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
 
-    MusicPlayer songPlayer = new MusicPlayer();
+    MusicManager songPlayer = new MusicManager();
 
     public Controller()
     {
@@ -107,9 +107,13 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    @FXML private void onPlayTrack(ActionEvent actionEvent)
+    @FXML private void onPlayTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
     {
-        isPlaying.setValue(!isPlaying.getValue());
+        songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+
+        songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
+
+        songPlayer.playTrack();
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)

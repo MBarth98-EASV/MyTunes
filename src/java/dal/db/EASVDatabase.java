@@ -255,7 +255,7 @@ public class EASVDatabase
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
                 songAlbum = result.getString("album");
-                songGenre = result.getString("genre")
+                songGenre = result.getString("genre");
 
                 songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
             }

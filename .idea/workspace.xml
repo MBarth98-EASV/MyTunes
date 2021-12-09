@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="" />
+    <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/resources/styles/FilterButton.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +22,7 @@
       <list>
         <option value="Class" />
         <option value="FxmlFile" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -47,6 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.34856537" />
@@ -92,7 +101,8 @@
       <workItem from="1638747379635" duration="649000" />
       <workItem from="1638895513611" duration="3320000" />
       <workItem from="1639077156333" duration="1189000" />
-      <workItem from="1639078392383" duration="298000" />
+      <workItem from="1639078392383" duration="2096000" />
+      <workItem from="1639086470244" duration="1522000" />
     </task>
     <servers />
   </component>

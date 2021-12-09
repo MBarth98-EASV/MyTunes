@@ -587,7 +587,7 @@
     -fx-border-color:  derive( #404040,20%);
     -fx-background-radius: 5;
     -fx-border-width: 1;
-    -fx-mark-color: rgb(99,180,234);
+    -fx-mark-color: #5786cb;
 }
 
 .combo-box .list-cell
@@ -640,10 +640,12 @@
 .combo-box-base:showing
 {
     -fx-color: #5786cb;
+    -fx-border-color: #5786cb;
 }
 
 .combo-box-base:focused {
-    -fx-background-color: #5786cb;
+    -fx-color: transparent;
+    -fx-border-color: #5786cb;
 
 }
 

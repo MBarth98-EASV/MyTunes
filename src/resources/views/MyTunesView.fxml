@@ -41,7 +41,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="310.0" />
             <ColumnConstraints maxWidth="190.66665649414062" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints maxWidth="1155.3333333333335" minWidth="598.6666768391929" prefWidth="735.0" />
+            <ColumnConstraints maxWidth="1155.3333333333335" minWidth="598.6666768391929" prefWidth="687.0" />
+            <ColumnConstraints maxWidth="789.3333333333335" minWidth="10.0" prefWidth="53.0" />
             <ColumnConstraints maxWidth="789.3333333333335" minWidth="0.0" prefWidth="111.0" />
         </columnConstraints>
         <rowConstraints>
@@ -54,8 +55,8 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <AutoCompleteTextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" onAction="#onSearch" prefHeight="32.0" prefWidth="854.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%);" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER">
-               <promptText>Search
+            <AutoCompleteTextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" onAction="#onSearch" prefHeight="32.0" prefWidth="711.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5;" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER">
+               <promptText>Press enter to search
                </promptText>
                <opaqueInsets>
                   <Insets />
@@ -67,7 +68,15 @@
                   <Insets />
                </GridPane.margin>
             </AutoCompleteTextField>
-            <ComboBox fx:id="cmboBoxFilter" minHeight="32.0" prefHeight="32.0" prefWidth="79.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
+            <ComboBox fx:id="cmboBoxFilter" maxWidth="88.0" minHeight="32.0" prefHeight="34.0" prefWidth="88.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34; -fx-border-radius: 5;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
+            <ToggleButton fx:id="tglBtnFilter" maxHeight="34.0" maxWidth="35.0" minHeight="34.0" minWidth="35.0" onAction="#onFilterToggled" prefHeight="34.0" prefWidth="35.0" styleClass="Button" stylesheets="@../styles/FilterButton.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <GridPane.margin>
+                  <Insets left="3.0" />
+               </GridPane.margin>
+            </ToggleButton>
          </children>
       </GridPane>
       <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #262626;" stylesheets="@../styles/dark.css" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">

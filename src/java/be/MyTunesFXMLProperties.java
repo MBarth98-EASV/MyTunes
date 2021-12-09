@@ -76,4 +76,5 @@ public class MyTunesFXMLProperties
 
     @FXML public ComboBox cmboBoxFilter;
 
+    @FXML public ToggleButton tglBtnFilter;
 }

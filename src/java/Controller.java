@@ -315,4 +315,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         cmboBoxFilter.setItems(comboBoxList);
         cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
     }
+
+    public void onFilterToggled(ActionEvent event) {
+    }
 }

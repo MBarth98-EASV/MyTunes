@@ -1,5 +1,6 @@
 package be;
 
+import com.google.gson.Gson;
 import javafx.beans.property.*;
 
 import java.util.HashMap;
@@ -189,17 +190,17 @@ public class SongModel extends MusicModel
         this.album.set(album);
     }
 
-      
+
+    public String getType(){
+        return TYPE;
+    }
+
     @Override
     public String toString()
     {
-        return artists.get() + " - " + title.get() + "  |  " + duration.get()
-                + "         " + TYPE;
+        //return new Gson().toJson(this);
+        return TYPE + "         " + artists.get() + " - " +
+                title.get() + "  |  " + duration.get();
     }
 
-    public Map<String, SongModel> StringToObject(){
-        HashMap<String, SongModel> thisMap = new HashMap<>();
-        thisMap.put(toString(),this);
-        return thisMap;
-    }
 }

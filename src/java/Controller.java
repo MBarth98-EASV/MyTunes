@@ -2,6 +2,10 @@ import CustomComponent.AutoCompleteTextField;
 import be.MusicModel;
 import be.MyTunesFXMLProperties;
 import be.SongModel;
+import com.google.gson.Gson;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import model.LocalFilesModel;
 
 import javafx.beans.property.BooleanProperty;
@@ -16,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
 import java.net.URL;
@@ -100,6 +105,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         dataArray.addAll(data.stream().toList());
 
         initializeSearchEntries(dataArray);
+
     }
 
 
@@ -231,8 +237,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSearch(ActionEvent event)
     {
+        txtFieldSearch.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    SearchModel s = new SearchModel();
+                    MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
+                    if (m){
 
-    }
+                    }
+                }
+            }
+        });
+
+        }
+
 
     @FXML
     private void onPlaylistNew(ActionEvent event)

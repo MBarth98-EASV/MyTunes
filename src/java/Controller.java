@@ -57,6 +57,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
     final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
 
+
     MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
@@ -117,6 +118,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         dataArray.addAll(data.stream().toList());
 
         initializeSearchEntries(dataArray);
+        setComboBox();
 
     }
 
@@ -278,5 +280,22 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     public void onShuffleToggled(ActionEvent event) {
+    }
+
+    public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
+    }
+
+    public void onSongAddToPlayList(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Temporary filler for combobox Filter
+     */
+    private void setComboBox(){
+        ObservableList<String> comboBoxList = FXCollections.observableArrayList();
+        comboBoxList.add("Artist");
+        comboBoxList.add("Album");
+        comboBoxList.add("Genre");
+        cmboBoxFilter.setItems(comboBoxList);
     }
 }

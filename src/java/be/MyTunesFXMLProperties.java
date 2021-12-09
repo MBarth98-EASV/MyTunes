@@ -70,4 +70,10 @@ public class MyTunesFXMLProperties
 
     @FXML public Slider sliderVolume;
 
+    @FXML public Button btnSongAddToPlaylist;
+
+    @FXML public Button btnSongRemoveFromPlaylist;
+
+    @FXML public ComboBox cmboBoxFilter;
+
 }

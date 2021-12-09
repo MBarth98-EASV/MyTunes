@@ -23,6 +23,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import CustomComponent.AutoCompleteTextField?>
 <GridPane cache="true" cacheHint="QUALITY" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <columnConstraints>
     <ColumnConstraints />
@@ -39,8 +40,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="310.0" />
             <ColumnConstraints maxWidth="190.66665649414062" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints maxWidth="1155.3333333333335" minWidth="598.6666768391929" prefWidth="1020.0" />
-            <ColumnConstraints maxWidth="789.3333333333335" minWidth="19.333333333333258" prefWidth="19.333333333333258" />
+            <ColumnConstraints maxWidth="1155.3333333333335" minWidth="598.6666768391929" prefWidth="950.0" />
+            <ColumnConstraints maxWidth="789.3333333333335" minWidth="7.0" prefWidth="7.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -52,7 +53,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <TextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" onAction="#onSearch" prefHeight="32.0" prefWidth="737.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%);" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+            <AutoCompleteTextField fx:id="txtFieldSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="199.0" onAction="#onSearch" prefHeight="32.0" prefWidth="946.0" scaleY="1.04" style="-fx-background-color: #464646; -fx-max-height: 32; -fx-min-height: 32; -fx-font-size: 13; -fx-border-color: derive( #404040,20%);" styleClass="text-field" translateY="-1.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                <promptText>Search
                </promptText>
                <opaqueInsets>
@@ -64,7 +65,7 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-            </TextField>
+            </AutoCompleteTextField>
          </children>
       </GridPane>
       <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #262626;" stylesheets="@../styles/dark.css" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
@@ -78,11 +79,11 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="47.0" valignment="BOTTOM" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <TreeTableView fx:id="treeView" prefHeight="546.0" prefWidth="435.0" styleClass="table-view">
+                  <TreeTableView fx:id="treeView" prefHeight="546.0" prefWidth="435.0" styleClass="table-view" stylesheets="@../styles/Tableview.css">
                     <columns>
                       <TreeTableColumn fx:id="tvColumnPlaylist" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Playlist" />
                       <TreeTableColumn fx:id="tvColumnArtist" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Artist" />
-                      <TreeTableColumn fx:id="tvColumnSongs" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="136.00001525878906" text="Songs" />
+                      <TreeTableColumn fx:id="tvColumnSongs" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="136.00001525878906" styleClass="tabl" text="Songs" />
                       <TreeTableColumn fx:id="tvColumnTime" editable="false" maxWidth="1.7976931348623157E308" minWidth="64.0" prefWidth="69.33334350585938" text="Time" />
                     </columns>
                      <columnResizePolicy>
@@ -144,7 +145,7 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="41.333333333333314" prefHeight="46.666646321614564" valignment="BOTTOM" vgrow="NEVER" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tblViewSongs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <TableView fx:id="tblViewSongs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../styles/Tableview.css" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <columns>
                       <TableColumn fx:id="tblClmnSongTitle" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="309.9999694824219" text="Title" />
                       <TableColumn fx:id="tblClmnSongArtist" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="136.0" text="Artist" />

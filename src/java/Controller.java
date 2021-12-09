@@ -1,138 +1,138 @@
+import CustomComponent.AutoCompleteTextField;
+import be.MusicModel;
+import be.MyTunesFXMLProperties;
+import be.SongModel;
+import com.google.gson.Gson;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import model.LocalFilesModel;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.SearchModel;
+import org.apache.commons.lang.NotImplementedException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.sql.SQLException;
 
-public class Controller implements Initializable
+public class Controller extends MyTunesFXMLProperties implements Initializable
 {
-    @FXML public TextField txtFieldSearch;
+/**Assuming that the newly added item has an index of N,
+ Selecting it:
 
-    @FXML public Button btnSettings;
+ listView.getSelectionModel().select(N);
+ Focusing on it:
 
-    @FXML public TreeTableView treeView;
+ listView.getFocusModel().focus(N);
+ Scrolling to it:
 
-    @FXML public TreeTableColumn tvColumnPlaylist;
+ listView.scrollTo(N);
+ *
+ * To Do: Get the selected item from search and do that. Use StringToMap.
+ */
 
-    @FXML public TreeTableColumn tvColumnArtist;
 
-    @FXML public TreeTableColumn tvColumnSongs;
 
-    @FXML public TreeTableColumn tvColumnTime;
+    /**
+     *  isPlaying is now a property because we can attach an event handler when the value changes.
+     */
+    private final BooleanProperty isPlaying = new SimpleBooleanProperty();
 
-    @FXML public Button btnPlaylistUp;
-
-    @FXML public Button btnPlaylistDown;
-
-    @FXML public Button btnPlaylistNew;
-
-    @FXML public Button btnPlaylistEdit;
-
-    @FXML public Button btnPlaylistDelete;
-
-    @FXML public TableView tblViewSongs;
-
-    @FXML public TableColumn tblClmnSongTitle;
-
-    @FXML public TableColumn tblClmnSongArtist;
-
-    @FXML public TableColumn tblClmnSongAlbum;
-
-    @FXML public TableColumn tblClmnSongGenre;
-
-    @FXML public TableColumn tblClmnSongTime;
-
-    @FXML public Button btnSongUp;
-
-    @FXML public Button btnSongDown;
-
-    @FXML public Button btnSongNew;
-
-    @FXML public Button btnSongEdit;
-
-    @FXML public Button btnSongDelete;
-
-    @FXML public Button btnPlayPause;
-
-    @FXML public Button btnNextSong;
-
-    @FXML public Button btnPrevSong;
-
-    @FXML public Label lblSongName;
-
-    @FXML public Label lblSongCurrentTime;
-
-    @FXML public Label lblSongTotalTime;
-
-    @FXML public Slider sliderSong;
-
-    @FXML public ToggleButton tglBtnShuffle;
-
-    @FXML public Slider sliderVolume;
-
+    final ArrayList<MusicModel> dataArray = new ArrayList();
+    final ObservableList<SongModel> data = FXCollections.observableArrayList();
 
     MusicPlayer songPlayer = new MusicPlayer();
 
-    boolean isPlaying = false;
-
     public Controller()
     {
+        isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
+        txtFieldSearch = new AutoCompleteTextField();
 
+        tblViewSongs.getColumns().add(this.tblClmnSongTitle);
+        tblViewSongs.getColumns().add(this.tblClmnSongArtist);
+        tblViewSongs.getColumns().add(this.tblClmnSongGenre);
+        tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
+        tblViewSongs.getColumns().add(this.tblClmnSongTime);
+    }
+
+    private void playPauseUpdateStyle(boolean state)
+    {
+        String playStyle = "-fx-background-image: url(/images/pause.png); -fx-background-position: 8;";
+        String pauseStyle = "-fx-background-image: url(/images/play.png); -fx-background-position: 9;";
+
+        btnPlayPause.setStyle(state ? playStyle : pauseStyle);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        data.add(new SongModel(1, "1st song", "Phillip", "soft pop", "rainbow and unicorns", 190, "local", "Magic location 2"));
+        data.add(new SongModel(2, "2st song", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(3, "3st song", "Mads", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(4, "1st", "Youtube", "Garbage", "Google", 190, "local", "The Cloud"));
+        data.add(new SongModel(5, "Some song", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(6, "Yeezy what's good?", "Kanye", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(7, "I Love Kanye", "Kanye West", "Hip-Hop", "The Life of Pablo", 60, "local", "Magic location 2"));
+        data.add(new SongModel(8, "Kill Ed Sheeran", "Rasmus", 50, "local", "Magic location 2"));
+        data.add(new SongModel(9, "Java is shit", "Mads", null, null, 345, "local", "Magic location"));
+        data.add(new SongModel(10, "DNA.", "Kendrick", "Hip-Hop", "DAMN.", 190, "local", "Magic location 2"));
+        data.add(new SongModel(11, "Superman", "Soulja Boy", 50, "local", "Magic location 2"));
+        data.add(new SongModel(12, "Another Song", "Mads", null, null, 345, "local", "Magic location"));
+
+        this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
+        this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
+        this.tblClmnSongGenre.setCellValueFactory(new PropertyValueFactory<SongModel, String>("genre"));
+        this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
+        this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
+
+        data.addAll();
+        tblViewSongs.setItems(data);
+        //data.addAll(new EASVDatabase().getAllSongs());
+        dataArray.addAll(data.stream().toList());
+
+        initializeSearchEntries(dataArray);
 
     }
 
+
     @FXML private void onPlayTrack(ActionEvent actionEvent)
     {
-
-        if(isPlaying)
-        {
-            songPlayer.pauseTrack();
-            isPlaying = false;
-            switchPlayPause();
-        }
-        else
-        {
-            songPlayer.playTrack();
-            isPlaying = true;
-            switchPlayPause();
-        }
+        isPlaying.setValue(!isPlaying.getValue());
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        songPlayer.nextTrack();
+        System.out.println("next song");
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        songPlayer.previousTrack();
+        System.out.println("previous/reset song");
     }
 
+
     @FXML
-    private void onSettings(ActionEvent actionEvent)
-    {
-        try
-        {
+    private void onSettings(ActionEvent actionEvent) {
+        try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
             Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 320, 157));
             stage.show();
-        }
-        catch (IOException e)
-        {
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -140,22 +140,45 @@ public class Controller implements Initializable
     @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
         System.out.println("track is moved upwards");
+        throw new NotImplementedException();
     }
 
     @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
         System.out.println("track is moved downwards");
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onSongNew(ActionEvent event)
-    {
-        try
-        {
+    private void onSongNew(ActionEvent event){
+        try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
-            stage.setScene(new Scene(root, 320, 190));
+            stage.setMaxHeight(193);
+            stage.setMinHeight(193);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 193));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSongEdit(ActionEvent event){
+        LocalFilesModel.setCurrentlySelectedSong((SongModel) tblViewSongs.getSelectionModel().getSelectedItem());
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Song");
+            stage.setMaxHeight(305);
+            stage.setMinHeight(305);
+            stage.setMaxWidth(320);
+            stage.setMinWidth(320);
+            stage.setScene(new Scene(root, 320, 305));
             stage.show();
         }
         catch (IOException e)
@@ -165,66 +188,71 @@ public class Controller implements Initializable
     }
 
     @FXML
-    private void onSongEdit(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onSongDelete(ActionEvent event){
-
-    }
-
-
-    @FXML
-    private void switchPlayPause()
+    private void onSongDelete(ActionEvent event)
     {
-        if (isPlaying)
-        {
-            btnPlayPause.setStyle("-fx-background-image: url(/images/pause.png);-fx-background-position: 8");
-        }
-        else
-        {
-            btnPlayPause.setStyle("-fx-background-image: url(/images/play.png);-fx-background-position: 9");
-        }
-    }
-
-
-    @FXML
-    private void setVolume(ActionEvent event){
-
+        throw new NotImplementedException();
     }
 
     @FXML
-    private void onPlaylistUp(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onPlaylistDown(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onSearch(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onPlaylistNew(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onPlaylistEdit(ActionEvent event){
-
-    }
-
-    @FXML
-    private void onPlaylistDelete(ActionEvent event){
-
-    }
-
-    public void onShuffleToggled(ActionEvent actionEvent)
+    private void setVolume(ActionEvent event)
     {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void onPlaylistUp(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void onPlaylistDown(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void onSearch(ActionEvent event)
+    {
+        txtFieldSearch.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    SearchModel s = new SearchModel();
+                    MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
+                    //if (m){
+
+                    //}
+                }
+            }
+        });
+
+        }
+
+
+    @FXML
+    private void onPlaylistNew(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void onPlaylistEdit(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void onPlaylistDelete(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+
+    private void initializeSearchEntries(List<MusicModel> inputList){
+        for (int i = 0; i < inputList.size(); i++){
+            txtFieldSearch.getEntries().add((inputList.get(i)).toString());
+
+        }
     }
 }

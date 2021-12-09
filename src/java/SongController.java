@@ -28,7 +28,6 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldEditAlbum;
     @FXML public TextField txtFieldEditGenre;
 
-
     @FXML public Button btnEditDone;
 
   

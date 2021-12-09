@@ -293,9 +293,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     private void setComboBox(){
         ObservableList<String> comboBoxList = FXCollections.observableArrayList();
+        comboBoxList.add("All");
         comboBoxList.add("Artist");
         comboBoxList.add("Album");
         comboBoxList.add("Genre");
         cmboBoxFilter.setItems(comboBoxList);
+        cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
     }
 }

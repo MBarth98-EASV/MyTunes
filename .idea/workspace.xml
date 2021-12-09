@@ -7,10 +7,8 @@
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/MusicModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MusicModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/SearchModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/SearchModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

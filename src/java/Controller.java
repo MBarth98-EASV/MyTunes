@@ -6,6 +6,7 @@ import be.SongModel;
 import com.google.gson.Gson;
 import javafx.event.EventHandler;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.LocalFilesModel;
@@ -54,6 +55,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     final ArrayList<MusicModel> dataArray = new ArrayList();
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
+    final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
 
     MusicPlayer songPlayer = new MusicPlayer();
 
@@ -98,6 +100,16 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongGenre.setCellValueFactory(new PropertyValueFactory<SongModel, String>("genre"));
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
+
+        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 3")));
+        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 2")));
+        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 1")));
+        //this.tvColumnPlaylist.setCellValueFactory(new PropertyValueFactory<PlaylistModel, List<SongModel>>("songs"));
+        treeView = new TreeTableView<PlaylistModel>();
+        TreeItem item = new TreeItem<PlaylistModel>(new PlaylistModel());
+        item.getChildren().addAll(playdata);
+        treeView.setRoot(item);
+
 
         data.addAll();
         tblViewSongs.setItems(data);

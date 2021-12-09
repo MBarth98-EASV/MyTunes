@@ -27,7 +27,7 @@ public class MusicPlayer {
 
         EASVDatabase dbaccess = new EASVDatabase();
 
-        private File filepath = new File(Controller.class.getResource(dbaccess.getFilePath(6, "Songs")).getFile());
+        private File filepath = new File("src/resources/music/file_example_MP3_5MG.mp3");//Controller.class.getResource(dbaccess.getFilePath(6, "Songs")).getFile());
 
         Media media = new Media(filepath.toURI().toString());
         MediaPlayer musicPlayer = new MediaPlayer(media);

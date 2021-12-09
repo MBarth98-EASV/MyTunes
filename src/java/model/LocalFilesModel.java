@@ -17,16 +17,19 @@ public class LocalFilesModel {
 
     public static SongModel currentlySelectedSong;
 
-    public LocalFilesModel() {
+    public LocalFilesModel() 
+    {
         localFilesManager = new LocalFilesManager();
     }
 
 
-    public List<SongModel> readAllFromNewDir(Path path){
+    public List<SongModel> readAllFromNewDir(Path path)
+    {
         return localFilesManager.readAllFromNewDir(path);
     }
 
-    public Path addSong(Path path){
+    public Path addSong(Path path)
+    {
         return localFilesManager.addSong(path);
     }
 
@@ -45,6 +48,4 @@ public class LocalFilesModel {
     public void editSong(SongModel songModel){
         localFilesManager.editSong(songModel);
     }
-
-
 }

@@ -57,15 +57,9 @@ public class SongModel extends MusicModel
 
     /**
      *  initialize the objects to valid references
-     * @param id
-     * @param title
-     * @param artist
-     * @param album
-     * @param duration
-     * @param genre
-     * @param s
+
      */
-    public SongModel(int id, String title, String artist, String album, int duration, String genre, String s)
+    public SongModel()
     {
         tag = new SimpleStringProperty();
         this.id = new SimpleIntegerProperty();
@@ -82,16 +76,14 @@ public class SongModel extends MusicModel
      */
     public SongModel(int id, String name, String artists, int duration, String tag, String location)
     {
+        this();
+
         this.setId(id);
         this.setTag(tag);
         this.setTitle(name);
         this.setArtists(artists);
         this.setDuration(duration);
         this.setLocation(location);
-    }
-
-    private void setId(int id) {
-        this.id.set(id);
     }
 
     /**
@@ -111,8 +103,7 @@ public class SongModel extends MusicModel
         return id.get();
     }
 
-
-    private void setId(int id)
+    public void setId(int id)
     {
         this.id.set(id);
     }
@@ -145,7 +136,7 @@ public class SongModel extends MusicModel
         return duration.get();
     }
 
-    public int setDuration(int duration)
+    public void setDuration(int duration)
     {
         this.duration.set(duration);
     }

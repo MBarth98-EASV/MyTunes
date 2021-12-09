@@ -233,10 +233,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         throw new NotImplementedException();
     }
 
-    public void onShuffleToggled(ActionEvent actionEvent)
-    {
-        throw new NotImplementedException();
-    }
 
     private void initializeSearchEntries(List<MusicModel> inputList){
         for (int i = 0; i < inputList.size(); i++){

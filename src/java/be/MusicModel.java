@@ -9,10 +9,14 @@ public class MusicModel {
     /**
      * A filler class that
      */
-    //private static final String
+    private static final String TYPE = "MusicModel";
 
     public MusicModel() {
 
+    }
+
+    public String getType(){
+        return TYPE;
     }
 
     @Override

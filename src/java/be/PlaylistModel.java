@@ -127,6 +127,7 @@ public class PlaylistModel extends MusicModel
         this.name.set(name);
     }
 
+    @Override
     public String getType(){
         return TYPE;
     }

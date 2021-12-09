@@ -1,9 +1,11 @@
 import CustomComponent.AutoCompleteTextField;
 import be.MusicModel;
 import be.MyTunesFXMLProperties;
+import be.PlaylistModel;
 import be.SongModel;
 import com.google.gson.Gson;
 import javafx.event.EventHandler;
+import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.LocalFilesModel;
@@ -220,9 +222,16 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                 if (ke.getCode().equals(KeyCode.ENTER)) {
                     SearchModel s = new SearchModel();
                     MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
-                    //if (m){
-
-                    //}
+                    if (m.getType().equals("[SONG]")){
+                        tblViewSongs.getSelectionModel().select((SongModel) m);
+                        tblViewSongs.scrollTo((SongModel) m);
+                    }
+                    if (m.getType().equals("[PLAYLIST]")){
+                        TreeItem treeItem = s.getTreeItem(treeView.getRoot().getChildren(), (PlaylistModel) m);
+                        treeView.getSelectionModel().select(treeItem);
+                        int index = treeItem.getParent().getChildren().indexOf(treeItem);
+                        treeView.scrollTo(index);
+                    }
                 }
             }
         });
@@ -254,5 +263,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
 
         }
+    }
+
+    public void onShuffleToggled(ActionEvent event) {
     }
 }

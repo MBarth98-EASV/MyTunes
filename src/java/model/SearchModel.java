@@ -1,6 +1,10 @@
 package model;
 
 import be.MusicModel;
+import be.PlaylistModel;
+import com.sun.source.tree.Tree;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
 
 import java.util.List;
 
@@ -15,4 +19,15 @@ public class SearchModel {
 
         return null;
     }
+
+    public TreeItem getTreeItem(ObservableList<TreeItem<PlaylistModel>> inputList, PlaylistModel inputPlaylist){
+        for (TreeItem<PlaylistModel> node : inputList){
+            if (node.getValue().getName().equals(inputPlaylist.getName())
+                && node.getValue().getOrderID() == inputPlaylist.getOrderID()){
+                return node;
+            }
+        }
+        return null;
+    }
+
 }

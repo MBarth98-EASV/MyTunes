@@ -203,9 +203,9 @@ public class EASVDatabase
 
             return filepath;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            e.printStackTrace();
+            System.out.println("database is not available");
             return null;
         }
     }
@@ -223,8 +223,8 @@ public class EASVDatabase
 
             return filepath;
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception ex) {
+            System.out.println("database is not available");
             return null;
         }
     }
@@ -238,6 +238,8 @@ public class EASVDatabase
         int songId;
         String songArtist;
         String songLocation;
+        String songAlbum;
+        String songGenre;
 
         try
         {
@@ -252,6 +254,8 @@ public class EASVDatabase
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
+                songAlbum = result.getString("album");
+                songGenre = result.getString("genre")
 
                 songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
             }
@@ -269,10 +273,10 @@ public class EASVDatabase
     /**
      * Updater for the SQL database.
      */
-    public void updateSong(String table, String column, String condition)
+    public void updateSong(String column, String condition)
     {
         try {
-            String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
+            String sql = "SELECT * FROM Songs SET " + column + " WHERE LIKE '%" + condition + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);

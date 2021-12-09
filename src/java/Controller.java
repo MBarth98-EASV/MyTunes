@@ -36,11 +36,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      *  isPlaying is now a property because we can attach an event handler when the value changes.
      */
     private final BooleanProperty isPlaying = new SimpleBooleanProperty();
-    //private static boolean isPlaying = true;
-
-    final ObservableList<SongModel> data = FXCollections.observableArrayList();
     
-    MusicPlayer songPlayer = new MusicPlayer();
+    
+    private final ObservableList<SongModel> data = FXCollections.observableArrayList();
+    
+    private MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
     {
@@ -53,7 +53,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
     }
 
-
     private void playPauseUpdateStyle(boolean state)
     {
         String playStyle = "-fx-background-image: url(/images/pause.png); -fx-background-position: 8;";
@@ -61,7 +60,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         btnPlayPause.setStyle(state ? playStyle : pauseStyle);
     }
-    
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -88,27 +86,29 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        songPlayer.nextTrack();
+        System.out.println("next song");
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        songPlayer.previousTrack();
+        System.out.println("previous/reset song");
+    }
+
+    @FXML private void onShuffleToggled(ActionEvent actionEvent)
+    {
+        System.out.println("get a random song");
     }
 
     @FXML
-    private void onSettings(ActionEvent actionEvent)
-    {
-        try
-        {
+    private void onSettings(ActionEvent actionEvent) {
+        try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
             Stage stage = new Stage();
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 320, 157));
             stage.show();
-        }
-        catch (IOException e)
-        {
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -126,10 +126,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     @FXML
-    private void onSongNew(ActionEvent event)
-    {
-        try
-        {
+    private void onSongNew(ActionEvent event){
+        try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
@@ -139,9 +137,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(320);
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
-        }
-        catch (IOException e)
-        {
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

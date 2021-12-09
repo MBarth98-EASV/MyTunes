@@ -94,6 +94,7 @@ public class SongModel
         this.setGenre(genre);
         this.setAlbum(album);
     }
+  
 
     public int getId()
     {
@@ -104,11 +105,6 @@ public class SongModel
     private void setId(int id)
     {
         this.id.set(id);
-    }
-
-    public IntegerProperty idProperty()
-    {
-        return id;
     }
 
 
@@ -141,10 +137,10 @@ public class SongModel
 
     public int setDuration(int duration)
     {
-        return duration;
+        this.duration.set(duration);
     }
-
-
+  
+  
     public String getTag()
     {
         return tag.get();
@@ -173,10 +169,11 @@ public class SongModel
     }
 
     public void setGenre(String genre)
+
     {
         this.genre.set(genre);
     }
-
+  
 
     public String getAlbum()
     {
@@ -187,11 +184,12 @@ public class SongModel
     {
         this.album.set(album);
     }
-
+  
       
     @Override
     public String toString()
     {
         return "("+id+") " + artists + " - " + title + " - " + duration;
+
     }
 }

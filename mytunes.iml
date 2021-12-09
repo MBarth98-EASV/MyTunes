@@ -35,5 +35,6 @@
     <orderEntry type="library" name="jaudiotagger-2.2.5" level="project" />
     <orderEntry type="library" name="apache.tika.core" level="project" />
     <orderEntry type="library" name="apache.tika.parsers" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
   </component>
 </module>

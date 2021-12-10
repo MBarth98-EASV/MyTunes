@@ -5,6 +5,7 @@ import be.PlaylistModel;
 import be.SongModel;
 import com.google.gson.Gson;
 import javafx.event.EventHandler;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.input.KeyCode;
@@ -58,12 +59,14 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
 
 
+    SearchModel searchModel;
     MusicPlayer songPlayer = new MusicPlayer();
 
     public Controller()
     {
         isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
         txtFieldSearch = new AutoCompleteTextField();
+        searchModel = new SearchModel();
 
         tblViewSongs.getColumns().add(this.tblClmnSongTitle);
         tblViewSongs.getColumns().add(this.tblClmnSongArtist);
@@ -234,17 +237,33 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
-                    SearchModel s = new SearchModel();
-                    MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
-                    if (m.getType().equals("[SONG]")){
-                        tblViewSongs.getSelectionModel().select((SongModel) m);
-                        tblViewSongs.scrollTo((SongModel) m);
-                    }
-                    if (m.getType().equals("[PLAYLIST]")){
-                        TreeItem treeItem = s.getTreeItem(treeView.getRoot().getChildren(), (PlaylistModel) m);
-                        treeView.getSelectionModel().select(treeItem);
-                        int index = treeItem.getParent().getChildren().indexOf(treeItem);
-                        treeView.scrollTo(index);
+
+                    String selectedItem = cmboBoxFilter.getSelectionModel().getSelectedItem().toString();
+                    switch (selectedItem){
+                        case "Artist | Filter": {
+                            searchModel.filterEqualsArtist();
+                            break;
+                        }
+                        case "Album | Filter": {
+                            searchModel.filterEqualsAlbum();
+                            break;
+                        }
+                        case "Genre | Filter": {
+                            searchModel.filterEqualsGenre();
+                            break;
+                        }
+                        case "Artist/Title | Filter": {
+                            searchModel.filterEqualsArtistTitle();
+                            break;
+                        }
+                        case "Search": {
+                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,treeView,txtFieldSearch);;
+                            break;
+                        }
+                        default: {
+                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,treeView,txtFieldSearch);
+                            break;
+                        }
                     }
                 }
             }
@@ -308,11 +327,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     private void setComboBox(){
         ObservableList<String> comboBoxList = FXCollections.observableArrayList();
-        comboBoxList.add("All");
-        comboBoxList.add("Artist");
-        comboBoxList.add("Album");
-        comboBoxList.add("Genre");
-        comboBoxList.add("Artist and Title");
+        comboBoxList.add("Search");
+        comboBoxList.add("Artist | Filter");
+        comboBoxList.add("Album | Filter");
+        comboBoxList.add("Genre | Filter");
+        comboBoxList.add("Artist/Title | Filter");
         cmboBoxFilter.setItems(comboBoxList);
         cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
     }
@@ -323,25 +342,32 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         txtFieldSearch.clear();
     }
 
+
     public void onComboBoxSelect(ActionEvent event) {
         String selectedItem = cmboBoxFilter.getSelectionModel().getSelectedItem().toString();
         switch (selectedItem){
-            case "Artist": {
+            case "Artist | Filter": {
+                txtFieldSearch.setPromptText("Enter artist to filter");
                 break;
             }
-            case "Album": {
+            case "Album | Filter": {
+                txtFieldSearch.setPromptText("Enter album to filter");
                 break;
             }
-            case "Genre": {
+            case "Genre | Filter": {
+                txtFieldSearch.setPromptText("Enter genre to filter");
                 break;
             }
-            case "Artist and Title": {
+            case "Artist/Title | Filter": {
+                txtFieldSearch.setPromptText("Enter artist or title to filter");
                 break;
             }
-            case "All": {
+            case "Search": {
+                txtFieldSearch.setPromptText("Press enter to search");
                 break;
             }
             default: {
+                txtFieldSearch.setPromptText("Press enter to search");
                 break;
             }
         }

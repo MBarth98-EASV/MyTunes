@@ -305,7 +305,7 @@ public class EASVDatabase
         }
     }
 
-
+ //TODO: Make methods applicable for Title and Artist which takes two parameters.
 
     public List<SongModel> filterEqualsParameter(String filterType, String filterParameter){
         String sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE " + filterParameter;
@@ -348,7 +348,11 @@ public class EASVDatabase
     }
 
 
-
+    /** Select every value in the wanted column and returns it as a list of Strings.
+     * @param filterType The column to select from. The filter is determined by
+     * the user in the Combobox Filter.
+     * @return
+     */
     public List<String> allAvailableByParameter(String filterType){
         String sql = "SELECT " + filterType + " FROM dbo.Songs " ;
         List<String> SearchEntryFilter = new ArrayList<>();

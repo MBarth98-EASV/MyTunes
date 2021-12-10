@@ -312,16 +312,38 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         comboBoxList.add("Artist");
         comboBoxList.add("Album");
         comboBoxList.add("Genre");
-        comboBoxList.add("Artist and Genre");
+        comboBoxList.add("Artist and Title");
         cmboBoxFilter.setItems(comboBoxList);
         cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
     }
 
 
     public void onClearSearchFilter(ActionEvent event) {
+        cmboBoxFilter.getSelectionModel().select(0);
+        txtFieldSearch.clear();
     }
 
     public void onComboBoxSelect(ActionEvent event) {
-        System.out.println("selected" + cmboBoxFilter.getSelectionModel());
+        String selectedItem = cmboBoxFilter.getSelectionModel().getSelectedItem().toString();
+        switch (selectedItem){
+            case "Artist": {
+                break;
+            }
+            case "Album": {
+                break;
+            }
+            case "Genre": {
+                break;
+            }
+            case "Artist and Title": {
+                break;
+            }
+            case "All": {
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 }

@@ -68,7 +68,7 @@
                   <Insets />
                </GridPane.margin>
             </AutoCompleteTextField>
-            <ComboBox fx:id="cmboBoxFilter" maxWidth="94.0" minHeight="32.0" prefHeight="34.0" prefWidth="94.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34; -fx-border-radius: 5;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
+            <ComboBox fx:id="cmboBoxFilter" onAction="#onComboBoxSelect" maxWidth="94.0" minHeight="32.0" prefHeight="34.0" prefWidth="94.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34; -fx-border-radius: 5;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
             <Button fx:id="btnClearSearchFilter" maxHeight="32.0" maxWidth="55.0" minHeight="32.0" minWidth="55.0" mnemonicParsing="false" onAction="#onClearSearchFilter" prefHeight="32.0" prefWidth="55.0" styleClass="Button2" stylesheets="@../styles/ClearButton.css" text="X" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <font>
                   <Font name="Consolas" size="28.0" />

@@ -4,6 +4,7 @@ import CustomComponent.AutoCompleteTextField;
 import be.MusicModel;
 import be.PlaylistModel;
 import be.SongModel;
+import bll.SearchManager;
 import com.sun.source.tree.Tree;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -14,6 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchModel {
+
+    SearchManager searchManager;
+    public SearchModel() {
+        searchManager = new SearchManager();
+    }
 
     private MusicModel getObjectFromText(List<MusicModel> inputList, String search) {
         for (MusicModel m : inputList) {

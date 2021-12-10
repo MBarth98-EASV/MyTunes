@@ -37,6 +37,10 @@ public class SearchManager {
         return artistAndTitle;
     }
 
+    public List<SongModel> filterEqualsSearch(){
+        return db.getAllSongs();
+    }
+
     public List<String> allAvailableArtist(){
         ArrayList<String> returnList = new ArrayList();
         returnList.addAll(db.allAvailableByParameter("artist"));

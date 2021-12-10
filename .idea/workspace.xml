@@ -5,37 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dlsc_formsfx_formsfx_core_11_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_controlsfx_controlsfx_11_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_core_12_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_javafx_12_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_17_ea_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/1st_semester_exam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/1st_semester_exam.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mytunes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mytunes.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/MusicPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/bll/LocalFilesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/LocalFilesManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/LocalFilesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/LocalFilesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/LocalFilesModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/bll/MusicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/MusicManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +92,7 @@
       <workItem from="1638719858274" duration="1658000" />
       <workItem from="1638747379635" duration="649000" />
       <workItem from="1638895513611" duration="3320000" />
+      <workItem from="1639126572719" duration="881000" />
     </task>
     <servers />
   </component>
@@ -137,6 +110,22 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java</url>
+          <line>252</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java</url>
+          <line>262</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

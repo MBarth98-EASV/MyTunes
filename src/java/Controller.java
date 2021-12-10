@@ -323,4 +323,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     public void onFilterToggled(ActionEvent event) {
     }
+
+    public void onClearSearchFilter(ActionEvent event) {
+    }
 }

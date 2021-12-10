@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/resources/styles/FilterButton.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/styles/ClearButton.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/dark.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,6 +101,8 @@
       <workItem from="1639077156333" duration="1189000" />
       <workItem from="1639078392383" duration="2096000" />
       <workItem from="1639086470244" duration="1522000" />
+      <workItem from="1639125478944" duration="590000" />
+      <workItem from="1639126143982" duration="1340000" />
     </task>
     <servers />
   </component>
@@ -119,6 +119,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -120,7 +120,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         //data.addAll(new EASVDatabase().getAllSongs());
         dataArray.addAll(data.stream().toList());
 
-        initializeSearchEntries(dataArray);
+        initializeMMSearchEntries(dataArray);
         setComboBox();
 
     }
@@ -230,6 +230,13 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         throw new NotImplementedException();
     }
 
+    /**
+     * Sets the searchbutton enterkey action depending on the selected mode in
+     * the combobox.
+     * If Search is selected, the searchbox dropdown will contain suggestions for every playlist and song.
+     * If a filter is selected, the table of songs will change to only include songs with the given parameters.
+     * @param event
+     */
     @FXML
     private void onSearch(ActionEvent event)
     {
@@ -306,9 +313,17 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    private void initializeSearchEntries(List<MusicModel> inputList){
+    private void initializeMMSearchEntries(List<MusicModel> inputList){
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
+
+        }
+    }
+
+    private void initializeStringSearchEntires(List<String> inputList){
+        inputList.add("test");
+        for (int i = 0; i < inputList.size(); i++){
+            txtFieldSearch.getEntries().add((inputList.get(i)));
 
         }
     }
@@ -344,30 +359,37 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
 
     public void onComboBoxSelect(ActionEvent event) {
-        String selectedItem = cmboBoxFilter.getSelectionModel().getSelectedItem().toString();
+        int selectedItem = cmboBoxFilter.getSelectionModel().getSelectedIndex();
+        //TODO: Switch to ENUM
         switch (selectedItem){
-            case "Artist | Filter": {
+            case 1: {
                 txtFieldSearch.setPromptText("Enter artist to filter");
+                initializeStringSearchEntires(searchModel.allAvailableArtist());
+                System.out.println("artist");
                 break;
             }
-            case "Album | Filter": {
+            case 2: {
+                initializeStringSearchEntires(searchModel.allAvailableAlbums());
                 txtFieldSearch.setPromptText("Enter album to filter");
+                System.out.println("album");
                 break;
             }
-            case "Genre | Filter": {
+            case 3: {
+                initializeStringSearchEntires(searchModel.allAvailableGenre());
                 txtFieldSearch.setPromptText("Enter genre to filter");
+                System.out.println("genre");
                 break;
             }
-            case "Artist/Title | Filter": {
+            case 4: {
+                initializeStringSearchEntires(searchModel.allAvailableTitleArtist());
                 txtFieldSearch.setPromptText("Enter artist or title to filter");
-                break;
-            }
-            case "Search": {
-                txtFieldSearch.setPromptText("Press enter to search");
+                System.out.println("artititle");
                 break;
             }
             default: {
+                initializeMMSearchEntries(dataArray);
                 txtFieldSearch.setPromptText("Press enter to search");
+                System.out.println("search");
                 break;
             }
         }

@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchModel {
@@ -66,6 +67,44 @@ public class SearchModel {
     public void filterEqualsArtistTitle(){
         //TODO: set table to have songs that include query
     }
+
+    public List<String> allAvailableArtist(){
+        ArrayList<String> test = new ArrayList<>();
+        test.add("test");
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        return test;
+    }
+
+    public List<String> allAvailableAlbums(){
+        ArrayList<String> test = new ArrayList<>();
+        test.add("test");
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        return test;
+    }
+
+    public List<String> allAvailableGenre(){
+        ArrayList<String> test = new ArrayList<>();
+        test.add("test");
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        return test;
+    }
+
+    public List<String> allAvailableTitleArtist(){
+        ArrayList<String> test = new ArrayList<>();
+        test.add("test");
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        return test;
+    }
+
+
 
 
 }

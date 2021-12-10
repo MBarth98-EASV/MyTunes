@@ -1,4 +1,5 @@
 import CustomComponent.AutoCompleteTextField;
+import CustomComponent.ComboBoxEnum;
 import be.MusicModel;
 import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
@@ -30,6 +31,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.sql.SQLException;
+import CustomComponent.ComboBoxEnum.*;
+
+import static CustomComponent.ComboBoxEnum.*;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
@@ -360,27 +364,26 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     public void onComboBoxSelect(ActionEvent event) {
         int selectedItem = cmboBoxFilter.getSelectionModel().getSelectedIndex();
-        //TODO: Switch to ENUM
-        switch (selectedItem){
-            case 1: {
+        switch (ComboBoxEnum.values()[selectedItem]){
+            case ARTIST: {
                 txtFieldSearch.setPromptText("Enter artist to filter");
                 initializeStringSearchEntires(searchModel.allAvailableArtist());
                 System.out.println("artist");
                 break;
             }
-            case 2: {
+            case ALBUM: {
                 initializeStringSearchEntires(searchModel.allAvailableAlbums());
                 txtFieldSearch.setPromptText("Enter album to filter");
                 System.out.println("album");
                 break;
             }
-            case 3: {
+            case GENRE: {
                 initializeStringSearchEntires(searchModel.allAvailableGenre());
                 txtFieldSearch.setPromptText("Enter genre to filter");
                 System.out.println("genre");
                 break;
             }
-            case 4: {
+            case ARTISTTITLE: {
                 initializeStringSearchEntires(searchModel.allAvailableTitleArtist());
                 txtFieldSearch.setPromptText("Enter artist or title to filter");
                 System.out.println("artititle");

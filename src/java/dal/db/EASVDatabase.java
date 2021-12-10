@@ -300,4 +300,54 @@ public class EASVDatabase
             e.printStackTrace();
         }
     }
+
+
+
+    public List<SongModel> filterEqualsParameter(String filterParameter){
+        String sql = "SELECT * FROM dbo.Songs";
+        List<SongModel> songs = new ArrayList<>();
+
+        String songTitle;
+        int songId;
+        String songArtist;
+        String songLocation;
+
+        try
+        {
+            System.out.println("trying to get all songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+                songTitle = result.getString("title");
+                songId = result.getInt("id");
+                songArtist = result.getString("artists");
+                songLocation = result.getString("filepath");
+
+                songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
+            }
+
+            return songs;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("database is not available");
+            // return empty array - garentee not null
+            return new ArrayList<>();
+        }
+    }
+
+
+
+    public List<String> allAvailableByParameter(String filterParameter){
+        ArrayList<String> test = new ArrayList<>();
+        test.add("test");
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        return test;
+    }
+
 }

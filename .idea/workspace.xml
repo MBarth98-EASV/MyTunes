@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/bll/SearchManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/SearchManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/SearchModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/SearchModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +103,7 @@
       <workItem from="1639086470244" duration="1522000" />
       <workItem from="1639125478944" duration="590000" />
       <workItem from="1639126143982" duration="11428000" />
+      <workItem from="1639163028287" duration="1802000" />
     </task>
     <servers />
   </component>
@@ -118,7 +120,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

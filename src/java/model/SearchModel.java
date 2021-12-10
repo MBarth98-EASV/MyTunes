@@ -6,6 +6,7 @@ import be.PlaylistModel;
 import be.SongModel;
 import bll.SearchManager;
 import com.sun.source.tree.Tree;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
@@ -21,6 +22,14 @@ public class SearchModel {
         searchManager = new SearchManager();
     }
 
+    /** Goes through every MusicModel in the inputList and returns the one
+     * matching the user's search query by comparing the MusicModel toString
+     * with the search query. With autocompletion, there's a high likelihood
+     * of a match.
+     * @param inputList A list of every song and playlist.
+     * @param search The string the user searched for.
+     * @return The matching MusicModel instance.
+     */
     private MusicModel getObjectFromText(List<MusicModel> inputList, String search) {
         for (MusicModel m : inputList) {
             if (m.toString().equals(search)) {
@@ -41,12 +50,20 @@ public class SearchModel {
         return null;
     }
 
-    public void filterEqualsSearch(List<MusicModel> alldata, TableView tableView, TreeTableView treeTableView, AutoCompleteTextField textField){
-        //TODO: Set table to all songs
+    /**
+     * Gets matching MusicModel instance and determines its type by using polymorphism
+     * with overridden methods in the MusicModels subclasses. The MusicModel "m" is then typecast
+     * to its actual class and selected and scrolled to in its list.
+     * @param alldata A list of every song and playlist available as a MusicModel instance.
+     * @param songTable The table of songs in the GUI.
+     * @param treeTableView The table of Playlists.
+     * @param textField The searchbar.
+     */
+    public void filterEqualsSearch(List<MusicModel> alldata, TableView songTable, TreeTableView treeTableView, AutoCompleteTextField textField){
         MusicModel m = getObjectFromText(alldata, textField.getText());
         if (m.getType().equals("[SONG]")){
-            tableView.getSelectionModel().select((SongModel) m);
-            tableView.scrollTo((SongModel) m);
+            songTable.getSelectionModel().select((SongModel) m);
+            songTable.scrollTo((SongModel) m);
         }
         if (m.getType().equals("[PLAYLIST]")){
             TreeItem treeItem = getTreeItem(treeTableView.getRoot().getChildren(), (PlaylistModel) m);
@@ -56,58 +73,46 @@ public class SearchModel {
         }
     }
 
-    public void filterEqualsArtist(){
-        //TODO: Set table to have songs that include query
+    public void filterEqualsArtist(TableView songTable, String filterParameter){
+        ObservableList<SongModel> data = FXCollections.observableArrayList(searchManager.filterEqualsArtist(filterParameter));
+        songTable.setItems(data);
     }
 
-    public void filterEqualsAlbum(){
-        //TODO: set table to have songs that include query
-    }
-
-
-    public void filterEqualsGenre(){
-        //TODO: set table to have songs that include query
+    public void filterEqualsAlbum(TableView songTable, String filterParameter){
+        ObservableList<SongModel> data = FXCollections.observableArrayList(searchManager.filterEqualsAlbum(filterParameter));
+        songTable.setItems(data);
     }
 
 
-    public void filterEqualsArtistTitle(){
-        //TODO: set table to have songs that include query
+    public void filterEqualsGenre(TableView songTable, String filterParameter){
+        ObservableList<SongModel> data = FXCollections.observableArrayList(searchManager.filterEqualsGenre(filterParameter));
+        songTable.setItems(data);
+    }
+
+
+    public void filterEqualsArtistTitle(TableView songTable, String filterParameter){
+        ObservableList<SongModel> data = FXCollections.observableArrayList(searchManager.filterEqualsArtistTitle(filterParameter));
+        songTable.setItems(data);
     }
 
     public List<String> allAvailableArtist(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        return searchManager.allAvailableArtist();
     }
 
     public List<String> allAvailableAlbums(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        return searchManager.allAvailableAlbums();
     }
 
     public List<String> allAvailableGenre(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        return searchManager.allAvailableGenre();
     }
 
     public List<String> allAvailableTitleArtist(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        return searchManager.allAvailableTitleArtist();
+    }
+
+    public List<SongModel> allAvailable(){
+        return searchManager.filterEqualsSearch();
     }
 
 

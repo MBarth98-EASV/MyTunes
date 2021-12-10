@@ -248,27 +248,23 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
+                    int selectedItem = cmboBoxFilter.getSelectionModel().getSelectedIndex();
 
-                    String selectedItem = cmboBoxFilter.getSelectionModel().getSelectedItem().toString();
-                    switch (selectedItem){
-                        case "Artist | Filter": {
+                    switch (ComboBoxEnum.values()[selectedItem]){
+                        case ARTIST: {
                             searchModel.filterEqualsArtist();
                             break;
                         }
-                        case "Album | Filter": {
+                        case ALBUM: {
                             searchModel.filterEqualsAlbum();
                             break;
                         }
-                        case "Genre | Filter": {
+                        case GENRE: {
                             searchModel.filterEqualsGenre();
                             break;
                         }
-                        case "Artist/Title | Filter": {
+                        case ARTISTTITLE: {
                             searchModel.filterEqualsArtistTitle();
-                            break;
-                        }
-                        case "Search": {
-                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,treeView,txtFieldSearch);;
                             break;
                         }
                         default: {

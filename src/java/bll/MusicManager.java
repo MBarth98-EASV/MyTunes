@@ -52,8 +52,12 @@ public class MusicManager {
 
         public void playTrack()
         {
-            beginTimer();
             musicPlayer.play();
+        }
+
+        public void stopTrack()
+        {
+            musicPlayer.stop();
         }
 
         public void pauseTrack()
@@ -63,63 +67,32 @@ public class MusicManager {
 
         public void resetTrack()
         {
-           cancelTimer();
            musicPlayer.seek(Duration.ZERO);
         }
 
         public void nextTrack()
         {
-            cancelTimer();
             musicPlayer.stop();
 
             playTrack();
-            beginTimer();
         }
 
         public void previousTrack()
         {
             if (musicPlayer.getCurrentTime().toSeconds() > 5)
             {
-                resetTrack();
+
             }
             else
             {
-                cancelTimer();
                 musicPlayer.stop();
-
-                beginTimer();
                 musicPlayer.play();
             }
         }
 
-        /**
-         * A timer to track how far the song is.
-         */
-        public void beginTimer()
+        public int getDuration()
         {
-            timer = new Timer();
-
-            timertask = new TimerTask()
-            {
-
-                public void run()
-                {
-                    isRunning = true;
-                    double timeleft = musicPlayer.getCurrentTime().toSeconds() - musicPlayer.getTotalDuration().toSeconds();
-
-                    if(timeleft == 0)
-                    {
-                        cancelTimer();
-                    }
-                }
-
-            };
-        }
-
-        public void cancelTimer()
-        {
-            isRunning = false;
-            timer.cancel();
+            return (int) musicPlayer.getCurrentTime().toSeconds();
         }
 
         public void setVolume(Double volume)

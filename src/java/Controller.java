@@ -92,6 +92,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onPlayTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
     {
+
         songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
 
         songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
@@ -99,14 +100,34 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songPlayer.playTrack();
     }
 
-    @FXML private void onNextTrack(ActionEvent actionEvent)
+    @FXML private void onNextTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
     {
-        System.out.println("next song");
+        songPlayer.stopTrack();
+
+        tblViewSongs.getSelectionModel().selectNext();
+
+        songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+
+        songPlayer.playTrack();
     }
 
-    @FXML private void onPreviousTrack(ActionEvent actionEvent)
+    @FXML private void onPreviousTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
     {
-        System.out.println("previous/reset song");
+        if (songPlayer.getDuration() > 5)
+        {
+            songPlayer.stopTrack();
+            songPlayer.playTrack();
+        }
+        else
+        {
+            songPlayer.stopTrack();
+
+            tblViewSongs.getSelectionModel().selectPrevious();
+
+            songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+
+            songPlayer.playTrack();
+        }
     }
 
 

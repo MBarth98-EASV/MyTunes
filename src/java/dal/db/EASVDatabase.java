@@ -231,7 +231,7 @@ public class EASVDatabase
   
     public List<SongModel> getAllSongs()
     {
-        String sql = "SELECT * FROM dbo.Songs";
+        String sql = "SELECT * FROM Songs";
         List<SongModel> songs = new ArrayList<>();
 
         String songTitle;

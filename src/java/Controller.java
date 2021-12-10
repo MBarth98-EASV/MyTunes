@@ -50,9 +50,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     private final BooleanProperty isPlaying = new SimpleBooleanProperty();
 
-    final ArrayList<MusicModel> dataArray = new ArrayList();
-    final ObservableList<SongModel> data = FXCollections.observableArrayList();
-
     MusicManager songPlayer = new MusicManager();
 
     public Controller()
@@ -84,12 +81,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        data.addAll();
-        tblViewSongs.setItems(data);
-        //data.addAll(new EASVDatabase().getAllSongs());
-        dataArray.addAll(data.stream().toList());
+        songPlayer.data.addAll();
+        tblViewSongs.setItems(songPlayer.data);
 
-        initializeSearchEntries(dataArray);
+
+        initializeSearchEntries(songPlayer.data);
 
     }
 
@@ -210,7 +206,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
                     SearchModel s = new SearchModel();
-                    MusicModel m = s.getObjectFromText(dataArray, txtFieldSearch.getText());
+                    MusicModel m = s.getObjectFromText(songPlayer.data, txtFieldSearch.getText());
                     //if (m){
 
                     //}
@@ -240,7 +236,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    private void initializeSearchEntries(List<MusicModel> inputList){
+    private void initializeSearchEntries(List<SongModel> inputList){
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
 

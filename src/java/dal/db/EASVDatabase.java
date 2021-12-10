@@ -238,6 +238,8 @@ public class EASVDatabase
         int songId;
         String songArtist;
         String songLocation;
+        String songAlbum;
+        String songGenre;
 
         try
         {
@@ -252,8 +254,10 @@ public class EASVDatabase
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
+                songGenre =  result.getString("genre");
+                songAlbum = result.getString("album");
 
-                songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
+                songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
             }
 
             return songs;
@@ -303,18 +307,20 @@ public class EASVDatabase
 
 
 
-    public List<SongModel> filterEqualsParameter(String filterParameter){
-        String sql = "SELECT * FROM dbo.Songs";
+    public List<SongModel> filterEqualsParameter(String filterType, String filterParameter){
+        String sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE " + filterParameter;
         List<SongModel> songs = new ArrayList<>();
 
         String songTitle;
         int songId;
         String songArtist;
         String songLocation;
+        String songGenre;
+        String songAlbum;
 
         try
         {
-            System.out.println("trying to get all songs from the database");
+            System.out.println("trying to get all filtered songs from the database");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -325,8 +331,10 @@ public class EASVDatabase
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
+                songGenre =  result.getString("genre");
+                songAlbum = result.getString("album");
 
-                songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
+                songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
             }
 
             return songs;
@@ -341,13 +349,34 @@ public class EASVDatabase
 
 
 
-    public List<String> allAvailableByParameter(String filterParameter){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+    public List<String> allAvailableByParameter(String filterType){
+        String sql = "SELECT " + filterType + " FROM dbo.Songs " ;
+        List<String> SearchEntryFilter = new ArrayList<>();
+
+        String chosenFilter;
+
+        try
+        {
+            System.out.println("trying to get all songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+                chosenFilter = result.getString(filterType);
+                SearchEntryFilter.add(chosenFilter);
+            }
+
+            return SearchEntryFilter;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("database is not available");
+            // return empty array - garentee not null
+            return new ArrayList<>();
+        }
     }
+
 
 }

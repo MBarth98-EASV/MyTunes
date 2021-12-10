@@ -1,68 +1,95 @@
 package bll;
 
 import be.SongModel;
+import dal.db.EASVDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchManager {
+    EASVDatabase db;
 
-    public List<SongModel> filterEqualsArtist(){
-        //TODO: Set table to have songs that include query
-        return null;
+    public SearchManager() {
+        db = new EASVDatabase();
     }
 
-    public List<SongModel> filterEqualsAlbum(){
-        //TODO: set table to have songs that include query
-        return null;
+    public List<SongModel> filterEqualsArtist(String filterParameter){
+        return db.filterEqualsParameter("artist", filterParameter);
     }
 
-
-    public List<SongModel> filterEqualsGenre(){
-        //TODO: set table to have songs that include query
-        return null;
+    public List<SongModel> filterEqualsAlbum(String filterParameter){
+        return db.filterEqualsParameter("album", filterParameter);
     }
 
 
-    public List<SongModel> filterEqualsArtistTitle(){
-        //TODO: set table to have songs that include query
-        return null;
+    public List<SongModel> filterEqualsGenre(String filterParameter){
+        return db.filterEqualsParameter("genre", filterParameter);
+    }
+
+
+    public List<SongModel> filterEqualsArtistTitle(String filterParameter){
+        List<SongModel> artistAndTitle = new ArrayList<>();
+        artistAndTitle.addAll(db.filterEqualsParameter("artist", filterParameter));
+        artistAndTitle.addAll(db.filterEqualsParameter("title", filterParameter));
+
+        return artistAndTitle;
     }
 
     public List<String> allAvailableArtist(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        ArrayList<String> returnList = new ArrayList();
+        returnList.addAll(db.allAvailableByParameter("artist"));
+        java.util.Collections.sort(returnList);
+
+
+        for (int i = 1; i<returnList.size(); i++) {
+            if (returnList.get(i).equals(returnList.get(i-1))){
+                returnList.remove(i);
+            }
+        } return returnList;
     }
 
     public List<String> allAvailableAlbums(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        ArrayList<String> returnList = new ArrayList();
+        returnList.addAll(db.allAvailableByParameter("album"));
+        java.util.Collections.sort(returnList);
+
+
+        for (int i = 1; i<returnList.size(); i++) {
+            if (returnList.get(i).equals(returnList.get(i-1))){
+                returnList.remove(i);
+            }
+        } return returnList;
     }
+
 
     public List<String> allAvailableGenre(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        ArrayList<String> returnList = new ArrayList();
+        returnList.addAll(db.allAvailableByParameter("genre"));
+        java.util.Collections.sort(returnList);
+
+
+        for (int i = 1; i<returnList.size(); i++) {
+            if (returnList.get(i).equals(returnList.get(i-1))){
+                returnList.remove(i);
+            }
+        } return returnList;
     }
 
+
     public List<String> allAvailableTitleArtist(){
-        ArrayList<String> test = new ArrayList<>();
-        test.add("test");
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        return test;
+        ArrayList<String> returnList = new ArrayList();
+        returnList.addAll(db.allAvailableByParameter("artist"));
+        returnList.addAll(db.allAvailableByParameter("title"));
+        java.util.Collections.sort(returnList);
+
+
+        for (int i = 1; i<returnList.size(); i++) {
+            if (returnList.get(i).equals(returnList.get(i-1))){
+                returnList.remove(i);
+            }
+        } return returnList;
     }
 
 

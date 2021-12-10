@@ -11,7 +11,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,25 +33,20 @@ public class MusicManager {
 
         MediaPlayer musicPlayer = null;
 
-
-    /**
-         * Variables, woo.
-         */
-        private Timer timer;
-        private TimerTask timertask;
-
-        private int songNumber;
-
-        private boolean isRunning;
-
         public MusicManager()
         {
             data.addAll(new EASVDatabase().getAllSongs());
         }
 
-        public void setMedia(String path)
+        public void pathToAbsolute(String path)
         {
-            this.musicPlayer = new MediaPlayer(new Media(path));
+            URL res = getClass().getClassLoader().
+            File file = Paths.get()
+            System.out.println(FileSystems.getDefault().getPath(path).toAbsolutePath());
+        }
+
+        public void setMedia(String path) {
+            this.musicPlayer = new MediaPlayer(new Media(FileSystems.getDefault().getPath(path).toAbsolutePath().toUri().toString()));
         }
 
         private void setMedia(int index) throws IOException
@@ -63,31 +67,6 @@ public class MusicManager {
         public void pauseTrack()
         {
            musicPlayer.pause();
-        }
-
-        public void resetTrack()
-        {
-           musicPlayer.seek(Duration.ZERO);
-        }
-
-        public void nextTrack()
-        {
-            musicPlayer.stop();
-
-            playTrack();
-        }
-
-        public void previousTrack()
-        {
-            if (musicPlayer.getCurrentTime().toSeconds() > 5)
-            {
-
-            }
-            else
-            {
-                musicPlayer.stop();
-                musicPlayer.play();
-            }
         }
 
         public int getDuration()

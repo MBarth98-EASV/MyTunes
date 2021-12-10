@@ -90,14 +90,24 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    @FXML private void onPlayTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
-    {
+    @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException {
+        songPlayer.pathToAbsolute(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+        /*
+        if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null)) {
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
 
-        songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+            songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
 
-        songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
-
-        songPlayer.playTrack();
+            songPlayer.playTrack();
+        }
+        else
+        {
+            tblViewSongs.getSelectionModel().select(0);
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());;
+            songPlayer.playTrack();
+        }
+        /
+         */
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
@@ -105,8 +115,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songPlayer.stopTrack();
 
         tblViewSongs.getSelectionModel().selectNext();
-
-        songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+        songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
 
         songPlayer.playTrack();
     }
@@ -123,7 +132,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             songPlayer.stopTrack();
 
             tblViewSongs.getSelectionModel().selectPrevious();
-
             songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
 
             songPlayer.playTrack();

@@ -321,6 +321,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * @param inputList
      */
     private void initializeMMSearchEntries(List<MusicModel> inputList){
+        txtFieldSearch.clear();
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
 
@@ -334,7 +335,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * @param inputList
      */
     private void initializeStringSearchEntires(List<String> inputList){
-        inputList.add("test");
+        txtFieldSearch.getEntries().clear();
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)));
 

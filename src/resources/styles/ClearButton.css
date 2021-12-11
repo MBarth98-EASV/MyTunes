@@ -1,6 +1,6 @@
 .Button {
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 12pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: #d5d4d4;
     -fx-content-display: CENTER;
     -fx-border-radius: 5;
@@ -31,7 +31,7 @@
 
 .Button2 {
     -fx-font-family: "Consolas", Helvetica, Arial, sans-serif;
-    -fx-font-size: 10pt;
+    -fx-font-size: 9pt;
     -fx-text-fill: #a6a6a6;
     -fx-background-color: transparent;
     -fx-content-display: CENTER;

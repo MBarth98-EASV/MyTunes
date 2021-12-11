@@ -89,7 +89,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    {   sliderVolume.setMax(1);
+        sliderVolume.setMin(0);
+        songPlayer = new MusicPlayer();
         data.add(new SongModel(1, "1st song", "Phillip", "soft pop", "rainbow and unicorns", 190, "local", "Magic location 2"));
         data.add(new SongModel(2, "2st song", "Rasmus", 50, "local", "Magic location 2"));
         data.add(new SongModel(3, "3st song", "Mads", null, null, 345, "local", "Magic location"));
@@ -219,7 +221,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void setVolume(ActionEvent event)
     {
-        throw new NotImplementedException();
+        songPlayer.setVolume(sliderVolume.getValue());
     }
 
     @FXML
@@ -346,6 +348,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     public void onSongAddToPlayList(ActionEvent actionEvent) {
+        SongModel addSong = tblViewSongs.getSelectionModel().getSelectedItem();
+        //tblViewPlaylist.getSelectionModel().getSelectedItem().
     }
 
 

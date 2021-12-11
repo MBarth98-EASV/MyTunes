@@ -16,7 +16,7 @@ public class SearchManager {
     }
 
     public List<SongModel> filterEqualsArtist(String filterParameter){
-        return db.filterEqualsParameter("artist", "NONE", filterParameter);
+        return db.filterEqualsParameter("artists", "NONE", filterParameter);
     }
 
     public List<SongModel> filterEqualsAlbum(String filterParameter){
@@ -31,7 +31,7 @@ public class SearchManager {
 
     public List<SongModel> filterEqualsArtistTitle(String filterParameter){
         List<SongModel> artistAndTitle = new ArrayList<>();
-        artistAndTitle.addAll(db.filterEqualsParameter("artist", "title", filterParameter));
+        artistAndTitle.addAll(db.filterEqualsParameter("artists", "title", filterParameter));
 
         return artistAndTitle;
     }
@@ -42,7 +42,7 @@ public class SearchManager {
 
     public List<String> allAvailableArtist(){
         ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("artist"));
+        inputList.addAll(db.allAvailableByParameter("artists"));
 
         List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
 
@@ -71,7 +71,7 @@ public class SearchManager {
 
     public List<String> allAvailableTitleArtist(){
         ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("artist"));
+        inputList.addAll(db.allAvailableByParameter("artists"));
         inputList.addAll(db.allAvailableByParameter("title"));
 
         List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());

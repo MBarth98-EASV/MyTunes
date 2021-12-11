@@ -61,6 +61,9 @@ public class SearchModel {
      */
     public void filterEqualsSearch(List<MusicModel> alldata, TableView songTable, TreeTableView treeTableView, AutoCompleteTextField textField){
         MusicModel m = getObjectFromText(alldata, textField.getText());
+        if (m == null){
+            
+        }
         if (m.getType().equals("[SONG]")){
             songTable.getSelectionModel().select((SongModel) m);
             songTable.scrollTo((SongModel) m);

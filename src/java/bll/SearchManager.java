@@ -16,23 +16,22 @@ public class SearchManager {
     }
 
     public List<SongModel> filterEqualsArtist(String filterParameter){
-        return db.filterEqualsParameter("artist", filterParameter);
+        return db.filterEqualsParameter("artist", "NONE", filterParameter);
     }
 
     public List<SongModel> filterEqualsAlbum(String filterParameter){
-        return db.filterEqualsParameter("album", filterParameter);
+        return db.filterEqualsParameter("album", "NONE", filterParameter);
     }
 
 
     public List<SongModel> filterEqualsGenre(String filterParameter){
-        return db.filterEqualsParameter("genre", filterParameter);
+        return db.filterEqualsParameter("genre", "NONE", filterParameter);
     }
 
 
     public List<SongModel> filterEqualsArtistTitle(String filterParameter){
         List<SongModel> artistAndTitle = new ArrayList<>();
-        artistAndTitle.addAll(db.filterEqualsParameter("artist", filterParameter));
-        artistAndTitle.addAll(db.filterEqualsParameter("title", filterParameter));
+        artistAndTitle.addAll(db.filterEqualsParameter("artist", "title", filterParameter));
 
         return artistAndTitle;
     }
@@ -42,58 +41,42 @@ public class SearchManager {
     }
 
     public List<String> allAvailableArtist(){
-        ArrayList<String> returnList = new ArrayList();
-        returnList.addAll(db.allAvailableByParameter("artist"));
-        java.util.Collections.sort(returnList);
+        ArrayList<String> inputList = new ArrayList();
+        inputList.addAll(db.allAvailableByParameter("artist"));
 
+        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
 
-        for (int i = 1; i<returnList.size(); i++) {
-            if (returnList.get(i).equals(returnList.get(i-1))){
-                returnList.remove(i);
-            }
-        } return returnList;
+        return returnList;
     }
 
     public List<String> allAvailableAlbums(){
-        ArrayList<String> returnList = new ArrayList();
-        returnList.addAll(db.allAvailableByParameter("album"));
-        java.util.Collections.sort(returnList);
+        ArrayList<String> inputList = new ArrayList();
+        inputList.addAll(db.allAvailableByParameter("album"));
 
+        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
 
-        for (int i = 1; i<returnList.size(); i++) {
-            if (returnList.get(i).equals(returnList.get(i-1))){
-                returnList.remove(i);
-            }
-        } return returnList;
+        return returnList;
     }
 
 
     public List<String> allAvailableGenre(){
-        ArrayList<String> returnList = new ArrayList();
-        returnList.addAll(db.allAvailableByParameter("genre"));
-        java.util.Collections.sort(returnList);
+        ArrayList<String> inputList = new ArrayList();
+        inputList.addAll(db.allAvailableByParameter("genre"));
 
+        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
 
-        for (int i = 1; i<returnList.size(); i++) {
-            if (returnList.get(i).equals(returnList.get(i-1))){
-                returnList.remove(i);
-            }
-        } return returnList;
+        return returnList;
     }
 
 
     public List<String> allAvailableTitleArtist(){
-        ArrayList<String> returnList = new ArrayList();
-        returnList.addAll(db.allAvailableByParameter("artist"));
-        returnList.addAll(db.allAvailableByParameter("title"));
-        java.util.Collections.sort(returnList);
+        ArrayList<String> inputList = new ArrayList();
+        inputList.addAll(db.allAvailableByParameter("artist"));
+        inputList.addAll(db.allAvailableByParameter("title"));
 
+        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
 
-        for (int i = 1; i<returnList.size(); i++) {
-            if (returnList.get(i).equals(returnList.get(i-1))){
-                returnList.remove(i);
-            }
-        } return returnList;
+        return returnList;
     }
 
 

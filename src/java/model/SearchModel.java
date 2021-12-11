@@ -8,6 +8,7 @@ import bll.SearchManager;
 import com.sun.source.tree.Tree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
@@ -62,7 +63,11 @@ public class SearchModel {
     public void filterEqualsSearch(List<MusicModel> alldata, TableView songTable, TreeTableView treeTableView, AutoCompleteTextField textField){
         MusicModel m = getObjectFromText(alldata, textField.getText());
         if (m == null){
-            
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText("Your search did not match any songs or playlists.");
+            errorAlert.showAndWait();
+            return;
         }
         if (m.getType().equals("[SONG]")){
             songTable.getSelectionModel().select((SongModel) m);

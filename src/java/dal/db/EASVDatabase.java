@@ -307,8 +307,14 @@ public class EASVDatabase
 
  //TODO: Make methods applicable for Title and Artist which takes two parameters.
 
-    public List<SongModel> filterEqualsParameter(String filterType, String filterParameter){
-        String sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE " + filterParameter;
+    public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
+        String sql = null;
+        if (!filterType2.equals("NONE")){
+            sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE %" + filterParameter + "% OR WHERE " +
+                    filterType2 + "LIKE %" + filterParameter + "%";
+        }
+        else sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE %" + filterParameter+"%";
+
         List<SongModel> songs = new ArrayList<>();
 
         String songTitle;

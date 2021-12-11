@@ -44,7 +44,7 @@ public class SearchManager {
         ArrayList<String> inputList = new ArrayList();
         inputList.addAll(db.allAvailableByParameter("artists"));
 
-        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
+        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
 
         return returnList;
     }
@@ -53,7 +53,7 @@ public class SearchManager {
         ArrayList<String> inputList = new ArrayList();
         inputList.addAll(db.allAvailableByParameter("album"));
 
-        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
+        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
 
         return returnList;
     }
@@ -63,7 +63,7 @@ public class SearchManager {
         ArrayList<String> inputList = new ArrayList();
         inputList.addAll(db.allAvailableByParameter("genre"));
 
-        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
+        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
 
         return returnList;
     }
@@ -74,7 +74,7 @@ public class SearchManager {
         inputList.addAll(db.allAvailableByParameter("artists"));
         inputList.addAll(db.allAvailableByParameter("title"));
 
-        List<String> returnList = inputList.stream().distinct().sorted().collect(Collectors.toList());
+        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
 
         return returnList;
     }

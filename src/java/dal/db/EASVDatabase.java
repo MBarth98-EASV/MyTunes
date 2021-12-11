@@ -360,7 +360,7 @@ public class EASVDatabase
      * @return
      */
     public List<String> allAvailableByParameter(String filterType){
-        String sql = "SELECT " + filterType + " FROM dbo.Songs " ;
+        String sql = "SELECT DISTINCT " + filterType + " FROM dbo.Songs " ;
         List<String> SearchEntryFilter = new ArrayList<>();
 
         String chosenFilter;

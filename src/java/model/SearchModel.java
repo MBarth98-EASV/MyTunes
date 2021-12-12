@@ -15,31 +15,40 @@ import javafx.scene.control.TreeTableView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchModel {
 
     SearchManager searchManager;
+
     public SearchModel() {
         searchManager = new SearchManager();
     }
 
-    /** Goes through every MusicModel in the inputList and returns the one
+    /**
+     * Goes through every MusicModel in the inputList and returns the one
      * matching the user's search query by comparing the MusicModel toString
      * with the search query. With autocompletion, there's a high likelihood
      * of a match.
+     *
      * @param inputList A list of every song and playlist.
-     * @param search The string the user searched for.
+     * @param search    The string the user searched for.
      * @return The matching MusicModel instance.
      */
     private MusicModel getObjectFromText(List<MusicModel> inputList, String search) {
-        for (MusicModel m : inputList) {
-            if (m.toString().equals(search)) {
-                return m;
-            }
-        }
-
+        if (!search.isEmpty() && !search.equals(null)) {
+            for (MusicModel m : inputList) {
+                if (m.toString().equalsIgnoreCase(search)) {
+                    return m;
+                }
+            } if (search.length() >= 3) {
+                List<MusicModel> backupSearch = inputList.stream().filter
+                        (m -> m.toString().toLowerCase().contains(search.toLowerCase())).sorted().collect(Collectors.toList());
+                return backupSearch.get(0);
+            } }
         return null;
     }
+
 
     private TreeItem getTreeItem(ObservableList<TreeItem<PlaylistModel>> inputList, PlaylistModel inputPlaylist){
         for (TreeItem<PlaylistModel> node : inputList){

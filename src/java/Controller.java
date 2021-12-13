@@ -3,7 +3,13 @@ import be.MusicModel;
 import be.MyTunesFXMLProperties;
 import be.SongModel;
 import bll.MusicManager;
+import com.sun.source.tree.Tree;
+import javafx.beans.Observable;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.LocalFilesModel;
@@ -22,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -57,12 +64,30 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
         txtFieldSearch = new AutoCompleteTextField();
 
+
         tblViewSongs.getColumns().add(this.tblClmnSongTitle);
         tblViewSongs.getColumns().add(this.tblClmnSongArtist);
         tblViewSongs.getColumns().add(this.tblClmnSongGenre);
         tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
     }
+
+    public void onSongSelectionChanged(ObservableValue obs, Number old, Number _new)
+    {
+        if (!old.equals(_new))
+        {
+            try
+            {
+                this.songPlayer.setMedia(this.songPlayer.data.get(_new.intValue()).getLocation());
+                System.out.println(this.songPlayer.data.get(_new.intValue()).getLocation());
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+    }
+
 
     private void playPauseUpdateStyle(boolean state)
     {
@@ -84,15 +109,24 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songPlayer.data.addAll();
         tblViewSongs.setItems(songPlayer.data);
 
+        this.tblViewSongs.getFocusModel().focusedIndexProperty().addListener(this::onSongSelectionChanged);
 
         initializeSearchEntries(songPlayer.data);
+
+
+
 
     }
 
 
     @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException
     {
-        if (isPlaying.getValue() == false) {
+        if (isPlaying.getValue()) {
+            songPlayer.pauseTrack();
+
+        } else
+        {
+            /*
             if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null)) {
 
                 songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
@@ -102,12 +136,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             } else {
                 tblViewSongs.getSelectionModel().select(0);
                 songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-                ;
+
                 songPlayer.playTrack();
             }
-        } else
-        {
-            songPlayer.pauseTrack();
+            */
+             songPlayer.playTrack();
         }
     }
 

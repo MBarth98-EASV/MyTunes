@@ -23,7 +23,7 @@ public class PlaylistModel extends MusicModel
      *  used to determine where the entity is displayed.
      */
 
-    private final IntegerProperty orderID;
+    private final IntegerProperty id;
 
     /**
      *   songs assigned to this playlist.
@@ -52,7 +52,7 @@ public class PlaylistModel extends MusicModel
      */
     public PlaylistModel()
     {
-        this.orderID = new SimpleIntegerProperty();
+        this.id = new SimpleIntegerProperty();
         this.songs = FXCollections.observableArrayList();
         this.selectedSongIndex = new SimpleIntegerProperty();
         this.isActive = new SimpleBooleanProperty();
@@ -66,21 +66,21 @@ public class PlaylistModel extends MusicModel
     {
         this();
 
-        this.setOrderID(id);
+        this.setID(id);
         this.setSongs(songs);
         this.setSelectedSongIndex(selectedSong);
         this.setIsActive(isActive);
         this.setName(name);
     }
 
-    public int getOrderID()
+    public int getID()
     {
-        return orderID.get();
+        return id.get();
     }
 
-    public void setOrderID(int orderID)
+    public void setID(int id)
     {
-        this.orderID.set(orderID);
+        this.id.set(id);
     }
 
 

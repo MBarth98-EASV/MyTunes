@@ -49,17 +49,6 @@ public class SearchModel {
         return null;
     }
 
-
-    private TreeItem getTreeItem(ObservableList<TreeItem<PlaylistModel>> inputList, PlaylistModel inputPlaylist){
-        for (TreeItem<PlaylistModel> node : inputList){
-            if (node.getValue().getName().equals(inputPlaylist.getName())
-                && node.getValue().getOrderID() == inputPlaylist.getOrderID()){
-                return node;
-            }
-        }
-        return null;
-    }
-
     /**
      * Gets matching MusicModel instance and determines its type by using polymorphism
      * with overridden methods in the MusicModels subclasses. The MusicModel "m" is then typecast

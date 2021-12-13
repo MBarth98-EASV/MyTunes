@@ -101,6 +101,9 @@ public class SongModel extends MusicModel {
         this.id.set(id);
     }
 
+    public int getId(){
+        return this.id.get();
+    }
 
     public String getTitle() {
         return title.get();

@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.PlaylistModel;
 import be.SongModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -409,5 +410,139 @@ public class EASVDatabase
         }
     }
 
+    /**
+     * Add song to SQL database table.
+     */
+    public void addPlaylist(String playlistName)
+    {
+
+        String sql = "INSERT INTO dbo.PlayList (name) VALUES ('" + playlistName + "')";
+
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+/*
+
+    public void removePlaylist(String table, int id)
+    {
+        try {
+            String sql = "DELETE FROM " + table + " WHERE id = '%" + id + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    */
+
+    public void removePlaylist(PlaylistModel playlist)
+    {
+        try {
+            String sql = "DELETE FROM dbo.PlayList WHERE name LIKE '%" + playlist.getName() + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+            removePlaylistSongs(playlist);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removePlaylistSongs(PlaylistModel playlist)
+    {
+        try {
+            String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID();
+
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Getters from the SQL database.
+     */
+    public int getPlaylistIDFromName(String playlistName, String table)
+    {
+        try
+        {
+            int playlistID;
+
+            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + playlistName + "%'";
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            playlistID = result.getInt("id");
+
+            return playlistID;
+        }
+        catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public String getPlaylistNameFromID(int playlistID, String table)
+    {
+        try {
+            String songName;
+
+            String sql = "SELECT * FROM dbo.PlayList WHERE id = " + playlistID;
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            result.next();
+            songName = result.getString("name");
+
+            return songName;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void addSongToPlaylist(SongModel song, PlaylistModel playlist){
+        String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
+                +  "(" + playlist.getID() + ", " + song.getId() + ")";
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<SongModel> getAllSongsInPlaylist(PlaylistModel playlist){
+        String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID();
+        try {
+            System.out.println("trying to get all filtered songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                int songId = result.getInt("id");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

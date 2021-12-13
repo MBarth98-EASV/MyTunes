@@ -23,14 +23,13 @@ public class LocalFilesModel {
     }
 
 
-    public List<SongModel> readAllFromNewDir(Path path)
+    public void readAllFromNewDir(Path path)
     {
-        return localFilesManager.readAllFromNewDir(path);
+        localFilesManager.loadAllFromNewDir(path);
     }
 
-    public Path addSong(Path path)
-    {
-        return localFilesManager.addSong(path);
+    public void addSong(Path path) {
+        localFilesManager.addSong(path);
     }
 
     public static void setCurrentlySelectedSong(SongModel songModel){

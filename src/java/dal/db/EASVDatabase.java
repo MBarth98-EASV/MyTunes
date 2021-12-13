@@ -388,5 +388,23 @@ public class EASVDatabase
         }
     }
 
+    /**
+     * Add song to SQL database table.
+     */
+    public void addAllSongsFromDir(String title, String artist, int dura, String source, String fpath, String genre, String album)
+    {
+            String sql = "INSERT INTO dbo.Songs (title, artists, duration, source, filepath, genre, album) " +
+                    "VALUES ('" + title + "', '" + artist + "', '" + dura + "', '"
+                    + source + "', '" + fpath + "', '" + genre + "', '" + album + "')";
+
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.execute(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

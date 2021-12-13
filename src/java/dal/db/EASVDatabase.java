@@ -43,10 +43,10 @@ public class EASVDatabase
     /**
      * Add song to SQL database table.
       */
-    public void addSong(String table, String songName, String art, int dura, String sauce, String fpath)
+    public void addSong(String songName, String art, int dura, String sauce, String fpath, String genre, String album)
     {
 
-        String sql = "INSERT INTO " + table + " (title, artists, duration, source, filepath) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "')";
+        String sql = "INSERT INTO Songs (title, artists, duration, source, filepath, genre, album) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "', '" + genre + "', '" + album + "')";
 
         try {
             Statement statement = dataSource.getConnection().createStatement();
@@ -61,10 +61,10 @@ public class EASVDatabase
     /**
      * Remove Songs from SQL database.
       */
-    public void removeSong(String table, int id)
+    public void removeSong(int id)
     {
         try {
-            String sql = "DELETE FROM " + table + " WHERE id LIKE '%" + id + "%'";
+            String sql = "DELETE FROM Songs WHERE id LIKE '%" + id + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
@@ -74,10 +74,10 @@ public class EASVDatabase
         }
     }
 
-    public void removeSong(String table, String songName)
+    public void removeSong(String songName)
     {
         try {
-            String sql = "DELETE FROM " + table + " WHERE title LIKE '%" + songName + "%'";
+            String sql = "DELETE FROM Songs WHERE title LIKE '%" + songName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);

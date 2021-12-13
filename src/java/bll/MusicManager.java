@@ -1,6 +1,5 @@
 package bll;
 
-import be.MusicModel;
 import be.SongModel;
 import dal.db.EASVDatabase;
 import javafx.beans.property.BooleanProperty;
@@ -11,12 +10,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.ArrayList;
 
 public class MusicManager {
 
-        public final ArrayList<MusicModel> dataArray = new ArrayList();
         public final ObservableList<SongModel> data = FXCollections.observableArrayList();
         public final BooleanProperty isPlaying = new SimpleBooleanProperty();
 

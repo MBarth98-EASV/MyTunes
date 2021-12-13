@@ -9,9 +9,8 @@ import java.util.Map;
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.
  */
-public class SongModel implements ISearchable{
-
-
+public class SongModel implements ISearchable
+{
     /**
      * the title of the song
      */

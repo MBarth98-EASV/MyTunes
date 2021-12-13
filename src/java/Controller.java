@@ -133,6 +133,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             audioManager.setVolume(sliderVolume.getValue());
         });
 
+        this.sliderSong.setMax(1.0);
+        this.sliderSong.setMin(0.0);
+        sliderSong.valueProperty().bind(this.audioManager.getCompletionRatio());
+
         this.lblSongName.textProperty().bind(this.audioManager.getCurrentSong().asString());
 
         this.lblSongCurrentTime.textProperty().bind(Bindings.createStringBinding(this::formatCurrentTime, this.audioManager.getCurrentTime()));
@@ -365,9 +369,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
     }
 
-    public void onSongAddToPlayList(ActionEvent actionEvent) {
+    public void onSongAddToPlayList(ActionEvent actionEvent)
+    {
         SongModel addSong = tblViewSongs.getSelectionModel().getSelectedItem();
-        //tblViewPlaylist.getSelectionModel().getSelectedItem().
+        // todo: ?
     }
 
 

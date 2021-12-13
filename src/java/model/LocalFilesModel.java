@@ -13,7 +13,6 @@ import java.util.List;
 public class LocalFilesModel {
 
     LocalFilesManager localFilesManager;
-    ObservableList musicFilePaths;
 
     public static SongModel currentlySelectedSong;
 

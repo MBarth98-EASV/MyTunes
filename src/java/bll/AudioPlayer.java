@@ -2,16 +2,10 @@ package bll;
 
 import be.IAudio;
 import be.SongModel;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-
-import java.io.File;
-import java.net.URI;
 
 
 public class AudioPlayer implements IAudio
@@ -22,16 +16,25 @@ public class AudioPlayer implements IAudio
 
     ObjectProperty<Duration> CurrentlyPlayedTime;
     ObjectProperty<Duration> TotalClipTime;
+    DoubleProperty completionRatio;
 
     public AudioPlayer()
     {
         isPlaying = new SimpleBooleanProperty();
         CurrentlyPlayedTime = new SimpleObjectProperty<>();
         TotalClipTime = new SimpleObjectProperty<>();
+        completionRatio = new SimpleDoubleProperty();
 
         isPlaying.setValue(false);
         CurrentlyPlayedTime.set(Duration.ZERO);
         TotalClipTime.set(Duration.ZERO);
+
+        CurrentlyPlayedTime.addListener((observable, oldValue, newValue) -> {
+            if (TotalClipTime.get().toSeconds() > 0)
+            {
+                completionRatio.setValue(newValue.toSeconds() / TotalClipTime.get().toSeconds());
+            }
+        });
     }
 
     @Override
@@ -43,8 +46,6 @@ public class AudioPlayer implements IAudio
     @Override
     public void load(String path)
     {
-
-
         if (musicPlayer != null)
         {
             musicPlayer.stop();

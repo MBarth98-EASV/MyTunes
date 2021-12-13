@@ -1,29 +1,17 @@
 package be;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.util.Duration;
-
 
 
 public class PlaylistModel implements ISearchable
 {
-    private static final String TYPE = "[PLAYLIST]";
-
     /**
      *  used to determine where the entity is displayed.
      */
@@ -151,7 +139,7 @@ public class PlaylistModel implements ISearchable
 
     @Override
     public String toString(){
-        return TYPE + "         " + name.get();
+        return name.get();
     }
 
     public ObjectProperty<Duration> getTotalDurationProperty()

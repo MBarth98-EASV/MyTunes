@@ -2,10 +2,7 @@ package bll;
 
 import be.PlaylistModel;
 import be.SongModel;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
@@ -86,8 +83,6 @@ public class AudioManager
         {
             this.selectedSong.setValue(song);
         }
-
-
     }
 
     public void setVolume(double value)
@@ -116,4 +111,11 @@ public class AudioManager
     {
         return this.player.TotalClipTime;
     }
+
+    public DoubleProperty getCompletionRatio()
+    {
+        return this.player.completionRatio;
+    }
+
+
 }

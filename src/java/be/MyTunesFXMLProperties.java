@@ -10,9 +10,9 @@ public class MyTunesFXMLProperties
 
     @FXML public Button btnSettings;
 
-    @FXML public TreeTableView<PlaylistModel> treeView;
+    @FXML public TreeTableView<PlaylistModel> treeView = new TreeTableView<>();
 
-    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnPlaylist;
+    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnPlaylist = new TreeTableColumn<>();
 
     @FXML public TreeTableColumn tvColumnArtist;
 
@@ -69,5 +69,21 @@ public class MyTunesFXMLProperties
     @FXML public ToggleButton tglBtnShuffle;
 
     @FXML public Slider sliderVolume = new Slider();
+
+    @FXML public Button btnSongAddToPlaylist;
+
+    @FXML public Button btnSongRemoveFromPlaylist;
+
+    @FXML public ComboBox cmboBoxFilter;
+
+    @FXML public Button btnClearSearchFilter;
+
+    @FXML public TableView<PlaylistModel> tblViewPlaylist = new TableView<PlaylistModel>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistName = new TableColumn<PlaylistModel, String>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistSongCount = new TableColumn<PlaylistModel, String>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistDuration = new TableColumn<PlaylistModel, String>();
 
 }

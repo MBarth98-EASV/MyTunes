@@ -165,7 +165,7 @@ public class SongModel extends MusicModel {
         this.album.set(album);
     }
 
-
+    @Override
     public String getType() {
         return TYPE;
     }

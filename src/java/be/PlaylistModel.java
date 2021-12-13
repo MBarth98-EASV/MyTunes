@@ -1,6 +1,7 @@
 package be;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class PlaylistModel extends MusicModel
     /**
      *   songs assigned to this playlist.
      */
-    private final ListProperty<SongModel> songs;
+    private final ObservableList<SongModel> songs;
 
     /**
      *  currently selected entry in the playlist songs.
@@ -52,7 +53,7 @@ public class PlaylistModel extends MusicModel
     public PlaylistModel()
     {
         this.orderID = new SimpleIntegerProperty();
-        this.songs = new SimpleListProperty<>();
+        this.songs = FXCollections.observableArrayList();
         this.selectedSongIndex = new SimpleIntegerProperty();
         this.isActive = new SimpleBooleanProperty();
         this.name = new SimpleStringProperty();
@@ -85,12 +86,12 @@ public class PlaylistModel extends MusicModel
 
     public ObservableList<SongModel> getSongs()
     {
-        return songs.get();
+        return songs;
     }
 
     public void setSongs(List<SongModel> songs)
     {
-        this.songs.getValue().setAll(songs);
+        this.songs.setAll(songs);
     }
       
 
@@ -127,6 +128,7 @@ public class PlaylistModel extends MusicModel
         this.name.set(name);
     }
 
+    @Override
     public String getType(){
         return TYPE;
     }

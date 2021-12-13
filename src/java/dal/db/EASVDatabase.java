@@ -116,10 +116,10 @@ public class EASVDatabase
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
+                songGenre =  result.getString("genre");
                 songAlbum = result.getString("album");
-                songGenre = result.getString("genre");
 
-                songs.add(new SongModel(songId, songTitle, songArtist, 0, "local", songLocation));
+                songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
             }
 
             return songs;
@@ -166,4 +166,110 @@ public class EASVDatabase
             e.printStackTrace();
         }
     }
+
+ //TODO: Make methods applicable for Title and Artist which takes two parameters.
+
+    public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
+        String sql = null;
+        if (!filterType2.equals("NONE")){
+            sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%' " +
+                    "OR " + filterType2 + " LIKE '%" + filterParameter + "%'";
+        }
+        else sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%'";
+
+        List<SongModel> songs = new ArrayList<>();
+
+        String songTitle;
+        int songId;
+        String songArtist;
+        String songLocation;
+        String songGenre;
+        String songAlbum;
+
+        try
+        {
+            System.out.println("trying to get all filtered songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+                songTitle = result.getString("title");
+                songId = result.getInt("id");
+                songArtist = result.getString("artists");
+                songLocation = result.getString("filepath");
+                songGenre =  result.getString("genre");
+                songAlbum = result.getString("album");
+
+                songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
+            }
+
+            return songs;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("database is not available");
+            // return empty array - garentee not null
+            return new ArrayList<>();
+        }
+    }
+
+
+    /** Select every value in the wanted column and returns it as a list of Strings.
+     * @param filterType The column to select from. The filter is determined by
+     * the user in the Combobox Filter.
+     * @return
+     */
+    public List<String> allAvailableByParameter(String filterType){
+        String sql = "SELECT DISTINCT " + filterType + " FROM dbo.Songs " ;
+        List<String> SearchEntryFilter = new ArrayList<>();
+
+
+        try
+        {
+            System.out.println("trying to get all songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+            {
+                String chosenFilter = result.getString(1);
+                if (chosenFilter == null || chosenFilter.isEmpty()){
+                    chosenFilter = "N/A";
+                }
+                SearchEntryFilter.add(chosenFilter);
+            }
+
+            return SearchEntryFilter;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("database is not available");
+            ex.printStackTrace();
+            // return empty array - garentee not null
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Add song to SQL database table.
+     */
+    public void addAllSongsFromDir(String title, String artist, int dura, String source, String fpath, String genre, String album)
+    {
+            String sql = "INSERT INTO dbo.Songs (title, artists, duration, source, filepath, genre, album) " +
+                    "VALUES ('" + title + "', '" + artist + "', '" + dura + "', '"
+                    + source + "', '" + fpath + "', '" + genre + "', '" + album + "')";
+
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.execute(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

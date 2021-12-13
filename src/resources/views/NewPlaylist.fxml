@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="193.0" maxWidth="320.0" minHeight="193.0" minWidth="236.0" prefHeight="193.0" prefWidth="236.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongController">
+    <children>
+        <GridPane prefHeight="190.0" prefWidth="236.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="226.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="0.0" prefWidth="84.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="318.0" minHeight="0.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="9.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="389.0" style="-fx-font-size: 16;" text="New Playlist" textAlignment="CENTER" GridPane.columnSpan="2147483647" />
+                <Label prefHeight="17.0" prefWidth="334.0" text="Name:" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                    <padding>
+                        <Insets left="4.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="txtFieldPlaylistName" prefHeight="33.0" prefWidth="226.0" style="-fx-background-color: #464646; -fx-font-size: 13; -fx-border-color: derive( #404040,20%); -fx-border-radius: 5; -fx-border-width: 2;" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                <Button fx:id="btnAddPlaylist" mnemonicParsing="false" onAction="#onAddPlaylist" prefHeight="32.0" prefWidth="74.0" style="-fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Add" GridPane.columnSpan="2147483647" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
+    </children>
+</AnchorPane>

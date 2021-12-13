@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
+import dal.db.EASVDatabase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -29,7 +30,11 @@ public class LocalFilesDAO {
 
     private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
     private static final Path dirPath = Path.of("src/resources/data/directory.txt");
+    EASVDatabase db;
 
+    public LocalFilesDAO() {
+        db = new EASVDatabase();
+    }
 
     /**
      * Lists all files in the given path, and checks whether it's a directory
@@ -106,28 +111,12 @@ public class LocalFilesDAO {
     }
 
     /**
-     * Writes the given path to externalsongs.txt. Also checks whether or not the given
-     * path is of a supported filetype (.mp3 or .wav). An exception is thrown if it is not.
+     * Load the given filepath to the DB via loadToDB, which parses any
+     * metadata and writes it in the database.
      * @param path The path to the song added manually by the user.
-     * @return The input path.
      */
-    public Path addSong(Path path) {
-
-        try (BufferedWriter bw = Files.newBufferedWriter(songPath, StandardOpenOption.SYNC,
-                StandardOpenOption.APPEND, StandardOpenOption.WRITE)) {
-
-            if (checkForMp3OrWav(String.valueOf(path))) {
-                bw.newLine();
-                bw.write(String.valueOf(path));
-            } else throw new Exception("The file you added is not currently supported");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return path;
+    public void addSong(Path path) {
+        loadSongToDB(Collections.singletonList(path));
     }
 
     /**
@@ -157,7 +146,6 @@ public class LocalFilesDAO {
         return returnList;
     }
 
-
     /**
      * Checks the characters of a filename after the "." indicating it's filetype.
      * @param fileName String value of a Path object.
@@ -175,20 +163,7 @@ public class LocalFilesDAO {
         } else return false;
     }
 
-    /**
-     *
-     * @return
-     * 
-     * Throws "Could not invoke DirectBuffer method - illegal access".
-     * Library fault - To do.
-     */
-    public List<SongModel> loadAllLocalSongs() {
-        ArrayList<SongModel> returnList = new ArrayList<>();
-        ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromDirectory(loadDirectory()));
-        loadList.addAll(loadAllExternalSongs());
-
-
+    public void loadSongToDB(List<Path> loadList){
         for (Path p : loadList) {
             String artist = "Unknown Artist";
             String title = String.valueOf(p);
@@ -249,11 +224,23 @@ public class LocalFilesDAO {
                 e.printStackTrace();
             }
 
-            int id = (int) (Math.random() * 100);
-                returnList.add(new SongModel(id, title, artist, genre, album, duration, "local", p.toString()));
+            db.addAllSongsFromDir(title, artist, duration, "local", p.toString(), genre, album);
         }
+    }
 
-        return returnList;
+
+    /**
+     *
+     * @return
+     * 
+     * Throws "Could not invoke DirectBuffer method - illegal access".
+     * Library fault - To do.
+     */
+    public void loadAllLocalSongs(Path directory) {
+        ArrayList<Path> loadList = new ArrayList<>();
+        loadList.addAll(readAllFromDirectory(directory));
+        loadSongToDB(loadList);
+
     }
     
     

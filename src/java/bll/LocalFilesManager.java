@@ -2,6 +2,7 @@ package bll;
 
 import be.SongModel;
 import dal.LocalFilesDAO;
+import dal.db.EASVDatabase;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -12,22 +13,23 @@ public class LocalFilesManager
 {
 
     LocalFilesDAO localFilesDAO;
+    EASVDatabase db;
 
     public LocalFilesManager() 
     {
         localFilesDAO = new LocalFilesDAO();
+        db = new EASVDatabase();
     }
 
-    public List<SongModel> readAllFromNewDir(Path path)
+    public void loadAllFromNewDir(Path path)
     {
-        localFilesDAO.saveDirectory(path);
-        return localFilesDAO.loadAllLocalSongs();
+        localFilesDAO.loadAllLocalSongs(path);
     }
 
 
-    public Path addSong(Path path){
 
-        return localFilesDAO.addSong(path);
+    public void addSong(Path path){
+        localFilesDAO.addSong(path);
 
     }
 

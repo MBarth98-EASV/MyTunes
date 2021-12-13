@@ -10,9 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class MusicManager {
@@ -53,6 +52,7 @@ public class MusicManager {
 
         public int getDuration()
         {
+            musicPlayer.getOnReady();
             return (int) musicPlayer.getCurrentTime().toSeconds();
         }
 
@@ -63,5 +63,11 @@ public class MusicManager {
 
         public void setMaxDuration()
         {
+            musicPlayer.getTotalDuration().toSeconds();
+        }
+
+        public void setPlayback(int seekTime)
+        {
+            musicPlayer.seek(Duration seekTime);
         }
 }

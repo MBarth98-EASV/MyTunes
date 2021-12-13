@@ -162,7 +162,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    @FXML private void onPlayPauseTrack(ActionEvent actionEvent) throws URISyntaxException
+    @FXML private void onPlayPauseTrack(ActionEvent actionEvent)
     {
         if (songPlayer.isPlaying.getValue() == false) {
            if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null))
@@ -183,7 +183,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         }
     }
 
-    @FXML private void onNextTrack(ActionEvent actionEvent) throws URISyntaxException
+    @FXML private void onNextTrack(ActionEvent actionEvent)
     {
         songPlayer.stopTrack();
 
@@ -194,7 +194,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         }
     }
 
-    @FXML private void onPreviousTrack(ActionEvent actionEvent) throws URISyntaxException
+    @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
         if (songPlayer.getDuration() > 5)
         {

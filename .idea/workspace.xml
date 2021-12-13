@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/MyTunesFXMLProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +108,10 @@
       <workItem from="1639249319139" duration="1577000" />
       <workItem from="1639303005435" duration="2097000" />
       <workItem from="1639387204882" duration="12584000" />
-      <workItem from="1639410769138" duration="2566000" />
+      <workItem from="1639410769138" duration="2647000" />
+      <workItem from="1639423504766" duration="1483000" />
+      <workItem from="1639425219088" duration="81000" />
+      <workItem from="1639425327880" duration="2969000" />
     </task>
     <servers />
   </component>

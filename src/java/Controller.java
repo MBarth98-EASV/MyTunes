@@ -7,11 +7,11 @@ import be.SongModel;
 import com.google.gson.Gson;
 import dal.db.EASVDatabase;
 import javafx.event.EventHandler;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import model.LocalFilesModel;
 
 import javafx.beans.property.BooleanProperty;
@@ -86,8 +86,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnPlaylistSongCount.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("songCount"));
         this.tblClmnPlaylistDuration.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("duration"));
 
-
-
+        handlePlaylistDoubleClick();
+        songContextMenu();
+        playlistContextMenu();
 
         data.addAll();
         tblViewSongs.setItems(data);
@@ -186,6 +187,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSongDelete(ActionEvent event)
     {
+        System.out.println("delete song");
         throw new NotImplementedException();
     }
 
@@ -383,5 +385,55 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     public void onPlayPauseTrack(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    public void handlePlaylistDoubleClick(){
+        tblViewPlaylist.setRowFactory( tv -> {
+            TableRow<PlaylistModel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                    PlaylistModel rowData = row.getItem();
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
+    }
+
+    @FXML
+    public void songContextMenu(){
+        ContextMenu contextMenuSongs = new ContextMenu();
+        tblViewSongs.setContextMenu(contextMenuSongs);
+        contextMenuSongs.setStyle("-fx-background-color: #404040; " +
+                "-fx-text-fill: WHITE;");
+        MenuItem newSong = new MenuItem("New");
+        MenuItem editSong = new MenuItem("Edit");
+        MenuItem deleteSong = new MenuItem("Delete");
+        newSong.setOnAction(event -> onSongNew(event));
+        editSong.setOnAction(event -> onSongEdit(event));
+        deleteSong.setOnAction(event -> onSongDelete(event));
+        contextMenuSongs.getItems().add(newSong);
+        contextMenuSongs.getItems().add(editSong);
+        contextMenuSongs.getItems().add(deleteSong);
+    }
+
+    @FXML
+    public void playlistContextMenu(){
+        ContextMenu contextMenuPlaylist = new ContextMenu();
+        tblViewPlaylist.setContextMenu(contextMenuPlaylist);
+        contextMenuPlaylist.setStyle("-fx-background-color: #404040; " +
+                "-fx-text-fill: WHITE;");
+        MenuItem newSong = new MenuItem("New");
+        MenuItem editSong = new MenuItem("Edit");
+        MenuItem deleteSong = new MenuItem("Delete");
+        newSong.setOnAction(event -> onPlaylistNew(event));
+        editSong.setOnAction(event -> onPlaylistEdit(event));
+        deleteSong.setOnAction(event -> onPlaylistDelete(event));
+        contextMenuPlaylist.getItems().add(newSong);
+        contextMenuPlaylist.getItems().add(editSong);
+        contextMenuPlaylist.getItems().add(deleteSong);
     }
 }

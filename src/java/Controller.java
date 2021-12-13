@@ -73,7 +73,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
     final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
 
-
     SearchModel searchModel;
     MusicManager songPlayer = new MusicManager();
 
@@ -159,6 +158,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         sliderVolume.valueProperty().addListener((observable, oldValue, newValue) -> {
             songPlayer.setVolume(sliderVolume.getValue());
         });
+
+        songPlayer.getDuration().addListener(((observable, oldValue, newValue) -> {
+           lblSongTotalTime.setText(songPlayer.getFormattedDuration());
+        }));
+
     }
 
 
@@ -196,7 +200,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        if (songPlayer.getDuration() > 5)
+        if (songPlayer.getDuration().getValue() > 5)
         {
             songPlayer.stopTrack();
             songPlayer.playTrack();

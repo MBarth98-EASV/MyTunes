@@ -91,9 +91,7 @@ public class PlaylistModel extends MusicModel
 
     public void setSongs(List<SongModel> songs)
     {
-        if(songs != null){
-            this.songs.setAll(songs);//.getValue().setAll(songs);
-        }
+        this.songs.setAll(songs);
     }
       
 

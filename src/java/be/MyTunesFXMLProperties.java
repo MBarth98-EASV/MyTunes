@@ -10,9 +10,9 @@ public class MyTunesFXMLProperties
 
     @FXML public Button btnSettings;
 
-    @FXML public TreeTableView<PlaylistModel> treeView;
+    @FXML public TreeTableView<PlaylistModel> treeView = new TreeTableView<>();
 
-    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnPlaylist;
+    @FXML public TreeTableColumn<PlaylistModel, String> tvColumnPlaylist = new TreeTableColumn<>();
 
     @FXML public TreeTableColumn tvColumnArtist;
 

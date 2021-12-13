@@ -407,14 +407,19 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     public void songContextMenu(){
         ContextMenu contextMenuSongs = new ContextMenu();
         tblViewSongs.setContextMenu(contextMenuSongs);
-        contextMenuSongs.setStyle("-fx-background-color: #404040; " +
-                "-fx-text-fill: WHITE;");
+        contextMenuSongs.setStyle("-fx-background-color: #404040; ");
+
         MenuItem newSong = new MenuItem("New");
+        newSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem editSong = new MenuItem("Edit");
+        editSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem deleteSong = new MenuItem("Delete");
+        deleteSong.setStyle("-fx-text-fill: #d5d4d4;");
+
         newSong.setOnAction(event -> onSongNew(event));
         editSong.setOnAction(event -> onSongEdit(event));
         deleteSong.setOnAction(event -> onSongDelete(event));
+
         contextMenuSongs.getItems().add(newSong);
         contextMenuSongs.getItems().add(editSong);
         contextMenuSongs.getItems().add(deleteSong);
@@ -423,15 +428,20 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     public void playlistContextMenu(){
         ContextMenu contextMenuPlaylist = new ContextMenu();
+        contextMenuPlaylist.setStyle("-fx-background-color: #404040;");
         tblViewPlaylist.setContextMenu(contextMenuPlaylist);
-        contextMenuPlaylist.setStyle("-fx-background-color: #404040; " +
-                "-fx-text-fill: WHITE;");
+
         MenuItem newSong = new MenuItem("New");
+        newSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem editSong = new MenuItem("Edit");
+        editSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem deleteSong = new MenuItem("Delete");
+        deleteSong.setStyle("-fx-text-fill: #d5d4d4;");
+
         newSong.setOnAction(event -> onPlaylistNew(event));
         editSong.setOnAction(event -> onPlaylistEdit(event));
         deleteSong.setOnAction(event -> onPlaylistDelete(event));
+
         contextMenuPlaylist.getItems().add(newSong);
         contextMenuPlaylist.getItems().add(editSong);
         contextMenuPlaylist.getItems().add(deleteSong);

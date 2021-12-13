@@ -1,0 +1,12 @@
+.context-menu {
+    -fx-background-color: #404040;
+}
+
+.menu-item {
+    -fx-text-fill: #d5d4d4;
+}
+
+.menu-item:focused   {
+    -fx-font-weight: bold;
+    -fx-background-color: #5786cb;
+}

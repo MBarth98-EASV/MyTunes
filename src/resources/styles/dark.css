@@ -81,8 +81,19 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d,50%);
+    -fx-background-color: #404040;
 }
+
+.menu-item {
+    -fx-text-fill: #d5d4d4;
+}
+
+.menu-item:focused   {
+    -fx-font-weight: bold;
+    -fx-background-color: #5786cb;
+}
+
+
 
 .menu-bar .label {
     -fx-font-size: 14pt;
@@ -566,15 +577,14 @@
 .menu-item:focused .label {
     -fx-text-fill: #005797;
 }
-
+/*
 .context-menu {
     -fx-background-color: #404040;
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
-    /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
-    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
 }
-
+*/
 
 .blackSeparator.separator .line {
     -fx-border-width: 1px;

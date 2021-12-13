@@ -213,11 +213,23 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     @FXML
-    private void onSongEdit(ActionEvent event){
-        LocalFilesModel.setCurrentlySelectedSong((SongModel) tblViewSongs.getSelectionModel().getSelectedItem());
+    private void onSongEdit(ActionEvent event)
+    {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
+
+            ResourceBundle resources = new ListResourceBundle() {
+                @Override
+                protected Object[][] getContents() {
+                    return new Object[][] {
+                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem() }
+                    };
+                }
+            };
+
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")), resources);
+
             Stage stage = new Stage();
+
             stage.setTitle("Edit Song");
             stage.setMaxHeight(305);
             stage.setMinHeight(305);

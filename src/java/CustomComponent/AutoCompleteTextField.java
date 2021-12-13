@@ -25,7 +25,7 @@ public class AutoCompleteTextField extends TextField
     /** The existing autocomplete entries. */
     private final SortedSet<String> entries;
     /** The popup used to select an entry. */
-    private ContextMenu entriesPopup;
+    private final ContextMenu entriesPopup;
 
     /** Construct a new AutoCompleteTextField. */
     public AutoCompleteTextField() {

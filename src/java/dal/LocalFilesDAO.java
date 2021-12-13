@@ -158,9 +158,7 @@ public class LocalFilesDAO {
         if (i > 0) {
             extension = fileName.substring(i + 1);
         }
-        if (extension.equals("mp3") || extension.equals("wav")) {
-            return true;
-        } else return false;
+        return extension.equals("mp3") || extension.equals("wav");
     }
 
     public void loadSongToDB(List<Path> loadList){

@@ -34,9 +34,11 @@ public class SongController implements Initializable {
 
     @FXML public TextField txtFieldPLEditName;
     @FXML public Button btnEditPLName;
-  
+
     String songPath = null;
     LocalFilesModel localFilesModel;
+
+    SongModel model;
 
     public SongController()
     {
@@ -47,8 +49,8 @@ public class SongController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
-
+        model = (SongModel) resources.getObject("selectedSong");
+        System.out.println(model.getTitle());
     }
 
     public void onSelectFile(ActionEvent event) 
@@ -71,19 +73,19 @@ public class SongController implements Initializable {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-  
-  
+
     public void onRemoveSong(ActionEvent event) {
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public void onEditSongDone(ActionEvent event) {
+    public void onEditSongDone(ActionEvent event)
+    {
         String editTitle = txtFieldEditTitle.getText();
         String editArtist = txtFieldEditArtist.getText();
         String editAlbum = txtFieldEditAlbum.getText();
         String editGenre = txtFieldEditGenre.getText();
-        SongModel currentlySelected = LocalFilesModel.getCurrentlySelectedSong();
+        SongModel currentlySelected = model;
 
         if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
         currentlySelected.setArtists(editArtist); }

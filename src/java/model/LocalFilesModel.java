@@ -14,13 +14,10 @@ public class LocalFilesModel {
 
     LocalFilesManager localFilesManager;
 
-    public static SongModel currentlySelectedSong;
-
     public LocalFilesModel() 
     {
         localFilesManager = new LocalFilesManager();
     }
-
 
     public void readAllFromNewDir(Path path)
     {
@@ -29,14 +26,6 @@ public class LocalFilesModel {
 
     public void addSong(Path path) {
         localFilesManager.addSong(path);
-    }
-
-    public static void setCurrentlySelectedSong(SongModel songModel){
-        currentlySelectedSong = songModel;
-    }
-
-    public static SongModel getCurrentlySelectedSong(){
-        return currentlySelectedSong;
     }
 
     public void removeSong(Path path){

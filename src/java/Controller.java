@@ -257,7 +257,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                             break;
                         }
                         default: {
-                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,treeView,txtFieldSearch);
+                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,tblViewPlaylist,txtFieldSearch);
                             break;
                         }
                     }

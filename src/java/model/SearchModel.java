@@ -66,10 +66,10 @@ public class SearchModel {
      * to its actual class and selected and scrolled to in its list.
      * @param alldata A list of every song and playlist available as a MusicModel instance.
      * @param songTable The table of songs in the GUI.
-     * @param treeTableView The table of Playlists.
+     * @param playlistTable The table of Playlists.
      * @param textField The searchbar.
      */
-    public void filterEqualsSearch(List<MusicModel> alldata, TableView songTable, TreeTableView treeTableView, AutoCompleteTextField textField){
+    public void filterEqualsSearch(List<MusicModel> alldata, TableView songTable, TableView playlistTable, AutoCompleteTextField textField){
         MusicModel m = getObjectFromText(alldata, textField.getText());
         if (m == null){
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -83,10 +83,8 @@ public class SearchModel {
             songTable.scrollTo((SongModel) m);
         }
         if (m.getType().equals("[PLAYLIST]")){
-            TreeItem treeItem = getTreeItem(treeTableView.getRoot().getChildren(), (PlaylistModel) m);
-            treeTableView.getSelectionModel().select(treeItem);
-            int index = treeItem.getParent().getChildren().indexOf(treeItem);
-            treeTableView.scrollTo(index);
+            playlistTable.getSelectionModel().select((PlaylistModel) m);
+            playlistTable.scrollTo((PlaylistModel) m);
         }
     }
 

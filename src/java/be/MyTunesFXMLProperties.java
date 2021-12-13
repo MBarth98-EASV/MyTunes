@@ -77,4 +77,13 @@ public class MyTunesFXMLProperties
     @FXML public ComboBox cmboBoxFilter;
 
     @FXML public Button btnClearSearchFilter;
+
+    @FXML public TableView<PlaylistModel> tblViewPlaylist = new TableView<PlaylistModel>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistName = new TableColumn<PlaylistModel, String>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistSongCount = new TableColumn<PlaylistModel, String>();
+
+    @FXML public TableColumn<PlaylistModel, String> tblClmnPlaylistDuration = new TableColumn<PlaylistModel, String>();
+
 }

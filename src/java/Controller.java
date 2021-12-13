@@ -1,16 +1,16 @@
 import CustomComponent.AutoCompleteTextField;
 import CustomComponent.ComboBoxEnum;
+import be.ISearchable;
 import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
 import bll.AudioManager;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
-import javafx.scene.control.TableView;
 import dal.db.EASVDatabase;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import model.LocalFilesModel;
 
 import javafx.collections.FXCollections;
@@ -65,6 +65,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistName);
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistSongCount);
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistDuration);
+
+        audioManager.handleEndOfMusic.set(() -> onNextTrack(null));
     }
 
 
@@ -108,7 +110,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        tblViewSongs.setItems(audioManager.getAvailableSongs());
+        tblViewSongs.itemsProperty().bind(audioManager.getAvailableSongs());
 
         tblViewSongs.getFocusModel().focusedCellProperty().addListener(o -> onSongSelectionChanged());
     }
@@ -131,6 +133,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             audioManager.setVolume(sliderVolume.getValue());
         });
 
+        this.lblSongName.textProperty().bind(this.audioManager.getCurrentSong().asString());
+
+        this.lblSongCurrentTime.textProperty().bind(Bindings.createStringBinding(this::formatCurrentTime, this.audioManager.getCurrentTime()));
+        this.lblSongTotalTime.textProperty().bind(Bindings.createStringBinding(this::formatTotalTime, this.audioManager.getTotalTime()));
     }
 
 
@@ -199,6 +205,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.tblViewSongs.refresh();
     }
 
     @FXML
@@ -239,12 +246,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         throw new NotImplementedException();
     }
 
-    @FXML
-    private void setVolume(ActionEvent event)
-    {
-        throw new NotImplementedException();
-    }
-
     /**
      * Sets the searchbutton enterkey action depending on the selected mode in
      * the combobox.
@@ -255,39 +256,37 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSearch(ActionEvent event)
     {
-        txtFieldSearch.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        txtFieldSearch.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
             @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getCode().equals(KeyCode.ENTER)) {
+            public void handle(KeyEvent key)
+            {
+                if (key.getCode().equals(KeyCode.ENTER))
+                {
                     int selectedItem = cmboBoxFilter.getSelectionModel().getSelectedIndex();
 
-                    switch (ComboBoxEnum.values()[selectedItem]){
-                        case ARTIST: {
-                            searchModel.filterEqualsArtist(tblViewSongs, txtFieldSearch.getText());
-                            break;
+                    switch (ComboBoxEnum.values()[selectedItem])
+                    {
+                        case ARTIST -> {
+                            searchModel.filterArtist(tblViewSongs, txtFieldSearch.getText());
                         }
-                        case ALBUM: {
-                            searchModel.filterEqualsAlbum(tblViewSongs, txtFieldSearch.getText());
-                            break;
+                        case ALBUM -> {
+                            searchModel.filterAlbum(tblViewSongs, txtFieldSearch.getText());
                         }
-                        case GENRE: {
-                            searchModel.filterEqualsGenre(tblViewSongs, txtFieldSearch.getText());
-                            break;
+                        case GENRE -> {
+                            searchModel.filterGenre(tblViewSongs, txtFieldSearch.getText());
                         }
-                        case ARTISTTITLE: {
-                            searchModel.filterEqualsArtistTitle(tblViewSongs, txtFieldSearch.getText());
-                            break;
+                        case ARTISTTITLE -> {
+                            searchModel.filterArtistAndTitle(tblViewSongs, txtFieldSearch.getText());
                         }
-                        default: {
-                            //searchModel.filterEqualsSearch(dataArray,tblViewSongs,tblViewPlaylist,txtFieldSearch);
-                            break;
+                        default -> {
+                            searchModel.filterEqualsSearch(tblViewSongs, txtFieldSearch);
                         }
                     }
                 }
             }
         });
-
-        }
+    }
 
 
     @FXML
@@ -343,16 +342,25 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * in the database.
      * @param inputList
      */
-    private void initializeStringSearchEntries(List<String> inputList){
+    private <T extends ISearchable> void initializeGenericSearchEntries(List<T> inputList){
         txtFieldSearch.getEntries().clear();
-        for (int i = 0; i < inputList.size(); i++){
-            txtFieldSearch.getEntries().add((inputList.get(i)));
 
+        for (int i = 0; i < inputList.size(); i++)
+        {
+            txtFieldSearch.getEntries().add((inputList.get(i).toSearchable()));
         }
     }
 
-    public void onShuffleToggled(ActionEvent event) {
+    private void initializeStringSearchEntries(List<String> inputList){
+        txtFieldSearch.getEntries().clear();
+
+        for (int i = 0; i < inputList.size(); i++)
+        {
+            txtFieldSearch.getEntries().add((inputList.get(i)));
+        }
     }
+
+
 
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
     }
@@ -363,15 +371,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    private void setComboBox(){
-        ObservableList<String> comboBoxList = FXCollections.observableArrayList();
-        comboBoxList.add("Search");
-        comboBoxList.add("Artist | Filter");
-        comboBoxList.add("Album | Filter");
-        comboBoxList.add("Genre | Filter");
-        comboBoxList.add("Artist/Title | Filter");
-        cmboBoxFilter.setItems(comboBoxList);
-        cmboBoxFilter.getSelectionModel().select(comboBoxList.get(0));
+    private void setComboBox()
+    {
+        cmboBoxFilter.setItems(FXCollections.observableArrayList("Search", "Artist | Filter", "Album | Filter", "Genre | Filter", "Artist/Title | Filter"));
+        cmboBoxFilter.getSelectionModel().select(0);
     }
 
     /**
@@ -385,38 +388,51 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     /**
-     * Sets the searchbar's prompt text and it's search entries for the autocomplete feature.
-     * @param event
+     * Sets the searchbar's prompt text, and it's search entries for the autocomplete feature.
      */
-    public void onComboBoxSelect(ActionEvent event) {
+    public void onComboBoxSelect(ActionEvent event)
+    {
         int selectedItem = cmboBoxFilter.getSelectionModel().getSelectedIndex();
-        switch (ComboBoxEnum.values()[selectedItem]){
-            case ARTIST: {
-                txtFieldSearch.setPromptText("Enter artist to filter");
+
+        switch (ComboBoxEnum.values()[selectedItem])
+        {
+            case ARTIST -> {
                 initializeStringSearchEntries(searchModel.allAvailableArtist());
-                break;
+                txtFieldSearch.setPromptText("Enter artist to filter");
             }
-            case ALBUM: {
+            case ALBUM -> {
                 initializeStringSearchEntries(searchModel.allAvailableAlbums());
                 txtFieldSearch.setPromptText("Enter album to filter");
-                break;
             }
-            case GENRE: {
+            case GENRE -> {
                 initializeStringSearchEntries(searchModel.allAvailableGenre());
                 txtFieldSearch.setPromptText("Enter genre to filter");
-                break;
             }
-            case ARTISTTITLE: {
+            case ARTISTTITLE -> {
                 initializeStringSearchEntries(searchModel.allAvailableTitleArtist());
                 txtFieldSearch.setPromptText("Enter artist or title to filter");
-                break;
             }
-            default: {
-               // initializeMMSearchEntries(dataArray); //Uses the original input data for the table.
-                //tblViewSongs.setItems(data);
+            default -> {
+                initializeGenericSearchEntries(searchModel.allAvailable());
                 txtFieldSearch.setPromptText("Press enter to search");
-                break;
             }
         }
     }
+
+    private String formatDuration(Duration duration)
+    {
+        if (duration == null) {
+            return "00:00";
+        } else {
+            return String.format("%02d:%02d", (int) duration.toMinutes(), (int) (duration.toSeconds() % 60));
+        }
+    }
+
+    private String formatCurrentTime() {
+        return formatDuration(this.audioManager.getCurrentTime().get());
+    }
+    private String formatTotalTime() {
+        return formatDuration(this.audioManager.getTotalTime().get());
+    }
+
 }

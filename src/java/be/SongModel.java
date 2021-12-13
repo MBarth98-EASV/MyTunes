@@ -9,8 +9,7 @@ import java.util.Map;
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.
  */
-public class SongModel extends MusicModel {
-    private static final String TYPE = "[SONG]";
+public class SongModel implements ISearchable{
 
 
     /**
@@ -166,14 +165,14 @@ public class SongModel extends MusicModel {
     }
 
     @Override
-    public String getType() {
-        return TYPE;
+    public String toString() {
+        //return new Gson().toJson(this);
+        return artists.get() + " - " +
+                title.get() + "  |  " + duration.get();
     }
 
     @Override
-    public String toString() {
-        //return new Gson().toJson(this);
-        return TYPE + "         " + artists.get() + " - " +
-                title.get() + "  |  " + duration.get();
+    public String toSearchable() {
+        return this.title.get();
     }
 }

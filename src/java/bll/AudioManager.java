@@ -3,12 +3,13 @@ package bll;
 import be.PlaylistModel;
 import be.SongModel;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+
 
 import java.util.List;
 
@@ -21,9 +22,16 @@ public class AudioManager
 
     private final AudioPlayer player;
 
-    public ObservableList<SongModel> getAvailableSongs() {
+    public ListProperty<SongModel> getAvailableSongs() {
         return this.selectedPlaylist.get().getSongs();
     }
+
+    public ObjectProperty<SongModel> getCurrentSong()
+    {
+        return selectedSong;
+    }
+
+    public ObjectProperty<Runnable> handleEndOfMusic = new SimpleObjectProperty<>();
 
     public AudioManager()
     {
@@ -90,11 +98,22 @@ public class AudioManager
     public void play()
     {
         player.play();
+        this.player.musicPlayer.onEndOfMediaProperty().bind(handleEndOfMusic);
     }
 
     public void pause()
     {
         player.pause();
+        this.player.musicPlayer.onEndOfMediaProperty().unbind();
     }
 
+    public ObjectProperty<Duration> getCurrentTime()
+    {
+        return this.player.CurrentlyPlayedTime;
+    }
+
+    public ObjectProperty<Duration> getTotalTime()
+    {
+        return this.player.TotalClipTime;
+    }
 }

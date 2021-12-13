@@ -15,69 +15,29 @@ public class SearchManager {
         db = new EASVDatabase();
     }
 
-    public List<SongModel> filterEqualsArtist(String filterParameter){
-        return db.filterEqualsParameter("artists", "NONE", filterParameter);
-    }
-
-    public List<SongModel> filterEqualsAlbum(String filterParameter){
-        return db.filterEqualsParameter("album", "NONE", filterParameter);
-    }
-
-
-    public List<SongModel> filterEqualsGenre(String filterParameter){
-        return db.filterEqualsParameter("genre", "NONE", filterParameter);
-    }
-
-
-    public List<SongModel> filterEqualsArtistTitle(String filterParameter){
-        List<SongModel> artistAndTitle = new ArrayList<>();
-        artistAndTitle.addAll(db.filterEqualsParameter("artists", "title", filterParameter));
-
-        return artistAndTitle;
-    }
-
-    public List<SongModel> filterEqualsSearch(){
+    public List<SongModel> getAll(){
         return db.getAllSongs();
     }
 
-    public List<String> allAvailableArtist(){
-        ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("artists"));
-
-        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
-
-        return returnList;
+    public List<SongModel> filter(String firstProperty, String filterParameter)
+    {
+        return db.filterEqualsParameter(firstProperty, "NONE", filterParameter);
     }
 
-    public List<String> allAvailableAlbums(){
-        ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("album"));
-
-        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
-
-        return returnList;
+    public List<SongModel> filter(String firstProperty, String secondProperty, String filterParameter)
+    {
+        return db.filterEqualsParameter(firstProperty, secondProperty, filterParameter);
     }
 
+    public List<String> getAllByParameter(String... params)
+    {
+        List<String> inputList = new ArrayList<>();
 
-    public List<String> allAvailableGenre(){
-        ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("genre"));
+        for (String param: params)
+        {
+            inputList.addAll(db.allAvailableByParameter(param));
+        }
 
-        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
-
-        return returnList;
+        return inputList.stream().sorted().collect(Collectors.toList());
     }
-
-
-    public List<String> allAvailableTitleArtist(){
-        ArrayList<String> inputList = new ArrayList();
-        inputList.addAll(db.allAvailableByParameter("artists"));
-        inputList.addAll(db.allAvailableByParameter("title"));
-
-        List<String> returnList = inputList.stream().sorted().collect(Collectors.toList());
-
-        return returnList;
-    }
-
-
 }

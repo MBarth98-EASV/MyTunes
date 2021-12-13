@@ -3,7 +3,9 @@ package bll;
 import be.IAudio;
 import be.SongModel;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -14,13 +16,22 @@ import java.net.URI;
 
 public class AudioPlayer implements IAudio
 {
-    MediaPlayer musicPlayer = null;
+    MediaPlayer musicPlayer;
 
-    BooleanProperty isPlaying = new SimpleBooleanProperty();
+    BooleanProperty isPlaying;
+
+    ObjectProperty<Duration> CurrentlyPlayedTime;
+    ObjectProperty<Duration> TotalClipTime;
 
     public AudioPlayer()
     {
+        isPlaying = new SimpleBooleanProperty();
+        CurrentlyPlayedTime = new SimpleObjectProperty<>();
+        TotalClipTime = new SimpleObjectProperty<>();
+
         isPlaying.setValue(false);
+        CurrentlyPlayedTime.set(Duration.ZERO);
+        TotalClipTime.set(Duration.ZERO);
     }
 
     @Override
@@ -32,13 +43,19 @@ public class AudioPlayer implements IAudio
     @Override
     public void load(String path)
     {
+
+
         if (musicPlayer != null)
         {
             musicPlayer.stop();
+            this.CurrentlyPlayedTime.unbind();
+            this.TotalClipTime.unbind();
         }
 
         // path needs to be url encoded, hence the %20, and characters can't be escaped which is why backslashes are replaced with forward-slashes
         this.musicPlayer = new MediaPlayer(new Media("file:/" + path.replace("\\", "/").replace(" ", "%20")));
+        this.CurrentlyPlayedTime.bind(this.musicPlayer.currentTimeProperty());
+        this.TotalClipTime.bind(this.musicPlayer.totalDurationProperty());
     }
 
     @Override

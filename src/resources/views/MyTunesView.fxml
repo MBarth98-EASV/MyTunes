@@ -261,11 +261,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ToggleButton fx:id="tglBtnShuffle" maxHeight="34.0" maxWidth="60.0" onAction="#onShuffleToggled" prefHeight="34.0" prefWidth="36.0" styleClass="Button" stylesheets="@../styles/shuffleButton.css" translateX="50.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ToggleButton>
+
                      </items>
                      <GridPane.margin>
                         <Insets right="25.0" />
@@ -329,7 +325,7 @@
                   <RowConstraints maxHeight="33.33331298828125" minHeight="7.33331298828125" prefHeight="12.666666666666671" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#setVolume" prefHeight="41.0" prefWidth="140.0" stylesheets="@../styles/Timeline.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Slider fx:id="sliderVolume" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="140.0" stylesheets="@../styles/Timeline.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="H_RESIZE" />
                      </cursor>

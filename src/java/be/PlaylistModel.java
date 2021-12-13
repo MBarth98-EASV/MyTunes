@@ -20,7 +20,7 @@ import javafx.util.Duration;
 
 
 
-public class PlaylistModel extends MusicModel
+public class PlaylistModel implements ISearchable
 {
     private static final String TYPE = "[PLAYLIST]";
 
@@ -33,7 +33,7 @@ public class PlaylistModel extends MusicModel
     /**
      *   songs assigned to this playlist.
      */
-    private final ObservableList<SongModel> songs;
+    private final ListProperty<SongModel> songs;
 
     /**
      *  currently selected entry in the playlist songs.
@@ -62,7 +62,7 @@ public class PlaylistModel extends MusicModel
     public PlaylistModel()
     {
         this.orderID = new SimpleIntegerProperty();
-        this.songs = FXCollections.observableArrayList();
+        this.songs = new SimpleListProperty<>();
         this.selectedSongIndex = new SimpleIntegerProperty();
         this.isActive = new SimpleBooleanProperty();
         this.name = new SimpleStringProperty();
@@ -98,14 +98,14 @@ public class PlaylistModel extends MusicModel
     }
 
 
-    public ObservableList<SongModel> getSongs()
+    public ListProperty<SongModel> getSongs()
     {
         return songs;
     }
 
     public void setSongs(List<SongModel> songs)
     {
-        this.songs.setAll(songs);
+        this.songs.setValue(FXCollections.observableArrayList(songs));
     }
 
     public IntegerProperty getCountProperty() {
@@ -150,11 +150,6 @@ public class PlaylistModel extends MusicModel
     }
 
     @Override
-    public String getType(){
-        return TYPE;
-    }
-
-    @Override
     public String toString(){
         return TYPE + "         " + name.get();
     }
@@ -164,4 +159,9 @@ public class PlaylistModel extends MusicModel
         return this.totalDuration;
     }
 
+    @Override
+    public String toSearchable()
+    {
+        return this.getName();
+    }
 }

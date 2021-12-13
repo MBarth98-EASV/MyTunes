@@ -45,6 +45,10 @@ public class PlaylistModel extends MusicModel
      */
     private final StringProperty name;
 
+    private SimpleIntegerProperty duration;
+
+    private SimpleIntegerProperty songCount;
+
 
 
     /**
@@ -57,6 +61,8 @@ public class PlaylistModel extends MusicModel
         this.selectedSongIndex = new SimpleIntegerProperty();
         this.isActive = new SimpleBooleanProperty();
         this.name = new SimpleStringProperty();
+        this.songCount = new SimpleIntegerProperty();
+        this.duration = new SimpleIntegerProperty();
     }
 
     /**
@@ -71,6 +77,8 @@ public class PlaylistModel extends MusicModel
         this.setSelectedSongIndex(selectedSong);
         this.setIsActive(isActive);
         this.setName(name);
+        this.setSongCount();
+        this.setDuration();
     }
 
     public int getID()
@@ -126,6 +134,26 @@ public class PlaylistModel extends MusicModel
     public void setName(String name)
     {
         this.name.set(name);
+    }
+
+    public int getSongCount(){
+        return songCount.get();
+    }
+
+    public void setSongCount(){
+        this.songCount.set(songs.size());
+    }
+
+    public int getDuration(){
+        return duration.get();
+    }
+
+    public void setDuration(){
+        int calcDuration = 0;
+        for (SongModel s : getSongs()){
+            calcDuration += s.getDuration();
+        }
+        this.duration.set(calcDuration);
     }
 
     @Override

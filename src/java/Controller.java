@@ -38,22 +38,6 @@ import static CustomComponent.ComboBoxEnum.*;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
-/**Assuming that the newly added item has an index of N,
- Selecting it:
-
- listView.getSelectionModel().select(N);
- Focusing on it:
-
- listView.getFocusModel().focus(N);
- Scrolling to it:
-
- listView.scrollTo(N);
- *
- * To Do: Get the selected item from search and do that. Use StringToMap.
- */
-
-
-
     /**
      *  isPlaying is now a property because we can attach an event handler when the value changes.
      */
@@ -61,7 +45,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     final ArrayList<MusicModel> dataArray = new ArrayList();
     final ObservableList<SongModel> data = FXCollections.observableArrayList();
-    final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
+    final ObservableList<PlaylistModel> playlistData = FXCollections.observableArrayList();
 
 
     SearchModel searchModel;
@@ -98,20 +82,20 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 3")));
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 2")));
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 1")));
-        //this.tvColumnPlaylist.setCellValueFactory(new PropertyValueFactory<PlaylistModel, List<SongModel>>("songs"));
-        treeView = new TreeTableView<PlaylistModel>();
-        TreeItem item = new TreeItem<PlaylistModel>(new PlaylistModel());
-        item.getChildren().addAll(playdata);
-        treeView.setRoot(item);
+        this.tblClmnPlaylistName.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("name"));
+        this.tblClmnPlaylistSongCount.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("songCount"));
+        this.tblClmnPlaylistDuration.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("duration"));
+
+
 
 
         data.addAll();
         tblViewSongs.setItems(data);
         data.addAll(new EASVDatabase().getAllSongs());
+        playlistData.addAll(new EASVDatabase().getAllPlaylists());
+        tblViewPlaylist.setItems(playlistData);
         dataArray.addAll(data.stream().toList());
+        dataArray.addAll(playlistData.stream().toList());
 
         initializeMMSearchEntries(dataArray);
         setComboBox();

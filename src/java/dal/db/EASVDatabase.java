@@ -425,7 +425,7 @@ public class EASVDatabase {
         try {
             int playlistID;
 
-            String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + playlistName + "%'";
+            String sql = "SELECT * FROM dbo.PlayList WHERE title LIKE '%" + playlistName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -463,7 +463,7 @@ public class EASVDatabase {
                 + "(" + playlist.getID() + ", " + song.getId() + ")";
         try {
             Statement statement = dataSource.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement.executeQuery(sql);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -474,7 +474,7 @@ public class EASVDatabase {
         ArrayList<SongModel> returnList = new ArrayList<>();
         String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlistID;
         try {
-            System.out.println("trying to get all filtered songs from the database");
+            System.out.println("trying to get all songs for the playlist");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -518,7 +518,14 @@ public class EASVDatabase {
 
     }
 
-    public void editPlaylist(PlaylistModel playlistModel){
-        
+    public void updatePlaylist(PlaylistModel playlistModel){
+        String sql = "UPDATE dbo.PlayList SET name='" + playlistModel.getName() + "' WHERE id=" + playlistModel.getID();
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

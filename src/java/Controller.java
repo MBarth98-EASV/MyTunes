@@ -142,7 +142,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
            } else {
                tblViewSongs.getSelectionModel().select(0);
                songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-
                songPlayer.playTrack();
            }
             songPlayer.playTrack();
@@ -159,7 +158,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         tblViewSongs.getSelectionModel().selectNext();
         songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-        songPlayer.playTrack();
+        if(songPlayer.isPlaying.getValue() == true) {
+            songPlayer.playTrack();
+        }
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent) throws URISyntaxException
@@ -175,8 +176,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             tblViewSongs.getSelectionModel().selectPrevious();
             songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
             songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-
-            songPlayer.playTrack();
+            if(songPlayer.isPlaying.getValue() == true) {
+                songPlayer.playTrack();
+            }
         }
 
     }

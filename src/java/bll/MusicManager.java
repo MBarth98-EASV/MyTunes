@@ -59,10 +59,7 @@ public class MusicManager {
             musicPlayer.setVolume(volume);
         }
 
-        private void setMaxDuration()
+        public void setMaxDuration()
         {
-            double maxDura = musicPlayer.getTotalDuration().toSeconds() / 60;
-            String totalTime = maxDura + ":00";
-
         }
 }

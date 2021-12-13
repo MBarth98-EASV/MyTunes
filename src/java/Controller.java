@@ -75,7 +75,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
 
     SearchModel searchModel;
-    MusicPlayer songPlayer = new MusicPlayer();
+    MusicManager songPlayer = new MusicManager();
 
     public Controller()
     {
@@ -105,7 +105,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         {
             try
             {
-                this.songPlayer.setMedia(this.songPlayer.data.get(_new.intValue()).getLocation());
+                this.songPlayer.setMedia(this.songPlayer.data.get(_new.intValue()));
                 System.out.println(this.songPlayer.data.get(_new.intValue()).getLocation());
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
-    {   songPlayer = new MusicPlayer();
+    {   songPlayer = new MusicManager();
 
         this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
         this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
@@ -162,17 +162,17 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException
+    @FXML private void onPlayPauseTrack(ActionEvent actionEvent) throws URISyntaxException
     {
         if (songPlayer.isPlaying.getValue() == false) {
            if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null))
            {
-               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
                songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
                songPlayer.playTrack();
            } else {
                tblViewSongs.getSelectionModel().select(0);
-               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
                songPlayer.playTrack();
            }
             songPlayer.playTrack();
@@ -188,7 +188,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songPlayer.stopTrack();
 
         tblViewSongs.getSelectionModel().selectNext();
-        songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+        songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
         if(songPlayer.isPlaying.getValue() == true) {
             songPlayer.playTrack();
         }
@@ -205,8 +205,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             songPlayer.stopTrack();
 
             tblViewSongs.getSelectionModel().selectPrevious();
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
             if(songPlayer.isPlaying.getValue() == true) {
                 songPlayer.playTrack();
             }
@@ -476,8 +476,5 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                 break;
             }
         }
-    }
-
-    public void onPlayPauseTrack(ActionEvent event) {
     }
 }

@@ -26,9 +26,9 @@ public class MusicManager {
             data.addAll(new EASVDatabase().getAllSongs());
         }
 
-        public void setMedia(String path) throws URISyntaxException
+        public void setMedia(SongModel song) throws URISyntaxException
         {
-            this.musicPlayer = new MediaPlayer(new Media(getClass().getClassLoader().getResource(path).toURI().toString()));
+            this.musicPlayer = new MediaPlayer(new Media(song.getLocation()));
         }
 
         public void playTrack()

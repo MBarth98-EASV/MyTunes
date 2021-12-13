@@ -418,6 +418,18 @@ public class EASVDatabase {
         }
     }
 
+    //TODO: Untested
+    private void removeSongFromPlaylist(SongModel song, PlaylistModel playlist) {
+        try {
+            String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID() + " AND SongID = " + song.getId();
+
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Getters from the SQL database.
      */
@@ -458,6 +470,9 @@ public class EASVDatabase {
         }
     }
 
+    //TODO: Didn't work in Azure Data Studio.
+    // "The INSERT statement conflicted with the FOREIGN KEY constraint "FK__Playlist___playl__164452B1".
+    // The conflict occurred in database "CSe21A_29_MyTunes_3", table "dbo.PlayList", column 'id'."
     public void addSongToPlaylist(SongModel song, PlaylistModel playlist) {
         String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
                 + "(" + playlist.getID() + ", " + song.getId() + ")";

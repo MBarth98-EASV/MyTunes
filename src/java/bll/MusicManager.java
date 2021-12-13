@@ -58,4 +58,9 @@ public class MusicManager {
         {
             musicPlayer.setVolume(volume);
         }
+
+        private void setMaxDuration()
+        {
+            double maxDura = musicPlayer.getTotalDuration().toSeconds();
+        }
 }

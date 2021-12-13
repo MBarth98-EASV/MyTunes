@@ -21,9 +21,12 @@ public class MusicManager {
         public final ObservableList<SongModel> data = FXCollections.observableArrayList();
         public final BooleanProperty isPlaying = new SimpleBooleanProperty();
         public DoubleProperty duration = new SimpleDoubleProperty(0);
+        public DoubleProperty currentDuration = new SimpleDoubleProperty(0);
 
         int minutes = 0;
         int seconds = 0;
+        int currentMinutes;
+        int currentSeconds;
 
         MediaPlayer musicPlayer = null;
 
@@ -32,7 +35,12 @@ public class MusicManager {
             data.addAll(new EASVDatabase().getAllSongs());
         }
 
-        public void setMedia(SongModel song)
+    /**
+     *  Makes a new MediaPlayer with a new media using the path from a song object.
+     *  Waits for musicPlayer MediaPlayer to be ready before updating variables for total duration of the song.
+     * @param song
+     */
+    public void setMedia(SongModel song)
         {
             this.musicPlayer = new MediaPlayer(new Media(Paths.get(song.getLocation()).toUri().toString()));
             musicPlayer.setOnReady(new Runnable() {
@@ -42,6 +50,10 @@ public class MusicManager {
                    duration.setValue(musicPlayer.getTotalDuration().toSeconds());
                    minutes = (int) (musicPlayer.getTotalDuration().toSeconds() / 60) % 60;
                    seconds = (int) musicPlayer.getTotalDuration().toSeconds() % 60;
+
+                   currentDuration.setValue(musicPlayer.getCurrentTime().toSeconds());
+                   currentMinutes = (int) (musicPlayer.getCurrentTime().toSeconds() / 60 ) % 60;
+                   currentSeconds = (int) musicPlayer.getCurrentTime().toSeconds() % 60;
                 }
             });
         }
@@ -69,8 +81,21 @@ public class MusicManager {
             musicPlayer.setVolume(volume);
         }
 
-        public DoubleProperty getDuration() {
+        public DoubleProperty getCurrentDurationProperty()
+       {
+        return currentDuration;
+       }
+
+        public DoubleProperty getDurationProperty() {
             return duration;
+        }
+
+        public double getDuration() {
+        return musicPlayer.getTotalDuration().toSeconds();
+        }
+
+        public String getFormattedCurrentDuration() {
+         return currentMinutes + ":" + currentSeconds;
         }
 
         public String getFormattedDuration() {

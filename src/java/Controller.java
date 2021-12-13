@@ -159,10 +159,19 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             songPlayer.setVolume(sliderVolume.getValue());
         });
 
-        songPlayer.getDuration().addListener(((observable, oldValue, newValue) -> {
-           lblSongTotalTime.setText(songPlayer.getFormattedDuration());
+        sliderSong.valueProperty().addListener(((observable, oldValue, newValue) -> {
+
         }));
 
+        songPlayer.getDurationProperty().addListener(((observable, oldValue, newValue) -> {
+           lblSongTotalTime.setText(songPlayer.getFormattedDuration());
+            sliderSong.setMin(0);
+            sliderSong.setMax(songPlayer.getDuration());
+        }));
+
+        songPlayer.getCurrentDurationProperty().addListener(((observable, oldValue, newValue) -> {
+            lblSongCurrentTime.setText(songPlayer.getFormattedCurrentDuration());
+        }));
     }
 
 
@@ -200,7 +209,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        if (songPlayer.getDuration().getValue() > 5)
+        if (songPlayer.getDuration() > 5)
         {
             songPlayer.stopTrack();
             songPlayer.playTrack();

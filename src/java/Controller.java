@@ -5,6 +5,7 @@ import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
 import com.google.gson.Gson;
+import dal.db.EASVDatabase;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
@@ -89,21 +90,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
-    {   sliderVolume.setMax(1);
-        sliderVolume.setMin(0);
-        songPlayer = new MusicPlayer();
-        data.add(new SongModel(1, "1st song", "Phillip", "soft pop", "rainbow and unicorns", 190, "local", "Magic location 2"));
-        data.add(new SongModel(2, "2st song", "Rasmus", 50, "local", "Magic location 2"));
-        data.add(new SongModel(3, "3st song", "Mads", null, null, 345, "local", "Magic location"));
-        data.add(new SongModel(4, "1st", "Youtube", "Garbage", "Google", 190, "local", "The Cloud"));
-        data.add(new SongModel(5, "Some song", "Rasmus", 50, "local", "Magic location 2"));
-        data.add(new SongModel(6, "Yeezy what's good?", "Kanye", null, null, 345, "local", "Magic location"));
-        data.add(new SongModel(7, "I Love Kanye", "Kanye West", "Hip-Hop", "The Life of Pablo", 60, "local", "Magic location 2"));
-        data.add(new SongModel(8, "Kill Ed Sheeran", "Rasmus", 50, "local", "Magic location 2"));
-        data.add(new SongModel(9, "Java is shit", "Mads", null, null, 345, "local", "Magic location"));
-        data.add(new SongModel(10, "DNA.", "Kendrick", "Hip-Hop", "DAMN.", 190, "local", "Magic location 2"));
-        data.add(new SongModel(11, "Superman", "Soulja Boy", 50, "local", "Magic location 2"));
-        data.add(new SongModel(12, "Another Song", "Mads", null, null, 345, "local", "Magic location"));
+    {   songPlayer = new MusicPlayer();
 
         this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
         this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
@@ -123,7 +110,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         data.addAll();
         tblViewSongs.setItems(data);
-        //data.addAll(new EASVDatabase().getAllSongs());
+        data.addAll(new EASVDatabase().getAllSongs());
         dataArray.addAll(data.stream().toList());
 
         initializeMMSearchEntries(dataArray);

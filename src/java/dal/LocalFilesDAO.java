@@ -146,7 +146,6 @@ public class LocalFilesDAO {
         return returnList;
     }
 
-
     /**
      * Checks the characters of a filename after the "." indicating it's filetype.
      * @param fileName String value of a Path object.
@@ -227,8 +226,6 @@ public class LocalFilesDAO {
 
             db.addAllSongsFromDir(title, artist, duration, "local", p.toString(), genre, album);
         }
-
-
     }
 
 

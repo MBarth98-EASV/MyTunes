@@ -1,29 +1,18 @@
 import CustomComponent.AutoCompleteTextField;
 import CustomComponent.ComboBoxEnum;
-import be.MusicModel;
 import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
-import bll.MusicManager;
-import com.sun.source.tree.Tree;
-import javafx.beans.Observable;
+import bll.AudioManager;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TreeView;
-import com.google.gson.Gson;
 import dal.db.EASVDatabase;
-import javafx.event.EventHandler;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.LocalFilesModel;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,13 +27,8 @@ import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
-import java.sql.SQLException;
-import CustomComponent.ComboBoxEnum.*;
-
-import static CustomComponent.ComboBoxEnum.*;
 
 public class Controller extends MyTunesFXMLProperties implements Initializable
 {
@@ -62,56 +46,37 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
  * To Do: Get the selected item from search and do that. Use StringToMap.
  */
 
-
-
-    /**
-     *  isPlaying is now a property because we can attach an event handler when the value changes.
-     */
-    private final BooleanProperty isPlaying = new SimpleBooleanProperty();
-
-    final ArrayList<MusicModel> dataArray = new ArrayList();
-    final ObservableList<SongModel> data = FXCollections.observableArrayList();
-    final ObservableList<TreeItem<PlaylistModel>> playdata = FXCollections.observableArrayList();
-
+    AudioManager audioManager = new AudioManager();
 
     SearchModel searchModel;
-    MusicManager songPlayer = new MusicManager();
 
     public Controller()
     {
-        isPlaying.addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
+        audioManager.getIsPlayingProperty().addListener((observable, oldValue, newValue) -> playPauseUpdateStyle(newValue));
         txtFieldSearch = new AutoCompleteTextField();
         searchModel = new SearchModel();
-
-
+        
         tblViewSongs.getColumns().add(this.tblClmnSongTitle);
         tblViewSongs.getColumns().add(this.tblClmnSongArtist);
         tblViewSongs.getColumns().add(this.tblClmnSongGenre);
         tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
 
-       //this.tblViewSongs.selectionModelProperty().addListener((observable, oldValue, newValue) -> {
-       //    try {
-       //        songPlayer.setMedia(newValue.getSelectedItem().getLocation());
-       //    } catch (URISyntaxException e) {
-       //        e.printStackTrace();
-       //    }
-       //});
+        tblViewPlaylist.getColumns().add(this.tblClmnPlaylistName);
+        tblViewPlaylist.getColumns().add(this.tblClmnPlaylistSongCount);
+        tblViewPlaylist.getColumns().add(this.tblClmnPlaylistDuration);
     }
 
-    public void onSongSelectionChanged(ObservableValue obs, Number old, Number _new)
+
+    public void onSongSelectionChanged()
     {
-        if (!old.equals(_new))
+        try
         {
-            try
-            {
-                this.songPlayer.setMedia(this.songPlayer.data.get(_new.intValue()));
-                System.out.println(this.songPlayer.data.get(_new.intValue()).getLocation());
-            }
-            catch (Exception ex)
-            {
-                //
-            }
+            this.audioManager.setSong(tblViewSongs.getSelectionModel().getSelectedItem());
+        }
+        catch (Exception ex)
+        {
+            // todo: error handling
         }
     }
 
@@ -124,94 +89,71 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         btnPlayPause.setStyle(state ? playStyle : pauseStyle);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {   songPlayer = new MusicManager();
+    private void playlistInitialize()
+    {
+        this.tblClmnPlaylistName.setCellValueFactory(data -> data.getValue().getNameProperty());
+        this.tblClmnPlaylistSongCount.setCellValueFactory(data -> data.getValue().getCountProperty().asString());
+        this.tblClmnPlaylistDuration.setCellValueFactory(data -> data.getValue().getTotalDurationProperty().asString());
 
+        this.tblViewPlaylist.setItems(audioManager.getPlaylists());
+
+        this.audioManager.addPlaylist(new PlaylistModel(0, new EASVDatabase().getAllSongs(), 0, true, "Default"));
+    }
+
+    private void songsInitialize()
+    {
         this.tblClmnSongTitle.setCellValueFactory(new PropertyValueFactory<SongModel, String>("title"));
         this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
         this.tblClmnSongGenre.setCellValueFactory(new PropertyValueFactory<SongModel, String>("genre"));
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 3")));
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 2")));
-        playdata.add(new TreeItem<PlaylistModel>(new PlaylistModel(12, new ArrayList<>(), 1, false, "Playlist 1")));
-        //this.tvColumnPlaylist.setCellValueFactory(new PropertyValueFactory<PlaylistModel, List<SongModel>>("songs"));
-        treeView = new TreeTableView<PlaylistModel>();
-        TreeItem item = new TreeItem<PlaylistModel>(new PlaylistModel());
-        item.getChildren().addAll(playdata);
-        treeView.setRoot(item);
+        tblViewSongs.setItems(audioManager.getAvailableSongs());
 
+        tblViewSongs.getFocusModel().focusedCellProperty().addListener(o -> onSongSelectionChanged());
+    }
 
-        data.addAll();
-        tblViewSongs.setItems(data);
-        data.addAll(new EASVDatabase().getAllSongs());
-        dataArray.addAll(data.stream().toList());
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        playlistInitialize();
+        songsInitialize();
 
-        initializeMMSearchEntries(dataArray);
+        initializeMMSearchEntries();
+
         setComboBox();
 
-        sliderVolume.setMin(0);
-        sliderVolume.setMax(1);
-        sliderVolume.setValue(1);
+        sliderVolume.setMin(0.0);
+        sliderVolume.setMax(1.0);
+        sliderVolume.setValue(1.0);
 
         sliderVolume.valueProperty().addListener((observable, oldValue, newValue) -> {
-            songPlayer.setVolume(sliderVolume.getValue());
+            audioManager.setVolume(sliderVolume.getValue());
         });
+
     }
 
 
     @FXML private void onPlayPauseTrack(ActionEvent actionEvent)
     {
-        if (songPlayer.isPlaying.getValue() == false) {
-           if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null))
-           {
-               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
-               songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
-               songPlayer.playTrack();
-           } else {
-               tblViewSongs.getSelectionModel().select(0);
-               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
-               songPlayer.playTrack();
-           }
-            songPlayer.playTrack();
+        if (audioManager.getIsPlayingProperty().get())
+        {
+            audioManager.pause();
         }
         else
         {
-            songPlayer.pauseTrack();
+            audioManager.play();
         }
     }
 
     @FXML private void onNextTrack(ActionEvent actionEvent)
     {
-        songPlayer.stopTrack();
-
         tblViewSongs.getSelectionModel().selectNext();
-        songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
-        if(songPlayer.isPlaying.getValue() == true) {
-            songPlayer.playTrack();
-        }
     }
 
     @FXML private void onPreviousTrack(ActionEvent actionEvent)
     {
-        if (songPlayer.getDuration() > 5)
-        {
-            songPlayer.stopTrack();
-            songPlayer.playTrack();
-
-        } else {
-            songPlayer.stopTrack();
-
-            tblViewSongs.getSelectionModel().selectPrevious();
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem());
-            if(songPlayer.isPlaying.getValue() == true) {
-                songPlayer.playTrack();
-            }
-        }
-
+        tblViewSongs.getSelectionModel().selectPrevious();
     }
 
 
@@ -288,7 +230,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onPlaylistUp(ActionEvent event)
     {
-        songPlayer.setVolume(sliderVolume.getValue());
+        this.audioManager.setVolume(sliderVolume.getValue());
     }
 
     @FXML
@@ -337,7 +279,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                             break;
                         }
                         default: {
-                            searchModel.filterEqualsSearch(dataArray,tblViewSongs,tblViewPlaylist,txtFieldSearch);
+                            //searchModel.filterEqualsSearch(dataArray,tblViewSongs,tblViewPlaylist,txtFieldSearch);
                             break;
                         }
                     }
@@ -385,12 +327,12 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * Sets the searchbar's search entries for autocompletion to MusicModel, a superclass
      * of be.SongModel and be.PlaylistModel. Allows to search for both songs and playlist.
      * Default value for the searchbar. Used in the actual search function.
-     * @param inputList
      */
-    private void initializeMMSearchEntries(List<MusicModel> inputList){
+    private void initializeMMSearchEntries()
+    {
         txtFieldSearch.getEntries().clear();
-        for (int i = 0; i < inputList.size(); i++){
-            txtFieldSearch.getEntries().add((inputList.get(i)).toString());
+        for (int i = 0; i < tblViewSongs.getItems().size(); i++){
+            txtFieldSearch.getEntries().add((tblViewSongs.getItems().get(i)).toString());
 
         }
     }
@@ -470,8 +412,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                 break;
             }
             default: {
-                initializeMMSearchEntries(dataArray); //Uses the original input data for the table.
-                tblViewSongs.setItems(data);
+               // initializeMMSearchEntries(dataArray); //Uses the original input data for the table.
+                //tblViewSongs.setItems(data);
                 txtFieldSearch.setPromptText("Press enter to search");
                 break;
             }

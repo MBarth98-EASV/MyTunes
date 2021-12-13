@@ -1,9 +1,12 @@
 package be;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +16,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
+
 
 
 public class PlaylistModel extends MusicModel
@@ -45,6 +50,10 @@ public class PlaylistModel extends MusicModel
      */
     private final StringProperty name;
 
+    private final IntegerProperty count;
+
+    private final ObjectProperty<Duration> totalDuration;
+
 
 
     /**
@@ -57,6 +66,8 @@ public class PlaylistModel extends MusicModel
         this.selectedSongIndex = new SimpleIntegerProperty();
         this.isActive = new SimpleBooleanProperty();
         this.name = new SimpleStringProperty();
+        this.count = new SimpleIntegerProperty();
+        this.totalDuration = new SimpleObjectProperty<>();
     }
 
     /**
@@ -68,9 +79,12 @@ public class PlaylistModel extends MusicModel
 
         this.setOrderID(id);
         this.setSongs(songs);
+        this.count.set(songs.size());
         this.setSelectedSongIndex(selectedSong);
         this.setIsActive(isActive);
         this.setName(name);
+        this.totalDuration.set(Duration.ZERO);
+        songs.forEach(songModel ->  this.totalDuration.get().add(Duration.seconds(songModel.getDuration())));
     }
 
     public int getOrderID()
@@ -93,7 +107,10 @@ public class PlaylistModel extends MusicModel
     {
         this.songs.setAll(songs);
     }
-      
+
+    public IntegerProperty getCountProperty() {
+        return count;
+    }
 
     public int getSelectedSongIndex()
     {
@@ -122,6 +139,10 @@ public class PlaylistModel extends MusicModel
         return name.get();
     }
 
+    public StringProperty getNameProperty()
+    {
+        return name;
+    }
 
     public void setName(String name)
     {
@@ -136,6 +157,11 @@ public class PlaylistModel extends MusicModel
     @Override
     public String toString(){
         return TYPE + "         " + name.get();
+    }
+
+    public ObjectProperty<Duration> getTotalDurationProperty()
+    {
+        return this.totalDuration;
     }
 
 }

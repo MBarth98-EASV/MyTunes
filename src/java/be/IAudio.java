@@ -1,6 +1,8 @@
 package be;
 
 import be.SongModel;
+import javafx.util.Duration;
+
 
 public interface IAudio
 {
@@ -12,6 +14,8 @@ public interface IAudio
     void load(SongModel song);
     void load(String path);
 
-    int getDuration(); // ms
-    int getTime(); // ms offset
+    void setVolume(double val);
+
+    Duration getDuration(); // ms
+    Duration getTime(); // ms offset
 }

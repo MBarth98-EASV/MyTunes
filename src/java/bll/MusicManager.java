@@ -68,6 +68,6 @@ public class MusicManager {
 
         public void setPlayback(int seekTime)
         {
-            musicPlayer.seek(Duration seekTime);
+           // musicPlayer.seek(Duration);
         }
 }

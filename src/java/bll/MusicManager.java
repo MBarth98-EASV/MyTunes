@@ -10,7 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class MusicManager {
@@ -26,9 +28,9 @@ public class MusicManager {
             data.addAll(new EASVDatabase().getAllSongs());
         }
 
-        public void setMedia(SongModel song) throws URISyntaxException
+        public void setMedia(SongModel song)
         {
-            this.musicPlayer = new MediaPlayer(new Media(song.getLocation()));
+            this.musicPlayer = new MediaPlayer(new Media(Paths.get(song.getLocation()).toUri().toString()));
         }
 
         public void playTrack()

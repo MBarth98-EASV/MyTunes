@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/mads-/Documents/GitHub/MyTunes/src</OriginalElement>
+  <nodes>
+    <node x="973.5232371794868" y="263.0">bll.SearchManager</node>
+    <node x="316.6822916666658" y="263.0">be.PlaylistModel</node>
+    <node x="547.6482371794868" y="263.0">CustomComponent.AutoCompleteTextField</node>
+    <node x="0.0" y="672.0">dal.DataAccessLayer</node>
+    <node x="122.93229166666578" y="378.0">bll.AudioManager</node>
+    <node x="788.1482371794868" y="263.0">bll.MusicManager</node>
+    <node x="477.9322916666658" y="378.0">be.MyTunesFXMLProperties</node>
+    <node x="811.375" y="83.0">be.SongModel</node>
+    <node x="313.5572916666658" y="493.0">Controller</node>
+    <node x="1198.5232371794868" y="263.0">dal.LocalFilesDAO</node>
+    <node x="1150.0833333333335" y="493.0">model.LocalFilesModel</node>
+    <node x="863.4739583333323" y="596.0">SongController</node>
+    <node x="1137.5" y="168.0">dal.db.EASVDatabase</node>
+    <node x="293.9322916666658" y="378.0">CustomComponent.ComboBoxEnum</node>
+    <node x="49.99238782051236" y="263.0">bll.AudioPlayer</node>
+    <node x="414.1065705128201" y="0.0">be.ISearchable</node>
+    <node x="958.3565705128201" y="378.0">model.SearchModel</node>
+    <node x="97.24238782051236" y="168.0">be.IAudio</node>
+    <node x="1155.8565705128203" y="378.0">bll.LocalFilesManager</node>
+    <node x="208.0" y="672.0">Main</node>
+    <node x="1144.0833333333335" y="596.0">SettingsController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Controller" target="be.MyTunesFXMLProperties" relationship="GENERALIZATION">
+      <point x="29.99970833333424" y="-15.5" />
+      <point x="402.557" y="426.5" />
+      <point x="584.4322916666658" y="426.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="be.MyTunesFXMLProperties" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-2.916666658165923E-4" y="-15.5" />
+      <point x="584.432" y="336.0" />
+      <point x="773.0" y="336.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="bll.LocalFilesManager" target="dal.db.EASVDatabase" relationship="TO_ONE">
+      <point x="15.000429487179645" y="-15.5" />
+      <point x="1258.357" y="315.0" />
+      <point x="1160.0" y="315.0" />
+      <point x="-52.5" y="15.5" />
+    </edge>
+    <edge source="Controller" target="bll.AudioManager" relationship="CREATE">
+      <point x="-15.00029166666576" y="-15.5" />
+      <point x="357.557" y="426.5" />
+      <point x="155.5" y="426.5" />
+      <point x="-42.932291666665776" y="15.5" />
+    </edge>
+    <edge source="bll.AudioManager" target="bll.AudioPlayer" relationship="TO_ONE">
+      <point x="-23.939903846153413" y="-15.5" />
+      <point x="58.5" y="15.5" />
+    </edge>
+    <edge source="be.PlaylistModel" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-2.9166666575974887E-4" y="-15.5" />
+      <point x="387.182" y="231.0" />
+      <point x="773.0" y="231.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="Controller" target="dal.db.EASVDatabase" relationship="CREATE">
+      <point x="-2.9166666575974887E-4" y="15.5" />
+      <point x="372.557" y="720.5" />
+      <point x="1364.023" y="720.5" />
+      <point x="1364.023" y="247.0" />
+      <point x="1212.5" y="247.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="bll.MusicManager" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-74.50023717948682" y="0.0" />
+      <point x="773.0" y="278.5" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="be.IAudio" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-3.878205123726275E-4" y="15.5" />
+      <point x="145.242" y="231.0" />
+      <point x="773.0" y="231.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="be.MyTunesFXMLProperties" target="CustomComponent.AutoCompleteTextField" relationship="DEPENDENCY">
+      <point x="38.06770833333417" y="-15.5" />
+      <point x="622.5" y="357.0" />
+      <point x="652.148" y="357.0" />
+      <point x="-2.3717948681678536E-4" y="15.5" />
+    </edge>
+    <edge source="bll.LocalFilesManager" target="dal.LocalFilesDAO" relationship="CREATE">
+      <point x="44.166429487179585" y="-15.5" />
+      <point x="14.99976282051307" y="15.5" />
+    </edge>
+    <edge source="bll.SearchManager" target="dal.db.EASVDatabase" relationship="CREATE">
+      <point x="14.99976282051307" y="-15.5" />
+      <point x="1066.023" y="247.0" />
+      <point x="1212.5" y="247.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="SongController" target="model.LocalFilesModel" relationship="CREATE">
+      <point x="-24.825958333332323" y="-15.5" />
+      <point x="914.648" y="541.0" />
+      <point x="1244.583" y="541.0" />
+      <point x="14.999666666666599" y="15.5" />
+    </edge>
+    <edge source="SongController" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-75.9999583333323" y="0.0" />
+      <point x="773.0" y="611.5" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="bll.MusicManager" target="be.SongModel" relationship="TO_MANY">
+      <point x="-23.14823717948684" y="-15.5" />
+      <point x="-36.375" y="15.5" />
+    </edge>
+    <edge source="Controller" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-2.9166666575974887E-4" y="-15.5" />
+      <point x="372.557" y="451.0" />
+      <point x="773.0" y="451.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="bll.SearchManager" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-2.371794869304722E-4" y="-15.5" />
+      <point x="1051.023" y="231.0" />
+      <point x="773.0" y="231.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="SongController" target="be.SongModel" relationship="TO_ONE">
+      <point x="-9.825958333332323" y="-15.5" />
+      <point x="929.648" y="556.5" />
+      <point x="1379.023" y="556.5" />
+      <point x="1379.023" y="-17.5" />
+      <point x="566.5" y="-17.5" />
+      <point x="566.5" y="247.0" />
+      <point x="839.5" y="247.0" />
+      <point x="-36.375" y="15.5" />
+    </edge>
+    <edge source="model.LocalFilesModel" target="bll.LocalFilesManager" relationship="CREATE">
+      <point x="14.999666666666599" y="-15.5" />
+      <point x="1.2264294871797574" y="15.5" />
+    </edge>
+    <edge source="model.SearchModel" target="bll.SearchManager" relationship="CREATE">
+      <point x="-29.999570512820128" y="-15.5" />
+      <point x="-53.16623717948687" y="15.5" />
+    </edge>
+    <edge source="model.SearchModel" target="CustomComponent.AutoCompleteTextField" relationship="DEPENDENCY">
+      <point x="-14.999570512820128" y="-15.5" />
+      <point x="1012.857" y="357.0" />
+      <point x="652.148" y="357.0" />
+      <point x="-2.3717948681678536E-4" y="15.5" />
+    </edge>
+    <edge source="bll.AudioManager" target="be.PlaylistModel" relationship="DEPENDENCY">
+      <point x="14.999708333334212" y="-15.5" />
+      <point x="213.432" y="357.0" />
+      <point x="387.182" y="357.0" />
+      <point x="-2.9166666575974887E-4" y="15.5" />
+    </edge>
+    <edge source="model.SearchModel" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="4.2948717987201235E-4" y="-15.5" />
+      <point x="1027.857" y="336.0" />
+      <point x="773.0" y="336.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="SettingsController" target="model.LocalFilesModel" relationship="TO_ONE">
+      <point x="-3.3333333340124227E-4" y="-15.5" />
+      <point x="-3.3333333340124227E-4" y="15.5" />
+    </edge>
+    <edge source="bll.MusicManager" target="dal.db.EASVDatabase" relationship="CREATE">
+      <point x="-2.3717948681678536E-4" y="-15.5" />
+      <point x="862.648" y="247.0" />
+      <point x="1212.5" y="247.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="bll.LocalFilesManager" target="dal.LocalFilesDAO" relationship="TO_ONE">
+      <point x="59.166429487179585" y="-15.5" />
+      <point x="29.99976282051307" y="15.5" />
+    </edge>
+    <edge source="be.PlaylistModel" target="be.SongModel" relationship="TO_MANY">
+      <point x="14.99970833333424" y="-15.5" />
+      <point x="402.182" y="247.0" />
+      <point x="839.5" y="247.0" />
+      <point x="-36.375" y="15.5" />
+    </edge>
+    <edge source="bll.AudioManager" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-2.916666657881706E-4" y="-15.5" />
+      <point x="198.432" y="336.0" />
+      <point x="773.0" y="336.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="Controller" target="CustomComponent.AutoCompleteTextField" relationship="CREATE">
+      <point x="59.0" y="0.0" />
+      <point x="708.4322916666658" y="508.5" />
+      <point x="56.28405448717899" y="15.5" />
+    </edge>
+    <edge source="model.LocalFilesModel" target="bll.LocalFilesManager" relationship="TO_ONE">
+      <point x="29.9996666666666" y="-15.5" />
+      <point x="16.226429487179757" y="15.5" />
+    </edge>
+    <edge source="be.SongModel" target="be.ISearchable" relationship="REALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="875.875" y="57.0" />
+      <point x="478.607" y="57.0" />
+      <point x="4.2948717992885577E-4" y="15.5" />
+    </edge>
+    <edge source="Controller" target="CustomComponent.ComboBoxEnum" relationship="DEPENDENCY">
+      <point x="14.99970833333424" y="-15.5" />
+      <point x="12.12470833333424" y="15.5" />
+    </edge>
+    <edge source="dal.LocalFilesDAO" target="dal.db.EASVDatabase" relationship="TO_ONE">
+      <point x="-2.371794869304722E-4" y="15.5" />
+      <point x="1272.523" y="315.0" />
+      <point x="1160.0" y="315.0" />
+      <point x="-52.5" y="15.5" />
+    </edge>
+    <edge source="Controller" target="model.SearchModel" relationship="CREATE">
+      <point x="14.99970833333424" y="15.5" />
+      <point x="387.557" y="541.5" />
+      <point x="738.4322916666658" y="541.5" />
+      <point x="738.4322916666658" y="393.5" />
+      <point x="-69.5" y="0.0" />
+    </edge>
+    <edge source="bll.SearchManager" target="dal.db.EASVDatabase" relationship="TO_ONE">
+      <point x="-2.371794869304722E-4" y="15.5" />
+      <point x="1051.023" y="315.0" />
+      <point x="1160.0" y="315.0" />
+      <point x="-52.5" y="15.5" />
+    </edge>
+    <edge source="bll.AudioManager" target="bll.AudioPlayer" relationship="CREATE">
+      <point x="-68.0" y="-15.5" />
+      <point x="14.439903846153413" y="15.5" />
+    </edge>
+    <edge source="dal.LocalFilesDAO" target="dal.db.EASVDatabase" relationship="CREATE">
+      <point x="-2.371794869304722E-4" y="-15.5" />
+      <point x="1272.523" y="247.0" />
+      <point x="1212.5" y="247.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="dal.db.EASVDatabase" target="be.SongModel" relationship="CREATE">
+      <point x="-75.0" y="0.0" />
+      <point x="877.648" y="183.5" />
+      <point x="1.7730000000000246" y="15.5" />
+    </edge>
+    <edge source="be.MyTunesFXMLProperties" target="CustomComponent.AutoCompleteTextField" relationship="TO_ONE">
+      <point x="82.71570833333419" y="-15.5" />
+      <point x="14.999762820513183" y="15.5" />
+    </edge>
+    <edge source="model.SearchModel" target="bll.SearchManager" relationship="TO_ONE">
+      <point x="38.16642948717981" y="-15.5" />
+      <point x="14.99976282051307" y="15.5" />
+    </edge>
+    <edge source="bll.AudioPlayer" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-3.8782051235841664E-4" y="-15.5" />
+      <point x="115.992" y="231.0" />
+      <point x="773.0" y="231.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="be.PlaylistModel" target="be.ISearchable" relationship="REALIZATION">
+      <point x="-15.00029166666576" y="-15.5" />
+      <point x="372.182" y="57.0" />
+      <point x="478.607" y="57.0" />
+      <point x="4.2948717992885577E-4" y="15.5" />
+    </edge>
+    <edge source="Controller" target="bll.AudioManager" relationship="TO_ONE">
+      <point x="-30.00029166666576" y="-15.5" />
+      <point x="342.557" y="451.0" />
+      <point x="140.5" y="451.0" />
+      <point x="-57.932291666665776" y="15.5" />
+    </edge>
+    <edge source="Controller" target="model.SearchModel" relationship="TO_ONE">
+      <point x="44.99970833333424" y="-15.5" />
+      <point x="417.557" y="481.0" />
+      <point x="1032.9739583333323" y="481.0" />
+      <point x="5.117387820512249" y="15.5" />
+    </edge>
+    <edge source="bll.AudioPlayer" target="be.IAudio" relationship="REALIZATION">
+      <point x="-15.000387820512358" y="-15.5" />
+      <point x="-44.25038782051236" y="15.5" />
+    </edge>
+    <edge source="bll.LocalFilesManager" target="dal.db.EASVDatabase" relationship="CREATE">
+      <point x="87.50042948717964" y="0.0" />
+      <point x="1364.023" y="393.5" />
+      <point x="1364.023" y="247.0" />
+      <point x="1212.5" y="247.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="model.LocalFilesModel" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="-3.3333333340124227E-4" y="-15.5" />
+      <point x="1229.583" y="451.0" />
+      <point x="773.0" y="451.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="SettingsController" target="model.LocalFilesModel" relationship="CREATE">
+      <point x="14.999666666666599" y="-15.5" />
+      <point x="14.999666666666599" y="15.5" />
+    </edge>
+    <edge source="bll.AudioManager" target="be.PlaylistModel" relationship="TO_MANY">
+      <point x="29.999708333334212" y="-15.5" />
+      <point x="228.432" y="278.5" />
+      <point x="-70.5" y="0.0" />
+    </edge>
+    <edge source="Controller" target="be.ISearchable" relationship="DEPENDENCY">
+      <point x="-59.0" y="0.0" />
+      <point x="-17.5" y="508.5" />
+      <point x="-17.5" y="15.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="bll.LocalFilesManager" target="be.SongModel" relationship="DEPENDENCY">
+      <point x="4.2948717964463867E-4" y="-15.5" />
+      <point x="1243.357" y="336.0" />
+      <point x="773.0" y="336.0" />
+      <point x="773.0" y="98.5" />
+      <point x="-64.5" y="0.0" />
+    </edge>
+    <edge source="Controller" target="be.PlaylistModel" relationship="CREATE">
+      <point x="-45.00029166666576" y="-15.5" />
+      <point x="327.557" y="466.0" />
+      <point x="32.49238782051236" y="466.0" />
+      <point x="32.49238782051236" y="150.5" />
+      <point x="357.182" y="150.5" />
+      <point x="-30.00029166666576" y="-15.5" />
+    </edge>
+    <edge source="be.MyTunesFXMLProperties" target="be.PlaylistModel" relationship="DEPENDENCY">
+      <point x="14.999708333334183" y="-15.5" />
+      <point x="599.432" y="357.0" />
+      <point x="387.182" y="357.0" />
+      <point x="-2.9166666575974887E-4" y="15.5" />
+    </edge>
+    <edge source="SongController" target="model.LocalFilesModel" relationship="TO_ONE">
+      <point x="5.1740416666676765" y="-15.5" />
+      <point x="944.648" y="577.0" />
+      <point x="1229.583" y="577.0" />
+      <point x="-3.3333333340124227E-4" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="683.0" y="351.5" />
+  <SelectedNodes>
+    <node>dal.DataAccessLayer</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

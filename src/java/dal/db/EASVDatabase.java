@@ -12,12 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EASVDatabase 
-{
+public class EASVDatabase {
     private SQLServerDataSource dataSource;
 
-    public EASVDatabase()
-    {
+    public EASVDatabase() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
         dataSource.setDatabaseName("CSe21A_29_MyTunes_3");
@@ -26,13 +24,11 @@ public class EASVDatabase
         dataSource.setPortNumber(1433);
     }
 
-    public Connection getConnection() throws SQLServerException
-    {
+    public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }
 
-    public static void main(String[] args) throws SQLException
-    {
+    public static void main(String[] args) throws SQLException {
         EASVDatabase databaseConnector = new EASVDatabase();
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -43,17 +39,15 @@ public class EASVDatabase
 
     /**
      * Add song to SQL database table.
-      */
-    public void addSong(String table, String songName, String art, int dura, String sauce, String fpath)
-    {
+     */
+    public void addSong(String table, String songName, String art, int dura, String sauce, String fpath) {
 
         String sql = "INSERT INTO " + table + " (title, artists, duration, source, filepath) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "')";
 
         try {
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -61,29 +55,25 @@ public class EASVDatabase
 
     /**
      * Remove Songs from SQL database.
-      */
-    public void removeSong(String table, int id)
-    {
+     */
+    public void removeSong(String table, int id) {
         try {
             String sql = "DELETE FROM " + table + " WHERE id LIKE '%" + id + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void removeSong(String table, String songName)
-    {
+    public void removeSong(String table, String songName) {
         try {
             String sql = "DELETE FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -92,10 +82,8 @@ public class EASVDatabase
      * Getters from the SQL database.
      */
 
-    public int getSongIDFromName(String songName, String table)
-    {
-        try
-        {
+    public int getSongIDFromName(String songName, String table) {
+        try {
             int songID;
 
             String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
@@ -107,14 +95,12 @@ public class EASVDatabase
             songID = result.getInt("id");
 
             return songID;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return 0;
         }
     }
 
-    public String getSongNameFromID(int songID, String table)
-    {
+    public String getSongNameFromID(int songID, String table) {
         try {
             String songName;
 
@@ -127,15 +113,13 @@ public class EASVDatabase
             songName = result.getString("title");
 
             return songName;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String getArtists(int songID, String table)
-    {
+    public String getArtists(int songID, String table) {
         try {
             String sql = "SELECT * FROM " + table + " WHERE id LIKE '%" + songID + "%'";
 
@@ -146,15 +130,13 @@ public class EASVDatabase
             String artists = result.getString("artists");
 
             return artists;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String getArtists(String songName, String table)
-    {
+    public String getArtists(String songName, String table) {
         try {
             String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
@@ -165,15 +147,13 @@ public class EASVDatabase
             String artists = result.getString("artists");
 
             return artists;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String getFilePath(String songName, String table)
-    {
+    public String getFilePath(String songName, String table) {
         try {
             String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + songName + "%'";
 
@@ -184,15 +164,13 @@ public class EASVDatabase
             String filepath = result.getString("filepath");
 
             return filepath;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String getNextSongPath(int id, String table)
-    {
+    public String getNextSongPath(int id, String table) {
         try {
             String sql = "SELECT * FROM " + table + " WHERE id = (SELECT MIN(id) FROM Songs WHERE id > " + id + ")";
 
@@ -203,16 +181,13 @@ public class EASVDatabase
             String filepath = result.getString("filepath");
 
             return filepath;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String getFilePath(int songID, String table)
-    {
+    public String getFilePath(int songID, String table) {
         try {
             String sql = "SELECT * FROM " + table + " WHERE id LIKE '%" + songID + "%'";
 
@@ -223,15 +198,13 @@ public class EASVDatabase
             String filepath = result.getString("filepath");
 
             return filepath;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-  
-    public List<SongModel> getAllSongs()
-    {
+
+    public List<SongModel> getAllSongs() {
         String sql = "SELECT * FROM dbo.Songs";
         List<SongModel> songs = new ArrayList<>();
 
@@ -242,47 +215,41 @@ public class EASVDatabase
         String songAlbum;
         String songGenre;
 
-        try
-        {
+        try {
             System.out.println("trying to get all songs from the database");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-            while (result.next())
-            {
+            while (result.next()) {
                 songTitle = result.getString("title");
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
-                songGenre =  result.getString("genre");
+                songGenre = result.getString("genre");
                 songAlbum = result.getString("album");
 
                 songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
             }
 
             return songs;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("database is not available");
             // return empty array - garentee not null
             return new ArrayList<>();
         }
     }
-  
+
     /**
      * Updater for the SQL database.
      */
-    public void updateSong(String table, String column, String condition)
-    {
+    public void updateSong(String table, String column, String condition) {
         try {
             String sql = "SELECT * FROM " + table + " SET " + column + " WHERE LIKE '%" + condition + "%'";
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -290,31 +257,26 @@ public class EASVDatabase
     /**
      * Database sorter
      */
-    public void sortList(String table, String column, String order)
-    {
-        try
-        {
-        String sql = "SELECT * FROM " + table + " ORDER BY " + column + order;
+    public void sortList(String table, String column, String order) {
+        try {
+            String sql = "SELECT * FROM " + table + " ORDER BY " + column + order;
 
-        Statement statement = dataSource.getConnection().createStatement();
-        statement.executeQuery(sql);
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.executeQuery(sql);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
- //TODO: Make methods applicable for Title and Artist which takes two parameters.
+    //TODO: Make methods applicable for Title and Artist which takes two parameters.
 
-    public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
+    public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter) {
         String sql = null;
-        if (!filterType2.equals("NONE")){
+        if (!filterType2.equals("NONE")) {
             sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%' " +
                     "OR " + filterType2 + " LIKE '%" + filterParameter + "%'";
-        }
-        else sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%'";
+        } else sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%'";
 
         List<SongModel> songs = new ArrayList<>();
 
@@ -325,29 +287,25 @@ public class EASVDatabase
         String songGenre;
         String songAlbum;
 
-        try
-        {
+        try {
             System.out.println("trying to get all filtered songs from the database");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-            while (result.next())
-            {
+            while (result.next()) {
                 songTitle = result.getString("title");
                 songId = result.getInt("id");
                 songArtist = result.getString("artists");
                 songLocation = result.getString("filepath");
-                songGenre =  result.getString("genre");
+                songGenre = result.getString("genre");
                 songAlbum = result.getString("album");
 
                 songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
             }
 
             return songs;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("database is not available");
             // return empty array - garentee not null
             return new ArrayList<>();
@@ -355,36 +313,34 @@ public class EASVDatabase
     }
 
 
-    /** Select every value in the wanted column and returns it as a list of Strings.
+    /**
+     * Select every value in the wanted column and returns it as a list of Strings.
+     *
      * @param filterType The column to select from. The filter is determined by
-     * the user in the Combobox Filter.
+     *                   the user in the Combobox Filter.
      * @return
      */
-    public List<String> allAvailableByParameter(String filterType){
-        String sql = "SELECT DISTINCT " + filterType + " FROM dbo.Songs " ;
+    public List<String> allAvailableByParameter(String filterType) {
+        String sql = "SELECT DISTINCT " + filterType + " FROM dbo.Songs ";
         List<String> SearchEntryFilter = new ArrayList<>();
 
 
-        try
-        {
+        try {
             System.out.println("trying to get all songs from the database");
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-            while (result.next())
-            {
+            while (result.next()) {
                 String chosenFilter = result.getString(1);
-                if (chosenFilter == null || chosenFilter.isEmpty()){
+                if (chosenFilter == null || chosenFilter.isEmpty()) {
                     chosenFilter = "N/A";
                 }
                 SearchEntryFilter.add(chosenFilter);
             }
 
             return SearchEntryFilter;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("database is not available");
             ex.printStackTrace();
             // return empty array - garentee not null
@@ -395,17 +351,15 @@ public class EASVDatabase
     /**
      * Add song to SQL database table.
      */
-    public void addAllSongsFromDir(String title, String artist, int dura, String source, String fpath, String genre, String album)
-    {
-            String sql = "INSERT INTO dbo.Songs (title, artists, duration, source, filepath, genre, album) " +
-                    "VALUES ('" + title + "', '" + artist + "', '" + dura + "', '"
-                    + source + "', '" + fpath + "', '" + genre + "', '" + album + "')";
+    public void addAllSongsFromDir(String title, String artist, int dura, String source, String fpath, String genre, String album) {
+        String sql = "INSERT INTO dbo.Songs (title, artists, duration, source, filepath, genre, album) " +
+                "VALUES ('" + title + "', '" + artist + "', '" + dura + "', '"
+                + source + "', '" + fpath + "', '" + genre + "', '" + album + "')";
 
         try {
             Statement statement = dataSource.getConnection().createStatement();
             statement.execute(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -413,16 +367,14 @@ public class EASVDatabase
     /**
      * Add song to SQL database table.
      */
-    public void addPlaylist(String playlistName)
-    {
+    public void addPlaylist(String playlistName) {
 
         String sql = "INSERT INTO dbo.PlayList (name) VALUES ('" + playlistName + "')";
 
         try {
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -443,29 +395,25 @@ public class EASVDatabase
     }
     */
 
-    public void removePlaylist(PlaylistModel playlist)
-    {
+    public void removePlaylist(PlaylistModel playlist) {
         try {
-            String sql = "DELETE FROM dbo.PlayList WHERE name LIKE '%" + playlist.getName() + "%'";
+            String sql = "DELETE FROM dbo.PlayList WHERE id = " + playlist.getID();
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
             removePlaylistSongs(playlist);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void removePlaylistSongs(PlaylistModel playlist)
-    {
+    private void removePlaylistSongs(PlaylistModel playlist) {
         try {
             String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID();
 
             Statement statement = dataSource.getConnection().createStatement();
             statement.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -473,10 +421,8 @@ public class EASVDatabase
     /**
      * Getters from the SQL database.
      */
-    public int getPlaylistIDFromName(String playlistName, String table)
-    {
-        try
-        {
+    public int getPlaylistIDFromName(String playlistName, String table) {
+        try {
             int playlistID;
 
             String sql = "SELECT * FROM " + table + " WHERE title LIKE '%" + playlistName + "%'";
@@ -488,14 +434,12 @@ public class EASVDatabase
             playlistID = result.getInt("id");
 
             return playlistID;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return 0;
         }
     }
 
-    public String getPlaylistNameFromID(int playlistID, String table)
-    {
+    public String getPlaylistNameFromID(int playlistID, String table) {
         try {
             String songName;
 
@@ -508,28 +452,27 @@ public class EASVDatabase
             songName = result.getString("name");
 
             return songName;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public void addSongToPlaylist(SongModel song, PlaylistModel playlist){
+    public void addSongToPlaylist(SongModel song, PlaylistModel playlist) {
         String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
-                +  "(" + playlist.getID() + ", " + song.getId() + ")";
+                + "(" + playlist.getID() + ", " + song.getId() + ")";
         try {
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<SongModel> getAllSongsInPlaylist(PlaylistModel playlist){
-        String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID();
+    public List<SongModel> getAllSongsInPlaylist(int playlistID) {
+        ArrayList<SongModel> returnList = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlistID;
         try {
             System.out.println("trying to get all filtered songs from the database");
 
@@ -538,11 +481,44 @@ public class EASVDatabase
 
             while (result.next()) {
                 int songId = result.getInt("id");
+                for (SongModel s : getAllSongs()) {
+                    if (s.getId() == songId);
+                    returnList.add(s);
+                }
             }
-        }
-        catch (Exception e){
+            return returnList;
+        } catch (Exception e) {
             e.printStackTrace();
+            return returnList;
         }
     }
 
+    public List<PlaylistModel> getAllPlaylists() {
+        ArrayList<PlaylistModel> returnList = new ArrayList<>();
+
+        String sql = "SELECT * FROM dbo.PlayList";
+        try {
+            System.out.println("trying to get all filtered songs from the database");
+
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                int playlistID = result.getInt("id");
+                String playlistName = result.getString("name");
+
+                returnList.add(new PlaylistModel(playlistID, getAllSongsInPlaylist(playlistID), 0, false, playlistName));
+            }
+            return returnList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return returnList;
+        }
+
+    }
+
+    public void editPlaylist(PlaylistModel playlistModel){
+        
+    }
 }

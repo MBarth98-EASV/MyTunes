@@ -175,7 +175,6 @@ public class SongModel extends MusicModel {
 
     @Override
     public String toString() {
-        //return new Gson().toJson(this);
         return TYPE + "         " + artists.get() + " - " +
                 title.get() + "  |  " + duration.get();
     }

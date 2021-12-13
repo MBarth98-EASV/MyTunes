@@ -68,6 +68,6 @@ public class MyTunesFXMLProperties
 
     @FXML public ToggleButton tglBtnShuffle;
 
-    @FXML public Slider sliderVolume;
+    @FXML public Slider sliderVolume = new Slider();
 
 }

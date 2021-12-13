@@ -70,6 +70,14 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewSongs.getColumns().add(this.tblClmnSongGenre);
         tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
+
+       //this.tblViewSongs.selectionModelProperty().addListener((observable, oldValue, newValue) -> {
+       //    try {
+       //        songPlayer.setMedia(newValue.getSelectedItem().getLocation());
+       //    } catch (URISyntaxException e) {
+       //        e.printStackTrace();
+       //    }
+       //});
     }
 
     public void onSongSelectionChanged(ObservableValue obs, Number old, Number _new)
@@ -113,34 +121,35 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         initializeSearchEntries(songPlayer.data);
 
+        sliderVolume.setMin(0);
+        sliderVolume.setMax(1);
+        sliderVolume.setValue(1);
 
-
-
+        sliderVolume.valueProperty().addListener((observable, oldValue, newValue) -> {
+            songPlayer.setVolume(sliderVolume.getValue());
+        });
     }
 
 
     @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException
     {
-        if (isPlaying.getValue()) {
-            songPlayer.pauseTrack();
+        if (songPlayer.isPlaying.getValue() == false) {
+           if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null))
+           {
+               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+               songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
+               songPlayer.playTrack();
+           } else {
+               tblViewSongs.getSelectionModel().select(0);
+               songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
 
-        } else
+               songPlayer.playTrack();
+           }
+            songPlayer.playTrack();
+        }
+        else
         {
-            /*
-            if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null)) {
-
-                songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-                songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
-
-                songPlayer.playTrack();
-            } else {
-                tblViewSongs.getSelectionModel().select(0);
-                songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-
-                songPlayer.playTrack();
-            }
-            */
-             songPlayer.playTrack();
+            songPlayer.pauseTrack();
         }
     }
 
@@ -150,7 +159,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
         tblViewSongs.getSelectionModel().selectNext();
         songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-
         songPlayer.playTrack();
     }
 
@@ -245,12 +253,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     @FXML
-    private void setVolume(ActionEvent event)
-    {
-        throw new NotImplementedException();
-    }
-
-    @FXML
     private void onPlaylistUp(ActionEvent event)
     {
         throw new NotImplementedException();
@@ -258,6 +260,12 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML
     private void onPlaylistDown(ActionEvent event)
+    {
+        throw new NotImplementedException();
+    }
+
+    @FXML
+    private void setVolume(ActionEvent event)
     {
         throw new NotImplementedException();
     }

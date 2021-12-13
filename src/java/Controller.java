@@ -308,7 +308,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * @param inputList
      */
     private void initializeMMSearchEntries(List<MusicModel> inputList){
-        txtFieldSearch.clear();
+        txtFieldSearch.getEntries().clear();
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)).toString());
 
@@ -321,7 +321,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * in the database.
      * @param inputList
      */
-    private void initializeStringSearchEntires(List<String> inputList){
+    private void initializeStringSearchEntries(List<String> inputList){
         txtFieldSearch.getEntries().clear();
         for (int i = 0; i < inputList.size(); i++){
             txtFieldSearch.getEntries().add((inputList.get(i)));
@@ -371,21 +371,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         switch (ComboBoxEnum.values()[selectedItem]){
             case ARTIST: {
                 txtFieldSearch.setPromptText("Enter artist to filter");
-                initializeStringSearchEntires(searchModel.allAvailableArtist());
+                initializeStringSearchEntries(searchModel.allAvailableArtist());
                 break;
             }
             case ALBUM: {
-                initializeStringSearchEntires(searchModel.allAvailableAlbums());
+                initializeStringSearchEntries(searchModel.allAvailableAlbums());
                 txtFieldSearch.setPromptText("Enter album to filter");
                 break;
             }
             case GENRE: {
-                initializeStringSearchEntires(searchModel.allAvailableGenre());
+                initializeStringSearchEntries(searchModel.allAvailableGenre());
                 txtFieldSearch.setPromptText("Enter genre to filter");
                 break;
             }
             case ARTISTTITLE: {
-                initializeStringSearchEntires(searchModel.allAvailableTitleArtist());
+                initializeStringSearchEntries(searchModel.allAvailableTitleArtist());
                 txtFieldSearch.setPromptText("Enter artist or title to filter");
                 break;
             }
@@ -396,5 +396,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                 break;
             }
         }
+    }
+
+    public void onPlayPauseTrack(ActionEvent event) {
     }
 }

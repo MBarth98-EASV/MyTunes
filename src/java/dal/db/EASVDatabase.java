@@ -363,7 +363,6 @@ public class EASVDatabase
         String sql = "SELECT DISTINCT " + filterType + " FROM dbo.Songs " ;
         List<String> SearchEntryFilter = new ArrayList<>();
 
-        String chosenFilter;
 
         try
         {
@@ -374,7 +373,10 @@ public class EASVDatabase
 
             while (result.next())
             {
-                chosenFilter = result.getString(filterType);
+                String chosenFilter = result.getString(1);
+                if (chosenFilter == null || chosenFilter.isEmpty()){
+                    chosenFilter = "N/A";
+                }
                 SearchEntryFilter.add(chosenFilter);
             }
 
@@ -383,6 +385,7 @@ public class EASVDatabase
         catch (Exception ex)
         {
             System.out.println("database is not available");
+            ex.printStackTrace();
             // return empty array - garentee not null
             return new ArrayList<>();
         }

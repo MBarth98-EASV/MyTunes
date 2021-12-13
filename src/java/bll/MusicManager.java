@@ -9,21 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MusicManager {
 
@@ -38,35 +26,27 @@ public class MusicManager {
             data.addAll(new EASVDatabase().getAllSongs());
         }
 
-        public void pathToAbsolute(String path)
+        public void setMedia(String path) throws URISyntaxException
         {
-            URL res = getClass().getClassLoader().
-            File file = Paths.get()
-            System.out.println(FileSystems.getDefault().getPath(path).toAbsolutePath());
-        }
-
-        public void setMedia(String path) {
-            this.musicPlayer = new MediaPlayer(new Media(FileSystems.getDefault().getPath(path).toAbsolutePath().toUri().toString()));
-        }
-
-        private void setMedia(int index) throws IOException
-        {
-            setMedia(data.get(index).getLocation());
+            this.musicPlayer = new MediaPlayer(new Media(getClass().getClassLoader().getResource(path).toURI().toString()));
         }
 
         public void playTrack()
         {
             musicPlayer.play();
+            isPlaying.setValue(true);
         }
 
         public void stopTrack()
         {
             musicPlayer.stop();
+            isPlaying.setValue(false);
         }
 
         public void pauseTrack()
         {
            musicPlayer.pause();
+           isPlaying.setValue(false);
         }
 
         public int getDuration()

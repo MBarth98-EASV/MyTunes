@@ -90,27 +90,28 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
 
-    @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException {
-        songPlayer.pathToAbsolute(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
-        /*
-        if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null)) {
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+    @FXML private void onPlayTrack(ActionEvent actionEvent) throws URISyntaxException
+    {
+        if (isPlaying.getValue() == false) {
+            if (!(tblViewSongs.getSelectionModel().getSelectedItem() == null)) {
 
-            songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
+                songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+                songPlayer.isPlaying.setValue(!songPlayer.isPlaying.getValue());
 
-            songPlayer.playTrack();
-        }
-        else
+                songPlayer.playTrack();
+            } else {
+                tblViewSongs.getSelectionModel().select(0);
+                songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+                ;
+                songPlayer.playTrack();
+            }
+        } else
         {
-            tblViewSongs.getSelectionModel().select(0);
-            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());;
-            songPlayer.playTrack();
+            songPlayer.pauseTrack();
         }
-        /
-         */
     }
 
-    @FXML private void onNextTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
+    @FXML private void onNextTrack(ActionEvent actionEvent) throws URISyntaxException
     {
         songPlayer.stopTrack();
 
@@ -120,22 +121,23 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songPlayer.playTrack();
     }
 
-    @FXML private void onPreviousTrack(ActionEvent actionEvent) throws IOException, URISyntaxException
+    @FXML private void onPreviousTrack(ActionEvent actionEvent) throws URISyntaxException
     {
         if (songPlayer.getDuration() > 5)
         {
             songPlayer.stopTrack();
             songPlayer.playTrack();
-        }
-        else
-        {
+
+        } else {
             songPlayer.stopTrack();
 
             tblViewSongs.getSelectionModel().selectPrevious();
-            songPlayer.setMedia(getClass().getResource(tblViewSongs.getSelectionModel().getSelectedItem().getLocation()).toURI().toString());
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
+            songPlayer.setMedia(tblViewSongs.getSelectionModel().getSelectedItem().getLocation());
 
             songPlayer.playTrack();
         }
+
     }
 
 

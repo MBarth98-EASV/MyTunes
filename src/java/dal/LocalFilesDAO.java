@@ -227,7 +227,7 @@ public class LocalFilesDAO {
                 e.printStackTrace();
             }
 
-            db.addAllSongsFromDir(title, artist, duration, "local", p.toString(), genre, album);
+            db.addSong(title, artist, duration, "local", p.toString(), genre, album);
         }
     }
 

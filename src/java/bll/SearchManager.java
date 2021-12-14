@@ -4,7 +4,6 @@ import be.SongModel;
 import dal.db.EASVDatabase;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class SearchManager {
 
         for (String param: params)
         {
-            inputList.addAll(db.allAvailableByParameter(param));
+            inputList.addAll(db.getUniqueValuesIn(param));
         }
 
         return inputList.stream().sorted().collect(Collectors.toList());

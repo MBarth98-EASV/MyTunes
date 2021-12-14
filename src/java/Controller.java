@@ -86,7 +86,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnPlaylistSongCount.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("songCount"));
         this.tblClmnPlaylistDuration.setCellValueFactory(new PropertyValueFactory<PlaylistModel, String>("duration"));
 
-        handlePlaylistDoubleClick();
         songContextMenu();
         playlistContextMenu();
 
@@ -388,20 +387,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     }
 
-
-    @FXML
-    public void handlePlaylistDoubleClick(){
-        tblViewPlaylist.setRowFactory( tv -> {
-            TableRow<PlaylistModel> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-                    PlaylistModel rowData = row.getItem();
-                    System.out.println(rowData);
-                }
-            });
-            return row ;
-        });
-    }
 
     @FXML
     public void songContextMenu(){

@@ -174,10 +174,14 @@ public class LocalFilesDAO {
                 Tag tag = audioFile.getTag();
                 AudioHeader header = audioFile.getAudioHeader();
 
-                artist = tag.getFirst(FieldKey.ARTIST);
-                title = tag.getFirst(FieldKey.TITLE);
-                album = tag.getFirst(FieldKey.ALBUM);
-                genre = tag.getFirst(FieldKey.GENRE);
+                if (tag != null)
+                {
+                    artist = tag.getFirst(FieldKey.ARTIST);
+                    title = tag.getFirst(FieldKey.TITLE);
+                    album = tag.getFirst(FieldKey.ALBUM);
+                    genre = tag.getFirst(FieldKey.GENRE);
+                }
+
                 duration = header.getTrackLength();
 
                 if (artist == null || artist.isEmpty() || artist.equals("null")){

@@ -6,7 +6,15 @@ import be.PlaylistModel;
 import be.SongModel;
 import bll.AudioManager;
 import dal.Utility;
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import dal.db.EASVDatabase;
 import javafx.scene.control.ContextMenu;
@@ -211,7 +219,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(320);
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
-
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(new EASVDatabase().getAllSongs())));
         } catch (IOException e) {
             e.printStackTrace();
         }

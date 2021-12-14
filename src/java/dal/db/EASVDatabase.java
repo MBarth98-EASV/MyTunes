@@ -5,6 +5,7 @@ import be.SongModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -228,9 +229,9 @@ public class EASVDatabase {
                 songLocation = result.getString("filepath");
                 songGenre = result.getString("genre");
                 songAlbum = result.getString("album");
-
+                if (Path.of(songLocation).toFile().isFile()){
                 songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, 0, "local", songLocation));
-            }
+            }}
 
             return songs;
         } catch (Exception ex) {
@@ -269,7 +270,6 @@ public class EASVDatabase {
         }
     }
 
-    //TODO: Make methods applicable for Title and Artist which takes two parameters.
 
     public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter) {
         String sql = null;
@@ -418,7 +418,7 @@ public class EASVDatabase {
         }
     }
 
-    //TODO: Untested
+    
     private void removeSongFromPlaylist(SongModel song, PlaylistModel playlist) {
         try {
             String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getID() + " AND SongID = " + song.getId();

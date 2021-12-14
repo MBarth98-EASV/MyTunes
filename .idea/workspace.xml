@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/resources/styles/ContextMenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +40,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="21jSA9weObWTmPIyTtVgS1SKdPD" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -129,6 +129,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

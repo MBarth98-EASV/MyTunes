@@ -196,7 +196,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSongNew(ActionEvent event){
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/NewSong.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/NewSong.fxml")));
             Stage stage = new Stage();
             stage.setTitle("New Song");
             stage.setMaxHeight(193);

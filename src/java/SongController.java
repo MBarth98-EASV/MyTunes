@@ -15,6 +15,7 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SongController implements Initializable {
@@ -49,8 +50,15 @@ public class SongController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        model = (SongModel) resources.getObject("selectedSong");
-        System.out.println(model.getTitle());
+        if (resources != null)
+        {
+            model = (SongModel) resources.getObject("selectedSong");
+            System.out.println(model.getTitle());
+
+        }
+
+
+
     }
 
     public void onSelectFile(ActionEvent event) 

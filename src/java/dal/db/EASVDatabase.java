@@ -34,7 +34,19 @@ public class EASVDatabase
         return dataSource.getConnection();
     }
 
-    private ResultSet execute(String sql)
+    private void execute(String sql)
+    {
+        try
+        {
+            Statement statement = dataSource.getConnection().createStatement();
+            statement.execute(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ResultSet query(String sql)
     {
         try {
             Statement statement = dataSource.getConnection().createStatement();
@@ -98,7 +110,7 @@ public class EASVDatabase
             int songId, duration;
             String songTitle, songArtist, songLocation, songAlbum, songGenre, source;
 
-            ResultSet result = this.execute(sql);
+            ResultSet result = this.query(sql);
 
             while (result.next())
             {
@@ -154,7 +166,7 @@ public class EASVDatabase
         try
         {
         List<String> searchableEntities = new ArrayList<>();
-            ResultSet result = this.execute("SELECT DISTINCT " + columnName + " FROM dbo.Songs ");
+            ResultSet result = this.query("SELECT DISTINCT " + columnName + " FROM dbo.Songs ");
 
             while (result.next())
             {

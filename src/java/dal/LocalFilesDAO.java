@@ -161,6 +161,96 @@ public class LocalFilesDAO {
         return extension.equals("mp3") || extension.equals("wav");
     }
 
+    public List<SongModel> loadSongModels(List<Path> loadList)
+    {
+        List<SongModel> returnList = new ArrayList<>();
+        for (Path p : loadList)
+        {
+            String artist = "Unknown Artist";
+            String title = String.valueOf(p);
+            String album = "N/A";
+            String genre = "N/A";
+            int duration = 0;
+
+            try
+            {
+                AudioFile audioFile = AudioFileIO.read(p.toFile());
+                Tag tag = audioFile.getTag();
+                AudioHeader header = audioFile.getAudioHeader();
+
+                if (tag != null)
+                {
+                    artist = tag.getFirst(FieldKey.ARTIST);
+                    title = tag.getFirst(FieldKey.TITLE);
+                    album = tag.getFirst(FieldKey.ALBUM);
+                    genre = tag.getFirst(FieldKey.GENRE);
+                }
+
+                duration = header.getTrackLength();
+
+                if (artist == null || artist.isEmpty() || artist.equals("null"))
+                {
+                    artist = "Unknown Artist";
+                }
+
+                if (title == null || title.isEmpty() || title.equals("null"))
+                {
+                    String titleExtension = p.toFile().getName();
+                    title = titleExtension.substring(0, titleExtension.lastIndexOf("."));
+                }
+
+                if (album == null || album.isEmpty() || album.equals("null"))
+                {
+                    album = "N/A";
+                }
+
+                if (genre == null || genre.isEmpty() || genre.equals("null"))
+                {
+                    genre = "---";
+                }
+
+                if (duration == 0)
+                {
+                    File file = p.toFile();
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+                    AudioFormat format = audioInputStream.getFormat();
+                    long frames = audioInputStream.getFrameLength();
+                    double durationInSeconds = (double) frames / format.getFrameRate();
+
+                    duration = (int) durationInSeconds;
+                }
+            }
+            catch (CannotReadException e)
+            {
+                e.printStackTrace();
+            }
+            catch (TagException e)
+            {
+                e.printStackTrace();
+            }
+            catch (InvalidAudioFrameException e)
+            {
+                e.printStackTrace();
+            }
+            catch (ReadOnlyFileException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            catch (UnsupportedAudioFileException e)
+            {
+                e.printStackTrace();
+            }
+
+            returnList.add(new SongModel(0, title, artist, genre, album, duration, "local", p.toString()));
+        }
+
+        return returnList;
+    }
+
     public void loadSongToDB(List<Path> loadList){
         for (Path p : loadList) {
             String artist = "Unknown Artist";

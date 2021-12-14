@@ -189,7 +189,7 @@ public class LocalFilesDAO {
                 }
 
                 if (title == null || title.isEmpty() || title.equals("null")){
-                    title = p.toFile().getName();
+                    title = p.toFile().getName().substring(0, title.lastIndexOf('.'));
                 }
 
                 if (album == null || album.isEmpty() || album.equals("null")){

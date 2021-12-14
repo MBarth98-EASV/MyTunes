@@ -98,7 +98,6 @@ public class EASVDatabase
     /**
      * Getters from the SQL database.
      */
-
     public ObservableList<SongModel> getAllSongs() {return getAllSongs("SELECT * FROM Songs"); }
 
     public ObservableList<SongModel> getAllSongs(String sql)

@@ -14,18 +14,15 @@ public class AudioManager
 {
     private final ObservableList<PlaylistModel> playlists;
 
-    private final ObjectProperty<PlaylistModel> selectedPlaylist = new SimpleObjectProperty<>();
-    private final ObjectProperty<SongModel> selectedSong = new SimpleObjectProperty<>();
-
     private final AudioPlayer player;
 
     public ListProperty<SongModel> getAvailableSongs() {
-        return this.selectedPlaylist.get().getSongs();
+        return DataManager.selectedPlaylist().get().getSongs();
     }
 
     public ObjectProperty<SongModel> getCurrentSong()
     {
-        return selectedSong;
+        return DataManager.selectedSong();
     }
 
     public ObjectProperty<Runnable> handleEndOfMusic = new SimpleObjectProperty<>();
@@ -35,11 +32,11 @@ public class AudioManager
         player = new AudioPlayer();
         playlists = FXCollections.observableArrayList();
 
-        this.selectedSong.addListener((observable, oldValue, newValue) -> {
+        DataManager.selectedSong().addListener((observable, oldValue, newValue) -> {
             if (oldValue != newValue)
             {
                 this.player.load(newValue);
-                this.selectedPlaylist.get().setSelectedSongIndex(selectedPlaylist.get().getSongs().indexOf(newValue));
+                DataManager.selectedPlaylist().get().setSelectedSongIndex(DataManager.selectedPlaylist().get().getSongs().indexOf(newValue));
 
                 if (this.player.isPlaying.get())
                 {
@@ -66,26 +63,26 @@ public class AudioManager
 
         if (!playlists.isEmpty())
         {
-            this.selectedPlaylist.setValue(playlists.get(0));
+            DataManager.selectedPlaylist().setValue(playlists.get(0));
         }
     }
 
     public void addPlaylist(PlaylistModel playlist)
     {
         this.playlists.add(playlist);
-        this.selectedPlaylist.set(this.playlists.get(this.playlists.size() - 1));
+        DataManager.selectedPlaylist().set(this.playlists.get(this.playlists.size() - 1));
 
-        if (!this.selectedPlaylist.get().getSongs().isEmpty())
+        if (!DataManager.selectedPlaylist().get().getSongs().isEmpty())
         {
-            this.selectedSong.set(this.selectedPlaylist.get().getSongs().get(0));
+            DataManager.selectedSong().set(DataManager.selectedPlaylist().get().getSongs().get(0));
         }
     }
 
     public void setSong(SongModel song)
     {
-        if (selectedPlaylist.get().getSongs().contains(song))
+        if (DataManager.selectedPlaylist().get().getSongs().contains(song))
         {
-            this.selectedSong.setValue(song);
+            DataManager.selectedSong().setValue(song);
         }
     }
 

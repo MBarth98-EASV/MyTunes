@@ -30,11 +30,6 @@ public class LocalFilesDAO {
 
     private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
     private static final Path dirPath = Path.of("src/resources/data/directory.txt");
-    EASVDatabase db;
-
-    public LocalFilesDAO() {
-        db = new EASVDatabase();
-    }
 
     /**
      * Lists all files in the given path, and checks whether it's a directory
@@ -109,16 +104,6 @@ public class LocalFilesDAO {
 
         return returnPath;
     }
-
-    /**
-     * Load the given filepath to the DB via loadToDB, which parses any
-     * metadata and writes it in the database.
-     * @param path The path to the song added manually by the user.
-     */
-    public void addSong(Path path) {
-        loadSongToDB(Collections.singletonList(path));
-    }
-
     /**
      * Reads the entirety of externalsongs.txt and adds the indvidual lines to the returnList
      * as Path objects.
@@ -250,93 +235,5 @@ public class LocalFilesDAO {
 
         return returnList;
     }
-
-    public void loadSongToDB(List<Path> loadList){
-        for (Path p : loadList) {
-            String artist = "Unknown Artist";
-            String title = String.valueOf(p);
-            String album = "N/A";
-            String genre = "N/A";
-            int duration = 0;
-
-            try {
-                AudioFile audioFile = AudioFileIO.read(p.toFile());
-                Tag tag = audioFile.getTag();
-                AudioHeader header = audioFile.getAudioHeader();
-
-                if (tag != null)
-                {
-                    artist = tag.getFirst(FieldKey.ARTIST);
-                    title = tag.getFirst(FieldKey.TITLE);
-                    album = tag.getFirst(FieldKey.ALBUM);
-                    genre = tag.getFirst(FieldKey.GENRE);
-                }
-
-                duration = header.getTrackLength();
-
-                if (artist == null || artist.isEmpty() || artist.equals("null")){
-                    artist = "Unknown Artist";
-                }
-
-                if (title == null || title.isEmpty() || title.equals("null")){
-                    String titleExtension = p.toFile().getName();
-                    title = titleExtension.substring(0, titleExtension.lastIndexOf("."));
-                }
-
-                if (album == null || album.isEmpty() || album.equals("null")){
-                    album = "N/A";
-                }
-
-                if (genre == null || genre.isEmpty() || genre.equals("null")){
-                    genre = "---";
-                }
-
-                if (duration == 0){
-                    File file = p.toFile();
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-                    AudioFormat format = audioInputStream.getFormat();
-                    long frames = audioInputStream.getFrameLength();
-                    double durationInSeconds = (double) frames / format.getFrameRate();
-
-                    duration = (int) durationInSeconds;
-                }
-
-
-
-            } catch (CannotReadException e) {
-                e.printStackTrace();
-            } catch (TagException e) {
-                e.printStackTrace();
-            } catch (InvalidAudioFrameException e) {
-                e.printStackTrace();
-            } catch (ReadOnlyFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            }
-
-            db.addSong(title, artist, duration, "local", p.toString(), genre, album);
-        }
-    }
-
-
-    /**
-     *
-     * @return
-     * 
-     * Throws "Could not invoke DirectBuffer method - illegal access".
-     * Library fault - To do.
-     */
-    public void loadAllLocalSongs(Path directory) {
-        ArrayList<Path> loadList = new ArrayList<>();
-        loadList.addAll(readAllFromDirectory(directory));
-        loadSongToDB(loadList);
-
-    }
-    
-    
-
 }
 

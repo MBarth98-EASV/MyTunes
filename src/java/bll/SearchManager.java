@@ -11,14 +11,11 @@ import java.util.stream.Collectors;
 
 public class SearchManager
 {
-    EASVDatabase db;
-
     public SearchManager() {
-        db = new EASVDatabase();
     }
 
     public ListProperty<SongModel> getAll(){
-        return new SimpleListProperty<SongModel>(db.getAllSongs());
+        return new SimpleListProperty<SongModel>(DataManager.getAllSongs());
     }
 
     public ListProperty<SongModel> filter(String firstProperty, String filterParameter)
@@ -28,7 +25,7 @@ public class SearchManager
             return getAll();
         }
 
-        return db.filterEqualsParameter(firstProperty, "NONE", filterParameter);
+        return DataManager.filterEqualsParameter(firstProperty, "NONE", filterParameter);
     }
 
     public ListProperty<SongModel> filter(String firstProperty, String secondProperty, String filterParameter)
@@ -38,7 +35,7 @@ public class SearchManager
             return getAll();
         }
 
-        return db.filterEqualsParameter(firstProperty, secondProperty, filterParameter);
+        return DataManager.filterEqualsParameter(firstProperty, secondProperty, filterParameter);
     }
 
     public List<String> getAllByParameter(String... params)
@@ -47,7 +44,7 @@ public class SearchManager
 
         for (String param: params)
         {
-            inputList.addAll(db.getUniqueValuesIn(param));
+            inputList.addAll(DataManager.getUniqueValuesIn(param));
         }
 
         return inputList.stream().sorted().collect(Collectors.toList());

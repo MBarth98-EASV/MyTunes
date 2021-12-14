@@ -7,29 +7,18 @@ import dal.db.EASVDatabase;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LocalFilesManager 
 {
 
-    LocalFilesDAO localFilesDAO;
-    EASVDatabase db;
-
     public LocalFilesManager() 
     {
-        localFilesDAO = new LocalFilesDAO();
-        db = new EASVDatabase();
     }
-
-    public void loadAllFromNewDir(Path path)
-    {
-        localFilesDAO.loadAllLocalSongs(path);
-    }
-
-
 
     public void addSong(Path path){
-        localFilesDAO.addSong(path);
+        DataManager.addSong(path);
 
     }
 

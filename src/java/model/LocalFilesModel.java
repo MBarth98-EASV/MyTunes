@@ -19,11 +19,6 @@ public class LocalFilesModel {
         localFilesManager = new LocalFilesManager();
     }
 
-    public void readAllFromNewDir(Path path)
-    {
-        localFilesManager.loadAllFromNewDir(path);
-    }
-
     public void addSong(Path path) {
         localFilesManager.addSong(path);
     }

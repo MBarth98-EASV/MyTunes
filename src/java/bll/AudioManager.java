@@ -74,7 +74,11 @@ public class AudioManager
     {
         this.playlists.add(playlist);
         this.selectedPlaylist.set(this.playlists.get(this.playlists.size() - 1));
-        this.selectedSong.set(this.selectedPlaylist.get().getSongs().get(0));
+
+        if (!this.selectedPlaylist.get().getSongs().isEmpty())
+        {
+            this.selectedSong.set(this.selectedPlaylist.get().getSongs().get(0));
+        }
     }
 
     public void setSong(SongModel song)

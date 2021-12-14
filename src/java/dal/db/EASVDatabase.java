@@ -517,13 +517,13 @@ public class EASVDatabase {
 
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
-
             while (result.next()) {
                 int playlistID = result.getInt("id");
                 String playlistName = result.getString("name");
-
+                List<SongModel> playlistSongs = getAllSongsInPlaylist(playlistID);
+                if (!playlistSongs.isEmpty()){
                 returnList.add(new PlaylistModel(playlistID, getAllSongsInPlaylist(playlistID), 0, false, playlistName));
-            }
+            }}
             return returnList;
 
         } catch (Exception e) {

@@ -73,12 +73,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         tblViewSongs.getColumns().add(this.tblClmnSongGenre);
         tblViewSongs.getColumns().add(this.tblClmnSongAlbum);
         tblViewSongs.getColumns().add(this.tblClmnSongTime);
-        songContextMenu();
 
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistName);
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistSongCount);
         tblViewPlaylist.getColumns().add(this.tblClmnPlaylistDuration);
-        playlistContextMenu();
 
         audioManager.handleEndOfMusic.set(() -> onNextTrack(null));
     }
@@ -134,6 +132,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     {
         playlistInitialize();
         songsInitialize();
+        playlistContextMenu();
+        songContextMenu();
 
         initializeMMSearchEntries();
 
@@ -467,12 +467,15 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         return formatDuration(this.audioManager.getTotalTime().get());
     }
 
+
     @FXML
     public void songContextMenu(){
         ContextMenu contextMenuSongs = new ContextMenu();
         tblViewSongs.setContextMenu(contextMenuSongs);
         contextMenuSongs.setStyle("-fx-background-color: #404040; ");
 
+        MenuItem addSong = new MenuItem("Add to playlist");
+        addSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem newSong = new MenuItem("New");
         newSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem editSong = new MenuItem("Edit");
@@ -480,10 +483,12 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         MenuItem deleteSong = new MenuItem("Delete");
         deleteSong.setStyle("-fx-text-fill: #d5d4d4;");
 
+        addSong.setOnAction(event -> onSongAddToPlayList(event));
         newSong.setOnAction(event -> onSongNew(event));
         editSong.setOnAction(event -> onSongEdit(event));
         deleteSong.setOnAction(event -> onSongDelete(event));
 
+        contextMenuSongs.getItems().add(addSong);
         contextMenuSongs.getItems().add(newSong);
         contextMenuSongs.getItems().add(editSong);
         contextMenuSongs.getItems().add(deleteSong);
@@ -495,17 +500,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         contextMenuPlaylist.setStyle("-fx-background-color: #404040;");
         tblViewPlaylist.setContextMenu(contextMenuPlaylist);
 
-        MenuItem newSong = new MenuItem("New");
+        MenuItem newSong = new MenuItem("Remove from playlist");
+        newSong.setStyle("-fx-text-fill: #d5d4d4;");
+        MenuItem removeSong = new MenuItem("New");
         newSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem editSong = new MenuItem("Edit");
         editSong.setStyle("-fx-text-fill: #d5d4d4;");
         MenuItem deleteSong = new MenuItem("Delete");
         deleteSong.setStyle("-fx-text-fill: #d5d4d4;");
 
+        removeSong.setOnAction(event -> onSongRemoveFromPlaylist(event));
         newSong.setOnAction(event -> onPlaylistNew(event));
         editSong.setOnAction(event -> onPlaylistEdit(event));
         deleteSong.setOnAction(event -> onPlaylistDelete(event));
 
+        contextMenuPlaylist.getItems().add(removeSong);
         contextMenuPlaylist.getItems().add(newSong);
         contextMenuPlaylist.getItems().add(editSong);
         contextMenuPlaylist.getItems().add(deleteSong);

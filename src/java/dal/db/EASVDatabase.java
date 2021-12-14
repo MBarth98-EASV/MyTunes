@@ -3,6 +3,10 @@ package dal.db;
 import be.SongModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -83,13 +87,13 @@ public class EASVDatabase
      * Getters from the SQL database.
      */
 
-    public List<SongModel> getAllSongs() {return getAllSongs("SELECT * FROM Songs"); }
+    public ObservableList<SongModel> getAllSongs() {return getAllSongs("SELECT * FROM Songs"); }
 
-    public List<SongModel> getAllSongs(String sql)
+    public ObservableList<SongModel> getAllSongs(String sql)
     {
         try
         {
-            List<SongModel> songs = new ArrayList<>();
+            ObservableList<SongModel> songs = FXCollections.observableArrayList();
 
             int songId, duration;
             String songTitle, songArtist, songLocation, songAlbum, songGenre, source;
@@ -117,13 +121,13 @@ public class EASVDatabase
             System.out.println(ex.getMessage());
 
             // return empty array - garentee not null
-            return new ArrayList<>();
+            return FXCollections.observableArrayList();
         }
     }
 
  //TODO: Make methods applicable for Title and Artist which takes two parameters.
 
-    public List<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
+    public ListProperty<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
         String sql = null;
 
         if (!filterType2.equals("NONE"))
@@ -136,7 +140,7 @@ public class EASVDatabase
             sql = "SELECT * FROM dbo.Songs WHERE " + filterType + " LIKE '%" + filterParameter + "%'";
         }
 
-        return this.getAllSongs(sql);
+        return new SimpleListProperty<>(this.getAllSongs(sql));
     }
 
 

@@ -2,29 +2,42 @@ package bll;
 
 import be.SongModel;
 import dal.db.EASVDatabase;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchManager {
+public class SearchManager
+{
     EASVDatabase db;
 
     public SearchManager() {
         db = new EASVDatabase();
     }
 
-    public List<SongModel> getAll(){
-        return db.getAllSongs();
+    public ListProperty<SongModel> getAll(){
+        return new SimpleListProperty<SongModel>(db.getAllSongs());
     }
 
-    public List<SongModel> filter(String firstProperty, String filterParameter)
+    public ListProperty<SongModel> filter(String firstProperty, String filterParameter)
     {
+        if (filterParameter == null || filterParameter.isEmpty())
+        {
+            return getAll();
+        }
+
         return db.filterEqualsParameter(firstProperty, "NONE", filterParameter);
     }
 
-    public List<SongModel> filter(String firstProperty, String secondProperty, String filterParameter)
+    public ListProperty<SongModel> filter(String firstProperty, String secondProperty, String filterParameter)
     {
+        if (filterParameter == null || filterParameter.isEmpty())
+        {
+            return getAll();
+        }
+
         return db.filterEqualsParameter(firstProperty, secondProperty, filterParameter);
     }
 

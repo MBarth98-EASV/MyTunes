@@ -5,6 +5,7 @@ import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
 import bll.AudioManager;
+import dal.Utility;
 import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import dal.db.EASVDatabase;
@@ -13,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+import jdk.jshell.execution.Util;
 import model.LocalFilesModel;
 
 import javafx.collections.FXCollections;
@@ -114,7 +116,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        tblViewSongs.itemsProperty().bind(audioManager.getAvailableSongs());
+        Utility.bind(tblViewSongs, audioManager.getAvailableSongs());
 
         tblViewSongs.getFocusModel().focusedCellProperty().addListener(o -> onSongSelectionChanged());
     }
@@ -300,7 +302,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                             searchModel.filterArtistAndTitle(tblViewSongs, txtFieldSearch.getText());
                         }
                         default -> {
-                            searchModel.filterEqualsSearch(tblViewSongs, txtFieldSearch);
+                            Utility.bind(tblViewSongs, audioManager.getAvailableSongs());
                         }
                     }
                 }
@@ -405,6 +407,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     public void onClearSearchFilter(ActionEvent event) {
         cmboBoxFilter.getSelectionModel().select(0);
+        Utility.bind(this.tblViewSongs, audioManager.getAvailableSongs());
         txtFieldSearch.clear();
     }
 

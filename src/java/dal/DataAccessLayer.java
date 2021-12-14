@@ -1,6 +1,10 @@
 package dal;
 
+import be.SongModel;
 import dal.db.EASVDatabase;
+import javafx.beans.property.ListProperty;
+import javafx.scene.control.TableView;
+
 
 public class DataAccessLayer
 {
@@ -10,6 +14,7 @@ public class DataAccessLayer
     {
         db = new EASVDatabase();
     }
+
 
 
     // todo: combine db and local
@@ -22,5 +27,6 @@ public class DataAccessLayer
 
     // todo update entities through this class ?
     // todo store data in-use in this class ?
+
 
 }

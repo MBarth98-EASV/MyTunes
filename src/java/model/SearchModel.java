@@ -3,6 +3,7 @@ package model;
 import CustomComponent.AutoCompleteTextField;
 import be.SongModel;
 import bll.SearchManager;
+import dal.Utility;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 
@@ -72,22 +73,28 @@ public class SearchModel {
 
     public void filterArtist(TableView<SongModel> songTable, String filterParameter)
     {
-        songTable.getItems().setAll(searchManager.filter("artists", filterParameter));
+        Utility.bind(songTable, searchManager.filter("artists", filterParameter));
+        //songTable.getItems().setAll(searchManager.filter("artists", filterParameter));
     }
 
     public void filterAlbum(TableView<SongModel> songTable, String filterParameter)
     {
-        songTable.getItems().setAll(searchManager.filter("album", filterParameter));
+        Utility.bind(songTable, searchManager.filter("album", filterParameter));
+        //songTable.getItems().setAll(searchManager.filter("album", filterParameter));
     }
 
     public void filterGenre(TableView<SongModel> songTable, String filterParameter)
     {
-        songTable.getItems().setAll(searchManager.filter("genre", filterParameter));
+        Utility.bind(songTable, searchManager.filter("genre", filterParameter));
+
+       //songTable.getItems().setAll(searchManager.filter("genre", filterParameter));
     }
 
     public void filterArtistAndTitle(TableView<SongModel> songTable, String filterParameter)
     {
-        songTable.getItems().setAll(searchManager.filter("artists", "title",filterParameter));
+        Utility.bind(songTable, searchManager.filter("artists", "title", filterParameter));
+
+       //songTable.getItems().setAll(searchManager.filter("artists", "title",filterParameter));
     }
 
     public List<String> allAvailableArtist()

@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.PlaylistModel;
 import be.SongModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -61,7 +62,7 @@ public class EASVDatabase
 
 
     /**
-     * Add song to SQL database table.
+     * Add song and playlist to SQL database table.
      */
     public void addSong(SongModel song)
     {
@@ -74,7 +75,7 @@ public class EASVDatabase
     }
 
     /**
-     * Add song to SQL database table.
+     * Add song or playlist to SQL database table.
       */
     public void addSong(String songName, String art, int dura, String sauce, String fpath, String genre, String album)
     {
@@ -82,9 +83,19 @@ public class EASVDatabase
         this.execute(sql);
     }
 
+    public void addPlaylist(String playlistName){
+        String sql = "INSERT INTO dbo.PlayList (name) VALUES ('" + playlistName + "')";
+        this.execute(sql);
+    }
+
+    public void addSongToPlaylist(SongModel song, PlaylistModel playlist){
+        String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
+                + "(" + playlist.getOrderID() + ", " + song.getId() + ")";
+        this.execute(sql);
+    }
 
     /**
-     * Remove Songs from SQL database.
+     * Remove Songs or Playlists from SQL database.
       */
     public void removeSong(int id)
     {
@@ -94,6 +105,31 @@ public class EASVDatabase
     public void removeSong(String songName)
     {
         this.execute("DELETE FROM Songs WHERE title LIKE '%" + songName + "%'");
+    }
+
+    public void removePlaylist(PlaylistModel playlist) {
+        String sql = "DELETE FROM dbo.PlayList WHERE id = " + playlist.getOrderID();
+        String sqlSongs = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID();
+        this.execute(sql);
+        this.execute(sqlSongs);
+    }
+
+    public void removeSongFromPlaylist(PlaylistModel playlist, SongModel song){
+        String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID() + " AND SongID = " + song.getId();
+        this.execute(sql);
+    }
+
+    /**
+     * Updaters for songs and playlists.
+     */
+    public void updateSong(SongModel song){
+        String sql = "UPDATE dbo.Songs SET title = '" + song.getTitle() + "', artists = '"
+                + song.getArtists() + "', genre = '" + song.getGenre() + "', album = '" + song.getAlbum() + "' WHERE id = " + song.getId();
+    }
+
+    public void updatePlaylist(PlaylistModel playlist){
+        String sql = "UPDATE dbo.PlayList SET name='" + playlist.getName() + "' WHERE id=" + playlist.getOrderID();
+        this.execute(sql);
     }
 
     /**
@@ -137,7 +173,42 @@ public class EASVDatabase
             return FXCollections.observableArrayList();
         }
     }
-    
+    public List<PlaylistModel> getAllPlaylists(){
+        ArrayList<PlaylistModel> returnList = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.PlayList";
+        try {
+            Statement statement = dataSource.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(sql);
+            while (result.next()) {
+                int playlistID = result.getInt("id");
+                String playlistName = result.getString("name");
+                List<SongModel> playlistSongs = getAllSongsInPlaylist(playlistID);
+                if (!playlistSongs.isEmpty()){
+                    returnList.add(new PlaylistModel(playlistID, getAllSongsInPlaylist(playlistID), 0, false, playlistName));
+                }}
+            return returnList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return returnList;
+        }
+
+    }
+
+    public List<SongModel> getAllSongsInPlaylist(int playlistID) throws SQLException {
+        ArrayList<SongModel> returnList = new ArrayList<>();
+        String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlistID;
+        ResultSet result = this.query(sql);
+        while (result.next()) {
+            int songId = result.getInt("id");
+            for (SongModel s : getAllSongs()) {
+                if (s.getId() == songId);
+                returnList.add(s);
+            }
+        }
+        return returnList;
+    }
+
 
     public ListProperty<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
         String sql = null;
@@ -186,4 +257,6 @@ public class EASVDatabase
             return new ArrayList<>();
         }
     }
+
+
 }

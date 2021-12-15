@@ -93,6 +93,9 @@ public class SongModel implements ISearchable
         this.setAlbum(album);
     }
 
+    public int getId(){
+        return this.id.get();
+    }
 
     public void setId(int id)
     {

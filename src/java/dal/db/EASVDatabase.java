@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -122,8 +123,9 @@ public class EASVDatabase
                 songAlbum = result.getString("album");
                 source = result.getString("source");
 
+                if (Path.of(songLocation).toFile().isFile()){
                 songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, duration, source, songLocation));
-            }
+            }}
 
             return songs;
         }
@@ -135,8 +137,7 @@ public class EASVDatabase
             return FXCollections.observableArrayList();
         }
     }
-
- //TODO: Make methods applicable for Title and Artist which takes two parameters.
+    
 
     public ListProperty<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter){
         String sql = null;

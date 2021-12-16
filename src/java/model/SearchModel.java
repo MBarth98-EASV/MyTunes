@@ -32,15 +32,16 @@ public class SearchModel {
     {
         if (search != null && !search.isEmpty())
         {
-            for (SongModel m : inputList)
+            for (SongModel song : inputList)
             {
-                if (m.toString().equalsIgnoreCase(search)) {
-                    return m;
+                if (song.toString().equalsIgnoreCase(search)) {
+                    return song;
                 }
             }
             if (search.length() >= 3)
             {
-                List<SongModel> backupSearch = inputList.stream().filter(m -> m.toString().toLowerCase().contains(search.toLowerCase())).sorted().collect(Collectors.toList());
+                List<SongModel> backupSearch = inputList.stream().filter(m -> m.toString()
+                        .toLowerCase().contains(search.toLowerCase())).sorted().collect(Collectors.toList());
                 return backupSearch.get(0);
             }
         }
@@ -53,11 +54,11 @@ public class SearchModel {
      * to its actual class and selected and scrolled to in its list.
      * @param textField The searchbar.
      */
-    public void filterEqualsSearch(TableView<SongModel> table, AutoCompleteTextField textField)
+    public void Search(TableView<SongModel> table, AutoCompleteTextField textField)
     {
-        SongModel m = getObjectFromText(table.getItems().stream().toList(), textField.getText());
+        SongModel song = getObjectFromText(table.getItems().stream().toList(), textField.getText());
 
-        if (m == null)
+        if (song == null)
         {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setHeaderText("Input not valid");
@@ -66,8 +67,8 @@ public class SearchModel {
         }
         else
         {
-            table.getSelectionModel().select(m);
-            table.scrollTo(m);
+            table.getSelectionModel().select(song);
+            table.scrollTo(song);
         }
     }
 

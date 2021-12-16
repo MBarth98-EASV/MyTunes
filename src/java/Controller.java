@@ -291,6 +291,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                         }
                         default -> {
                             Utility.bind(tblViewSongs, audioManager.getAvailableSongs());
+                            searchModel.Search(tblViewSongs, txtFieldSearch);
                         }
                     }
                 }

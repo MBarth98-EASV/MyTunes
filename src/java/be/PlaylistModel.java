@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
 import javafx.util.Duration;
 
 
-public class PlaylistModel implements ISearchable
+public class PlaylistModel
 {
     /**
      *  used to determine where the entity is displayed.
@@ -147,9 +147,4 @@ public class PlaylistModel implements ISearchable
         return this.totalDuration;
     }
 
-    @Override
-    public String toSearchable()
-    {
-        return this.getName();
-    }
 }

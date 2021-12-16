@@ -1,20 +1,12 @@
 import CustomComponent.AutoCompleteTextField;
 import CustomComponent.ComboBoxEnum;
-import be.ISearchable;
 import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
 import bll.AudioManager;
 import dal.Utility;
-import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import dal.db.EASVDatabase;
 import javafx.scene.control.ContextMenu;
@@ -22,11 +14,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-import jdk.jshell.execution.Util;
-import model.LocalFilesModel;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -372,12 +361,12 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      * in the database.
      * @param inputList
      */
-    private <T extends ISearchable> void initializeGenericSearchEntries(List<T> inputList){
+    private <T> void initializeGenericSearchEntries(List<T> inputList){
         txtFieldSearch.getEntries().clear();
 
         for (int i = 0; i < inputList.size(); i++)
         {
-            txtFieldSearch.getEntries().add((inputList.get(i).toSearchable()));
+            txtFieldSearch.getEntries().add((inputList.get(i).toString()));
         }
     }
 

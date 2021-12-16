@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/button.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/button.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/shuffleButton.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/shuffleButton.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/ISearchable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/PlaylistModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/be/SongModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/be/SongModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

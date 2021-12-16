@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.
  */
-public class SongModel implements ISearchable
+public class SongModel
 {
     /**
      * the title of the song
@@ -173,8 +173,4 @@ public class SongModel implements ISearchable
                 title.get() + "  |  " + duration.get();
     }
 
-    @Override
-    public String toSearchable() {
-        return this.title.get();
-    }
 }

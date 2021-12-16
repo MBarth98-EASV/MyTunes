@@ -158,7 +158,7 @@ public class LocalFilesDAO {
                 e.printStackTrace();
             }
 
-            returnList.add(new SongModel(0, title, artist, genre, album, duration, "local", p.toString()));
+            returnList.add(new SongModel(-1, title, artist, genre, album, duration, "local", p.toString()));
         }
 
         return returnList;

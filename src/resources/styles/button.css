@@ -58,8 +58,8 @@
 }
 
 .Button2:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #11223f;
+    -fx-opacity: 0.2;
+    -fx-background-color: transparent;
     -fx-text-fill: #d5d4d4;
 }
 

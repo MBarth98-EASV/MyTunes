@@ -48,7 +48,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnSettings" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="117.0" onAction="#onSettings" prefHeight="34.0" prefWidth="117.0" scaleY="0.95" style="-fx-min-width: 101; -fx-max-width: 101; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Settings" translateX="10.0" GridPane.rowIndex="1">
+            <Button fx:id="btnSettings" alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="117.0" onAction="#onSettings" opacity="0.2" prefHeight="34.0" prefWidth="117.0" scaleY="0.95" style="-fx-min-width: 101; -fx-max-width: 101; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Settings" translateX="10.0" GridPane.rowIndex="1">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -65,7 +65,7 @@
                   <Insets />
                </GridPane.margin>
             </AutoCompleteTextField>
-            <ComboBox fx:id="cmboBoxFilter" onAction="#onComboBoxSelect" maxWidth="94.0" minHeight="32.0" prefHeight="34.0" prefWidth="94.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34; -fx-border-radius: 5;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
+            <ComboBox fx:id="cmboBoxFilter" maxWidth="94.0" minHeight="32.0" onAction="#onComboBoxSelect" prefHeight="34.0" prefWidth="94.0" promptText="Filter" style="-fx-max-height: 34; -fx-min-height: 34; -fx-border-radius: 5;" styleClass="choice-box" stylesheets="@../styles/dark.css" translateY="-1.0" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
             <Button fx:id="btnClearSearchFilter" maxHeight="32.0" maxWidth="55.0" minHeight="32.0" minWidth="55.0" mnemonicParsing="false" onAction="#onClearSearchFilter" prefHeight="32.0" prefWidth="55.0" styleClass="Button2" stylesheets="@../styles/ClearButton.css" text="X" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <font>
                   <Font name="Consolas" size="28.0" />
@@ -101,9 +101,9 @@
                      <buttons>
                         <GridPane prefHeight="47.0" prefWidth="607.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="80.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.0" minWidth="10.0" prefWidth="76.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="102.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="80.33334350585938" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.0" minWidth="10.0" prefWidth="76.00000000000001" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="88.33333333333331" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="70.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="0.0" prefWidth="71.0" />
                            </columnConstraints>
@@ -111,32 +111,17 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="btnSongEdit1" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <Button fx:id="btnSongEdit1" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongNew1" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New">
+                              <Button fx:id="btnSongNew1" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New" GridPane.halignment="LEFT">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongDown1" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMoveSongDown" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button fx:id="btnSongUp1" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onMoveSongUp" prefHeight="34.0" prefWidth="26.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" GridPane.columnIndex="3">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button fx:id="btnSongDelete1" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Button fx:id="btnSongRemoveFromPlaylist" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongRemoveFromPlaylist" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 56; -fx-border-radius: 5; -fx-font-size: 16; -fx-min-hieght: 34; -fx-max-height: 34;" styleClass="Button2" stylesheets="@../styles/button.css" text="▶" GridPane.columnIndex="3">
+                              <Button fx:id="btnSongDelete1" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -172,38 +157,44 @@
                      <buttons>
                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="805.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="80.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.0" minWidth="10.0" prefWidth="76.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="92.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="205.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="65.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="0.0" prefWidth="68.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="80.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.0" minWidth="10.0" prefWidth="77.00002034505206" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="331.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="61.33335367838538" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="118.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="64.33341471354163" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="0.0" prefWidth="68.333251953125" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="btnSongEdit" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1">
+                              <Button fx:id="btnSongEdit" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongNew" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New">
+                              <Button fx:id="btnSongNew" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New" GridPane.halignment="LEFT">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongDown" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMoveSongDown" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" GridPane.columnIndex="5">
+                              <Button fx:id="btnSongDown" disable="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMoveSongDown" opacity="0.2" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" GridPane.columnIndex="6">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongUp" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onMoveSongUp" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" GridPane.columnIndex="4">
+                              <Button fx:id="btnSongUp" disable="true" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onMoveSongUp" opacity="0.2" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" GridPane.columnIndex="5">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongDelete" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2">
+                              <Button fx:id="btnSongDelete" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="btnSongRemoveFromPlaylist" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongRemoveFromPlaylist" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 56; -fx-border-radius: 5; -fx-font-size: 16; -fx-min-hieght: 34; -fx-max-height: 34;" styleClass="Button2" stylesheets="@../styles/button.css" text="▶" GridPane.columnIndex="4">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -231,11 +222,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane>
+            <GridPane prefHeight="75.0" prefWidth="0.0">
               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="32.666656494140625" prefWidth="64.6666768391927" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="152.66664632161462" prefWidth="163.00002034505212" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="47.6666259765625" prefWidth="98.33331298828125" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="25.0" prefHeight="33.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -267,6 +258,7 @@
                         <Insets right="25.0" />
                      </GridPane.margin>
                   </ToolBar>
+                  <ToggleButton disable="true" mnemonicParsing="false" opacity="0.2" prefHeight="34.0" prefWidth="36.0" styleClass="Button" stylesheets="@../styles/shuffleButton.css" translateX="5.0" translateY="3.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane prefHeight="54.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">

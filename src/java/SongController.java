@@ -84,7 +84,7 @@ public class SongController implements Initializable {
 
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){
-            DataManager.addSong(Path.of(songPath));
+            DataManager.add(Path.of(songPath));
         }
 
         ((Node)(event.getSource())).getScene().getWindow().hide();

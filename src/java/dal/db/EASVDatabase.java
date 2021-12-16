@@ -8,6 +8,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.didion.jwnl.data.Exc;
 
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -55,11 +56,28 @@ public class EASVDatabase
             return statement.executeQuery(sql);
         }
         catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }
 
+    private int getSongID(SongModel song)
+    {
+        String sql = """
+                SELECT * FROM dbo.Songs
+                where filepath = '%s'
+                """.formatted(song.getLocation());
+
+        try
+        {
+            ResultSet result = this.query(sql);
+            result.next();
+            return result.getInt("id");
+        }
+        catch (Exception ex)
+        {
+            return -1;
+        }
+    }
 
     /**
      * Add song and playlist to SQL database table.
@@ -71,7 +89,29 @@ public class EASVDatabase
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
                 """.formatted(song.getTitle(), song.getArtists(), song.getDuration(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
 
-       this.execute(sql);
+       this.query(sql);
+    }
+
+    public void add(SongModel song, PlaylistModel playlist)
+    {
+        String sql = """
+                INSERT INTO Songs (title, artists, duration, source, filepath, genre, album)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
+                """.formatted(song.getTitle(), song.getArtists(), song.getDuration(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
+
+        try
+        {
+            this.execute(sql);
+
+            String sql2 = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES "
+                    + "(" + playlist.getOrderID() + ", " + this.getSongID(song) + ")";
+
+            System.out.println(playlist.getOrderID());
+            System.out.println(this.getSongID(song));
+
+            this.execute(sql2);
+
+        } catch (Exception ex) {}
     }
 
     /**
@@ -174,16 +214,19 @@ public class EASVDatabase
             return FXCollections.observableArrayList();
         }
     }
-    public ObservableList<PlaylistModel> getAllPlaylists(){
+    public ObservableList<PlaylistModel> getAllPlaylists()
+    {
         ObservableList<PlaylistModel> returnList = FXCollections.observableArrayList();
+
         String sql = "SELECT * FROM dbo.PlayList";
+
         try {
             Statement statement = dataSource.getConnection().createStatement();
             ResultSet result = statement.executeQuery(sql);
             while (result.next()) {
                 int playlistID = result.getInt("id");
                 String playlistName = result.getString("name");
-                List<SongModel> playlistSongs = this.getAllSongs();
+                List<SongModel> playlistSongs = getAllSongsInPlaylist(playlistID);
                 returnList.add(new PlaylistModel(playlistID, playlistSongs, 0, false, playlistName));
             }
             return returnList;
@@ -192,8 +235,8 @@ public class EASVDatabase
             e.printStackTrace();
             return returnList;
         }
-
     }
+
 
     public List<SongModel> getAllSongsInPlaylist(int playlistID) throws SQLException {
         ArrayList<SongModel> returnList = new ArrayList<>();

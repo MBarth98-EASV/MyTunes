@@ -23,8 +23,6 @@ public class DataManager {
     private static EASVDatabase database = new EASVDatabase();;
     private static LocalFilesDAO localfiles = new LocalFilesDAO();
 
-
-
     public static ObjectProperty<SongModel> selectedSong()
     {
         return selectedSong;
@@ -39,6 +37,17 @@ public class DataManager {
     {
         database.addSong(song);
         selectedPlaylist.get().getSongs().add(song);
+    }
+
+    public static void add(SongModel song)
+    {
+        database.add(song, selectedPlaylist.get());
+        selectedPlaylist.get().getSongs().add(song);
+    }
+
+    public static void add(Path path) {
+        SongModel song = localfiles.loadSongModels(Collections.singletonList(path)).get(0);
+        add(song);
     }
 
     public static ObservableList<SongModel> getAllSongs()

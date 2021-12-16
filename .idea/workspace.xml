@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/src/java/bll/AudioManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/AudioManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/bll/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/DataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/EditSong.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/EditSong.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +41,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/resources/views/MyTunesView.fxml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="21jSA9weObWTmPIyTtVgS1SKdPD" />
   <component name="ProjectLevelVcsManager">
@@ -128,28 +127,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <condition expression="playlists.size() &gt; 0" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/java/bll/DataManager.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/bll/DataManager.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/Controller.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

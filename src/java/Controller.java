@@ -86,6 +86,19 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         }
     }
 
+    private void onPlaylistSelectionChanged()
+    {
+        try
+        {
+            DataManager.selectedPlaylist().setValue(tblViewPlaylist.getSelectionModel().selectedItemProperty().getValue());
+            Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.selectedPlaylist().get().getSongs()));
+
+        }
+        catch (Exception ex)
+        {
+            // todo: error handling
+        }
+    }
 
     private void playPauseUpdateStyle(boolean state)
     {
@@ -105,7 +118,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         DataManager.fetchplaylists();
         //DataManager.playlists.add(new PlaylistModel(, DataManager.getAllSongs(), 0, true, "Default"));
         Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<>(DataManager.getPlaylists()));
+
+        tblViewPlaylist.getFocusModel().focusedCellProperty().addListener(o -> onPlaylistSelectionChanged());
     }
+
+
 
     private void songsInitialize()
     {
@@ -115,7 +132,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.getSongs()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.selectedPlaylist().get().getSongs()));
 
         tblViewSongs.getFocusModel().focusedCellProperty().addListener(o -> onSongSelectionChanged());
     }
@@ -248,7 +265,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(335);
             stage.setScene(new Scene(root, 335, 335));
             stage.show();
-            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs())));
         }
         catch (IOException e)
         {

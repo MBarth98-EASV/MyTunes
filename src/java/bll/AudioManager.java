@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class AudioManager
@@ -52,6 +53,13 @@ public class AudioManager
 
 
 
+    public void setPlaylist(PlaylistModel playlist)
+    {
+        if (DataManager.getPlaylists().contains(playlist))
+        {
+            DataManager.selectedPlaylist().setValue(playlist);
+        }
+    }
 
 
     public void setSong(SongModel song)

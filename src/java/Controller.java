@@ -214,11 +214,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(320);
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
-            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(new EASVDatabase().getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.tblViewSongs.refresh();
     }
 
     @FXML
@@ -257,6 +256,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void onSongDelete(ActionEvent event)
     {
         DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
+        tblViewSongs.getItems().remove(tblViewSongs.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -310,6 +310,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 236, 193));
             stage.show();
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -343,6 +344,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void onPlaylistDelete(ActionEvent event)
     {
         DataManager.removePlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem());
+        tblViewPlaylist.getItems().remove(tblViewPlaylist.getSelectionModel().getSelectedItem());
+
     }
 
     /**

@@ -46,6 +46,10 @@ public class DataManager {
         return database.getAllSongs();
     }
 
+    public static ObservableList<PlaylistModel> getPlaylists(){
+        return database.getAllPlaylists();
+    }
+
     public static ListProperty<SongModel> filterEqualsParameter(String filterType, String filterType2, String filterParameter)
     {
         return database.filterEqualsParameter(filterType, filterType2, filterParameter);
@@ -71,8 +75,8 @@ public class DataManager {
         playlists.get(0).getSongs().remove(song);
     }
 
-    public static void addPlaylist(String text) {
-        database.addPlaylist(text);
+    public static void addPlaylist(String name) {
+        database.addPlaylist(name);
     }
 
     public static void editPlaylist(PlaylistModel currentlySelected) {

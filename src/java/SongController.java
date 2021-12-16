@@ -46,6 +46,7 @@ public class SongController implements Initializable {
         if (resources != null)
         {
             model = (SongModel) resources.getObject("selectedSong");
+            playlistModel = (PlaylistModel) resources.getObject("selectedPlaylist");
             System.out.println(model.getTitle());
 
         }

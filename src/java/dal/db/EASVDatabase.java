@@ -173,8 +173,8 @@ public class EASVDatabase
             return FXCollections.observableArrayList();
         }
     }
-    public List<PlaylistModel> getAllPlaylists(){
-        ArrayList<PlaylistModel> returnList = new ArrayList<>();
+    public ObservableList<PlaylistModel> getAllPlaylists(){
+        ObservableList<PlaylistModel> returnList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM dbo.PlayList";
         try {
             Statement statement = dataSource.getConnection().createStatement();

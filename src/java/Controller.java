@@ -256,18 +256,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         throw new NotImplementedException();
     }
 
-    @FXML
-    private void onPlaylistUp(ActionEvent event)
-    {
-        this.audioManager.setVolume(sliderVolume.getValue());
-    }
-
-    @FXML
-    private void onPlaylistDown(ActionEvent event)
-    {
-        throw new NotImplementedException();
-    }
-
     /**
      * Sets the searchbutton enterkey action depending on the selected mode in
      * the combobox.

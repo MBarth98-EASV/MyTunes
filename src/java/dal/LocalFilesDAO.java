@@ -27,11 +27,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class LocalFilesDAO {
 
-
-    private static final Path songPath = Path.of("src/resources/data/externalsongs.txt");
-    private static final Path dirPath = Path.of("src/resources/data/directory.txt");
-
-    /**
+    /** //TODO: To be used for adding all songs in a directory in the settings panel if implemented.
      * Lists all files in the given path, and checks whether it's a directory
      * or a supported filetype (.wav or .mp3). The file's path is then stored as a Path object in
      * the returnlist. If it's a directory, the method is run again in inside that directory.

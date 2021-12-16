@@ -172,7 +172,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML
     private void onSettings(ActionEvent actionEvent) {
-        try {
+        /*try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/Settings.fxml")));
             Stage stage = new Stage();
             stage.setTitle("Settings");
@@ -182,7 +182,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */ //TODO
     }
+
 
     @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {

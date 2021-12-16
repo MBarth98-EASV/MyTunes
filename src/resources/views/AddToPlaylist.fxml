@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="363.0" maxWidth="444.0" minHeight="363.0" minWidth="444.0" prefHeight="363.0" prefWidth="444.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongController">
+    <children>
+        <GridPane prefHeight="363.0" prefWidth="444.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="226.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="0.0" prefWidth="84.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="29.666666666666668" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="318.0" minHeight="0.0" prefHeight="7.666666666666668" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="9.0" prefHeight="281.3333333333333" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="10.0" prefHeight="36.666666666666686" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="460.0" style="-fx-font-size: 16;" text="Add Song to Playlist" textAlignment="CENTER" GridPane.columnSpan="2147483647" />
+                <Button fx:id="btnSelectPlaylist" mnemonicParsing="false" onAction="#onAddToPlaylist" prefHeight="32.0" prefWidth="74.0" style="-fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+            <ListView fx:id="lstViewAddSongToPlaylist" prefHeight="200.0" prefWidth="200.0" styleClass="table-view" stylesheets="@../styles/Tableview.css" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
+    </children>
+</AnchorPane>

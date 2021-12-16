@@ -19,14 +19,14 @@ public class SearchModel {
     }
 
     /**
-     * Goes through every MusicModel in the inputList and returns the one
-     * matching the user's search query by comparing the MusicModel toString
-     * with the search query. With autocompletion, there's a high likelihood
-     * of a match.
+     * Goes through every SongModel in the input list and compares the
+     * search string to every SongModels toString method. If the search string doesn't match
+     * exactly, it will return the closest song it can find, so long as the search
+     * string is longer than 3 characters.
      *
      * @param inputList A list of every song and playlist.
      * @param search    The string the user searched for.
-     * @return The matching MusicModel instance.
+     * @return The matching songmodel instance.
      */
     private SongModel getObjectFromText(List<SongModel> inputList, String search)
     {
@@ -49,9 +49,7 @@ public class SearchModel {
     }
 
     /**
-     * Gets matching MusicModel instance and determines its type by using polymorphism
-     * with overridden methods in the MusicModels subclasses. The MusicModel "m" is then typecast
-     * to its actual class and selected and scrolled to in its list.
+     * Gets matching songmodel and selects it in the table upon search.
      * @param textField The searchbar.
      */
     public void Search(TableView<SongModel> table, AutoCompleteTextField textField)

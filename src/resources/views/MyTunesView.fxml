@@ -121,7 +121,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnPlaylistDelete" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlaylistDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                              <Button fx:id="btnPlaylistDelete" maxWidth="74.0" minWidth="74.0" mnemonicParsing="false" onAction="#onPlaylistDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

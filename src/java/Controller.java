@@ -236,6 +236,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -278,6 +280,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     {
         DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
         Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getSongs()));
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+
     }
 
     /**
@@ -413,11 +417,46 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
         DataManager.songRemoveFromPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
     }
 
     public void onSongAddToPlayList(ActionEvent actionEvent)
     {
+        try {
+            ResourceBundle resources = new ListResourceBundle() {
+                @Override
+                protected Object[][] getContents() {
+                    return new Object[][] {
+                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}, {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}
+                    };
+                }
+            };
+
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/AddToPlaylist.fxml")), resources);
+
+            Stage stage = new Stage();
+
+            stage.setTitle("Add Song To Playlist");
+            stage.setMaxHeight(363);
+            stage.setMinHeight(363);
+            stage.setMaxWidth(444);
+            stage.setMinWidth(444);
+            stage.setScene(new Scene(root, 444, 363));
+            stage.show();
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
+
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         DataManager.songAddToPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
     }
 
 

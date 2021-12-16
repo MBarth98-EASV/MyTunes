@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -36,6 +37,10 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldPLEditName;
     @FXML public Button btnEditPLName;
 
+    @FXML public ListView<PlaylistModel> lstViewAddSongToPlaylist;
+    @FXML public Button btnSelectPlaylist;
+
+
     String songPath = null;
 
     SongModel model;
@@ -43,7 +48,7 @@ public class SongController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
-    {
+    {   lstViewAddSongToPlaylist.setItems(DataManager.getPlaylists());
         if (resources != null)
         {
             try {
@@ -126,6 +131,11 @@ public class SongController implements Initializable {
     public void onAddPlaylist(ActionEvent event) {
         if (txtFieldPlaylistName.getText() != null && !txtFieldPlaylistName.getText().isEmpty())
         DataManager.addPlaylist(txtFieldPlaylistName.getText());
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    public void onAddToPlaylist(ActionEvent event) {
+        DataManager.songAddToPlaylist(lstViewAddSongToPlaylist.getSelectionModel().getSelectedItem(), model);
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

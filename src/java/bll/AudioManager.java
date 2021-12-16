@@ -12,7 +12,6 @@ import java.util.List;
 
 public class AudioManager
 {
-    private final ObservableList<PlaylistModel> playlists;
 
     private final AudioPlayer player;
 
@@ -30,7 +29,6 @@ public class AudioManager
     public AudioManager()
     {
         player = new AudioPlayer();
-        playlists = FXCollections.observableArrayList();
 
         DataManager.selectedSong().addListener((observable, oldValue, newValue) -> {
             if (oldValue != newValue)
@@ -52,31 +50,9 @@ public class AudioManager
         return player.isPlaying;
     }
 
-    public ObservableList<PlaylistModel> getPlaylists()
-    {
-        return this.playlists;
-    }
 
-    public void populate(List<PlaylistModel> playlists)
-    {
-        this.playlists.setAll(playlists);
 
-        if (!playlists.isEmpty())
-        {
-            DataManager.selectedPlaylist().setValue(playlists.get(0));
-        }
-    }
 
-    public void addPlaylist(PlaylistModel playlist)
-    {
-        this.playlists.add(playlist);
-        DataManager.selectedPlaylist().set(this.playlists.get(this.playlists.size() - 1));
-
-        if (!DataManager.selectedPlaylist().get().getSongs().isEmpty())
-        {
-            DataManager.selectedSong().set(DataManager.selectedPlaylist().get().getSongs().get(0));
-        }
-    }
 
     public void setSong(SongModel song)
     {
@@ -94,7 +70,11 @@ public class AudioManager
     public void play()
     {
         player.play();
-        this.player.musicPlayer.onEndOfMediaProperty().bind(handleEndOfMusic);
+        if (this.player.musicPlayer != null)
+        {
+            this.player.musicPlayer.onEndOfMediaProperty().bind(handleEndOfMusic);
+        }
+
     }
 
     public void pause()

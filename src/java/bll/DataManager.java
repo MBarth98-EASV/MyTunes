@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class DataManager {
-    private static final ObservableList<PlaylistModel> playlists = FXCollections.emptyObservableList();;
+    private static ObservableList<PlaylistModel> playlists = FXCollections.emptyObservableList();;
 
     private static final ObjectProperty<PlaylistModel> selectedPlaylist = new SimpleObjectProperty<>();;
     private static final ObjectProperty<SongModel> selectedSong = new SimpleObjectProperty<>();;
@@ -46,6 +46,16 @@ public class DataManager {
         return database.getAllSongs();
     }
 
+    public static void fetchplaylists()
+    {
+        playlists = (database.getAllPlaylists());
+        selectedPlaylist.setValue(playlists.stream().findFirst().get());
+    }
+
+    public static ObservableList<SongModel> getSongs(){
+        return selectedPlaylist().get().getSongs();
+    }
+
     public static ObservableList<PlaylistModel> getPlaylists(){
         return database.getAllPlaylists();
     }
@@ -71,12 +81,13 @@ public class DataManager {
 
     public static void removeSong(SongModel song)
     {
-        database.removeSong(song.getTitle());
-        playlists.get(0).getSongs().remove(song);
+        database.removeSong(song.getId());
+        selectedPlaylist().get().getSongs().remove(song);
     }
 
     public static void addPlaylist(String name) {
         database.addPlaylist(name);
+        playlists = FXCollections.observableList(database.getAllPlaylists());
     }
 
     public static void editPlaylist(PlaylistModel currentlySelected) {

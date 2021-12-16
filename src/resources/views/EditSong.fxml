@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="305.0" maxWidth="320.0" minHeight="305.0" minWidth="320.0" prefHeight="297.0" prefWidth="320.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongController">
+<AnchorPane maxHeight="335.0" maxWidth="335.0" minHeight="335.0" minWidth="335.0" prefHeight="335.0" prefWidth="335.0" style="-fx-background-color: #404040;" styleClass="background" stylesheets="@../styles/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongController">
     <children>
         <GridPane prefHeight="308.0" prefWidth="320.0">
             <columnConstraints>

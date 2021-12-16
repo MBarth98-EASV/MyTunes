@@ -125,6 +125,7 @@ public class EASVDatabase
     public void updateSong(SongModel song){
         String sql = "UPDATE dbo.Songs SET title = '" + song.getTitle() + "', artists = '"
                 + song.getArtists() + "', genre = '" + song.getGenre() + "', album = '" + song.getAlbum() + "' WHERE id = " + song.getId();
+        this.execute(sql);
     }
 
     public void updatePlaylist(PlaylistModel playlist){
@@ -182,10 +183,9 @@ public class EASVDatabase
             while (result.next()) {
                 int playlistID = result.getInt("id");
                 String playlistName = result.getString("name");
-                List<SongModel> playlistSongs = getAllSongsInPlaylist(playlistID);
-                if (!playlistSongs.isEmpty()){
-                    returnList.add(new PlaylistModel(playlistID, getAllSongsInPlaylist(playlistID), 0, false, playlistName));
-                }}
+                List<SongModel> playlistSongs = this.getAllSongs();
+                returnList.add(new PlaylistModel(playlistID, playlistSongs, 0, false, playlistName));
+            }
             return returnList;
 
         } catch (Exception e) {

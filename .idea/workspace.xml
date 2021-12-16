@@ -7,9 +7,11 @@
     <list default="true" id="d3832474-4fe7-47fb-93e6-d9d01c6d3816" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/SongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/bll/AudioManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/AudioManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/bll/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/bll/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/Utility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/db/EASVDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/EditSong.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/EditSong.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +128,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="playlists.size() &gt; 0" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/java/bll/DataManager.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/bll/DataManager.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/Controller.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

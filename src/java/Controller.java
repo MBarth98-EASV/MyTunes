@@ -101,9 +101,10 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnPlaylistSongCount.setCellValueFactory(data -> data.getValue().getCountProperty().asString());
         this.tblClmnPlaylistDuration.setCellValueFactory(data -> data.getValue().getTotalDurationProperty().asString());
 
-        this.tblViewPlaylist.setItems(audioManager.getPlaylists());
-
-        this.audioManager.addPlaylist(new PlaylistModel(0, new EASVDatabase().getAllSongs(), 0, true, "Default"));
+        //this.tblViewPlaylist.setItems(audioManager.getPlaylists());
+        DataManager.fetchplaylists();
+        //DataManager.playlists.add(new PlaylistModel(, DataManager.getAllSongs(), 0, true, "Default"));
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<>(DataManager.getPlaylists()));
     }
 
     private void songsInitialize()
@@ -114,7 +115,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
         this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
 
-        Utility.bind(tblViewSongs, audioManager.getAvailableSongs());
+        Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.getSongs()));
 
         tblViewSongs.getFocusModel().focusedCellProperty().addListener(o -> onSongSelectionChanged());
     }
@@ -130,6 +131,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         initializeMMSearchEntries();
 
         setComboBox();
+
+        tblViewPlaylist.getSelectionModel().select(0);
+        tblViewSongs.getSelectionModel().select(0);
 
         sliderVolume.setMin(0.0);
         sliderVolume.setMax(1.0);
@@ -224,12 +228,11 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void onSongEdit(ActionEvent event)
     {
         try {
-
             ResourceBundle resources = new ListResourceBundle() {
                 @Override
                 protected Object[][] getContents() {
                     return new Object[][] {
-                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem() }
+                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}, {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}
                     };
                 }
             };
@@ -239,12 +242,13 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             Stage stage = new Stage();
 
             stage.setTitle("Edit Song");
-            stage.setMaxHeight(305);
-            stage.setMinHeight(305);
-            stage.setMaxWidth(320);
-            stage.setMinWidth(320);
-            stage.setScene(new Scene(root, 320, 305));
+            stage.setMaxHeight(335);
+            stage.setMinHeight(335);
+            stage.setMaxWidth(335);
+            stage.setMinWidth(335);
+            stage.setScene(new Scene(root, 335, 335));
             stage.show();
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
         }
         catch (IOException e)
         {
@@ -256,7 +260,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void onSongDelete(ActionEvent event)
     {
         DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
-        tblViewSongs.getItems().remove(tblViewSongs.getSelectionModel().getSelectedItem());
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getSongs()));
     }
 
     /**
@@ -319,24 +323,28 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML
     private void onPlaylistEdit(ActionEvent event) {
-        try {
-        ResourceBundle resources = new ListResourceBundle() {
-            @Override
-            protected Object[][] getContents() {
-                return new Object[][] {
-                        { "selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem() }
+        if (tblViewPlaylist.getSelectionModel().getSelectedItem() != null) {
+            try {
+                ResourceBundle resources = new ListResourceBundle() {
+                    @Override
+                    protected Object[][] getContents() {
+                        return new Object[][]{
+                                {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}, {"selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}
+                        };
+                    }
                 };
+
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")), resources);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root, 236, 193));
+                stage.show();
+                stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        };
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")), resources);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root, 236, 193));
-        stage.show();
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        }
 
 }
 

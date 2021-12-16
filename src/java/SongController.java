@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -45,9 +46,22 @@ public class SongController implements Initializable {
     {
         if (resources != null)
         {
-            model = (SongModel) resources.getObject("selectedSong");
-            playlistModel = (PlaylistModel) resources.getObject("selectedPlaylist");
-            System.out.println(model.getTitle());
+            try {
+                if (resources.getObject("selectedSong") != null) {
+                    model = (SongModel) resources.getObject("selectedSong");
+                }
+                if (resources.getObject("selectedPlaylist") != null) {
+                    playlistModel = (PlaylistModel) resources.getObject("selectedPlaylist");
+                }
+                System.out.println(model.getTitle());
+            } catch (Exception e) {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("Input not valid");
+                errorAlert.setContentText("Could not find a selected song and playlist.");
+                errorAlert.showAndWait();
+                e.printStackTrace();
+            }
+
 
         }
 
@@ -92,7 +106,7 @@ public class SongController implements Initializable {
         if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
         currentlySelected.setAlbum(editAlbum); }
         if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){
-        currentlySelected.setTag(editGenre); }
+        currentlySelected.setGenre(editGenre); }
 
         DataManager.editSong(currentlySelected);
 
@@ -110,6 +124,7 @@ public class SongController implements Initializable {
     }
 
     public void onAddPlaylist(ActionEvent event) {
+        if (txtFieldPlaylistName.getText() != null && !txtFieldPlaylistName.getText().isEmpty())
         DataManager.addPlaylist(txtFieldPlaylistName.getText());
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }

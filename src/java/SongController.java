@@ -48,7 +48,7 @@ public class SongController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
-    {   lstViewAddSongToPlaylist.setItems(DataManager.getPlaylists());
+    {   //lstViewAddSongToPlaylist.setItems(DataManager.getPlaylists());
         if (resources != null)
         {
             try {

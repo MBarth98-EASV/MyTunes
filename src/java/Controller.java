@@ -235,7 +235,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(320);
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
-            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs())));
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
 
         } catch (IOException e) {
@@ -418,7 +418,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
         DataManager.songRemoveFromPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
         Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
-        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs()));
     }
 
     public void onSongAddToPlayList(ActionEvent actionEvent)
@@ -444,7 +444,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(444);
             stage.setScene(new Scene(root, 444, 363));
             stage.show();
-            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs())));
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
 
 
@@ -453,10 +453,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         {
             e.printStackTrace();
         }
-
-        DataManager.songAddToPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
-        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
-        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
     }
 
 

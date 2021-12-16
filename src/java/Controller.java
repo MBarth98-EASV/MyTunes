@@ -219,6 +219,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setScene(new Scene(root, 320, 193));
             stage.show();
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+            stage.getScene().getWindow().setOnHiding((o) -> Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists())));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -249,6 +251,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setScene(new Scene(root, 335, 335));
             stage.show();
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs())));
+
         }
         catch (IOException e)
         {
@@ -261,6 +264,8 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     {
         DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
         Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getSongs()));
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+
     }
 
     /**
@@ -396,11 +401,15 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
         DataManager.songRemoveFromPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
     }
 
     public void onSongAddToPlayList(ActionEvent actionEvent)
     {
         DataManager.songAddToPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
+        Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getAllSongs()));
     }
 
 

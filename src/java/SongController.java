@@ -1,21 +1,20 @@
-import dal.db.EASVDatabase;
+import be.PlaylistModel;
 import be.SongModel;
-import model.LocalFilesModel;
 
+import bll.DataManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SongController implements Initializable {
@@ -37,15 +36,9 @@ public class SongController implements Initializable {
     @FXML public Button btnEditPLName;
 
     String songPath = null;
-    LocalFilesModel localFilesModel;
 
     SongModel model;
-
-    public SongController()
-    {
-        localFilesModel = new LocalFilesModel();
-
-    }
+    PlaylistModel playlistModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -76,16 +69,12 @@ public class SongController implements Initializable {
 
     public void onAddSong(ActionEvent event) {
         if(!txtFieldAddSongPath.getText().equals(null) && !txtFieldAddSongPath.getText().isEmpty()){
-            localFilesModel.addSong(Path.of(songPath));
+            DataManager.addSong(Path.of(songPath));
         }
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public void onRemoveSong(ActionEvent event) {
-
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
 
     public void onEditSongDone(ActionEvent event)
     {
@@ -104,19 +93,23 @@ public class SongController implements Initializable {
         if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){
         currentlySelected.setTag(editGenre); }
 
-        localFilesModel.editSong(currentlySelected);
-
+        DataManager.editSong(currentlySelected);
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     public void onEditPlaylist(ActionEvent event) {
+        String editName = txtFieldPLEditName.getText();
+        PlaylistModel currentlySelected = playlistModel;
+        if (editName != null || !editName.isEmpty() || !editName.equals("null")){
+            currentlySelected.setName(editName); }
 
+        DataManager.editPlaylist(currentlySelected);
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     public void onAddPlaylist(ActionEvent event) {
-
+        DataManager.addPlaylist(txtFieldPlaylistName.getText());
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

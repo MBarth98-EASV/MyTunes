@@ -111,17 +111,17 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="btnSongEdit1" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <Button fx:id="btnPlaylistEdit" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlaylistEdit" prefHeight="34.0" prefWidth="51.0" style="-fx-min-width: 10; -fx-max-width: 71; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Edit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongNew1" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSongNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New" GridPane.halignment="LEFT">
+                              <Button fx:id="btnPlaylistNew" maxWidth="73.0" minWidth="0.0" mnemonicParsing="false" onAction="#onPlaylistNew" prefHeight="34.0" prefWidth="73.0" style="-fx-min-width: 10; -fx-max-width: 75; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="New" GridPane.halignment="LEFT">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongDelete1" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSongDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                              <Button fx:id="btnPlaylistDelete" maxWidth="74.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlaylistDelete" prefHeight="34.0" prefWidth="76.0" style="-fx-min-width: 10; -fx-max-width: 87; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="Delete" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

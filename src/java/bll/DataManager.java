@@ -25,12 +25,6 @@ public class DataManager {
 
 
 
-    public static void removeSong(SongModel song)
-    {
-        database.removeSong(song.getTitle());
-        playlists.get(0).getSongs().remove(song);
-    }
-
     public static ObjectProperty<SongModel> selectedSong()
     {
         return selectedSong;
@@ -47,11 +41,6 @@ public class DataManager {
         selectedPlaylist.get().getSongs().add(song);
     }
 
-    public static void addSong(Path path) {
-        SongModel song = localfiles.loadSongModels(Collections.singletonList(path)).get(0);
-        addSong(song);
-    }
-
     public static ObservableList<SongModel> getAllSongs()
     {
         return database.getAllSongs();
@@ -65,5 +54,35 @@ public class DataManager {
     public static List<String> getUniqueValuesIn(String columnName)
     {
         return database.getUniqueValuesIn(columnName);
+    }
+
+    public static void addSong(Path path) {
+        SongModel song = localfiles.loadSongModels(Collections.singletonList(path)).get(0);
+        addSong(song);
+    }
+
+    public static void editSong(SongModel currentlySelected) {
+        database.updateSong(currentlySelected);
+    }
+
+    public static void removeSong(SongModel song)
+    {
+        database.removeSong(song.getTitle());
+        playlists.get(0).getSongs().remove(song);
+    }
+
+    public static void removePlaylist(PlaylistModel selectedItem) {
+    }
+
+    public static void editPlaylist(PlaylistModel currentlySelected) {
+    }
+
+    public static void songRemoveFromPlaylist(PlaylistModel selectedItem, SongModel selectedItem1) {
+    }
+
+    public static void songAddToPlaylist(PlaylistModel selectedItem, SongModel selectedItem1) {
+    }
+
+    public static void addPlaylist(String text) {
     }
 }

@@ -4,11 +4,13 @@ import be.MyTunesFXMLProperties;
 import be.PlaylistModel;
 import be.SongModel;
 import bll.AudioManager;
+import bll.DataManager;
 import dal.Utility;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
 import javafx.event.EventHandler;
 import dal.db.EASVDatabase;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
@@ -27,6 +29,7 @@ import javafx.stage.Stage;
 import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -253,7 +256,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSongDelete(ActionEvent event)
     {
-        throw new NotImplementedException();
+        DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -314,9 +317,18 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     }
 
     @FXML
-    private void onPlaylistEdit(ActionEvent event)
-    { try {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")));
+    private void onPlaylistEdit(ActionEvent event) {
+        try {
+        ResourceBundle resources = new ListResourceBundle() {
+            @Override
+            protected Object[][] getContents() {
+                return new Object[][] {
+                        { "selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem() }
+                };
+            }
+        };
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")), resources);
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 236, 193));
         stage.show();
@@ -330,7 +342,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onPlaylistDelete(ActionEvent event)
     {
-        throw new NotImplementedException();
+        DataManager.removePlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -371,15 +383,13 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         }
     }
 
-
-
     public void onSongRemoveFromPlaylist(ActionEvent actionEvent) {
+        DataManager.songRemoveFromPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
     }
 
     public void onSongAddToPlayList(ActionEvent actionEvent)
     {
-        SongModel addSong = tblViewSongs.getSelectionModel().getSelectedItem();
-        // todo: ?
+        DataManager.songAddToPlaylist(tblViewPlaylist.getSelectionModel().getSelectedItem(), tblViewSongs.getSelectionModel().getSelectedItem());
     }
 
 

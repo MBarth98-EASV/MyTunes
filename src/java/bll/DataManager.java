@@ -71,18 +71,23 @@ public class DataManager {
         playlists.get(0).getSongs().remove(song);
     }
 
-    public static void removePlaylist(PlaylistModel selectedItem) {
+    public static void addPlaylist(String text) {
+        database.addPlaylist(text);
     }
 
     public static void editPlaylist(PlaylistModel currentlySelected) {
+        database.updatePlaylist(currentlySelected);
     }
 
-    public static void songRemoveFromPlaylist(PlaylistModel selectedItem, SongModel selectedItem1) {
+    public static void removePlaylist(PlaylistModel selectedItem) {
+        database.removePlaylist(selectedItem);
     }
 
-    public static void songAddToPlaylist(PlaylistModel selectedItem, SongModel selectedItem1) {
+    public static void songRemoveFromPlaylist(PlaylistModel selectedPlaylist, SongModel selectedSong) {
+        database.removeSongFromPlaylist(selectedPlaylist,selectedSong);
     }
 
-    public static void addPlaylist(String text) {
+    public static void songAddToPlaylist(PlaylistModel selectedPlaylist, SongModel selectedSong) {
+        database.addSongToPlaylist(selectedPlaylist, selectedSong);
     }
 }

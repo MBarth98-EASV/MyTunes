@@ -88,7 +88,7 @@ public class EASVDatabase
         this.execute(sql);
     }
 
-    public void addSongToPlaylist(SongModel song, PlaylistModel playlist){
+    public void addSongToPlaylist(PlaylistModel playlist, SongModel song){
         String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
                 + "(" + playlist.getOrderID() + ", " + song.getId() + ")";
         this.execute(sql);

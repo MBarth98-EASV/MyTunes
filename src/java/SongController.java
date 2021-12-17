@@ -38,7 +38,7 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldPLEditName;
     @FXML public Button btnEditPLName;
 
-    @FXML public ListView<PlaylistModel> lstViewAddSongToPlaylist;
+    @FXML public ListView<PlaylistModel> lstViewAddSongToPlaylist = new ListView<>();
     @FXML public Button btnSelectPlaylist;
 
 
@@ -103,13 +103,13 @@ public class SongController implements Initializable {
         String editGenre = txtFieldEditGenre.getText();
         SongModel currentlySelected = songModel;
 
-        if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
+        if (editArtist != null && !editArtist.isEmpty() && !editArtist.equals("null")){
         currentlySelected.setArtists(editArtist); }
-        if (editTitle != null || !editTitle.isEmpty() || !editTitle.equals("null")){
+        if (editTitle != null && !editTitle.isEmpty() && !editTitle.equals("null")){
         currentlySelected.setTitle(editTitle); }
-        if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
+        if (editAlbum != null && !editAlbum.isEmpty() && !editAlbum.equals("null")){
         currentlySelected.setAlbum(editAlbum); }
-        if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){
+        if (editGenre != null && !editGenre.isEmpty() && !editGenre.equals("null")){
         currentlySelected.setGenre(editGenre); }
 
         DataManager.editSong(currentlySelected);

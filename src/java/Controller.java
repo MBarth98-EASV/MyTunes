@@ -270,6 +270,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(335);
             stage.setScene(new Scene(root, 335, 335));
             stage.show();
+            if (DataManager.selectedPlaylist() == null){
+                DataManager.selectedPlaylist().setValue(DataManager.getPlaylists().get(0));
+            }
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs())));
         }
         catch (IOException e)

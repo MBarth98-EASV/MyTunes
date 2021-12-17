@@ -100,21 +100,11 @@ public class PlaylistModel
         return count;
     }
 
-    public int getSelectedSongIndex()
-    {
-        return selectedSongIndex.get();
-    }
-
     public void setSelectedSongIndex(int selectedSongIndex)
     {
         this.selectedSongIndex.set(selectedSongIndex);
     }
-      
 
-    public boolean getIsActive()
-    {
-        return isActive.get();
-    }
 
     public void setIsActive(boolean isActive)
     {

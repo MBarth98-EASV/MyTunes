@@ -1,10 +1,6 @@
 package be;
 
-import com.google.gson.Gson;
 import javafx.beans.property.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *   a model of a single song instance, described by the database and visualized by fxml data binding.

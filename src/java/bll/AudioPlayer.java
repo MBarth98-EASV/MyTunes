@@ -65,13 +65,11 @@ public class AudioPlayer implements IAudio
         this.musicPlayer.setVolume(val);
     }
 
-    @Override
     public Duration getDuration()
     {
         return musicPlayer.getTotalDuration();
     }
 
-    @Override
     public Duration getTime()
     {
         return musicPlayer.getCurrentTime();
@@ -94,7 +92,6 @@ public class AudioPlayer implements IAudio
         musicPlayer.pause();
     }
 
-    @Override
     public void reset()
     {
         this.pause();
@@ -103,7 +100,6 @@ public class AudioPlayer implements IAudio
         this.play();
     }
 
-    @Override
     public void skipTo(int ms)
     {
         this.pause();

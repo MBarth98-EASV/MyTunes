@@ -9,8 +9,6 @@ import dal.Utility;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleListProperty;
 import javafx.event.EventHandler;
-import dal.db.EASVDatabase;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
@@ -29,7 +27,6 @@ import javafx.stage.Stage;
 import model.SearchModel;
 import org.apache.commons.lang.NotImplementedException;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;

@@ -3,22 +3,12 @@ package bll;
 import be.PlaylistModel;
 import be.SongModel;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.util.Duration;
-
-
-import javax.xml.crypto.Data;
-import java.util.List;
 
 public class AudioManager
 {
 
     private final AudioPlayer player;
-
-    public ListProperty<SongModel> getAvailableSongs() {
-        return DataManager.selectedPlaylist().get().getSongs();
-    }
 
     public ObjectProperty<SongModel> getCurrentSong()
     {

@@ -37,41 +37,17 @@ public class SongController implements Initializable {
     @FXML public TextField txtFieldPLEditName;
     @FXML public Button btnEditPLName;
 
-    @FXML public ListView<PlaylistModel> lstViewAddSongToPlaylist;
+    @FXML public ListView<PlaylistModel> lstViewAddSongToPlaylist = new ListView<>();
     @FXML public Button btnSelectPlaylist;
 
 
     String songPath = null;
 
-    SongModel model;
-    PlaylistModel playlistModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        if (resources != null)
-        {
-            try {
-                if (resources.getObject("selectedSong") != null) {
-                    model = (SongModel) resources.getObject("selectedSong");
-                }
-                if (resources.getObject("selectedPlaylist") != null) {
-                    playlistModel = (PlaylistModel) resources.getObject("selectedPlaylist");
-                }
-                System.out.println(model.getTitle());
-            } catch (Exception e) {
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setHeaderText("Input not valid");
-                errorAlert.setContentText("Could not find a selected song and playlist.");
-                errorAlert.showAndWait();
-                e.printStackTrace();
-            }
-
-
-        }
-
-
-
+        lstViewAddSongToPlaylist.setItems(DataManager.getPlaylists());
     }
 
     public void onSelectFile(ActionEvent event) 
@@ -102,29 +78,27 @@ public class SongController implements Initializable {
         String editArtist = txtFieldEditArtist.getText();
         String editAlbum = txtFieldEditAlbum.getText();
         String editGenre = txtFieldEditGenre.getText();
-        SongModel currentlySelected = model;
 
-        if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
-        currentlySelected.setArtists(editArtist); }
-        if (editTitle != null || !editTitle.isEmpty() || !editTitle.equals("null")){
-        currentlySelected.setTitle(editTitle); }
-        if (editAlbum != null || !editAlbum.isEmpty() || !editAlbum.equals("null")){
-        currentlySelected.setAlbum(editAlbum); }
-        if (editGenre != null || !editGenre.isEmpty() || !editGenre.equals("null")){
-        currentlySelected.setGenre(editGenre); }
-
-        DataManager.editSong(currentlySelected);
+        if (editArtist != null && !editArtist.isEmpty()){
+            DataManager.selectedSong().get().setArtists(editArtist); }
+        if (editTitle != null && !editTitle.isEmpty()){
+            DataManager.selectedSong().get().setTitle(editTitle); }
+        if (editAlbum != null && !editAlbum.isEmpty()){
+            DataManager.selectedSong().get().setAlbum(editAlbum); }
+        if (editGenre != null && !editGenre.isEmpty()){
+            DataManager.selectedSong().get().setGenre(editGenre); }
 
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public void onEditPlaylist(ActionEvent event) {
+    public void onEditPlaylist(ActionEvent event)
+    {
         String editName = txtFieldPLEditName.getText();
-        PlaylistModel currentlySelected = playlistModel;
-        if (editName != null || !editName.isEmpty() || !editName.equals("null")){
-            currentlySelected.setName(editName); }
 
-        DataManager.editPlaylist(currentlySelected);
+        if (editName != null && !editName.isEmpty()){
+            DataManager.selectedPlaylist().get().setName(editName);
+        }
+
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
@@ -135,7 +109,7 @@ public class SongController implements Initializable {
     }
 
     public void onAddToPlaylist(ActionEvent event) {
-        DataManager.songAddToPlaylist(lstViewAddSongToPlaylist.getSelectionModel().getSelectedItem(), model);
+        DataManager.songAddToPlaylist(lstViewAddSongToPlaylist.getSelectionModel().getSelectedItem(), DataManager.selectedSong().get());
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

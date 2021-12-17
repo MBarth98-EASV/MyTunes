@@ -94,89 +94,89 @@ public class EASVDatabase
 
     public void add(SongModel song, PlaylistModel playlist)
     {
-        String sql = """
+        if (song == null || playlist == null)
+            return;
+
+        try
+        {
+            String sql = """
                 INSERT INTO Songs (title, artists, duration, source, filepath, genre, album)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
                 """.formatted(song.getTitle(), song.getArtists(), song.getDuration(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
 
-        try
-        {
             this.execute(sql);
-
-            String sql2 = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES "
-                    + "(" + playlist.getOrderID() + ", " + this.getSongID(song) + ")";
 
             System.out.println(playlist.getOrderID());
             System.out.println(this.getSongID(song));
 
-            this.execute(sql2);
+            this.execute("INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES (" + playlist.getOrderID() + ", " + this.getSongID(song) + ")");
 
         } catch (Exception ex) {}
     }
 
-    /**
-     * Add song or playlist to SQL database table.
-      */
-    public void addSong(String songName, String art, int dura, String sauce, String fpath, String genre, String album)
+    public void add(String playlistName)
     {
-        String sql = "INSERT INTO Songs (title, artists, duration, source, filepath, genre, album) VALUES ('" + songName + "', '" + art + "', '" + dura + "', '" + sauce + "', '" + fpath + "', '" + genre + "', '" + album + "')";
-        this.execute(sql);
+        if (playlistName != null && !playlistName.isEmpty())
+        {
+            this.execute("INSERT INTO dbo.PlayList (name) VALUES ('" + playlistName + "')");
+        }
     }
 
-    public void addPlaylist(String playlistName){
-        String sql = "INSERT INTO dbo.PlayList (name) VALUES ('" + playlistName + "')";
-        this.execute(sql);
-    }
-
-    public void addSongToPlaylist(PlaylistModel playlist, SongModel song){
-        String sql = "INSERT INTO dbo.Playlist_entry (playlistID, SongID) VALUES"
-                + "(" + playlist.getOrderID() + ", " + song.getId() + ")";
-        this.execute(sql);
-    }
 
     /**
-     * Remove Songs or Playlists from SQL database.
-      */
-    public void removeSong(int id)
+     *  removes a specific song from the database and the linked playlist(s)
+     * */
+    public void remove(PlaylistModel playlist, SongModel song)
     {
-        this.execute("DELETE FROM Songs WHERE id = " + id);
+        if (song != null)
+        {
+            this.execute("DELETE FROM Songs WHERE id = " + song.getId());
+        }
+        if (playlist != null)
+        {
+            this.execute("DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID() + " AND SongID = " + song.getId());
+        }
     }
 
-    public void removeSong(String songName)
+    /**
+     *  Removes all songs associated with the playlist and the playlist instance in the database itself.
+     * */
+    public void remove(PlaylistModel playlist)
     {
-        this.execute("DELETE FROM Songs WHERE title LIKE '%" + songName + "%'");
-    }
-
-    public void removePlaylist(PlaylistModel playlist) {
-        String sql = "DELETE FROM dbo.PlayList WHERE id = " + playlist.getOrderID();
-        String sqlSongs = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID();
-        this.execute(sql);
-        this.execute(sqlSongs);
-    }
-
-    public void removeSongFromPlaylist(PlaylistModel playlist, SongModel song){
-        String sql = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID() + " AND SongID = " + song.getId();
-        this.execute(sql);
+        if (playlist != null)
+        {
+            String sql = "DELETE FROM dbo.PlayList WHERE id = " + playlist.getOrderID();
+            String sqlSongs = "DELETE FROM dbo.Playlist_entry WHERE playlistID = " + playlist.getOrderID();
+            this.execute(sql);
+            this.execute(sqlSongs);
+        }
     }
 
     /**
      * Updaters for songs and playlists.
      */
-    public void updateSong(SongModel song){
-        String sql = "UPDATE dbo.Songs SET title = '" + song.getTitle() + "', artists = '"
-                + song.getArtists() + "', genre = '" + song.getGenre() + "', album = '" + song.getAlbum() + "' WHERE id = " + song.getId();
-        this.execute(sql);
+    public void update(SongModel song)
+    {
+        if (song != null)
+        {
+            String sql = "UPDATE dbo.Songs SET title = '" + song.getTitle() + "', artists = '"
+                    + song.getArtists() + "', genre = '" + song.getGenre() + "', album = '" + song.getAlbum() + "' WHERE id = " + song.getId();
+            this.execute(sql);
+        }
     }
 
-    public void updatePlaylist(PlaylistModel playlist){
-        String sql = "UPDATE dbo.PlayList SET name='" + playlist.getName() + "' WHERE id=" + playlist.getOrderID();
-        this.execute(sql);
+    public void update(PlaylistModel playlist)
+    {
+        if (playlist != null)
+        {
+            this.execute("UPDATE dbo.PlayList SET name='" + playlist.getName() + "' WHERE id=" + playlist.getOrderID());
+        }
     }
 
     /**
      * Getters from the SQL database.
      */
-    public ObservableList<SongModel> getAllSongs() {return getAllSongs("SELECT * FROM Songs"); }
+    public ObservableList<SongModel> getAllSongs() { return getAllSongs("SELECT * FROM Songs"); }
 
     public ObservableList<SongModel> getAllSongs(String sql)
     {
@@ -184,25 +184,16 @@ public class EASVDatabase
         {
             ObservableList<SongModel> songs = FXCollections.observableArrayList();
 
-            int songId, duration;
-            String songTitle, songArtist, songLocation, songAlbum, songGenre, source;
-
             ResultSet result = this.query(sql);
 
             while (result.next())
             {
-                songTitle = result.getString("title");
-                songId = result.getInt("id");
-                duration = result.getInt("duration");
-                songArtist = result.getString("artists");
-                songLocation = result.getString("filepath");
-                songGenre =  result.getString("genre");
-                songAlbum = result.getString("album");
-                source = result.getString("source");
-
-                if (Path.of(songLocation).toFile().isFile()){
-                songs.add(new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, duration, source, songLocation));
-            }}
+                SongModel song = createSongFromDatabaseResult(result);
+                if (song != null)
+                {
+                    songs.add(song);
+                }
+            }
 
             return songs;
         }
@@ -214,6 +205,32 @@ public class EASVDatabase
             return FXCollections.observableArrayList();
         }
     }
+
+    private SongModel createSongFromDatabaseResult(ResultSet result)
+    {
+        try
+        {
+            int songId, duration;
+            String songTitle, songArtist, songLocation, songAlbum, songGenre, source;
+
+            songTitle = result.getString("title");
+            songId = result.getInt("id");
+            duration = result.getInt("duration");
+            songArtist = result.getString("artists");
+            songLocation = result.getString("filepath");
+            songGenre =  result.getString("genre");
+            songAlbum = result.getString("album");
+            source = result.getString("source");
+
+            if (Path.of(songLocation).toFile().isFile())
+            {
+               return new SongModel(songId, songTitle, songArtist, songGenre, songAlbum, duration, source, songLocation);
+            }
+        }
+        catch (Exception ex) { }
+        return null;
+    }
+
     public ObservableList<PlaylistModel> getAllPlaylists()
     {
         ObservableList<PlaylistModel> returnList = FXCollections.observableArrayList();

@@ -3,6 +3,7 @@ package be;
 import CustomComponent.AutoCompleteTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 public class MyTunesFXMLProperties
 {
@@ -26,7 +27,7 @@ public class MyTunesFXMLProperties
 
     @FXML public TableColumn<SongModel, String> tblClmnSongGenre = new TableColumn<SongModel, String>();
 
-    @FXML public TableColumn<SongModel, String> tblClmnSongTime = new TableColumn<SongModel, String>();
+    @FXML public TableColumn<SongModel, String> tblClmnSongTime = new TableColumn<>();
 
     @FXML public Button btnSongUp;
 

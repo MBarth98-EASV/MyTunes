@@ -2,6 +2,7 @@ package be;
 
 import com.google.gson.Gson;
 import javafx.beans.property.*;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class SongModel
     /**
      * the time in seconds the song takes to complete
      */
-    private IntegerProperty duration = null;
+    private ObjectProperty<Duration> duration = null;
 
 
      /*  
@@ -65,7 +66,7 @@ public class SongModel
         this.genre = new SimpleStringProperty();
         this.album = new SimpleStringProperty();
         location = new SimpleStringProperty();
-        this.duration = new SimpleIntegerProperty();
+        this.duration = new SimpleObjectProperty<>();
     }
 
     /**
@@ -121,13 +122,13 @@ public class SongModel
     }
 
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration.get();
     }
 
     public void setDuration(int duration)
     {
-        this.duration.set(duration);
+        this.duration.set(Duration.seconds(duration));
     }
 
 

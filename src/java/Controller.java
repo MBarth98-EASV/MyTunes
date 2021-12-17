@@ -7,10 +7,9 @@ import bll.AudioManager;
 import bll.DataManager;
 import dal.Utility;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleListProperty;
 import javafx.event.EventHandler;
-import dal.db.EASVDatabase;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
@@ -27,9 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.SearchModel;
-import org.apache.commons.lang.NotImplementedException;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -116,11 +113,16 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     {
         this.tblClmnPlaylistName.setCellValueFactory(data -> data.getValue().getNameProperty());
         this.tblClmnPlaylistSongCount.setCellValueFactory(data -> data.getValue().getCountProperty().asString());
-        this.tblClmnPlaylistDuration.setCellValueFactory(data -> data.getValue().getTotalDurationProperty().asString());
+        this.tblClmnPlaylistDuration.setCellValueFactory(data -> new StringBinding()
+        {
+            @Override
+            protected String computeValue()
+            {
+                return formatDuration(data.getValue().getTotalDurationProperty().get());
+            }
+        });
 
-        //this.tblViewPlaylist.setItems(audioManager.getPlaylists());
         DataManager.fetchplaylists();
-        //DataManager.playlists.add(new PlaylistModel(, DataManager.getAllSongs(), 0, true, "Default"));
         Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<>(DataManager.getPlaylists()));
 
         tblViewPlaylist.getFocusModel().focusedCellProperty().addListener(o -> onPlaylistSelectionChanged());
@@ -134,7 +136,14 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         this.tblClmnSongArtist.setCellValueFactory(new PropertyValueFactory<SongModel, String>("artists"));
         this.tblClmnSongGenre.setCellValueFactory(new PropertyValueFactory<SongModel, String>("genre"));
         this.tblClmnSongAlbum.setCellValueFactory(new PropertyValueFactory<SongModel, String>("album"));
-        this.tblClmnSongTime.setCellValueFactory(new PropertyValueFactory<SongModel, String>("duration"));
+        this.tblClmnSongTime.setCellValueFactory(data -> new StringBinding()
+        {
+            @Override
+            protected String computeValue()
+            {
+                return formatDuration(data.getValue().getDuration());
+            }
+        });
 
         Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.selectedPlaylist().get().getSongs()));
 
@@ -148,7 +157,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         songsInitialize();
         playlistContextMenu();
         songContextMenu();
-
 
         initializeMMSearchEntries();
 
@@ -258,19 +266,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSongEdit(ActionEvent event)
     {
-       /* try {
-            ResourceBundle resources = new ListResourceBundle() {
-                @Override
-                protected Object[][] getContents() {
-                    return new Object[][] {
-                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()},
-                            {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()},
-                            {"playlistSelectionList", DataManager.getPlaylists()},
-                    };
-                }
-            };
-
-        */
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
 

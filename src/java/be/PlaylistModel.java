@@ -72,7 +72,7 @@ public class PlaylistModel
         this.setIsActive(isActive);
         this.setName(name);
         this.totalDuration.set(Duration.ZERO);
-        songs.forEach(songModel ->  this.totalDuration.get().add(Duration.seconds(songModel.getDuration())));
+        songs.forEach(songModel ->  this.totalDuration.get().add(songModel.getDuration()));
     }
 
     public int getOrderID()

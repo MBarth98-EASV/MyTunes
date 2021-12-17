@@ -179,12 +179,12 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongDown" disable="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMoveSongDown" opacity="0.2" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" GridPane.columnIndex="6">
+                              <Button fx:id="btnSongDown" disable="false" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMoveSongDown" opacity="1" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▼" GridPane.columnIndex="6">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="btnSongUp" disable="true" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onMoveSongUp" opacity="0.2" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" GridPane.columnIndex="5">
+                              <Button fx:id="btnSongUp" disable="false" maxWidth="65.0" minWidth="0.0" mnemonicParsing="false" onAction="#onMoveSongUp" opacity="1" prefHeight="34.0" prefWidth="60.0" style="-fx-min-width: 10; -fx-max-width: 60; -fx-border-radius: 5;" styleClass="Button2" stylesheets="@../styles/button.css" text="▲" GridPane.columnIndex="5">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

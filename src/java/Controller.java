@@ -144,6 +144,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         playlistContextMenu();
         songContextMenu();
 
+
         initializeMMSearchEntries();
 
         setComboBox();
@@ -212,14 +213,22 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
-        System.out.println("track is moved upwards");
-        throw new NotImplementedException();
+        int i = tblViewSongs.getSelectionModel().getSelectedIndex();
+        if (i < tblViewSongs.getItems().size() && i > 0){
+            SongModel toMove = tblViewSongs.getSelectionModel().getSelectedItem();
+            tblViewSongs.getItems().set(i, tblViewSongs.getItems().get(i-1));
+            tblViewSongs.getItems().set(i-1, toMove);
+        }
     }
 
     @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
-        System.out.println("track is moved downwards");
-        throw new NotImplementedException();
+        int i = tblViewSongs.getSelectionModel().getSelectedIndex();
+        if (i+1 < tblViewSongs.getItems().size() && i > -1){
+            SongModel toMove = tblViewSongs.getSelectionModel().getSelectedItem();
+            tblViewSongs.getItems().set(i, tblViewSongs.getItems().get(i+1));
+            tblViewSongs.getItems().set(i+1, toMove);
+        }
     }
 
     @FXML

@@ -85,33 +85,29 @@ public class DataManager {
     }
 
     public static void editSong(SongModel currentlySelected) {
-        database.updateSong(currentlySelected);
+        database.update(currentlySelected);
     }
 
     public static void removeSong(SongModel song)
     {
-        database.removeSong(song.getId());
+        database.remove(selectedPlaylist.get(), song);
         selectedPlaylist().get().getSongs().remove(song);
     }
 
     public static void addPlaylist(String name) {
-        database.addPlaylist(name);
+        database.add(name);
         playlists = FXCollections.observableList(database.getAllPlaylists());
     }
 
     public static void editPlaylist(PlaylistModel currentlySelected) {
-        database.updatePlaylist(currentlySelected);
+        database.update(currentlySelected);
     }
 
     public static void removePlaylist(PlaylistModel selectedItem) {
-        database.removePlaylist(selectedItem);
-    }
-
-    public static void songRemoveFromPlaylist(PlaylistModel selectedPlaylist, SongModel selectedSong) {
-        database.removeSongFromPlaylist(selectedPlaylist,selectedSong);
+        database.remove(selectedItem);
     }
 
     public static void songAddToPlaylist(PlaylistModel selectedPlaylist, SongModel selectedSong) {
-        database.addSongToPlaylist(selectedPlaylist, selectedSong);
+        database.add(selectedSong, selectedPlaylist);
     }
 }

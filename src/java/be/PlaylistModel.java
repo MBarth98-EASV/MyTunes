@@ -88,7 +88,12 @@ public class PlaylistModel
 
     public ListProperty<SongModel> getSongs()
     {
-        return songs;
+        if (songs != null) {
+            return songs;
+        }
+        SimpleListProperty<SongModel> empty = new SimpleListProperty<SongModel>();
+        empty.add(new SongModel());
+        return empty;
     }
 
     public void setSongs(List<SongModel> songs)

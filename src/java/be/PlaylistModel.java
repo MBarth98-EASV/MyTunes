@@ -1,6 +1,8 @@
 package be;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
@@ -72,8 +74,10 @@ public class PlaylistModel
         this.setIsActive(isActive);
         this.setName(name);
         this.totalDuration.set(Duration.ZERO);
-        songs.forEach(songModel ->  this.totalDuration.get().add(songModel.getDuration()));
+        this.songs.forEach(song -> this.totalDuration.set(Duration.seconds(this.totalDuration.get().toSeconds()  + song.getDuration().toSeconds())));
+
     }
+
 
     public int getOrderID()
     {

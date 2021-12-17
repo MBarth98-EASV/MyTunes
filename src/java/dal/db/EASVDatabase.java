@@ -87,7 +87,7 @@ public class EASVDatabase
         String sql = """
                 INSERT INTO Songs (title, artists, duration, source, filepath, genre, album)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                """.formatted(song.getTitle(), song.getArtists(), song.getDuration(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
+                """.formatted(song.getTitle(), song.getArtists(), (int) song.getDuration().toSeconds(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
 
        this.query(sql);
     }
@@ -102,7 +102,7 @@ public class EASVDatabase
             String sql = """
                 INSERT INTO Songs (title, artists, duration, source, filepath, genre, album)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                """.formatted(song.getTitle(), song.getArtists(), song.getDuration(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
+                """.formatted(song.getTitle(), song.getArtists(), (int) song.getDuration().toSeconds(), song.getTag(), song.getLocation(), song.getGenre(), song.getAlbum());
 
             this.execute(sql);
 

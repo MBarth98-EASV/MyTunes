@@ -92,7 +92,6 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         {
             DataManager.selectedPlaylist().setValue(tblViewPlaylist.getSelectionModel().selectedItemProperty().getValue());
             Utility.bind(tblViewSongs, new SimpleListProperty<>(DataManager.selectedPlaylist().get().getSongs()));
-
         }
         catch (Exception ex)
         {
@@ -283,7 +282,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     private void onSongDelete(ActionEvent event)
     {
         DataManager.removeSong(tblViewSongs.getSelectionModel().getSelectedItem());
-        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.getSongs()));
+        Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs()));
         Utility.bindPlaylist(tblViewPlaylist, new SimpleListProperty<PlaylistModel>(DataManager.getPlaylists()));
 
     }
@@ -322,7 +321,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
                             searchModel.filterArtistAndTitle(tblViewSongs, txtFieldSearch.getText());
                         }
                         default -> {
-                            Utility.bind(tblViewSongs, audioManager.getAvailableSongs());
+                            Utility.bind(tblViewSongs, DataManager.selectedPlaylist().get().getSongs());
                             searchModel.Search(tblViewSongs, txtFieldSearch);
                         }
                     }
@@ -481,7 +480,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
      */
     public void onClearSearchFilter(ActionEvent event) {
         cmboBoxFilter.getSelectionModel().select(0);
-        Utility.bind(this.tblViewSongs, audioManager.getAvailableSongs());
+        Utility.bind(this.tblViewSongs, DataManager.selectedPlaylist().get().getSongs());
         txtFieldSearch.clear();
     }
 

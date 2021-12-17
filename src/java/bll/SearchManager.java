@@ -15,7 +15,7 @@ public class SearchManager
     }
 
     public ListProperty<SongModel> getAll(){
-        return new SimpleListProperty<SongModel>(DataManager.getAllSongs());
+        return new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs());
     }
 
     public ListProperty<SongModel> filter(String firstProperty, String filterParameter)

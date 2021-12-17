@@ -238,18 +238,35 @@ public class EASVDatabase
     }
 
 
-    public List<SongModel> getAllSongsInPlaylist(int playlistID) throws SQLException {
-        ArrayList<SongModel> returnList = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlistID;
-        ResultSet result = this.query(sql);
-        while (result.next()) {
-            int songId = result.getInt("id");
-            for (SongModel s : getAllSongs()) {
-                if (s.getId() == songId);
-                returnList.add(s);
+    public List<SongModel> getAllSongsInPlaylist(int playlistID)
+    {
+        try
+        {
+            ArrayList<SongModel> returnList = new ArrayList<>();
+
+            String sql = "SELECT * FROM dbo.Playlist_entry WHERE playlistID = " + playlistID;
+
+            ResultSet result = this.query(sql);
+
+            List<SongModel> songs = getAllSongs();
+
+            while (result.next())
+            {
+                int songId = result.getInt("SongID");
+
+                SongModel song = songs.stream().filter(currentSong -> songId == currentSong.getId()).findFirst().orElse(null);
+                if (song != null)
+                {
+                    returnList.add(song);
+                }
             }
+
+            return returnList;
         }
-        return returnList;
+        catch (Exception ex)
+        {
+            return new ArrayList<>();
+        }
     }
 
 

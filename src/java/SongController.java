@@ -2,6 +2,7 @@ import be.PlaylistModel;
 import be.SongModel;
 
 import bll.DataManager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,35 +44,33 @@ public class SongController implements Initializable {
 
     String songPath = null;
 
-    SongModel model;
+    SongModel songModel;
     PlaylistModel playlistModel;
+    ObservableList<PlaylistModel> playlistSelection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
-    {   //lstViewAddSongToPlaylist.setItems(DataManager.getPlaylists());
-        if (resources != null)
-        {
-            try {
-                if (resources.getObject("selectedSong") != null) {
-                    model = (SongModel) resources.getObject("selectedSong");
+    {
+        playlistSelection = DataManager.getPlaylists();
+        lstViewAddSongToPlaylist.setItems(playlistSelection);
+
+        try {
+            if (DataManager.selectedSong() != null){
+                    songModel = DataManager.selectedSong().get();
                 }
-                if (resources.getObject("selectedPlaylist") != null) {
-                    playlistModel = (PlaylistModel) resources.getObject("selectedPlaylist");
+            if (DataManager.selectedPlaylist() != null){
+                    playlistModel = DataManager.selectedPlaylist().get();
                 }
-                System.out.println(model.getTitle());
-            } catch (Exception e) {
+
+
+
+        } catch (Exception e) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setHeaderText("Input not valid");
                 errorAlert.setContentText("Could not find a selected song and playlist.");
                 errorAlert.showAndWait();
                 e.printStackTrace();
-            }
-
-
         }
-
-
-
     }
 
     public void onSelectFile(ActionEvent event) 
@@ -102,7 +101,7 @@ public class SongController implements Initializable {
         String editArtist = txtFieldEditArtist.getText();
         String editAlbum = txtFieldEditAlbum.getText();
         String editGenre = txtFieldEditGenre.getText();
-        SongModel currentlySelected = model;
+        SongModel currentlySelected = songModel;
 
         if (editArtist != null || !editArtist.isEmpty() || !editArtist.equals("null")){
         currentlySelected.setArtists(editArtist); }
@@ -135,7 +134,7 @@ public class SongController implements Initializable {
     }
 
     public void onAddToPlaylist(ActionEvent event) {
-        DataManager.songAddToPlaylist(lstViewAddSongToPlaylist.getSelectionModel().getSelectedItem(), model);
+        DataManager.songAddToPlaylist(lstViewAddSongToPlaylist.getSelectionModel().getSelectedItem(), songModel);
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

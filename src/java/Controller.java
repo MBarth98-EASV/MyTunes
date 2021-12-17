@@ -149,6 +149,7 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
         playlistContextMenu();
         songContextMenu();
 
+
         initializeMMSearchEntries();
 
         setComboBox();
@@ -217,14 +218,22 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     @FXML private void onMoveSongUp(ActionEvent actionEvent)
     {
-        System.out.println("track is moved upwards");
-        throw new NotImplementedException();
+        int i = tblViewSongs.getSelectionModel().getSelectedIndex();
+        if (i < tblViewSongs.getItems().size() && i > 0){
+            SongModel toMove = tblViewSongs.getSelectionModel().getSelectedItem();
+            tblViewSongs.getItems().set(i, tblViewSongs.getItems().get(i-1));
+            tblViewSongs.getItems().set(i-1, toMove);
+        }
     }
 
     @FXML private void onMoveSongDown(ActionEvent actionEvent)
     {
-        System.out.println("track is moved downwards");
-        throw new NotImplementedException();
+        int i = tblViewSongs.getSelectionModel().getSelectedIndex();
+        if (i+1 < tblViewSongs.getItems().size() && i > -1){
+            SongModel toMove = tblViewSongs.getSelectionModel().getSelectedItem();
+            tblViewSongs.getItems().set(i, tblViewSongs.getItems().get(i+1));
+            tblViewSongs.getItems().set(i+1, toMove);
+        }
     }
 
     @FXML
@@ -249,17 +258,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onSongEdit(ActionEvent event)
     {
-        try {
+       /* try {
             ResourceBundle resources = new ListResourceBundle() {
                 @Override
                 protected Object[][] getContents() {
                     return new Object[][] {
-                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}, {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}
+                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()},
+                            {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()},
+                            {"playlistSelectionList", DataManager.getPlaylists()},
                     };
                 }
             };
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")), resources);
+        */
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditSong.fxml")));
 
             Stage stage = new Stage();
 
@@ -270,6 +283,9 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
             stage.setMinWidth(335);
             stage.setScene(new Scene(root, 335, 335));
             stage.show();
+            if (DataManager.selectedPlaylist() == null){
+                DataManager.selectedPlaylist().setValue(DataManager.getPlaylists().get(0));
+            }
             stage.getScene().getWindow().setOnHiding((o) -> Utility.bind(tblViewSongs, new SimpleListProperty<SongModel>(DataManager.selectedPlaylist().get().getSongs())));
         }
         catch (IOException e)
@@ -348,17 +364,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
     @FXML
     private void onPlaylistEdit(ActionEvent event) {
         if (tblViewPlaylist.getSelectionModel().getSelectedItem() != null) {
-            try {
+           /* try {
                 ResourceBundle resources = new ListResourceBundle() {
                     @Override
                     protected Object[][] getContents() {
                         return new Object[][]{
-                                {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}, {"selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}
+                                {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()},
+                                {"selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()},
+                                {"playlistSelectionList", DataManager.getPlaylists()},
                         };
                     }
                 };
 
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")), resources);
+            */
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/EditPlaylist.fxml")));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root, 236, 193));
                 stage.show();
@@ -426,17 +446,21 @@ public class Controller extends MyTunesFXMLProperties implements Initializable
 
     public void onSongAddToPlayList(ActionEvent actionEvent)
     {
-        try {
+       /* try {
             ResourceBundle resources = new ListResourceBundle() {
                 @Override
                 protected Object[][] getContents() {
                     return new Object[][] {
-                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()}, {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()}
+                            { "selectedSong", tblViewSongs.getSelectionModel().getSelectedItem()},
+                            {"selectedPlaylist", tblViewPlaylist.getSelectionModel().getSelectedItem()},
+                            {"playlistSelectionList", DataManager.getPlaylists()},
                     };
                 }
             };
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/AddToPlaylist.fxml")), resources);
+        */
+        try{
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("views/AddToPlaylist.fxml")));
 
             Stage stage = new Stage();
 

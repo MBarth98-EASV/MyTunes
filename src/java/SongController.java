@@ -2,6 +2,7 @@ import be.PlaylistModel;
 import be.SongModel;
 
 import bll.DataManager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

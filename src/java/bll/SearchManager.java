@@ -1,7 +1,6 @@
 package bll;
 
 import be.SongModel;
-import dal.db.EASVDatabase;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 
